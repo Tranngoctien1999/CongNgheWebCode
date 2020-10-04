@@ -148,7 +148,6 @@
     <Compile Include="Models\PhuongTien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quyen.cs" />
-    <Compile Include="sysdiagram.cs" />
     <Compile Include="Models\ThongTinLoaiQuyenLoaiNhanVien.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Ve.cs" />

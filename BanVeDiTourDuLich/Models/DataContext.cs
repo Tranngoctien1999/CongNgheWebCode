@@ -23,7 +23,6 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<MaGiamGia> MaGiamGias { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<PhuongTien> PhuongTiens { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThongTinLoaiQuyenLoaiNhanVien> ThongTinLoaiQuyenLoaiNhanViens { get; set; }
         public virtual DbSet<Tour> Tours { get; set; }
         public virtual DbSet<Ve> Ves { get; set; }
