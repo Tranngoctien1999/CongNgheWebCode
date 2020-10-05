@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -6,6 +7,8 @@ namespace BanVeDiTourDuLich.Controllers
     {
         public ActionResult Index()
         {
+            List<DiaDiem> diaDiemList = new List<DiaDiem>();
+            diaDiemList.Add(new DiaDiem(){MaDiaDiem = "123" , });
             return View();
         }
 
