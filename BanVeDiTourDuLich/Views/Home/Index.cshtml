@@ -1,8 +1,7 @@
-﻿@{
+﻿@model List<DiaDiem>
+@{
     ViewBag.Title = "Vacation";
 }
-
-
 <div class="hero-wrap js-fullheight"
      style="background-image: url('../../Content/images/bg_2.jpg')"
      data-stellar-background-ratio="0.5">
@@ -265,7 +264,7 @@
                        class="img"
                        style="background-image: url(../../Content/images/place-1.jpg)">
                         <div class="text">
-                            <h3>Singapore</h3>
+                            <h3>@Model[0].TenDiaDiem</h3>
                             <span>8 Chuyến đi</span>
                         </div>
                     </a>

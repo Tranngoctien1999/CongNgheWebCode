@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web.Mvc;
 
 namespace BanVeDiTourDuLich.Controllers
@@ -8,21 +9,31 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult Index()
         {
             List<DiaDiem> diaDiemList = new List<DiaDiem>();
-            diaDiemList.Add(new DiaDiem(){MaDiaDiem = "123" , });
-            return View();
+            diaDiemList.Add(new DiaDiem()
+            {
+                MaDiaDiem = "123" , DiaChi = "236 Hoang Quoc Viet" 
+                , TenDiaDiem = "Hoc Vien Ki Thuat Quan Su"
+            });
+            return View(diaDiemList);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            return View();
+        }
 
+        public ActionResult Destination()
+        {
+            return View();
+        }
+
+        public ActionResult Blog()
+        {
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
