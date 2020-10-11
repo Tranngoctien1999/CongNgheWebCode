@@ -141,6 +141,14 @@
     <Compile Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.designer.cs">
       <DependentUpon>202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010110921532_AddSoLuongToLoaiVe.cs" />
+    <Compile Include="Migrations\202010110921532_AddSoLuongToLoaiVe.designer.cs">
+      <DependentUpon>202010110921532_AddSoLuongToLoaiVe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs" />
+    <Compile Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.designer.cs">
+      <DependentUpon>202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -324,6 +332,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.resx">
       <DependentUpon>202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010110921532_AddSoLuongToLoaiVe.resx">
+      <DependentUpon>202010110921532_AddSoLuongToLoaiVe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.resx">
+      <DependentUpon>202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

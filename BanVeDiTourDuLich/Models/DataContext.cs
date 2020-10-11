@@ -82,8 +82,7 @@ namespace BanVeDiTourDuLich
                 .IsUnicode(false);
 
             modelBuilder.Entity<LoaiKhachHang>()
-                .Property(e => e.ChiTiet)
-                .IsFixedLength();
+                .Property(e => e.ChiTiet);
 
             modelBuilder.Entity<LoaiKhachHang>()
                 .HasMany(e => e.KhachHangs)

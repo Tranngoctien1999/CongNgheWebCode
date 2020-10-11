@@ -24,6 +24,9 @@ namespace BanVeDiTourDuLich
         [StringLength(50)]
         public string Ten { get; set; }
 
+        [Required]
+        public int SoLuong { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhuongTien> ChiTietPhuongTiens { get; set; }
 
