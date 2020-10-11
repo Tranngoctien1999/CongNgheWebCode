@@ -29,14 +29,11 @@ namespace BanVeDiTourDuLich
 
         public DateTime ThoigianDi { get; set; }
 
-        [Column(TypeName = "timestamp")]
-        [MaxLength(8)]
-        [Timestamp]
-        public byte[] SoGio { get; set; }
+        public int SoGio { get; set; }
 
-        public virtual DiaDiem DiaDiem { get; set; }
+        public virtual DiaDiem DiaDiemDi { get; set; }
 
-        public virtual DiaDiem DiaDiem1 { get; set; }
+        public virtual DiaDiem DiaDiemDen { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }

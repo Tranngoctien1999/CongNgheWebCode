@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Web.Mvc;
 
@@ -9,11 +10,8 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult Index()
         {
             List<DiaDiem> diaDiemList = new List<DiaDiem>();
-            diaDiemList.Add(new DiaDiem()
-            {
-                MaDiaDiem = "123" , DiaChi = "236 Hoang Quoc Viet" 
-                , TenDiaDiem = "Hoc Vien Ki Thuat Quan Su"
-            });
+            DataContext context = new DataContext();
+            diaDiemList = context.DiaDiems.ToList();
             return View(diaDiemList);
         }
 

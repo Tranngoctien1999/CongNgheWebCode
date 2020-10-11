@@ -37,13 +37,13 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<DiaDiem>()
                 .HasMany(e => e.Tours)
-                .WithRequired(e => e.DiaDiem)
+                .WithRequired(e => e.DiaDiemDi)
                 .HasForeignKey(e => e.MaDiemDen)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DiaDiem>()
                 .HasMany(e => e.Tours1)
-                .WithRequired(e => e.DiaDiem1)
+                .WithRequired(e => e.DiaDiemDen)
                 .HasForeignKey(e => e.MaDiemDi)
                 .WillCascadeOnDelete(false);
 
@@ -197,8 +197,7 @@ namespace BanVeDiTourDuLich
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tour>()
-                .Property(e => e.SoGio)
-                .IsFixedLength();
+                .Property(e => e.SoGio);
 
             modelBuilder.Entity<Tour>()
                 .HasMany(e => e.Ves)

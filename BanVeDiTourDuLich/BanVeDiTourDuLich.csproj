@@ -133,6 +133,14 @@
     <Compile Include="Migrations\202010050312514_Initial.designer.cs">
       <DependentUpon>202010050312514_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.cs" />
+    <Compile Include="Migrations\202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.designer.cs">
+      <DependentUpon>202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs" />
+    <Compile Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.designer.cs">
+      <DependentUpon>202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -185,18 +193,18 @@
     <Content Include="Content\images\bg_1.jpg" />
     <Content Include="Content\images\bg_2.jpg" />
     <Content Include="Content\images\bg_3.jpg" />
-    <Content Include="Content\images\destination-1.jpg" />
-    <Content Include="Content\images\destination-10.jpg" />
-    <Content Include="Content\images\destination-11.jpg" />
-    <Content Include="Content\images\destination-12.jpg" />
-    <Content Include="Content\images\destination-2.jpg" />
-    <Content Include="Content\images\destination-3.jpg" />
-    <Content Include="Content\images\destination-4.jpg" />
-    <Content Include="Content\images\destination-5.jpg" />
-    <Content Include="Content\images\destination-6.jpg" />
-    <Content Include="Content\images\destination-7.jpg" />
-    <Content Include="Content\images\destination-8.jpg" />
-    <Content Include="Content\images\destination-9.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM1.jpg" />
+    <Content Include="Content\images\Destinations\destination-10.jpg" />
+    <Content Include="Content\images\Destinations\destination-11.jpg" />
+    <Content Include="Content\images\Destinations\destination-12.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM2.jpg" />
+    <Content Include="Content\images\Destinations\destination-3.jpg" />
+    <Content Include="Content\images\Destinations\destination-4.jpg" />
+    <Content Include="Content\images\Destinations\destination-5.jpg" />
+    <Content Include="Content\images\Destinations\destination-6.jpg" />
+    <Content Include="Content\images\Destinations\destination-7.jpg" />
+    <Content Include="Content\images\Destinations\destination-8.jpg" />
+    <Content Include="Content\images\Destinations\destination-9.jpg" />
     <Content Include="Content\images\footer-bg.jpg" />
     <Content Include="Content\images\image_1.jpg" />
     <Content Include="Content\images\image_2.jpg" />
@@ -205,14 +213,14 @@
     <Content Include="Content\images\image_5.jpg" />
     <Content Include="Content\images\image_6.jpg" />
     <Content Include="Content\images\loc.png" />
-    <Content Include="Content\images\person_1.jpg" />
-    <Content Include="Content\images\person_2.jpg" />
-    <Content Include="Content\images\person_3.jpg" />
-    <Content Include="Content\images\person_4.jpg" />
-    <Content Include="Content\images\place-1.jpg" />
-    <Content Include="Content\images\place-2.jpg" />
-    <Content Include="Content\images\place-3.jpg" />
-    <Content Include="Content\images\place-4.jpg" />
+    <Content Include="Content\images\Persions\person_1.jpg" />
+    <Content Include="Content\images\Persions\person_2.jpg" />
+    <Content Include="Content\images\Persions\person_3.jpg" />
+    <Content Include="Content\images\Persions\person_4.jpg" />
+    <Content Include="Content\images\Destinations\place-1.jpg" />
+    <Content Include="Content\images\Destinations\place-2.jpg" />
+    <Content Include="Content\images\Destinations\place-3.jpg" />
+    <Content Include="Content\images\Destinations\place-4.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\flaticon\backup.txt" />
     <Content Include="Content\fonts\flaticon\font\flaticon.css" />
@@ -310,6 +318,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010050312514_Initial.resx">
       <DependentUpon>202010050312514_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.resx">
+      <DependentUpon>202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.resx">
+      <DependentUpon>202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
