@@ -1,3 +1,5 @@
+using BanVeDiTourDuLich.Models;
+
 namespace BanVeDiTourDuLich
 {
     using System;
@@ -28,6 +30,7 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<Ve> Ves { get; set; }
         public virtual DbSet<ChiTietPhuongTien> ChiTietPhuongTiens { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
+        public virtual DbSet<NhanXet> NhanXets { get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -246,6 +249,18 @@ namespace BanVeDiTourDuLich
             modelBuilder.Entity<Quyen>()
                 .Property(e => e.MaLoaiQuyen)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<KhachHang>()
+                .HasMany(e => e.NhanXets)
+                .WithRequired(e => e.KhachHang);
+
+            modelBuilder.Entity<Tour>()
+                .HasMany(e => e.NhanXets)
+                .WithRequired(e => e.Tour);
+            ;
+
+            modelBuilder.Entity<NhanXet>()
+                .ToTable("NhanXet");
         }
     }
 }

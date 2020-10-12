@@ -1,4 +1,5 @@
 ﻿using System;
+using BanVeDiTourDuLich.Models;
 
 namespace BanVeDiTourDuLich.Migrations
 {
@@ -17,6 +18,7 @@ namespace BanVeDiTourDuLich.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+
 
             // Thêm địa điểm
             DiaDiem diaDiem1 = new DiaDiem()
@@ -213,6 +215,16 @@ namespace BanVeDiTourDuLich.Migrations
                 
             };
             context.Ves.AddOrUpdate(ve ,ve1);
+
+            // Add Comment
+
+            NhanXet nhanXet = new NhanXet()
+            {
+                MaKhachHang = khachHang1.MaKhachHang,
+                MaTour = tour.MaTour,
+                NoiDung = "Tour này hay quá"
+            };
+            context.NhanXets.AddOrUpdate(nhanXet);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BanVeDiTourDuLich.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
+using BanVeDiTourDuLich.Models;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -32,6 +33,15 @@ namespace BanVeDiTourDuLich.Controllers
             {
                 indexViewModel.CacDiaDiem = query1.ToList();
             }
+
+            var query2 = from nhanXet in context.NhanXets
+                select new NhanXet
+                {
+                    MaKhachHang = nhanXet.MaKhachHang,
+                    MaTour = nhanXet.MaTour,
+                    NoiDung = nhanXet.NoiDung
+                };
+            indexViewModel.CacNhanXet = query2.ToList();
             return View(indexViewModel);
         }
 
@@ -41,11 +51,6 @@ namespace BanVeDiTourDuLich.Controllers
         }
 
         public ActionResult Destination()
-        {
-            return View();
-        }
-
-        public ActionResult Blog()
         {
             return View();
         }

@@ -1,3 +1,5 @@
+using BanVeDiTourDuLich.Models;
+
 namespace BanVeDiTourDuLich
 {
     using System;
@@ -40,5 +42,7 @@ namespace BanVeDiTourDuLich
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
+
+        public virtual ICollection<NhanXet> NhanXets { get; set; }
     }
 }

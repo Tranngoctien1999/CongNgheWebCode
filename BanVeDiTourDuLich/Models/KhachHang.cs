@@ -1,3 +1,5 @@
+using BanVeDiTourDuLich.Models;
+
 namespace BanVeDiTourDuLich
 {
     using System;
@@ -31,6 +33,8 @@ namespace BanVeDiTourDuLich
         [Required]
         [StringLength(20)]
         public string MaLoaiKhachHang { get; set; }
+
+        public virtual ICollection<NhanXet> NhanXets { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }

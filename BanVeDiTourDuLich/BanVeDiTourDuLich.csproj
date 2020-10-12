@@ -153,6 +153,14 @@
     <Compile Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.designer.cs">
       <DependentUpon>202010120219377_AddMaTourVaoLoaiVeFK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010120356138_AddNhanXet.cs" />
+    <Compile Include="Migrations\202010120356138_AddNhanXet.designer.cs">
+      <DependentUpon>202010120356138_AddNhanXet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010120411580_FixNhanXetTableName.cs" />
+    <Compile Include="Migrations\202010120411580_FixNhanXetTableName.designer.cs">
+      <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -170,6 +178,7 @@
     <Compile Include="Models\LoaiVe.cs" />
     <Compile Include="Models\MaGiamGia.cs" />
     <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="Models\NhanXet.cs" />
     <Compile Include="Models\PhuongTien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quyen.cs" />
@@ -311,7 +320,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Destination.cshtml" />
-    <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +356,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.resx">
       <DependentUpon>202010120219377_AddMaTourVaoLoaiVeFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120356138_AddNhanXet.resx">
+      <DependentUpon>202010120356138_AddNhanXet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120411580_FixNhanXetTableName.resx">
+      <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
