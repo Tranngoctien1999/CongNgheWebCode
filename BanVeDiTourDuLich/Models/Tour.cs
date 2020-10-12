@@ -13,6 +13,7 @@ namespace BanVeDiTourDuLich
         public Tour()
         {
             Ves = new HashSet<Ve>();
+            LoaiVes = new HashSet<LoaiVe>();
         }
 
         [Key]
@@ -34,6 +35,8 @@ namespace BanVeDiTourDuLich
         public virtual DiaDiem DiaDiemDi { get; set; }
 
         public virtual DiaDiem DiaDiemDen { get; set; }
+
+        public virtual ICollection<LoaiVe> LoaiVes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }

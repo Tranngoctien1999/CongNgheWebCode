@@ -203,6 +203,10 @@ namespace BanVeDiTourDuLich
                 .WithRequired(e => e.Tour)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Tour>()
+                .HasMany(e => e.LoaiVes)
+                .WithRequired(e => e.Tour);
+
             modelBuilder.Entity<Ve>()
                 .Property(e => e.MaVe)
                 .IsUnicode(false);

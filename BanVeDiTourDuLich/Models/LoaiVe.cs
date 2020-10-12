@@ -16,6 +16,8 @@ namespace BanVeDiTourDuLich
             Ves = new HashSet<Ve>();
         }
 
+
+
         [Key]
         [StringLength(20)]
         public string MaLoaiVe { get; set; }
@@ -26,11 +28,19 @@ namespace BanVeDiTourDuLich
 
         [Required]
         public int SoLuong { get; set; }
+        
+        [Required]
+        [StringLength(20)]
+        public string MaTour { get; set; }
+
+        public double GiaTien { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhuongTien> ChiTietPhuongTiens { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ves { get; set; }
+
+        public virtual Tour Tour { get; set; }
     }
 }

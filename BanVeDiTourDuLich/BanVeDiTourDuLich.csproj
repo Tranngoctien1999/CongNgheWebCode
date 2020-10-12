@@ -149,6 +149,10 @@
     <Compile Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.designer.cs">
       <DependentUpon>202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.cs" />
+    <Compile Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.designer.cs">
+      <DependentUpon>202010120219377_AddMaTourVaoLoaiVeFK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -172,6 +176,9 @@
     <Compile Include="Models\ThongTinLoaiQuyenLoaiNhanVien.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Ve.cs" />
+    <Compile Include="ViewModels\DiaDiemGiaTien.cs" />
+    <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
+    <Compile Include="ViewModels\IndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -206,9 +213,9 @@
     <Content Include="Content\images\Destinations\destination-11.jpg" />
     <Content Include="Content\images\Destinations\destination-12.jpg" />
     <Content Include="Content\images\Destinations\MADIADIEM2.jpg" />
-    <Content Include="Content\images\Destinations\destination-3.jpg" />
-    <Content Include="Content\images\Destinations\destination-4.jpg" />
-    <Content Include="Content\images\Destinations\destination-5.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM3.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM4.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM5.jpg" />
     <Content Include="Content\images\Destinations\destination-6.jpg" />
     <Content Include="Content\images\Destinations\destination-7.jpg" />
     <Content Include="Content\images\Destinations\destination-8.jpg" />
@@ -338,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.resx">
       <DependentUpon>202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.resx">
+      <DependentUpon>202010120219377_AddMaTourVaoLoaiVeFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
