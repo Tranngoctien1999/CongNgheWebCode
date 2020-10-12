@@ -26,6 +26,8 @@ namespace BanVeDiTourDuLich
         [Required]
         public string DiaChi { get; set; }
 
+        public string DuongDanAnh { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tour> Tours { get; set; }
 
