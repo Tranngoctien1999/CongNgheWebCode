@@ -2,46 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>@ViewBag.Title</title>
     @* Style rendering for the first version *@
-    
+
     <link
         href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
-        rel="stylesheet"
-    />
+        rel="stylesheet"/>
 
-    <link rel="stylesheet" href="~/Content/css/open-iconic-bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/css/animate.css" />
+    <link rel="stylesheet" href="~/Content/css/open-iconic-bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/Content/css/animate.css"/>
 
-    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css" />
-    <link rel="stylesheet" href="~/Content/css/magnific-popup.css" />
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css"/>
 
-    <link rel="stylesheet" href="~/Content/css/aos.css" />
+    <link rel="stylesheet" href="~/Content/css/aos.css"/>
 
-    <link rel="stylesheet" href="~/Content/css/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Content/css/ionicons.min.css"/>
 
-    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css" />
-    <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css" />
+    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css"/>
+    <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css"/>
 
-    <link rel="stylesheet" href="~/Content/css/flaticon.css" />
-    <link rel="stylesheet" href="~/Content/css/icomoon.css" />
-    <link rel="stylesheet" href="~/Content/css/style.css" />
+    <link rel="stylesheet" href="~/Content/css/flaticon.css"/>
+    <link rel="stylesheet" href="~/Content/css/icomoon.css"/>
+    <link rel="stylesheet" href="~/Content/css/style.css"/>
     @* End Testing Renderer here *@
 </head>
 <body>
 <nav
     class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-    id="ftco-navbar"
->
+    id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index.html"
-        >Vacation<span>Travel Agency</span></a
+        <a class="navbar-brand" href="/home/index">
+            Vacation<span>Travel Agency</span>
+        </a
         >
         <button
             class="navbar-toggler"
@@ -50,27 +48,23 @@
             data-target="#ftco-nav"
             aria-controls="ftco-nav"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
+            aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Danh mục
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a href="index.html" class="nav-link">Trang chủ</a>
+                    <a href="/home/index" class="nav-link">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a href="about.html" class="nav-link">Về chúng tôi</a>
+                    <a href="/home/about" class="nav-link">Về chúng tôi</a>
                 </li>
                 <li class="nav-item">
-                    <a href="destination.html" class="nav-link">Điểm đến</a>
+                    <a href="/home/destination" class="nav-link">Điểm đến</a>
                 </li>
                 <li class="nav-item">
-                    <a href="blog.html" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="contact.html" class="nav-link">Liên hệ</a>
+                    <a href="/home/contact" class="nav-link">Liên hệ</a>
                 </li>
                 <li class="nav-item cta">
                     <a href="#" class="nav-link">Đặt ngay</a>
@@ -80,7 +74,7 @@
     </div>
 </nav>
 <!-- END nav -->
-@RenderBody()    
+@RenderBody()
 
 <footer class="ftco-footer bg-bottom"
         style="background-image: url(images/footer-bg.jpg)">
@@ -92,13 +86,19 @@
                     <p>Du lịch an toàn,thuận tiện</p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                         <li class="ftco-animate">
-                            <a href="#"><span class="icon-twitter"></span></a>
+                            <a href="#">
+                                <span class="icon-twitter"></span>
+                            </a>
                         </li>
                         <li class="ftco-animate">
-                            <a href="#"><span class="icon-facebook"></span></a>
+                            <a href="#">
+                                <span class="icon-facebook"></span>
+                            </a>
                         </li>
                         <li class="ftco-animate">
-                            <a href="#"><span class="icon-instagram"></span></a>
+                            <a href="#">
+                                <span class="icon-instagram"></span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -107,14 +107,18 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Thông tin</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">Câu hỏi thường gặp</a></li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Câu hỏi thường gặp</a>
+                        </li>
                         <li>
                             <a href="#" class="py-2 d-block">Riêng tư và điều khoản</a>
                         </li>
                         <li>
                             <a href="#" class="py-2 d-block">Chính sách hoàn tiền</a>
                         </li>
-                        <li><a href="#" class="py-2 d-block">Gọi ngay</a></li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Gọi ngay</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -122,14 +126,24 @@
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">Trải nghiệm</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">Chuyến đi</a></li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Chuyến đi</a>
+                        </li>
                         <li>
                             <a href="#" class="py-2 d-block">Khách sạn và nhà hàng</a>
                         </li>
-                        <li><a href="#" class="py-2 d-block">Bãi biển</a></li>
-                        <li><a href="#" class="py-2 d-block">Tự nhiên</a></li>
-                        <li><a href="#" class="py-2 d-block">Dã ngoại</a></li>
-                        <li><a href="#" class="py-2 d-block">Bữa tiệc</a></li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Bãi biển</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Tự nhiên</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Dã ngoại</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Bữa tiệc</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -139,7 +153,8 @@
                     <div class="block-23 mb-3">
                         <ul>
                             <li>
-                                <span class="icon icon-map-marker"></span><span class="text">
+                                <span class="icon icon-map-marker"></span>
+                                <span class="text">
                                     203 Fake St. Mountain View, San Francisco, California,
                                     USA
                                 </span>
@@ -165,7 +180,7 @@
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;
                     <script>
-                document.write(new Date().getFullYear());
+                        document.write(new Date().getFullYear());
                     </script>
                     All rights reserved | This template is made with
                     <i class="icon-heart color-danger" aria-hidden="true"></i> by
@@ -178,7 +193,7 @@
 </footer>
 
 @* Render Scripts for the first version here *@
-    
+
 <script src="~/Scripts/js/jquery.min.js"></script>
 <script src="~/Scripts/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="~/Scripts/js/popper.min.js"></script>

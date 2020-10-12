@@ -23,7 +23,6 @@ namespace BanVeDiTourDuLich
         [StringLength(50)]
         public string Ten { get; set; }
 
-        [StringLength(10)]
         public string ChiTiet { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

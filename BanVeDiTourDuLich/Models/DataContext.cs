@@ -1,3 +1,5 @@
+using BanVeDiTourDuLich.Models;
+
 namespace BanVeDiTourDuLich
 {
     using System;
@@ -28,6 +30,7 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<Ve> Ves { get; set; }
         public virtual DbSet<ChiTietPhuongTien> ChiTietPhuongTiens { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
+        public virtual DbSet<NhanXet> NhanXets { get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,13 +40,13 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<DiaDiem>()
                 .HasMany(e => e.Tours)
-                .WithRequired(e => e.DiaDiem)
+                .WithRequired(e => e.DiaDiemDi)
                 .HasForeignKey(e => e.MaDiemDen)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DiaDiem>()
                 .HasMany(e => e.Tours1)
-                .WithRequired(e => e.DiaDiem1)
+                .WithRequired(e => e.DiaDiemDen)
                 .HasForeignKey(e => e.MaDiemDi)
                 .WillCascadeOnDelete(false);
 
@@ -82,8 +85,7 @@ namespace BanVeDiTourDuLich
                 .IsUnicode(false);
 
             modelBuilder.Entity<LoaiKhachHang>()
-                .Property(e => e.ChiTiet)
-                .IsFixedLength();
+                .Property(e => e.ChiTiet);
 
             modelBuilder.Entity<LoaiKhachHang>()
                 .HasMany(e => e.KhachHangs)
@@ -197,13 +199,16 @@ namespace BanVeDiTourDuLich
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tour>()
-                .Property(e => e.SoGio)
-                .IsFixedLength();
+                .Property(e => e.SoGio);
 
             modelBuilder.Entity<Tour>()
                 .HasMany(e => e.Ves)
                 .WithRequired(e => e.Tour)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tour>()
+                .HasMany(e => e.LoaiVes)
+                .WithRequired(e => e.Tour);
 
             modelBuilder.Entity<Ve>()
                 .Property(e => e.MaVe)
@@ -244,6 +249,18 @@ namespace BanVeDiTourDuLich
             modelBuilder.Entity<Quyen>()
                 .Property(e => e.MaLoaiQuyen)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<KhachHang>()
+                .HasMany(e => e.NhanXets)
+                .WithRequired(e => e.KhachHang);
+
+            modelBuilder.Entity<Tour>()
+                .HasMany(e => e.NhanXets)
+                .WithRequired(e => e.Tour);
+            ;
+
+            modelBuilder.Entity<NhanXet>()
+                .ToTable("NhanXet");
         }
     }
 }

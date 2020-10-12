@@ -129,6 +129,39 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Migrations\202010050312514_Initial.cs" />
+    <Compile Include="Migrations\202010050312514_Initial.designer.cs">
+      <DependentUpon>202010050312514_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.cs" />
+    <Compile Include="Migrations\202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.designer.cs">
+      <DependentUpon>202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs" />
+    <Compile Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.designer.cs">
+      <DependentUpon>202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010110921532_AddSoLuongToLoaiVe.cs" />
+    <Compile Include="Migrations\202010110921532_AddSoLuongToLoaiVe.designer.cs">
+      <DependentUpon>202010110921532_AddSoLuongToLoaiVe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs" />
+    <Compile Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.designer.cs">
+      <DependentUpon>202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.cs" />
+    <Compile Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.designer.cs">
+      <DependentUpon>202010120219377_AddMaTourVaoLoaiVeFK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010120356138_AddNhanXet.cs" />
+    <Compile Include="Migrations\202010120356138_AddNhanXet.designer.cs">
+      <DependentUpon>202010120356138_AddNhanXet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010120411580_FixNhanXetTableName.cs" />
+    <Compile Include="Migrations\202010120411580_FixNhanXetTableName.designer.cs">
+      <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\DataContext.cs" />
@@ -145,12 +178,16 @@
     <Compile Include="Models\LoaiVe.cs" />
     <Compile Include="Models\MaGiamGia.cs" />
     <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="Models\NhanXet.cs" />
     <Compile Include="Models\PhuongTien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quyen.cs" />
     <Compile Include="Models\ThongTinLoaiQuyenLoaiNhanVien.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Ve.cs" />
+    <Compile Include="ViewModels\DiaDiemGiaTien.cs" />
+    <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
+    <Compile Include="ViewModels\IndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -180,18 +217,18 @@
     <Content Include="Content\images\bg_1.jpg" />
     <Content Include="Content\images\bg_2.jpg" />
     <Content Include="Content\images\bg_3.jpg" />
-    <Content Include="Content\images\destination-1.jpg" />
-    <Content Include="Content\images\destination-10.jpg" />
-    <Content Include="Content\images\destination-11.jpg" />
-    <Content Include="Content\images\destination-12.jpg" />
-    <Content Include="Content\images\destination-2.jpg" />
-    <Content Include="Content\images\destination-3.jpg" />
-    <Content Include="Content\images\destination-4.jpg" />
-    <Content Include="Content\images\destination-5.jpg" />
-    <Content Include="Content\images\destination-6.jpg" />
-    <Content Include="Content\images\destination-7.jpg" />
-    <Content Include="Content\images\destination-8.jpg" />
-    <Content Include="Content\images\destination-9.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM1.jpg" />
+    <Content Include="Content\images\Destinations\destination-10.jpg" />
+    <Content Include="Content\images\Destinations\destination-11.jpg" />
+    <Content Include="Content\images\Destinations\destination-12.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM2.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM3.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM4.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM5.jpg" />
+    <Content Include="Content\images\Destinations\destination-6.jpg" />
+    <Content Include="Content\images\Destinations\destination-7.jpg" />
+    <Content Include="Content\images\Destinations\destination-8.jpg" />
+    <Content Include="Content\images\Destinations\destination-9.jpg" />
     <Content Include="Content\images\footer-bg.jpg" />
     <Content Include="Content\images\image_1.jpg" />
     <Content Include="Content\images\image_2.jpg" />
@@ -200,14 +237,14 @@
     <Content Include="Content\images\image_5.jpg" />
     <Content Include="Content\images\image_6.jpg" />
     <Content Include="Content\images\loc.png" />
-    <Content Include="Content\images\person_1.jpg" />
-    <Content Include="Content\images\person_2.jpg" />
-    <Content Include="Content\images\person_3.jpg" />
-    <Content Include="Content\images\person_4.jpg" />
-    <Content Include="Content\images\place-1.jpg" />
-    <Content Include="Content\images\place-2.jpg" />
-    <Content Include="Content\images\place-3.jpg" />
-    <Content Include="Content\images\place-4.jpg" />
+    <Content Include="Content\images\Persions\person_1.jpg" />
+    <Content Include="Content\images\Persions\person_2.jpg" />
+    <Content Include="Content\images\Persions\person_3.jpg" />
+    <Content Include="Content\images\Persions\person_4.jpg" />
+    <Content Include="Content\images\Destinations\place-1.jpg" />
+    <Content Include="Content\images\Destinations\place-2.jpg" />
+    <Content Include="Content\images\Destinations\place-3.jpg" />
+    <Content Include="Content\images\Destinations\place-4.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\flaticon\backup.txt" />
     <Content Include="Content\fonts\flaticon\font\flaticon.css" />
@@ -280,9 +317,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Destination.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,6 +337,32 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202010050312514_Initial.resx">
+      <DependentUpon>202010050312514_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.resx">
+      <DependentUpon>202010110618097_ChangeTourNumberOfHoursTypeToIntAndAddTourDataSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.resx">
+      <DependentUpon>202010110642099_UpdateDiaDiemAddDuongDanAnhProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010110921532_AddSoLuongToLoaiVe.resx">
+      <DependentUpon>202010110921532_AddSoLuongToLoaiVe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.resx">
+      <DependentUpon>202010111453178_ChangeChiTietInLoaiKhachHangToNvarcharmax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120219377_AddMaTourVaoLoaiVeFK.resx">
+      <DependentUpon>202010120219377_AddMaTourVaoLoaiVeFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120356138_AddNhanXet.resx">
+      <DependentUpon>202010120356138_AddNhanXet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120411580_FixNhanXetTableName.resx">
+      <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,7 +13,7 @@ namespace BanVeDiTourDuLich
         [StringLength(20)]
         public string MaVe { get; set; }
 
-        public double GiaTien { get; set; }
+        
 
         [Required]
         [StringLength(20)]
