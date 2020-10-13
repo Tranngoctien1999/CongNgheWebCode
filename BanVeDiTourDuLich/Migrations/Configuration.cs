@@ -205,7 +205,6 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = tour.MaTour,
                 MaHoaDon = hoaDon1.MaHoaDon,
                 MaLoaiVe = loaiThuongGia.MaLoaiVe,
-                
             };
 
             Ve ve1 = new Ve()
@@ -227,6 +226,15 @@ namespace BanVeDiTourDuLich.Migrations
                 NoiDung = "Tour này hay quá"
             };
             context.NhanXets.AddOrUpdate(nhanXet);
+            //add taikhoan
+            //Account account = new Account()
+            //{
+            //    ID = 01,
+            //    TaiKhoan="user",
+            //    MatKhau="123456"
+            //};
+            //context.Accounts.AddOrUpdate(account);
+
         }
     }
 }

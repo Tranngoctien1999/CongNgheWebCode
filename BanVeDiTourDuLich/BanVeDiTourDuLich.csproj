@@ -163,8 +163,12 @@
       <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs" />
-    <Compile Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.designer.cs">
+    <Compile Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.Designer.cs">
       <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010131459537_AddTaiKhoan.cs" />
+    <Compile Include="Migrations\202010131459537_AddTaiKhoan.designer.cs">
+      <DependentUpon>202010131459537_AddTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
@@ -185,6 +189,7 @@
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Models\NhanXet.cs" />
     <Compile Include="Models\PhuongTien.cs" />
+    <Compile Include="Models\TaiKhoan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quyen.cs" />
     <Compile Include="Models\ThongTinLoaiQuyenLoaiNhanVien.cs" />
@@ -245,14 +250,14 @@
     <Content Include="Content\images\image_5.jpg" />
     <Content Include="Content\images\image_6.jpg" />
     <Content Include="Content\images\loc.png" />
-    <Content Include="Content\images\Persions\NHANVIEN0.jpg" />
-    <Content Include="Content\images\Persions\ADMIN.jpg" />
-    <Content Include="Content\images\Persions\NHANVIEN1.jpg" />
-    <Content Include="Content\images\Persions\KH01.jpg" />
     <Content Include="Content\images\Destinations\place-1.jpg" />
     <Content Include="Content\images\Destinations\place-2.jpg" />
     <Content Include="Content\images\Destinations\place-3.jpg" />
     <Content Include="Content\images\Destinations\place-4.jpg" />
+    <Content Include="Content\images\Persions\ADMIN.jpg" />
+    <Content Include="Content\images\Persions\KH01.jpg" />
+    <Content Include="Content\images\Persions\NHANVIEN0.jpg" />
+    <Content Include="Content\images\Persions\NHANVIEN1.jpg" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -2308,6 +2313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.resx">
       <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131459537_AddTaiKhoan.resx">
+      <DependentUpon>202010131459537_AddTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
