@@ -15,7 +15,7 @@ namespace BanVeDiTourDuLich
         {
             HoaDons = new HashSet<HoaDon>();
         }
-
+        
         [Key]
         [StringLength(20)]
         public string MaNhanVien { get; set; }
@@ -36,6 +36,9 @@ namespace BanVeDiTourDuLich
         [StringLength(20)]
         public string MaLoaiNhanVien { get; set; }
         
+
+
+        public string DuongDanAnh { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }

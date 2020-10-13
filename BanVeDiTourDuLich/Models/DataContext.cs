@@ -269,7 +269,6 @@ namespace BanVeDiTourDuLich
             modelBuilder.Entity<TaiKhoan>()
                 .HasRequired(c => c.NhanVien)
                 .WithRequiredDependent(c => c.TaiKhoan);
-
         }
     }
 }
