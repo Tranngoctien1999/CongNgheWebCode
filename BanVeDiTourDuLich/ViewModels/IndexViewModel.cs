@@ -10,6 +10,6 @@ namespace BanVeDiTourDuLich.ViewModels
     {
         public List<DiaDiemGiaTien> CacDiaDiem { get; set; }
         public List<ExpandedDiaDiemViewModel> CacDiaDiemBinhChon { get; set; }
-        public List<NhanXet> CacNhanXet { get; set; }
+        public List<NhanXetExpandedViewModel> CacNhanXet { get; set; }
     }
 }
