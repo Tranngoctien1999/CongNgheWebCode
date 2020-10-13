@@ -162,6 +162,10 @@
     <Compile Include="Migrations\202010120411580_FixNhanXetTableName.designer.cs">
       <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs" />
+    <Compile Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.designer.cs">
+      <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -189,6 +193,7 @@
     <Compile Include="ViewModels\DiaDiemGiaTien.cs" />
     <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
+    <Compile Include="ViewModels\NhanXetExpandedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -240,10 +245,10 @@
     <Content Include="Content\images\image_5.jpg" />
     <Content Include="Content\images\image_6.jpg" />
     <Content Include="Content\images\loc.png" />
-    <Content Include="Content\images\Persions\person_1.jpg" />
-    <Content Include="Content\images\Persions\person_2.jpg" />
-    <Content Include="Content\images\Persions\person_3.jpg" />
-    <Content Include="Content\images\Persions\person_4.jpg" />
+    <Content Include="Content\images\Persions\NHANVIEN0.jpg" />
+    <Content Include="Content\images\Persions\ADMIN.jpg" />
+    <Content Include="Content\images\Persions\NHANVIEN1.jpg" />
+    <Content Include="Content\images\Persions\KH01.jpg" />
     <Content Include="Content\images\Destinations\place-1.jpg" />
     <Content Include="Content\images\Destinations\place-2.jpg" />
     <Content Include="Content\images\Destinations\place-3.jpg" />
@@ -2300,6 +2305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010120411580_FixNhanXetTableName.resx">
       <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.resx">
+      <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

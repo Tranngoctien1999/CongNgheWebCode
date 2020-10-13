@@ -152,7 +152,8 @@ namespace BanVeDiTourDuLich.Migrations
                 MaLoaiNhanVien = nhanVien.MaLoaiNhanVien,
                 Luong = 20000000,
                 NgaySinh = new DateTime(1999, 10, 29),
-                NgayVaoLam = new DateTime(2020, 09, 10)
+                NgayVaoLam = new DateTime(2020, 09, 10),
+                DuongDanAnh = "/Content/images/Persions/NHANVIEN01.jpg"
             };
             context.NhanViens.AddOrUpdate(nhanVien1);
 
@@ -174,7 +175,8 @@ namespace BanVeDiTourDuLich.Migrations
                 Ten = "Trần Ngọc Tiến",
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,
-                ThoiGianDangKi = new DateTime(2020, 10, 1)
+                ThoiGianDangKi = new DateTime(2020, 10, 1),
+                DuongDanAnh = "/Content/images/Persions/KH01.jpg"
             };
             context.KhachHangs.AddOrUpdate(khachHang1);
 
