@@ -2,10 +2,7 @@ using BanVeDiTourDuLich.Models;
 
 namespace BanVeDiTourDuLich
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class DataContext : DbContext
     {
@@ -30,9 +27,8 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<Ve> Ves { get; set; }
         public virtual DbSet<ChiTietPhuongTien> ChiTietPhuongTiens { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
-        public virtual DbSet<NhanXet> NhanXets { get; set;}
-
-        public virtual DbSet<TaiKhoan> Accounts { get; set; }
+        public virtual DbSet<NhanXet> NhanXets { get; set; }
+        public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiaDiem>()
@@ -262,6 +258,18 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<NhanXet>()
                 .ToTable("NhanXet");
+
+            modelBuilder.Entity<TaiKhoan>()
+                .ToTable("TaiKhoan");
+
+            modelBuilder.Entity<TaiKhoan>()
+                .HasRequired(c => c.KhachHang)
+                .WithRequiredDependent(c => c.TaiKhoan);
+
+            modelBuilder.Entity<TaiKhoan>()
+                .HasRequired(c => c.NhanVien)
+                .WithRequiredDependent(c => c.TaiKhoan);
+
         }
     }
 }
