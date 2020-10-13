@@ -34,14 +34,14 @@ namespace BanVeDiTourDuLich.Controllers
                 indexViewModel.CacDiaDiem = query1.ToList();
             }
 
-            var query2 = from nhanXet in context.NhanXets
-                select new NhanXet
-                {
-                    MaKhachHang = nhanXet.MaKhachHang,
-                    MaTour = nhanXet.MaTour,
-                    NoiDung = nhanXet.NoiDung
-                };
-            indexViewModel.CacNhanXet = query2.ToList();
+            //var query2 = from nhanXet in context.NhanXets
+            //    select new NhanXet
+            //    {
+            //        MaKhachHang = nhanXet.MaKhachHang,
+            //        MaTour = nhanXet.MaTour,
+            //        NoiDung = nhanXet.NoiDung
+            //    };
+            //indexViewModel.CacNhanXet = query2.ToList();
             return View(indexViewModel);
         }
 
