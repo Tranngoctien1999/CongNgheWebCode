@@ -162,7 +162,16 @@
     <Compile Include="Migrations\202010120411580_FixNhanXetTableName.designer.cs">
       <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010130808543_AddIDToAccount.cs" />
+    <Compile Include="Migrations\202010130808543_AddIDToAccount.designer.cs">
+      <DependentUpon>202010130808543_AddIDToAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010130839056_AddKhoaNgoai.cs" />
+    <Compile Include="Migrations\202010130839056_AddKhoaNgoai.designer.cs">
+      <DependentUpon>202010130839056_AddKhoaNgoai.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\DataContext.cs" />
@@ -2300,6 +2309,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010120411580_FixNhanXetTableName.resx">
       <DependentUpon>202010120411580_FixNhanXetTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130808543_AddIDToAccount.resx">
+      <DependentUpon>202010130808543_AddIDToAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130839056_AddKhoaNgoai.resx">
+      <DependentUpon>202010130839056_AddKhoaNgoai.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -32,6 +32,7 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<NhanXet> NhanXets { get; set;}
 
+        public virtual DbSet<TaiKhoan> Accounts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiaDiem>()

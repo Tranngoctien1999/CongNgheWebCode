@@ -174,7 +174,7 @@ namespace BanVeDiTourDuLich.Migrations
                 Ten = "Trần Ngọc Tiến",
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,
-                ThoiGianDangKi = new DateTime(2020, 10, 1)
+                ThoiGianDangKi = new DateTime(2020, 10, 1),
             };
             context.KhachHangs.AddOrUpdate(khachHang1);
 
@@ -203,7 +203,6 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = tour.MaTour,
                 MaHoaDon = hoaDon1.MaHoaDon,
                 MaLoaiVe = loaiThuongGia.MaLoaiVe,
-                
             };
 
             Ve ve1 = new Ve()
@@ -225,6 +224,15 @@ namespace BanVeDiTourDuLich.Migrations
                 NoiDung = "Tour này hay quá"
             };
             context.NhanXets.AddOrUpdate(nhanXet);
+            //add taikhoan
+            //Account account = new Account()
+            //{
+            //    ID = 01,
+            //    TaiKhoan="user",
+            //    MatKhau="123456"
+            //};
+            //context.Accounts.AddOrUpdate(account);
+
         }
     }
 }
