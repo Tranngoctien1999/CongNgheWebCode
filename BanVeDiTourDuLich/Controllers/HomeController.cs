@@ -2,15 +2,16 @@
 using System.Linq;
 using System.Web.Mvc;
 using BanVeDiTourDuLich.Models;
+using System;
 
 namespace BanVeDiTourDuLich.Controllers
 {
     public class HomeController : Controller
     {
+        private IndexViewModel indexViewModel = new IndexViewModel();
+        private DataContext context = new DataContext(); 
         public ActionResult Index()
         {
-            IndexViewModel indexViewModel = new IndexViewModel();
-            DataContext context = new DataContext();
             // Linq select top 4 poupular destionation base on number of tours
             var query = from diaDiem in context.DiaDiems
                         join tour in context.Tours on diaDiem.MaDiaDiem
@@ -34,14 +35,24 @@ namespace BanVeDiTourDuLich.Controllers
                 indexViewModel.CacDiaDiem = query1.ToList();
             }
 
-            var query2 = from nhanXet in context.NhanXets
-                select new NhanXet
-                {
-                    MaKhachHang = nhanXet.MaKhachHang,
-                    MaTour = nhanXet.MaTour,
-                    NoiDung = nhanXet.NoiDung
-                };
-            indexViewModel.CacNhanXet = query2.ToList();
+            //var query2 = from nhanXet in context.NhanXets
+            //    select new NhanXet
+            //    {
+            //        MaKhachHang = nhanXet.MaKhachHang,
+            //        MaTour = nhanXet.MaTour,
+            //        NoiDung = nhanXet.NoiDung
+            //    };
+            //indexViewModel.CacNhanXet = query2.ToList();
+            return View(indexViewModel);
+        }
+        public ActionResult Search(string diemden)
+        {
+            var query1 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         where diaDiem.TenDiaDiem.Contains(diemden)
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = 0 };
+            
+                indexViewModel.CacDiaDiem = query1.ToList();         
             return View(indexViewModel);
         }
 
