@@ -1,4 +1,4 @@
-﻿@model BanVeDiTourDuLich.ViewModels.IndexViewModel
+﻿@model BanVeDiTourDuLich.ViewModels.SearchViewModel
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_MyLayout.cshtml";
@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row justify-content-center pb-4">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">kết quả tìm kiếm cho @ViewBag.diemden </h2>
+                <h2 class="mb-4">kết quả tìm kiếm cho @Model.TuKhoaTimKiem </h2>
             </div>
         </div>
         <div class="row">
