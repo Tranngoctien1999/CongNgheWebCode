@@ -20,14 +20,10 @@
                 .ForeignKey("dbo.NhanVien", t => t.MaTaiKhoan)
                 .Index(t => t.MaTaiKhoan);
             
-            DropColumn("dbo.KhachHang", "DuongDanAnh");
-            DropColumn("dbo.NhanVien", "DuongDanAnh");
         }
         
         public override void Down()
         {
-            AddColumn("dbo.NhanVien", "DuongDanAnh", c => c.String());
-            AddColumn("dbo.KhachHang", "DuongDanAnh", c => c.String());
             DropForeignKey("dbo.TaiKhoan", "MaTaiKhoan", "dbo.NhanVien");
             DropForeignKey("dbo.TaiKhoan", "MaTaiKhoan", "dbo.KhachHang");
             DropIndex("dbo.TaiKhoan", new[] { "MaTaiKhoan" });

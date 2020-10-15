@@ -166,9 +166,9 @@
     <Compile Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.Designer.cs">
       <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010131459537_AddTaiKhoan.cs" />
-    <Compile Include="Migrations\202010131459537_AddTaiKhoan.designer.cs">
-      <DependentUpon>202010131459537_AddTaiKhoan.cs</DependentUpon>
+    <Compile Include="Migrations\202010140835500_AddTaiKhoan.cs" />
+    <Compile Include="Migrations\202010140835500_AddTaiKhoan.designer.cs">
+      <DependentUpon>202010140835500_AddTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
@@ -2317,8 +2317,8 @@
     <EmbeddedResource Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.resx">
       <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010131459537_AddTaiKhoan.resx">
-      <DependentUpon>202010131459537_AddTaiKhoan.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010140835500_AddTaiKhoan.resx">
+      <DependentUpon>202010140835500_AddTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

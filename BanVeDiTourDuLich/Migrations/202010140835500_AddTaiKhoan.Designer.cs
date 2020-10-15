@@ -13,7 +13,7 @@ namespace BanVeDiTourDuLich.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202010131459537_AddTaiKhoan"; }
+            get { return "202010140835500_AddTaiKhoan"; }
         }
         
         string IMigrationMetadata.Source

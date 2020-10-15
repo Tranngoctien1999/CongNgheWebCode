@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,5 +14,7 @@ namespace BanVeDiTourDuLich.Controllers
         {
             return View();
         }
+
+
     }
 }
