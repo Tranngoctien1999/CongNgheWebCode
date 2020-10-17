@@ -276,6 +276,7 @@
     <Content Include="Content\dist\img\user8-128x128.jpg" />
     <Content Include="Content\dist\js\adminlte.js" />
     <Content Include="Content\dist\js\adminlte.min.js" />
+    <Content Include="Content\dist\js\AdminScript.js" />
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
@@ -2344,6 +2345,7 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\QuanLyBanVe.cshtml" />
+    <Content Include="Views\Admin\QuanLyNguoiDung.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

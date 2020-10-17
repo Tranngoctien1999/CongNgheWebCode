@@ -41,5 +41,19 @@ namespace BanVeDiTourDuLich.Controllers
 
             return View(quanLyVeViewModel);
         }
+
+        public ActionResult QuanLyNguoiDung()
+        {
+            _context.KhachHangs.GroupJoin((_context.HoaDons, khachHang => khachHang.MaKhachHang,
+                hoaDon => hoaDon.MaKhachHang
+                , (hang, don) => new
+                {
+                    TenKhachHang = hang. ,
+                    SoTien = 
+                });
+                
+
+            return View();
+        }
     }
 }
