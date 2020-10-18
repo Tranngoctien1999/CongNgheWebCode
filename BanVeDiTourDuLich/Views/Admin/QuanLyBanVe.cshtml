@@ -2,112 +2,121 @@
 @{
     ViewBag.Title = "QuanLyBanVe";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var context = new DataContext();
 }
 
-<style>
-    .btn-max-width {
-        width: 80%;
+    <style>
+        .btn-max-width {
+            width: 80%;
+        }
+    </style>
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Quản lý vé</h1>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Quản lý vé</li>
+                        </ol>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Vé</h3>
+
+                <div class="card-tools">
+                    <button type="button"
+                            class="btn btn-tool"
+                            data-card-widget="collapse"
+                            title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button"
+                            class="btn btn-tool"
+                            data-card-widget="remove"
+                            title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">#</th>
+                            <th style="width: 20%">Mã vé</th>
+                            <th style="width: 20%">Điểm đi-Điểm đến</th>
+                            <th style="width: 15%">Thời gian khởi hành</th>
+                            <th>Thành tiền</th>
+                            <th style="width: 4%" class="text-center">Tình trạng</th>
+                            <th style="width: 20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @{var _context = new DataContext();};
+                    @foreach (var thongTinVe in @Model.DanhSachThongTinVe)
+                    {
+                        int i = 1;
+                        <tr>
+                            <td>@i</td>
+                            <td>
+                                <a> @thongTinVe.Ve.MaVe </a>
+                                <br/>
+                                <small> Tạo vào 01.01.2019 </small>
+                            </td>
+                            <td>
+                                <p>@thongTinVe.DiaDiemDi.TenDiaDiem - @thongTinVe.DiaDiemDen.TenDiaDiem</p>
+                            </td>
+                            <td>
+                                <p>@thongTinVe.Ve.Tour.ThoigianDi</p>
+                            </td>
+                            <td>
+                                <p>@thongTinVe.GiaTien VNĐ</p>
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-success">Vé chưa sử dụng</span>
+                            </td>
+                            <td class="project-actions text-center">
+                                <a class="btn btn-primary btn-sm btn-max-width" href="/admin/quanlybanve/?id=@thongTinVe.Ve.MaVe">
+                                    <i class="fas fa-folder"> </i>
+                                    Xem chi tiết hóa đơn
+                                </a>
+
+                                <a class="btn btn-danger btn-sm btn-max-width" onclick="() => { @*@_context.Ves.Remove(_context.Ves.Find(@thongTinVe.Ve.MaVe));
+@_context.SaveChanges();*@    }">
+                                    <i class="fas fa-trash"> </i>
+                                    Xóa
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.content -->
+    </div>
+
+<script>
+    function myFunction(id) {
+       
     }
-</style>
-
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Quản lý vé</h1>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Quản lý vé</li>
-                    </ol>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-    <!-- Main content -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Vé</h3>
-
-            <div class="card-tools">
-                <button type="button"
-                        class="btn btn-tool"
-                        data-card-widget="collapse"
-                        title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button"
-                        class="btn btn-tool"
-                        data-card-widget="remove"
-                        title="Remove">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body p-0">
-            <table class="table table-striped projects">
-                <thead>
-                    <tr>
-                        <th style="width: 1%">#</th>
-                        <th style="width: 20%">Mã vé</th>
-                        <th style="width: 20%">Điểm đi-Điểm đến</th>
-                        <th style="width: 15%">Thời gian khởi hành</th>
-                        <th>Thành tiền</th>
-                        <th style="width: 4%" class="text-center">Tình trạng</th>
-                        <th style="width: 20%"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach (var thongTinVe in @Model.DanhSachThongTinVe)
-                {
-                    int i = 1;
-                    <tr>
-                        <td>@i</td>
-                        <td>
-                            <a> @thongTinVe.Ve.MaVe </a>
-                            <br/>
-                            <small> Tạo vào 01.01.2019 </small>
-                        </td>
-                        <td>
-                            <p>@thongTinVe.DiaDiemDi.TenDiaDiem - @thongTinVe.DiaDiemDen.TenDiaDiem</p>
-                        </td>
-                        <td>
-                            <p>@thongTinVe.Ve.Tour.ThoigianDi</p>
-                        </td>
-                        <td>
-                            <p>@thongTinVe.GiaTien VNĐ</p>
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Vé chưa sử dụng</span>
-                        </td>
-                        <td class="project-actions text-center">
-                            <a class="btn btn-primary btn-sm btn-max-width" href="./invoice.html">
-                                <i class="fas fa-folder"> </i>
-                                Xem chi tiết hóa đơn
-                            </a>
-
-                            <a class="btn btn-danger btn-sm btn-max-width" href="#">
-                                <i class="fas fa-trash"> </i>
-                                Xóa
-                            </a>
-                        </td>
-                    </tr> 
-                }
-                
-                </tbody>
-            </table>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
-    <!-- /.content -->
-</div>
-
+</script>

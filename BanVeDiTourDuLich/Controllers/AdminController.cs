@@ -1,4 +1,6 @@
-﻿using BanVeDiTourDuLich.ViewModels;
+﻿using System;
+using System.Diagnostics;
+using BanVeDiTourDuLich.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,8 +19,17 @@ namespace BanVeDiTourDuLich.Controllers
             return View();
         }
 
-        public ActionResult QuanLyBanVe()
+        public ActionResult QuanLyBanVe(string id)
         {
+            if (id != null)
+            {
+                ThongTinHoaDon thongTin = new ThongTinHoaDon();
+                thongTin.HoaDon = _context.Ves.Find(id).HoaDon;
+                thongTin.CacVe = thongTin.HoaDon.Ves.ToList();
+                thongTin.KhachHang = thongTin.HoaDon.KhachHang;
+                thongTin.NhanVien = thongTin.HoaDon.NhanVien;
+                return View("~/Views/Admin/ChiTietVe.cshtml" , thongTin);
+            }
             QuanLyVeViewModel quanLyVeViewModel = new QuanLyVeViewModel();
             quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours, ve => ve.MaTour, tour => tour.MaTour,
                 (ve, tour) =>

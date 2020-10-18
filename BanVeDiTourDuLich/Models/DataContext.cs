@@ -263,12 +263,12 @@ namespace BanVeDiTourDuLich
                 .ToTable("TaiKhoan");
 
             modelBuilder.Entity<TaiKhoan>()
-                .HasRequired(c => c.KhachHang)
-                .WithRequiredDependent(c => c.TaiKhoan);
+                .HasOptional(c => c.KhachHang)
+                .WithOptionalDependent(c => c.TaiKhoan);
 
             modelBuilder.Entity<TaiKhoan>()
-                .HasRequired(c => c.NhanVien)
-                .WithRequiredDependent(c => c.TaiKhoan);
+                .HasOptional(c => c.NhanVien)
+                .WithOptionalDependent(c => c.TaiKhoan);
         }
     }
 }
