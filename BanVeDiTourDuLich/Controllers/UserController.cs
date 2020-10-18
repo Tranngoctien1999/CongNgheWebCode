@@ -14,7 +14,5 @@ namespace BanVeDiTourDuLich.Controllers
         {
             return View();
         }
-
-
     }
 }

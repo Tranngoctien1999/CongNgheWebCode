@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BanVeDiTourDuLich.ViewModels;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using BanVeDiTourDuLich.ViewModels;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -23,14 +20,15 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult QuanLyBanVe()
         {
             QuanLyVeViewModel quanLyVeViewModel = new QuanLyVeViewModel();
-            quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours , ve => ve.MaTour , tour => tour.MaTour,
+            quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours, ve => ve.MaTour, tour => tour.MaTour,
                 (ve, tour) =>
-                new {
+                new
+                {
                     Ve = ve,
                     DiaDiemDen = tour.DiaDiemDen,
                     DiaDiemDi = tour.DiaDiemDi
-                }).Join(_context.LoaiVes , c => c.Ve.MaLoaiVe , loaiVe => loaiVe.MaLoaiVe ,
-                (c , loaiVe) => new ThongTinVeExpanded()
+                }).Join(_context.LoaiVes, c => c.Ve.MaLoaiVe, loaiVe => loaiVe.MaLoaiVe,
+                (c, loaiVe) => new ThongTinVeExpanded()
                 {
                     Ve = c.Ve,
                     GiaTien = loaiVe.GiaTien,
@@ -44,16 +42,20 @@ namespace BanVeDiTourDuLich.Controllers
 
         public ActionResult QuanLyNguoiDung()
         {
-            _context.KhachHangs.GroupJoin((_context.HoaDons, khachHang => khachHang.MaKhachHang,
-                hoaDon => hoaDon.MaKhachHang
-                , (hang, don) => new
+            QuanLyNguoiDungViewModel data = new QuanLyNguoiDungViewModel();
+            foreach(KhachHang khach in _context.KhachHangs.ToList())
+            {
+                double tongTien = khach.HoaDons.Sum(hoaDon => hoaDon.Ves.Sum(ve => ve.LoaiVe.GiaTien));
+                int soVe = khach.HoaDons.Sum(hoaDon => hoaDon.Ves.Count);
+                data.ThongTinCacNguoiDung.Add(new NguoiDungViewModel
                 {
-                    TenKhachHang = hang. ,
-                    SoTien = 
+                    TenNguoiDung = khach.Ten,
+                    SoTienMua = tongTien,
+                    SoVeMua = soVe
                 });
-                
-
-            return View();
+            };
+            //data.ThongTinCacNguoiDung = query.ToList();
+            return View(data);
         }
     }
 }
