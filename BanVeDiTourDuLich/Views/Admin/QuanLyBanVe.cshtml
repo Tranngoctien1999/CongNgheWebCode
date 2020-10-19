@@ -5,68 +5,68 @@
     var context = new DataContext();
 }
 
-    <style>
-        .btn-max-width {
-            width: 80%;
-        }
-    </style>
+<style>
+    .btn-max-width {
+        width: 80%;
+    }
+</style>
 
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Quản lý vé</h1>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Quản lý vé</li>
-                        </ol>
-                    </div>
-                    <!-- /.col -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Quản lý vé</h1>
                 </div>
-                <!-- /.row -->
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Quản lý vé</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
         </div>
-        <!-- /.content-header -->
-        <!-- Main content -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Vé</h3>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Vé</h3>
 
-                <div class="card-tools">
-                    <button type="button"
-                            class="btn btn-tool"
-                            data-card-widget="collapse"
-                            title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button"
-                            class="btn btn-tool"
-                            data-card-widget="remove"
-                            title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+            <div class="card-tools">
+                <button type="button"
+                        class="btn btn-tool"
+                        data-card-widget="collapse"
+                        title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button"
+                        class="btn btn-tool"
+                        data-card-widget="remove"
+                        title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="card-body p-0">
-                <table class="table table-striped projects">
-                    <thead>
-                        <tr>
-                            <th style="width: 1%">#</th>
-                            <th style="width: 20%">Mã vé</th>
-                            <th style="width: 20%">Điểm đi-Điểm đến</th>
-                            <th style="width: 15%">Thời gian khởi hành</th>
-                            <th>Thành tiền</th>
-                            <th style="width: 4%" class="text-center">Tình trạng</th>
-                            <th style="width: 20%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 1%">#</th>
+                        <th style="width: 20%">Mã vé</th>
+                        <th style="width: 20%">Điểm đi-Điểm đến</th>
+                        <th style="width: 15%">Thời gian khởi hành</th>
+                        <th>Thành tiền</th>
+                        <th style="width: 4%" class="text-center">Tình trạng</th>
+                        <th style="width: 20%"></th>
+                    </tr>
+                </thead>
+                <tbody>
                     @{var _context = new DataContext();};
                     @foreach (var thongTinVe in @Model.DanhSachThongTinVe)
                     {
@@ -75,7 +75,7 @@
                             <td>@i</td>
                             <td>
                                 <a> @thongTinVe.Ve.MaVe </a>
-                                <br/>
+                                <br />
                                 <small> Tạo vào 01.01.2019 </small>
                             </td>
                             <td>
@@ -96,27 +96,43 @@
                                     Xem chi tiết hóa đơn
                                 </a>
 
-                                <a class="btn btn-danger btn-sm btn-max-width" onclick="() => { @*@_context.Ves.Remove(_context.Ves.Find(@thongTinVe.Ve.MaVe));
-@_context.SaveChanges();*@    }">
-                                    <i class="fas fa-trash"> </i>
-                                    Xóa
-                                </a>
+                                <form action="/QuanLyBanVe/Xoa" method="post">
+                                    <input name='id' type="hidden" value="@thongTinVe.Ve.MaVe" />
+                                    <button class="btn-delete" type='submit'>
+                                        <a class="btn btn-danger btn-sm btn-max-width js-xoa">
+                                            <i class="fas fa-trash"> </i>
+                                            Xóa
+                                        </a>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
-
                     }
 
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
+                </tbody>
+            </table>
         </div>
-        <!-- /.card -->
-        <!-- /.content -->
+        <!-- /.card-body -->
     </div>
+    <!-- /.card -->
+    <!-- /.content -->
+</div>
+@section scripts
+{
 
-<script>
-    function myFunction(id) {
-       
-    }
-</script>
+}
+
+@section styles
+{
+    <style>
+        .js-xoa
+        {
+            width: 100%
+        }
+
+        .btn-delete{
+            border: none;
+            width: 100%;
+        }
+    </style>
+}

@@ -85,8 +85,12 @@ namespace BanVeDiTourDuLich.Controllers
             return View();
         }
 
-        public ActionResult Destination()
+        public ActionResult Destination(string Id)
         {
+            if (Id != null)
+            {
+                return View("~/Views/Home/ChiTietChuyenDi.cshtml");
+            }
             IndexViewModel indexViewModel = new IndexViewModel();
             // Linq select top 4 poupular destionation base on number of tours
             var query = from diaDiem in context.DiaDiems
@@ -144,9 +148,6 @@ namespace BanVeDiTourDuLich.Controllers
             return View();
         }
 
-        public ActionResult ChiTietChuyenDi()
-        {
-            return View();
-        }
+        
     }
 }
