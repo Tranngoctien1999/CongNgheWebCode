@@ -68,7 +68,16 @@ namespace BanVeDiTourDuLich.Controllers
 
         public ActionResult Destination()
         {
-            return View();
+            IndexViewModel indexViewModel = new IndexViewModel();
+            DataContext context = new DataContext();
+            // Linq select top 4 poupular destionation base on number of tours
+            var query = from diaDiem in context.DiaDiems
+                        join tour in context.Tours on diaDiem.MaDiaDiem
+                            equals tour.MaDiemDen into g
+                        orderby g.Count() descending
+                        select new ExpandedDiaDiemViewModel() { DiaDiem = diaDiem, SoChuyen = g.Count() };
+            indexViewModel.CacDiaDiemBinhChon = query.Take(4).ToList();
+            return View(indexViewModel);
         }
 
         public ActionResult Contact()

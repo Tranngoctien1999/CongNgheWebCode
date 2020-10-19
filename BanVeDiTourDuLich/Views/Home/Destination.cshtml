@@ -1,4 +1,6 @@
-﻿
+﻿@using BanVeDiTourDuLich.Models
+@using BanVeDiTourDuLich.ViewModels
+@model BanVeDiTourDuLich.ViewModels.IndexViewModel
 @{
     ViewBag.Title = "Destination";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,46 +14,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 ftco-animate">
-                <div class="project-destination">
-                    <a href="#" class="img" style="background-image: url(/Content/images/place-1.jpg);">
-                        <div class="text">
-                            <h3>Singapore</h3>
-                            <span>8 Tours</span>
-                        </div>
-                    </a>
+            @foreach (var destination in @Model.CacDiaDiemBinhChon)
+            {
+                <div class="col-md-3 ftco-animate">
+                    <div class="project-destination">
+                        <a href="#" class="img" style="background-image: url(@destination.DiaDiem.DuongDanAnh);">
+                            <div class="text">
+                                <h3>@destination.DiaDiem.TenDiaDiem</h3>
+                                <span>@destination.SoChuyen Chuyến đi</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="project-destination">
-                    <a href="#" class="img" style="background-image: url(/Content/images/place-2.jpg);">
-                        <div class="text">
-                            <h3>Canada</h3>
-                            <span>2 Tours</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="project-destination">
-                    <a href="#" class="img" style="background-image: url(/Content/images/place-3.jpg);">
-                        <div class="text">
-                            <h3>Thailand</h3>
-                            <span>5 Tours</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="project-destination">
-                    <a href="#" class="img" style="background-image: url(/Content/images/place-4.jpg);">
-                        <div class="text">
-                            <h3>Autralia</h3>
-                            <span>5 Tours</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            }
+
+            
         </div>
     </div>
 </section>
@@ -174,7 +151,8 @@
             </div>
             <div class="col-md-4 ftco-animate">
                 <div class="project-wrap">
-                    <a href="#" class="img" style="background-image: url(/Content/images/destination-3.jpg);"></a>
+                    <a href="#" class="img" style="        background-image: url(/Content/images/destination-3.jpg);
+"></a>
                     <div class="text p-4">
                         <span class="price">$300/person</span>
                         <span class="days">7 Days Tour</span>
