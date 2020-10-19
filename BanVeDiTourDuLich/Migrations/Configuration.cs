@@ -227,13 +227,13 @@ namespace BanVeDiTourDuLich.Migrations
             };
             context.NhanXets.AddOrUpdate(nhanXet);
             //add taikhoan
-            //Account account = new Account()
-            //{
-            //    ID = 01,
-            //    TaiKhoan="user",
-            //    MatKhau="123456"
-            //};
-            //context.Accounts.AddOrUpdate(account);
+            TaiKhoan account = new TaiKhoan()
+            {
+                MaTaiKhoan = nhanVien1.MaNhanVien,
+                TaiKhoanDangNhap = "user",
+                MatKhau = "123456"
+            };
+            context.TaiKhoans.AddOrUpdate(account);
 
         }
     }
