@@ -3,7 +3,10 @@
 @model BanVeDiTourDuLich.ViewModels.IndexViewModel
 @{
     ViewBag.Title = "Vacation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <div class="hero-wrap js-fullheight"
      style="background-image: url('../../Content/images/bg_2.jpg')"
      data-stellar-background-ratio="0.5">
@@ -34,7 +37,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-wrap-1 ftco-animate p-4">
-                    <form action="#" class="search-property-1">
+                    <form action="/Home/Search" class="search-property-1" method="get">
                         <div class="row">
                             <div class="col-lg align-items-end">
                                 <div class="form-group">
@@ -43,7 +46,7 @@
                                         <div class="icon">
                                             <span class="ion-ios-search"></span>
                                         </div>
-                                        <input type="text"
+                                        <input type="text" name="diemden"
                                                class="form-control"
                                                placeholder="Search place" />
                                     </div>
@@ -106,7 +109,7 @@
                             <div class="col-lg align-self-end">
                                 <div class="form-group">
                                     <div class="form-field">
-                                        <input type="submit"
+                                        <input type="submit" name="diemden"
                                                value="Search"
                                                class="form-control btn btn-primary" />
                                     </div>

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Migrations\202010050312514_Initial.cs" />
     <Compile Include="Migrations\202010050312514_Initial.designer.cs">
@@ -166,9 +167,13 @@
     <Compile Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.Designer.cs">
       <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010131459537_AddTaiKhoan.cs" />
-    <Compile Include="Migrations\202010131459537_AddTaiKhoan.designer.cs">
-      <DependentUpon>202010131459537_AddTaiKhoan.cs</DependentUpon>
+    <Compile Include="Migrations\202010140835500_AddTaiKhoan.cs" />
+    <Compile Include="Migrations\202010140835500_AddTaiKhoan.designer.cs">
+      <DependentUpon>202010140835500_AddTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010181645246_fixTaiKhoan.cs" />
+    <Compile Include="Migrations\202010181645246_fixTaiKhoan.designer.cs">
+      <DependentUpon>202010181645246_fixTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
@@ -198,7 +203,13 @@
     <Compile Include="ViewModels\DiaDiemGiaTien.cs" />
     <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
+    <Compile Include="ViewModels\NguoiDungViewModel.cs" />
     <Compile Include="ViewModels\NhanXetExpandedViewModel.cs" />
+    <Compile Include="ViewModels\QuanLyNguoiDungViewModel.cs" />
+    <Compile Include="ViewModels\QuanLyVeViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\ThongTinHoaDon.cs" />
+    <Compile Include="ViewModels\ThongTinVeExpanded.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -225,6 +236,58 @@
     <Content Include="Content\css\owl.carousel.min.css" />
     <Content Include="Content\css\owl.theme.default.min.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\dist\css\adminlte.css" />
+    <Content Include="Content\dist\css\adminlte.min.css" />
+    <Content Include="Content\dist\css\alt\adminlte.components.css" />
+    <Content Include="Content\dist\css\alt\adminlte.components.min.css" />
+    <Content Include="Content\dist\css\alt\adminlte.core.css" />
+    <Content Include="Content\dist\css\alt\adminlte.core.min.css" />
+    <Content Include="Content\dist\css\alt\adminlte.extra-components.css" />
+    <Content Include="Content\dist\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="Content\dist\css\alt\adminlte.pages.css" />
+    <Content Include="Content\dist\css\alt\adminlte.pages.min.css" />
+    <Content Include="Content\dist\css\alt\adminlte.plugins.css" />
+    <Content Include="Content\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Content\dist\img\AdminLTELogo.png" />
+    <Content Include="Content\dist\img\avatar.png" />
+    <Content Include="Content\dist\img\avatar2.png" />
+    <Content Include="Content\dist\img\avatar3.png" />
+    <Content Include="Content\dist\img\avatar4.png" />
+    <Content Include="Content\dist\img\avatar5.png" />
+    <Content Include="Content\dist\img\boxed-bg.jpg" />
+    <Content Include="Content\dist\img\boxed-bg.png" />
+    <Content Include="Content\dist\img\credit\american-express.png" />
+    <Content Include="Content\dist\img\credit\cirrus.png" />
+    <Content Include="Content\dist\img\credit\mastercard.png" />
+    <Content Include="Content\dist\img\credit\paypal.png" />
+    <Content Include="Content\dist\img\credit\paypal2.png" />
+    <Content Include="Content\dist\img\credit\visa.png" />
+    <Content Include="Content\dist\img\default-150x150.png" />
+    <Content Include="Content\dist\img\icons.png" />
+    <Content Include="Content\dist\img\photo1.png" />
+    <Content Include="Content\dist\img\photo2.png" />
+    <Content Include="Content\dist\img\photo3.jpg" />
+    <Content Include="Content\dist\img\photo4.jpg" />
+    <Content Include="Content\dist\img\prod-1.jpg" />
+    <Content Include="Content\dist\img\prod-2.jpg" />
+    <Content Include="Content\dist\img\prod-3.jpg" />
+    <Content Include="Content\dist\img\prod-4.jpg" />
+    <Content Include="Content\dist\img\prod-5.jpg" />
+    <Content Include="Content\dist\img\user1-128x128.jpg" />
+    <Content Include="Content\dist\img\user2-160x160.jpg" />
+    <Content Include="Content\dist\img\user3-128x128.jpg" />
+    <Content Include="Content\dist\img\user4-128x128.jpg" />
+    <Content Include="Content\dist\img\user5-128x128.jpg" />
+    <Content Include="Content\dist\img\user6-128x128.jpg" />
+    <Content Include="Content\dist\img\user7-128x128.jpg" />
+    <Content Include="Content\dist\img\user8-128x128.jpg" />
+    <Content Include="Content\dist\js\adminlte.js" />
+    <Content Include="Content\dist\js\adminlte.min.js" />
+    <Content Include="Content\dist\js\AdminScript.js" />
+    <Content Include="Content\dist\js\demo.js" />
+    <Content Include="Content\dist\js\pages\dashboard.js" />
+    <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\dist\js\pages\dashboard3.js" />
     <Content Include="Content\images\about-1.jpg" />
     <Content Include="Content\images\about.jpg" />
     <Content Include="Content\images\bg_1.jpg" />
@@ -2225,6 +2288,21 @@
     <Content Include="Content\plugins\summernote\summernote.js.map" />
     <Content Include="Content\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\plugins\toastr\toastr.js.map" />
+    <Content Include="Content\dist\css\adminlte.css.map" />
+    <Content Include="Content\dist\css\adminlte.min.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.components.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.components.min.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.core.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.core.min.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.pages.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.plugins.css.map" />
+    <Content Include="Content\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Content\dist\js\.eslintrc.json" />
+    <Content Include="Content\dist\js\adminlte.js.map" />
+    <Content Include="Content\dist\js\adminlte.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2269,6 +2347,14 @@
     <Content Include="Views\Home\Destination.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\_MyLayout.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\QuanLyBanVe.cshtml" />
+    <Content Include="Views\Admin\QuanLyNguoiDung.cshtml" />
+    <Content Include="Views\Admin\ChiTietVe.cshtml" />
+    <Content Include="Views\Home\ChiTietChuyenDi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2314,8 +2400,11 @@
     <EmbeddedResource Include="Migrations\202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.resx">
       <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010131459537_AddTaiKhoan.resx">
-      <DependentUpon>202010131459537_AddTaiKhoan.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010140835500_AddTaiKhoan.resx">
+      <DependentUpon>202010140835500_AddTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010181645246_fixTaiKhoan.resx">
+      <DependentUpon>202010181645246_fixTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -2353,6 +2442,13 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
