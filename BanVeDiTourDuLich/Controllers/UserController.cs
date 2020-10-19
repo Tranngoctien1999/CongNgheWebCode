@@ -16,7 +16,6 @@ namespace BanVeDiTourDuLich.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Index(string TaiKhoanDangNhap, string password)
         {
@@ -30,6 +29,7 @@ namespace BanVeDiTourDuLich.Controllers
                     Session["MaTaiKhoan"] = data.FirstOrDefault().MaTaiKhoan;
                     Session["TaiKhoanDangNhap"] = data.FirstOrDefault().TaiKhoanDangNhap;
                     return View("~/Views/Admin/Index.cshtml");
+
                 }
                 else
                 {

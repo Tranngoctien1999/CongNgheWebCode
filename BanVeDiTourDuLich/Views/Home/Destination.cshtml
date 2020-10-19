@@ -1,4 +1,5 @@
 ﻿@model BanVeDiTourDuLich.ViewModels.IndexViewModel
+
 @{
     ViewBag.Title = "Destination";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,12 +17,52 @@
             {
                 <div class="col-md-3 ftco-animate">
                     <div class="project-destination">
-                        <a href="#"
-                           class="img"
-                           style="background-image: url(@destination.DiaDiem.DuongDanAnh)">
+
+                        <a href="#" class="img" style="background-image: url(@destination.DiaDiem.DuongDanAnh);">
                             <div class="text">
                                 <h3>@destination.DiaDiem.TenDiaDiem</h3>
                                 <span>@destination.SoChuyen Chuyến đi</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="ftco-section ftco-no-pb ftco-no-pt">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-5">
+                <div class="search-wrap-1 search-wrap-notop ftco-animate p-4">
+                    <form action="#" class="search-property-1">
+                        <div class="row">
+                            <div class="col-lg align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Điểm đến</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="ion-ios-search"></span></div>
+                                        <input type="text" class="form-control" placeholder="Tìm kiếm điểm đến">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Ngày Check-in </label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="ion-ios-calendar"></span></div>
+                                        <input type="text" class="form-control checkin_date" placeholder="Ngày Check In ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg align-items-end">
+                                <div class="form-group">
+                                    <label for="#">Ngày Check-out</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="ion-ios-calendar"></span></div>
+                                        <input type="text" class="form-control checkout_date" placeholder="Ngày Check Out ">
+                                    </div>
+                                </div>
                             </div>
                         </a>
                     </div>

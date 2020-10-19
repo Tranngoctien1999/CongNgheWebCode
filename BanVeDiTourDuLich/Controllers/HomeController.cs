@@ -95,8 +95,6 @@ namespace BanVeDiTourDuLich.Controllers
                         orderby g.Count() descending
                         select new ExpandedDiaDiemViewModel() { DiaDiem = diaDiem, SoChuyen = g.Count() };
             indexViewModel.CacDiaDiemBinhChon = query.Take(4).ToList();
-
-
             // Select 6 newest tour 
             var query1 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
@@ -137,6 +135,7 @@ namespace BanVeDiTourDuLich.Controllers
                               TenKhachHang = nhanXetExpand.Ten
                           });
             indexViewModel.CacNhanXet = query2.ToList();
+
             return View(indexViewModel);
         }
 
