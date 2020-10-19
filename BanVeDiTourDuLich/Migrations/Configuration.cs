@@ -61,6 +61,13 @@ namespace BanVeDiTourDuLich.Migrations
                 TenDiaDiem = "Biển Hoằng Hóa",
                 DuongDanAnh = "/Content/images/Destinations/MADIADIEM5.jpg"
             };
+            DiaDiem diaDiem6 = new DiaDiem()
+            {
+                MaDiaDiem = "DIADIEM6",
+                DiaChi = "Hạ Long , Quảng Ninh",
+                TenDiaDiem = "Vịnh Hạ Long",
+                DuongDanAnh = "/Content/images/Destinations/halong.jpg"
+            };
 
             context.DiaDiems.AddOrUpdate(diaDiem1, diaDiem2 , diaDiem3 , diaDiem4 , diaDiem5);
 

@@ -82,7 +82,31 @@ namespace BanVeDiTourDuLich.Controllers
 
         public ActionResult About()
         {
-            return View();
+            IndexViewModel indexView = new IndexViewModel();
+            var query2 = (from nhanXet in context.NhanXets
+                          join KhachHang in context.KhachHangs
+                              on nhanXet.MaKhachHang equals KhachHang.MaKhachHang
+                              into g
+                          select new
+                          {
+                              MaKhachHang = nhanXet.MaKhachHang,
+                              MaTour = nhanXet.MaTour,
+                              NoiDung = nhanXet.NoiDung,
+                              Ten = g.FirstOrDefault().Ten,
+                              DuongDanAnh = g.FirstOrDefault().DuongDanAnh
+                          }).ToList().Select(nhanXetExpand => new NhanXetExpandedViewModel()
+                          {
+                              NhanXet = new NhanXet()
+                              {
+                                  MaKhachHang = nhanXetExpand.MaKhachHang,
+                                  MaTour = nhanXetExpand.MaTour,
+                                  NoiDung = nhanXetExpand.NoiDung
+                              },
+                              DuongDanAnh = nhanXetExpand.DuongDanAnh,
+                              TenKhachHang = nhanXetExpand.Ten
+                          });
+            indexView.CacNhanXet = query2.ToList();
+            return View(indexView);
         }
 
         public ActionResult Destination(string Id)
@@ -142,7 +166,7 @@ namespace BanVeDiTourDuLich.Controllers
 
             return View(indexViewModel);
         }
-
+       
         public ActionResult Contact()
         {
             return View();
