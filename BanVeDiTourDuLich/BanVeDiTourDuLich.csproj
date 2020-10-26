@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\QuanLyBanVeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Migrations\202010050312514_Initial.cs" />
     <Compile Include="Migrations\202010050312514_Initial.designer.cs">
@@ -320,7 +321,7 @@
     <Content Include="Content\images\Persions\ADMIN.jpg" />
     <Content Include="Content\images\Persions\KH01.jpg" />
     <Content Include="Content\images\Persions\NHANVIEN0.jpg" />
-    <Content Include="Content\images\Persions\NHANVIEN1.jpg" />
+    <Content Include="Content\images\Persions\NHANVIEN01.jpg" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -2358,6 +2359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\QuanLyBanVe\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
