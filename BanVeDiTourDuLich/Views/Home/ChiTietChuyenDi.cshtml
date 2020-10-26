@@ -4,15 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="ftco-section ftco-no-pt">
+
+<section class="ftco-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 ftco-animate">
+        <div class="row justify-content-center pb-4 detail-destination">
+            <div class="col-md-4 ftco-animate image-box">
                 <div class="project-wrap">
-                    <a href="#" class="img" style="background-image: url(images/destination-1.jpg)"></a>
+                    <a href="#" class="img" style="background-image: url(/Content/images/Destinations/MADIADIEM1.jpg)"></a>
                 </div>
             </div>
-            <div class="motachitiet">
+            <div class="motachitiet" style="flex: 0.8; font-weight: 600">
                 <div class="sec1">
                     <span class="diadiem">Điểm đến: HCM</span>
                 </div>
@@ -21,17 +22,7 @@
                     <span class="songay">3 ngày</span>
                     <span class="noikhoihanh">HN</span>
                 </div>
-                <div class="sec3">
-                    <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
-                        <span class="price" itemprop="price" content="9290000">9,290,000</span>&nbsp;<span class="unit"
-                                                                                                           itemprop="priceCurrency" content="VND">đ</span>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-right">
-                        <a href="" class="btn btn-book1 btn-md">
-                            <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Đặt ngay
-                        </a>
-                    </div>
-                </div>
+
                 <div class="sec4">
                     <ul>
                         <li><span class="flaticon-shower"></span>2</li>
@@ -39,12 +30,34 @@
                         <li><span class="flaticon-mountains"></span>Near Mountain</li>
                     </ul>
                 </div>
+                <form action="/DatVe/" method="post">
+                    <div class="sec3">
+                        <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
+                            <p style="margin-right: 50px">Giá Vé :</p>
+                            <select name="giave" id="" class="form-control" style="font-size: 15px;margin-bottom: 20px">
+                                <option value="">$5,000 (Hạng thường)</option>
+                                <option value="">$10,000 (Hạng Thương gia)</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <button class="btn btn-primary" type="submit">
+                                <a href="" class="btn btn-book1 btn-md">
+                                    <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Đặt ngay
+                                </a>
+                            </button>
+                        </div>
+                        
+                    </div>
+                </form>
+                
             </div>
         </div>
     </div>
 </section>
 
-<div class="chuongtrinhtour mg-bot30">
+<div class="chuongtrinhtour mg-bot30" style="display: flex;
+    flex-direction: column;
+    padding:0 10%;">
     <div class="title-lg">
         <h2>Chương trình tour</h2>
     </div>
@@ -158,8 +171,6 @@
                         </div>
                     </div>
 
-
-
                 </div>
                 <div class="an-hien ah2">
                     <div class="hienra">
@@ -175,3 +186,17 @@
     </div>
 </div>
 
+@section styles
+{
+    <style>
+        .detail-destination {
+            justify-content: space-around !important;
+
+        }
+        .image-box {
+            flex: 0 0 50% ;
+            max-width: 50%;
+        }
+    </style>
+   
+}

@@ -70,12 +70,20 @@ namespace BanVeDiTourDuLich.Controllers
                 var data = _db.TaiKhoans.Where(s => s.TaiKhoanDangNhap.Equals(TaiKhoanDangNhap) && s.MatKhau.Equals(password)).ToList();
                 if (data.Count() > 0)
                 {
-                    //add session
-                   
-                    Session["MaTaiKhoan"] = data.FirstOrDefault().MaTaiKhoan;
-                    Session["TaiKhoanDangNhap"] = data.FirstOrDefault().TaiKhoanDangNhap;
-                    return View("~/Views/Admin/Index.cshtml");
-
+                    if (data.First().NhanVien != null)
+                    {
+                        //add session
+                        Session["MaTaiKhoan"] = data.FirstOrDefault().MaTaiKhoan;
+                        Session["TaiKhoanDangNhap"] = data.FirstOrDefault().TaiKhoanDangNhap;
+                        return RedirectToAction("Index" , "Admin");
+                    }
+                    else
+                    {
+                        //add session
+                        Session["MaTaiKhoan"] = data.FirstOrDefault().MaTaiKhoan;
+                        Session["TaiKhoanDangNhap"] = data.FirstOrDefault().TaiKhoanDangNhap;
+                        return RedirectToAction("Index" , "Home");
+                    }
                 }
                 else
                 {
@@ -85,5 +93,15 @@ namespace BanVeDiTourDuLich.Controllers
             }
             return View();
         }
+
+        public ActionResult Signout()
+        {
+            if(Session["MaTaiKhoan"] != null)
+            {
+                Session.Clear();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

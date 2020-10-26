@@ -16,39 +16,45 @@ namespace BanVeDiTourDuLich.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            if (CheckUser())
+            {
+                return View("Index");
+            }
+            return HttpNotFound("Hãy Đăng Nhập");
         }
 
         public ActionResult QuanLyBanVe(string id)
         {
-            if (id != null)
+            if (CheckUser())
             {
-                ThongTinHoaDon thongTin = new ThongTinHoaDon();
-                thongTin.HoaDon = _context.Ves.Find(id).HoaDon;
-                thongTin.CacVe = thongTin.HoaDon.Ves.ToList();
-                thongTin.KhachHang = thongTin.HoaDon.KhachHang;
-                thongTin.NhanVien = thongTin.HoaDon.NhanVien;
-                return View("~/Views/Admin/ChiTietVe.cshtml" , thongTin);
+                if (id != null)
+                {
+                    ThongTinHoaDon thongTin = new ThongTinHoaDon();
+                    thongTin.HoaDon = _context.Ves.Find(id).HoaDon;
+                    thongTin.CacVe = thongTin.HoaDon.Ves.ToList();
+                    thongTin.KhachHang = thongTin.HoaDon.KhachHang;
+                    thongTin.NhanVien = thongTin.HoaDon.NhanVien;
+                    return View("~/Views/Admin/ChiTietVe.cshtml", thongTin);
+                }
+                QuanLyVeViewModel quanLyVeViewModel = new QuanLyVeViewModel();
+                quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours, ve => ve.MaTour, tour => tour.MaTour,
+                    (ve, tour) =>
+                        new
+                        {
+                            Ve = ve,
+                            DiaDiemDen = tour.DiaDiemDen,
+                            DiaDiemDi = tour.DiaDiemDi
+                        }).Join(_context.LoaiVes, c => c.Ve.MaLoaiVe, loaiVe => loaiVe.MaLoaiVe,
+                    (c, loaiVe) => new ThongTinVeExpanded()
+                    {
+                        Ve = c.Ve,
+                        GiaTien = loaiVe.GiaTien,
+                        DiaDiemDen = c.DiaDiemDen,
+                        DiaDiemDi = c.DiaDiemDi
+                    }).ToList();
+                return View(quanLyVeViewModel);
             }
-            QuanLyVeViewModel quanLyVeViewModel = new QuanLyVeViewModel();
-            quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours, ve => ve.MaTour, tour => tour.MaTour,
-                (ve, tour) =>
-                new
-                {
-                    Ve = ve,
-                    DiaDiemDen = tour.DiaDiemDen,
-                    DiaDiemDi = tour.DiaDiemDi
-                }).Join(_context.LoaiVes, c => c.Ve.MaLoaiVe, loaiVe => loaiVe.MaLoaiVe,
-                (c, loaiVe) => new ThongTinVeExpanded()
-                {
-                    Ve = c.Ve,
-                    GiaTien = loaiVe.GiaTien,
-                    DiaDiemDen = c.DiaDiemDen,
-                    DiaDiemDi = c.DiaDiemDi
-                }).ToList();
-            //var list = _context.Ves.ToList();
-
-            return View(quanLyVeViewModel);
+            return HttpNotFound("Hãy Đăng Nhập");
         }
 
         public ActionResult QuanLyNguoiDung()
@@ -65,8 +71,21 @@ namespace BanVeDiTourDuLich.Controllers
                     SoVeMua = soVe
                 });
             };
-            //data.ThongTinCacNguoiDung = query.ToList();
             return View(data);
+        }
+
+        public bool CheckUser()
+        {
+            var userId = Session["MaTaiKhoan"];
+            if (userId != null)
+            {
+                NhanVien nhanVien = _context.NhanViens.Find(userId);
+                if (nhanVien == null)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

@@ -44,5 +44,7 @@ namespace BanVeDiTourDuLich
         public virtual ICollection<Ve> Ves { get; set; }
 
         public virtual ICollection<NhanXet> NhanXets { get; set; }
+
+        public virtual ChiTietTour ChiTietTour { get; set; }
     }
 }
