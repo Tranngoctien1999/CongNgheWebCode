@@ -29,6 +29,8 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<NhanXet> NhanXets { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
+        public virtual DbSet<ChiTietTour> ChiTietTours { get; set; }
+        public virtual DbSet<TinhNang> TinhNangs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiaDiem>()
@@ -254,7 +256,6 @@ namespace BanVeDiTourDuLich
             modelBuilder.Entity<Tour>()
                 .HasMany(e => e.NhanXets)
                 .WithRequired(e => e.Tour);
-            ;
 
             modelBuilder.Entity<NhanXet>()
                 .ToTable("NhanXet");
@@ -269,6 +270,18 @@ namespace BanVeDiTourDuLich
             modelBuilder.Entity<TaiKhoan>()
                 .HasOptional(c => c.NhanVien)
                 .WithOptionalDependent(c => c.TaiKhoan);
+
+            modelBuilder.Entity<ChiTietTour>()
+                .ToTable("ChiTietTour")
+                .HasKey(c => c.MaTour)
+                .HasRequired(c => c.Tour)
+                .WithRequiredDependent(c => c.ChiTietTour);
+
+            modelBuilder.Entity<TinhNang>()
+                .ToTable("TinhNang")
+                .HasKey(c => c.MaTinhNang)
+                .HasRequired(c => c.ChiTietTour)
+                .WithMany(c => c.TinhNangs);
         }
     }
 }

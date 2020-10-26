@@ -242,6 +242,35 @@ namespace BanVeDiTourDuLich.Migrations
             };
             context.TaiKhoans.AddOrUpdate(account);
 
+
+            // Them Chi tiet Tour
+
+            ChiTietTour chiTiet = new ChiTietTour()
+            {
+                MaTour = tour.MaTour,
+                ChiTiet = "Di Ha Giang"
+            };
+
+            context.ChiTietTours.AddOrUpdate(chiTiet);
+            // Them Cac Tinh Nang Cua Tour
+
+            TinhNang tinhNangGanBien = new TinhNang()
+            {
+                MaTour = tour.MaTour,
+                TenTinhNang = "Địa điểm",
+                ThongTinTinhNang = "Gần biển"
+            };
+
+
+            TinhNang tinhNangPhongNgu = new TinhNang()
+            {
+                MaTour = tour.MaTour,
+                TenTinhNang = "Số giường ngủ",
+                ThongTinTinhNang = "4 giường"
+            };
+
+            context.TinhNangs.AddOrUpdate(tinhNangPhongNgu);
+            context.TinhNangs.AddOrUpdate(tinhNangGanBien);
         }
     }
 }
