@@ -1,38 +1,41 @@
-﻿@using System.Web.UI.WebControls
+﻿@{
+    DataContext context = new DataContext();
+    TaiKhoan taiKhoan = context.TaiKhoans.Find(Session["MaTaiKhoan"]);
+}
+@using System.Web.UI.WebControls
+@using BanVeDiTourDuLich.Models
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>@ViewBag.Title</title>
     @* Style rendering for the first version *@
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+          rel="stylesheet" />
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
-        rel="stylesheet"/>
+    <link rel="stylesheet" href="~/Content/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/css/animate.css" />
 
-    <link rel="stylesheet" href="~/Content/css/open-iconic-bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/Content/css/animate.css"/>
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css" />
 
-    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css"/>
-    <link rel="stylesheet" href="~/Content/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="~/Content/css/aos.css" />
 
-    <link rel="stylesheet" href="~/Content/css/aos.css"/>
+    <link rel="stylesheet" href="~/Content/css/ionicons.min.css" />
 
-    <link rel="stylesheet" href="~/Content/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css" />
 
-    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css"/>
-    <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css"/>
-
-    <link rel="stylesheet" href="~/Content/css/flaticon.css"/>
-    <link rel="stylesheet" href="~/Content/css/icomoon.css"/>
-    <link rel="stylesheet" href="~/Content/css/style.css"/>
+    <link rel="stylesheet" href="~/Content/css/flaticon.css" />
+    <link rel="stylesheet" href="~/Content/css/icomoon.css" />
+    <link rel="stylesheet" href="~/Content/css/style.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     @* End Testing Renderer here *@
-    
-    @RenderSection("styles" , false);
+
+    @RenderSection("styles", false);
 </head>
 <body>
 <nav
@@ -68,9 +71,23 @@
                 <li class="nav-item">
                     <a href="/home/contact" class="nav-link">Liên hệ</a>
                 </li>
-                <li class="nav-item cta">
-                    <a href="/user/index" class="nav-link">Đăng nhập</a>
-                </li>
+                @if (taiKhoan == null)
+                {
+                    <li class="nav-item cta">
+                        <a href="/user/index" class="nav-link">Đăng nhập</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="#" class="nav-link cart">
+                            <i class="fas fa-cart-plus"></i> Giỏ Hàng
+                        </a>
+                    </li>
+                    <li class="nav-item cta">
+                        <a href="#" class="nav-link">Nguyễn Thành Công</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
