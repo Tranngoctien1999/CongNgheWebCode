@@ -35,36 +35,59 @@
         <div class="row">
             <div class="col-md-12 mb-5">
                 <div class="search-wrap-1 search-wrap-notop ftco-animate p-4">
-                    <form action="#" class="search-property-1">
+                    <form action="/Home/Search" class="search-property-1" method="get">
                         <div class="row">
                             <div class="col-lg align-items-end">
                                 <div class="form-group">
                                     <label for="#">Điểm đến</label>
                                     <div class="form-field">
-                                        <div class="icon"><span class="ion-ios-search"></span></div>
-                                        <input type="text" class="form-control" placeholder="Tìm kiếm điểm đến">
+                                        <div class="icon">
+                                            <span class="ion-ios-search"></span>
+                                        </div>
+                                        <input type="text" name="diemden"
+                                               class="form-control"
+                                               placeholder="Search place" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg align-items-end">
                                 <div class="form-group">
-                                    <label for="#">Ngày Check-in </label>
+                                    <label for="#">Ngày check-in</label>
                                     <div class="form-field">
-                                        <div class="icon"><span class="ion-ios-calendar"></span></div>
-                                        <input type="text" class="form-control checkin_date" placeholder="Ngày Check In ">
+                                        <div class="icon">
+                                            <span class="ion-ios-calendar"></span>
+                                        </div>
+                                        <input type="text"
+                                               class="form-control checkin_date"
+                                               placeholder="Check In Date" />
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg align-items-end">
                                 <div class="form-group">
-                                    <label for="#">Ngày Check-out</label>
+                                    <label for="#">Giá cao nhất</label>
                                     <div class="form-field">
-                                        <div class="icon"><span class="ion-ios-calendar"></span></div>
-                                        <input type="text" class="form-control checkout_date" placeholder="Ngày Check Out ">
+                                        <div class="select-wrap">
+                                            <div class="icon">
+                                                <span class="ion-ios-arrow-down"></span>
+                                            </div>
+                                            <input name="gia" id="" class="form-control" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                            <div class="col-lg align-self-end">
+                                <div class="form-group">
+                                    <div class="form-field">
+                                        <input type="submit"
+                                               value="Search"
+                                               class="form-control btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     </div>
                 </div>
             }
