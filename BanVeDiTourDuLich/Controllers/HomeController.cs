@@ -68,6 +68,7 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult Search(string diemden,string ngaydi=null,double gia=0)
         {
             SearchViewModel searchViewModel = new SearchViewModel();
+            
             var query1 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
                          join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
@@ -226,6 +227,17 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult Contact()
         {
             return View();
+        }
+        public ActionResult Tour(string id)
+        {
+            SearchViewModel indexView = new SearchViewModel();
+            var query1 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where diaDiem.MaDiaDiem.Contains(id)
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            indexView.CacDiaDiem = query1.ToList();
+            return View(indexView);
         }
 
         
