@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\QuanLyBanVeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Migrations\202010050312514_Initial.cs" />
@@ -176,9 +177,18 @@
     <Compile Include="Migrations\202010181645246_fixTaiKhoan.designer.cs">
       <DependentUpon>202010181645246_fixTaiKhoan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010260327251_Add ChiTiet and TinhNang.cs" />
+    <Compile Include="Migrations\202010260327251_Add ChiTiet and TinhNang.designer.cs">
+      <DependentUpon>202010260327251_Add ChiTiet and TinhNang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010260342036_Change name ChiTiet and TinhNang.cs" />
+    <Compile Include="Migrations\202010260342036_Change name ChiTiet and TinhNang.designer.cs">
+      <DependentUpon>202010260342036_Change name ChiTiet and TinhNang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\ChiTietTour.cs" />
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\DiaDiem.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,6 +206,7 @@
     <Compile Include="Models\NhanXet.cs" />
     <Compile Include="Models\PhuongTien.cs" />
     <Compile Include="Models\TaiKhoan.cs" />
+    <Compile Include="Models\TinhNang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quyen.cs" />
     <Compile Include="Models\ThongTinLoaiQuyenLoaiNhanVien.cs" />
@@ -226,6 +237,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Content\css\Cart.css" />
     <Content Include="Content\css\css\bootstrap-reboot.css" />
     <Content Include="Content\css\css\mixins\_text-hide.css" />
     <Content Include="Content\css\flaticon.css" />
@@ -2305,6 +2317,7 @@
     <Content Include="Content\dist\js\adminlte.js.map" />
     <Content Include="Content\dist\js\adminlte.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -2356,6 +2369,7 @@
     <Content Include="Views\Admin\QuanLyNguoiDung.cshtml" />
     <Content Include="Views\Admin\ChiTietVe.cshtml" />
     <Content Include="Views\Home\ChiTietChuyenDi.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2407,6 +2421,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010181645246_fixTaiKhoan.resx">
       <DependentUpon>202010181645246_fixTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010260327251_Add ChiTiet and TinhNang.resx">
+      <DependentUpon>202010260327251_Add ChiTiet and TinhNang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010260342036_Change name ChiTiet and TinhNang.resx">
+      <DependentUpon>202010260342036_Change name ChiTiet and TinhNang.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

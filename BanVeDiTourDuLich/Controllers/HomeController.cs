@@ -65,17 +65,74 @@ namespace BanVeDiTourDuLich.Controllers
             return View(indexViewModel);
         }
 
-        public ActionResult Search(string diemden)
+        public ActionResult Search(string diemden,string ngaydi=null,double gia=0)
         {
             SearchViewModel searchViewModel = new SearchViewModel();
+            
             var query1 = from diaDiem in context.DiaDiems
-                join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                where diaDiem.TenDiaDiem.Contains(diemden)
-                select new DiaDiemGiaTien() {DiaDiem = diaDiem, GiaTien = 0};
-            searchViewModel.CacDiaDiem = query1.ToList();
-            if (diemden != null)
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where diaDiem.TenDiaDiem.Contains(diemden)
+
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            var query2 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where tour.ThoigianDi.ToString().Contains(ngaydi)
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            var query3 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where loaive.GiaTien <= gia
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            var query4 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where diaDiem.TenDiaDiem.Contains(diemden) && tour.ThoigianDi.ToString().Contains(ngaydi)
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            var query5 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where diaDiem.TenDiaDiem.Contains(diemden) && loaive.GiaTien <= gia
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+
+            var query6 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where tour.ThoigianDi.ToString().Contains(ngaydi) && loaive.GiaTien <= gia
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            var query7 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where tour.ThoigianDi.ToString().Contains(ngaydi) && loaive.GiaTien <= gia && diaDiem.TenDiaDiem.Contains(diemden)
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            if (diemden != null && ngaydi == "" && gia == 0)
             {
-                searchViewModel.TuKhoaTimKiem = "\"" + diemden + "\"";
+                searchViewModel.CacDiaDiem = query1.ToList();
+            }
+            else if (diemden == "" && ngaydi != null && gia == 0)
+            {
+                searchViewModel.CacDiaDiem = query2.ToList();
+            }
+            else if (diemden == "" && ngaydi == "" && gia != 0)
+            {
+                searchViewModel.CacDiaDiem = query3.ToList();
+            }
+            else if(diemden != null && ngaydi != null && gia == 0)
+            {
+                searchViewModel.CacDiaDiem = query4.ToList();
+            }
+            else if (diemden != null && ngaydi == "" && gia != 0)
+            {
+                searchViewModel.CacDiaDiem = query5.ToList();
+            }
+            else if (diemden == "" && ngaydi != null && gia != 0)
+            {
+                searchViewModel.CacDiaDiem = query6.ToList();
+            }
+            else
+            {
+                searchViewModel.CacDiaDiem = query7.ToList();
             }
             return View(searchViewModel);
         }
@@ -171,7 +228,19 @@ namespace BanVeDiTourDuLich.Controllers
         {
             return View();
         }
+        public ActionResult Tour(string id)
+        {
+            SearchViewModel indexView = new SearchViewModel();
+            var query1 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         where diaDiem.MaDiaDiem.Contains(id)
+                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+            indexView.CacDiaDiem = query1.ToList();
+            return View(indexView);
+        }
 
+        
         
     }
 }

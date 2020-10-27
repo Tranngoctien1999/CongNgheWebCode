@@ -79,7 +79,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem1.MaDiaDiem,
                 MaDiemDi = diaDiem2.MaDiaDiem,
                 SoGio = 10,
-                ThoigianDi = new DateTime(2020, 10, 29, 8, 20, 10),
+                ThoigianDi = new DateTime(2020, 10, 29),
             };
 
             Tour tour2 = new Tour()
@@ -88,7 +88,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem2.MaDiaDiem,
                 MaDiemDi = diaDiem3.MaDiaDiem,
                 SoGio = 20,
-                ThoigianDi = new DateTime(2020, 10, 29, 8, 20, 10),
+                ThoigianDi = new DateTime(2020, 10, 29),
             };
 
             Tour tour3 = new Tour()
@@ -97,7 +97,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem3.MaDiaDiem,
                 MaDiemDi = diaDiem4.MaDiaDiem,
                 SoGio = 15,
-                ThoigianDi = new DateTime(2020, 10, 29, 8, 20, 10),
+                ThoigianDi = new DateTime(2020, 10, 29),
             };
 
             Tour tour4 = new Tour()
@@ -106,7 +106,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem4.MaDiaDiem,
                 MaDiemDi = diaDiem5.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 10, 29, 8, 20, 10),
+                ThoigianDi = new DateTime(2020, 10, 29),
             };
 
             context.Tours.AddOrUpdate(tour , tour2 , tour3 , tour4);
@@ -242,6 +242,35 @@ namespace BanVeDiTourDuLich.Migrations
             };
             context.TaiKhoans.AddOrUpdate(account);
 
+
+            // Them Chi tiet Tour
+
+            ChiTietTour chiTiet = new ChiTietTour()
+            {
+                MaTour = tour.MaTour,
+                ChiTiet = "Di Ha Giang"
+            };
+
+            context.ChiTietTours.AddOrUpdate(chiTiet);
+            // Them Cac Tinh Nang Cua Tour
+
+            TinhNang tinhNangGanBien = new TinhNang()
+            {
+                MaTour = tour.MaTour,
+                TenTinhNang = "Địa điểm",
+                ThongTinTinhNang = "Gần biển"
+            };
+
+
+            TinhNang tinhNangPhongNgu = new TinhNang()
+            {
+                MaTour = tour.MaTour,
+                TenTinhNang = "Số giường ngủ",
+                ThongTinTinhNang = "4 giường"
+            };
+
+            context.TinhNangs.AddOrUpdate(tinhNangPhongNgu);
+            context.TinhNangs.AddOrUpdate(tinhNangGanBien);
         }
     }
 }
