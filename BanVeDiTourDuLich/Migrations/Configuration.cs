@@ -268,7 +268,6 @@ namespace BanVeDiTourDuLich.Migrations
                 TenTinhNang = "Số giường ngủ",
                 ThongTinTinhNang = "4 giường"
             };
-
             context.TinhNangs.AddOrUpdate(tinhNangPhongNgu);
             context.TinhNangs.AddOrUpdate(tinhNangGanBien);
         }
