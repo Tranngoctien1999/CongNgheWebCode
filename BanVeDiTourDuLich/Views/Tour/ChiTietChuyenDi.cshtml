@@ -1,4 +1,4 @@
-﻿
+﻿@model BanVeDiTourDuLich.ViewModels.ChiTietViewModel
 @{
     ViewBag.Title = "ChiTietChuyenDi";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,18 +8,18 @@
 <section class="ftco-section">
     <div class="container">
         <div style="align-items: center;" class="row justify-content-center pb-4 detail-destination">
-            <div  class="col-md-4 ftco-animate image-box">
+            <div class="col-md-4 ftco-animate image-box">
                 <div class="project-wrap">
-                    <a href="#" class="img" style="background-image: url(/Content/images/Destinations/MADIADIEM1.jpg);border-radius: 6px;"></a>
+                    <a href="#" class="img" style="background-image: url(@Model.ChiTiet.DuongDanAnh);border-radius: 6px;"></a>
                 </div>
             </div>
             <div class="motachitiet" style="flex: 0.8; font-weight: 600">
                 <div class="sec1">
-                    <span class="diadiem">Điểm đến: HCM</span>
+                    <span class="diadiem">Điểm đến:@Model.ChiTiet.TenDiaDiem</span>
                 </div>
                 <div class="sec2">
-                    <span class="ngaykhoihanh">Khởi hành: 21-12-2020</span>
-                    <span class="songay">3 ngày</span>
+                    <span class="ngaykhoihanh">Khởi hành:@Model.ChiTiet.Tour.ThoigianDi</span>
+                    <span class="songay">@Model.ChiTiet.Tour.SoGio</span>
                     <span class="noikhoihanh">HN</span>
                 </div>
 
@@ -56,7 +56,7 @@
                                 </a>
                             </button>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>
@@ -70,7 +70,7 @@
     <div class="title-lg">
         <h2>Chương trình tour</h2>
     </div>
-    
+
 </div>
 
 @section styles
@@ -78,12 +78,12 @@
     <style>
         .detail-destination {
             justify-content: space-around !important;
-
         }
+
         .image-box {
-            flex: 0 0 50% ;
+            flex: 0 0 50%;
             max-width: 50%;
         }
     </style>
-   
+
 }
