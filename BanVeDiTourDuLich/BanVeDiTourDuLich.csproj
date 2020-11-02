@@ -132,6 +132,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\QuanLyBanVeController.cs" />
+    <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Migrations\202010050312514_Initial.cs" />
     <Compile Include="Migrations\202010050312514_Initial.designer.cs">
@@ -249,6 +250,8 @@
     <Content Include="Content\css\owl.carousel.min.css" />
     <Content Include="Content\css\owl.theme.default.min.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\TourStyles\style.css" />
+    <Content Include="Content\css\TourStyles\ThemeHe.css" />
     <Content Include="Content\dist\css\adminlte.css" />
     <Content Include="Content\dist\css\adminlte.min.css" />
     <Content Include="Content\dist\css\alt\adminlte.components.css" />
@@ -2368,8 +2371,11 @@
     <Content Include="Views\Admin\QuanLyBanVe.cshtml" />
     <Content Include="Views\Admin\QuanLyNguoiDung.cshtml" />
     <Content Include="Views\Admin\ChiTietVe.cshtml" />
-    <Content Include="Views\Home\ChiTietChuyenDi.cshtml" />
+    <Content Include="Views\Tour\ChiTietChuyenDi.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Tour\Index.cshtml">
+      <BrowseToURL>~/Tour/Index.</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
