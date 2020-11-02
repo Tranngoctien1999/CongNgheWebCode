@@ -1,0 +1,127 @@
+﻿@model BanVeDiTourDuLich.ViewModels.SearchViewModel
+@{
+    ViewBag.Title = "TimKiemTour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="/Content/css/TourStyles/style.css" rel="stylesheet" />
+<link href="/Content/css/TourStyles/ThemeHe.css" rel="stylesheet" />
+<div class="container n3-list-tour mg-bot40">
+    <div class="row">
+        <div class="list-tour" itemscope="" itemtype="http://schema.org/Place">
+            <div class="list">
+                <div class="row">
+                    <div class="col-xs-12 mg-bot15">
+                        <div style="padding: 12px 10px;background-color:#f1f1f1;line-height:18px;">
+                            <span class="dep-place">
+                                <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Hà Nội
+                            </span>
+                            <span>Có 26 tour khởi hành vào thời gian bạn chọn</span>
+                        </div>
+                    </div>
+                    @*  Search Result Component *@
+                    @foreach (var destination in @Model.CacTour)
+                    {
+                        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
+                            <div class="frame-day-scroll" id="tagMax318">
+                                <div class="text-center">
+                                    <div class="f-day">
+                                        @destination.ThoiGianDi.Day
+                                    </div>
+                                    <div class="f-date">@destination.ThoiGianDi.Month/@destination.ThoiGianDi.Year</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                            <div class="item mg-bot30">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="tour-name">
+                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaLoaiVe" title=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)"><h3> Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)</h3></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="pos-relative">
+                                            <div class="badge-promo tc">
+                                                <div class="badge-promo-content">
+                                                    <div><i class="fas fa-spinner"></i>&nbsp;&nbsp;Tiêu chuẩn</div>
+                                                </div>
+                                            </div>
+                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaLoaiVe" title=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)">
+                                            <img src="@destination.DuongDanAnh" class="img-responsive pic-lt" alt=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                        <div class="frame-info pos-relative">
+                                            <div class="row">
+
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mg-bot10">
+                                                    <div class="f-left group-listtour" style="width:100%">
+
+                                                        <div style="float:left;margin:5px 0px; padding-top:15px;padding-left:10px;" data-tourid="20024124-3d4b-4661-949f-fbe136704b78" class="rateit" data-rateit-value="4.7" data-rateit-resetable="false"><button id="rateit-reset-2" data-role="none" class="rateit-reset" aria-label="reset rating" aria-controls="rateit-range-2" style="display: none;"></button><div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.7" aria-readonly="false" style="width: 80px; height: 16px;"><div class="rateit-selected" style="height: 16px; width: 75.2px;"></div><div class="rateit-hover" style="height:16px"></div></div></div>
+                                                        <div style="float: left; margin-top:5px; padding-top:15px;">
+                                                            <span class="hreview-aggregate">
+                                                                <span class="item">
+                                                                    <span class="fn">
+                                                                        <span class="rating"><span class="average"><strong>4.7</strong></span><strong>/<span class="best">5 </span></strong>trong <span class="votes"><strong>358</strong></span> Đánh giá<span class="summary"></span></span>
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="col-md-7 col-sm-7 col-xs-12 mg-bot10">
+                                                    <div class="f-left l"><img src="https://travel.com.vn/Content/ThemeHe/img/i-code.png" alt="code"></div>
+                                                    <div class="f-left r">Mã tour: NDHAN502-233-131120VN-U</div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="col-md-5 col-sm-5 col-xs-12 mg-bot10">
+                                                    <div class="f-left l"><img src="https://travel.com.vn/Content/ThemeHe/img/i-chair.png" alt="chair"></div>
+                                                    <div class="f-left r">
+                                                        Số chỗ còn nhận: <span class="font500">9</span>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="col-md-7 col-sm-7 col-xs-12 mg-bot10">
+                                                    <div class="f-left l"><img src="https://travel.com.vn/Content/ThemeHe/img/i-date.png" alt="date"></div>
+                                                    <div class="f-left r">Ngày đi: <span class="font500">@destination.ThoiGianDi.</span></div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="col-md-5 col-sm-5 col-xs-12 mg-bot10">
+                                                    <div class="f-left l"><img src="https://travel.com.vn/Content/ThemeHe/img/i-clock.png" alt="clock"></div>
+                                                    <div class="f-left r">Giờ đi: <span class="font500">@destination.ThoiGianDi.Hour</span></div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="col-md-7 col-sm-7 col-xs-12 mg-bot10">
+                                                    <div class="f-left l"><img src="https://travel.com.vn/Content/ThemeHe/img/i-price.png" alt="price"></div>
+                                                    <div class="f-left r">
+                                                        Giá:
+                                                        <span class="font500 price">@destination.GiaTien đ</span>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="col-md-5 col-sm-5 col-xs-12">
+                                                    <div class="f-left l"><img src="https://travel.com.vn/Content/ThemeHe/img/i-calendar.png" alt="date"></div>
+                                                    <div class="f-left r">Số ngày: <span class="font500">4</span></div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 mg-bot10">
+                                                    <div class="f-left l"><img src="https://travel.com.vn/Content/ThemeHe/img/i-dep.png"></div>
+                                                    <div class="f-left r">Nơi khởi hành: <span class="font500">Hà Nội</span></div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

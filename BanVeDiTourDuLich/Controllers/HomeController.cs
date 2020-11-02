@@ -105,34 +105,34 @@ namespace BanVeDiTourDuLich.Controllers
                          join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
                          where tour.ThoigianDi.ToString().Contains(ngaydi) && loaive.GiaTien <= gia && diaDiem.TenDiaDiem.Contains(diemden)
                          select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
-            if (diemden != null && ngaydi == "" && gia == 0)
-            {
-                searchViewModel.CacDiaDiem = query1.ToList();
-            }
-            else if (diemden == "" && ngaydi != null && gia == 0)
-            {
-                searchViewModel.CacDiaDiem = query2.ToList();
-            }
-            else if (diemden == "" && ngaydi == "" && gia != 0)
-            {
-                searchViewModel.CacDiaDiem = query3.ToList();
-            }
-            else if(diemden != null && ngaydi != null && gia == 0)
-            {
-                searchViewModel.CacDiaDiem = query4.ToList();
-            }
-            else if (diemden != null && ngaydi == "" && gia != 0)
-            {
-                searchViewModel.CacDiaDiem = query5.ToList();
-            }
-            else if (diemden == "" && ngaydi != null && gia != 0)
-            {
-                searchViewModel.CacDiaDiem = query6.ToList();
-            }
-            else
-            {
-                searchViewModel.CacDiaDiem = query7.ToList();
-            }
+            //if (diemden != null && ngaydi == "" && gia == 0)
+            //{
+            //    searchViewModel.CacDiaDiem = query1.ToList();
+            //}
+            //else if (diemden == "" && ngaydi != null && gia == 0)
+            //{
+            //    searchViewModel.CacDiaDiem = query2.ToList();
+            //}
+            //else if (diemden == "" && ngaydi == "" && gia != 0)
+            //{
+            //    searchViewModel.CacDiaDiem = query3.ToList();
+            //}
+            //else if(diemden != null && ngaydi != null && gia == 0)
+            //{
+            //    searchViewModel.CacDiaDiem = query4.ToList();
+            //}
+            //else if (diemden != null && ngaydi == "" && gia != 0)
+            //{
+            //    searchViewModel.CacDiaDiem = query5.ToList();
+            //}
+            //else if (diemden == "" && ngaydi != null && gia != 0)
+            //{
+            //    searchViewModel.CacDiaDiem = query6.ToList();
+            //}
+            //else
+            //{
+            //    searchViewModel.CacDiaDiem = query7.ToList();
+            //}
             return View(searchViewModel);
         }
 
