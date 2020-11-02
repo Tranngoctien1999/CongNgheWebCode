@@ -21,8 +21,7 @@ namespace BanVeDiTourDuLich.Controllers
                 select new ExpandedDiaDiemViewModel() {DiaDiem = diaDiem, SoChuyen = g.Count()};
             indexViewModel.CacDiaDiemBinhChon = query.Take(4).ToList();
 
-
-            // Select 6 newest tour 
+            // Select 6 newest tour ;
             var query1 = from diaDiem in context.DiaDiems
                 join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
                 join loaiVe in context.LoaiVes on tour.MaTour equals loaiVe.MaTour
@@ -170,7 +169,7 @@ namespace BanVeDiTourDuLich.Controllers
         {
             if (Id != null)
             {
-                return View("~/Views/Home/ChiTietChuyenDi.cshtml");
+                //return View("~/Views/Home/ChiTietChuyenDi.cshtml" , diaDiem );
             }
             IndexViewModel indexViewModel = new IndexViewModel();
             // Linq select top 4 poupular destionation base on number of tours
@@ -194,8 +193,6 @@ namespace BanVeDiTourDuLich.Controllers
             {
                 indexViewModel.CacDiaDiem = query1.ToList();
             }
-
-
             // Select 6 newest comments
             var query2 = (from nhanXet in context.NhanXets
                           join KhachHang in context.KhachHangs
@@ -220,27 +217,23 @@ namespace BanVeDiTourDuLich.Controllers
                               TenKhachHang = nhanXetExpand.Ten
                           });
             indexViewModel.CacNhanXet = query2.ToList();
-
             return View(indexViewModel);
         }
-       
         public ActionResult Contact()
         {
             return View();
         }
-        public ActionResult Tour(string id)
-        {
-            SearchViewModel indexView = new SearchViewModel();
-            var query1 = from diaDiem in context.DiaDiems
-                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
-                         where diaDiem.MaDiaDiem.Contains(id)
-                         select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
-            indexView.CacDiaDiem = query1.ToList();
-            return View(indexView);
-        }
+        //public ActionResult Tour(string id)
+        //{
+        //    SearchViewModel indexView = new SearchViewModel();
+        //    var query1 = from diaDiem in context.DiaDiems
+        //                 join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+        //                 join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+        //                 where diaDiem.MaDiaDiem.Contains(id)
+        //                 select new DiaDiemGiaTien() { DiaDiem = diaDiem, GiaTien = loaive.GiaTien };
+        //    indexView.CacDiaDiem = query1.ToList();
+        //    return View(indexView);
+        //}
 
-        
-        
     }
 }
