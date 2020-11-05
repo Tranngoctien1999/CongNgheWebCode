@@ -1,7 +1,8 @@
-﻿@model List<BanVeDiTourDuLich.ViewModels.ThongTinHangTrongGio>
+﻿@model List<BanVeDiTourDuLich.ViewModels.ThongTinVeTrongGio>
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DataContext context = new DataContext();
 }
 <main>
     <div class="basket">
@@ -31,7 +32,7 @@
                         <p>Product Code - 232321939</p>
                     </div>
                 </div>
-                <div class="price">26.00</div>
+                <div class="price">gia</div>
                 <div class="quantity">
                     <input type="number" value="4" min="1" class="quantity-field">
                 </div>
