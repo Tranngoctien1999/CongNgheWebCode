@@ -40,7 +40,6 @@ namespace BanVeDiTourDuLich.Controllers
                     {
                         ViewBag.error = "Mật khẩu phải giống nhau";
                         return View();
-
                     }
                     
                 }

@@ -5,11 +5,9 @@ using System.Web;
 
 namespace BanVeDiTourDuLich.ViewModels
 {
-    public class ChiTiet
+    public class TourGiaTien
     {
-        public string DuongDanAnh { get; set; }
-        public string TenDiaDiem { get; set; }
-        public double GiaTien { get; set; }
         public Tour Tour { get; set; }
+        public double GiaTien { get; set; }
     }
 }

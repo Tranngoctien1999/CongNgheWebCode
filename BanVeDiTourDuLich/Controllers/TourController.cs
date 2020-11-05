@@ -1,6 +1,8 @@
 ﻿using BanVeDiTourDuLich.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -90,14 +92,22 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult ChiTietChuyenDi(String id)
         {
             ChiTietViewModel chiTietViewModel = new ChiTietViewModel();
-            var query = from diaDiem in context.DiaDiems
-                        join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                        join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
-                        where loaive.MaLoaiVe.Contains(id)
-                        select new ChiTiet() { Tour = tour, TenDiaDiem = diaDiem.TenDiaDiem, DuongDanAnh = diaDiem.DuongDanAnh, GiaTien = loaive.GiaTien };
-            chiTietViewModel.ChiTiet = query.SingleOrDefault();
+            var chuyenDi = context.Tours.Where(tour => tour.MaTour == id).Include(tour => tour.LoaiVes)
+                .Include(tour => tour.DiaDiemDen).FirstOrDefault();
+            chiTietViewModel.CacLoaiVe = chuyenDi.LoaiVes.ToList();
+            chiTietViewModel.Tour = chuyenDi;
             return View(chiTietViewModel);
-
         }
+
+        public static string AddDotAndCommaToInteger(double amount)
+        {
+            string parts = amount.ToString("N0", new NumberFormatInfo()
+            {
+                NumberGroupSizes = new[] { 3 },
+                NumberGroupSeparator = "."
+            });
+            return parts;
+        }
+
     }
 }
