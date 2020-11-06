@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DatVeController.cs" />
     <Compile Include="Controllers\QuanLyBanVeController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -213,10 +214,10 @@
     <Compile Include="Models\ThongTinLoaiQuyenLoaiNhanVien.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Ve.cs" />
-    <Compile Include="ViewModels\ChiTiet.cs" />
     <Compile Include="ViewModels\ChiTietTour.cs" />
     <Compile Include="ViewModels\ChiTietViewModel.cs" />
-    <Compile Include="ViewModels\DiaDiemGiaTien.cs" />
+    <Compile Include="ViewModels\ThongTinHangTrongGio.cs" />
+    <Compile Include="ViewModels\TourGiaTien.cs" />
     <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\NguoiDungViewModel.cs" />
@@ -2383,6 +2384,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DatVe\" />
     <Folder Include="Views\QuanLyBanVe\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿@model BanVeDiTourDuLich.ViewModels.ChiTietViewModel
+﻿@using BanVeDiTourDuLich.Controllers
+@model BanVeDiTourDuLich.ViewModels.ChiTietViewModel
 @{
     ViewBag.Title = "ChiTietChuyenDi";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,16 +11,16 @@
         <div style="align-items: center;" class="row justify-content-center pb-4 detail-destination">
             <div class="col-md-4 ftco-animate image-box">
                 <div class="project-wrap">
-                    <a href="#" class="img" style="background-image: url(@Model.ChiTiet.DuongDanAnh);border-radius: 6px;"></a>
+                    <a href="#" class="img" style="background-image: url(@Model.Tour.DiaDiemDen.DuongDanAnh); border-radius: 6px;"></a>
                 </div>
             </div>
             <div class="motachitiet" style="flex: 0.8; font-weight: 600">
                 <div class="sec1">
-                    <span class="diadiem">Điểm đến:@Model.ChiTiet.TenDiaDiem</span>
+                    <span class="diadiem">Điểm đến:@Model.Tour.DiaDiemDen.TenDiaDiem</span>
                 </div>
                 <div class="sec2">
-                    <span class="ngaykhoihanh">Khởi hành:@Model.ChiTiet.Tour.ThoigianDi</span>
-                    <span class="songay">@Model.ChiTiet.Tour.SoGio</span>
+                    <span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>
+                    <span class="songay">@Model.Tour.SoGio</span>
                     <span class="noikhoihanh">HN</span>
                 </div>
 
@@ -30,33 +31,39 @@
                         <li><span class="flaticon-mountains"></span>Near Mountain</li>
                     </ul>
                 </div>
-                <form action="/DatVe/" method="post">
+                <form id="datve" action="/DatVe/" method="post">
+                    <input name="MaTour" value="@Model.Tour.MaTour" type="hidden"/>
+                    <input id="IsRedirect" type="hidden" value=""/>
                     <div class="sec3">
                         <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
                             <p style="margin-right: 50px">Giá Vé :</p>
-                            <select name="giave" id="" class="form-control" style="font-size: 15px;margin-bottom: 20px">
-                                <option value="">$5,000 (Hạng thường)</option>
-                                <option value="">$10,000 (Hạng Thương gia)</option>
+                            <select name="MaLoaiVe" id="" class="form-control" style="font-size: 15px; margin-bottom: 20px">
+                                @foreach (var loaiVe in Model.CacLoaiVe)
+                                {
+                                    <option value="@loaiVe.MaLoaiVe">@TourController.AddDotAndCommaToInteger(loaiVe.GiaTien) VNĐ (@loaiVe.Ten) <span>Hiện còn : @loaiVe.SoLuong vé</span></option>
+                                }
                             </select>
                             <div class="quantity">
-                                <p style="margin-right: 50px;display: inline;">Số Lượng:</p>
-                                <input style="width: 10%; margin-left: 3px; margin-bottom: 10px;display: inline-block" type="number" value="4" min="1" class="quantity-field">
+                                <p style="display: inline; margin-right: 50px;">Số Lượng:</p>
+                                <input name="SoLuong" style="display: inline-block; margin-bottom: 10px; margin-left: 3px; width: 10%;"
+                                       type="number" min="1" class="quantity-field"
+                                       value="1">
                             </div>
                         </div>
                         <div>
-                            <button style="margin-right: 20px;
-    margin-left: 0px;" class="btn btn-primary" type="submit">
-                                <a href="" class="btn btn-book1 btn-md">
+                            <button style="margin-left: 0px; margin-right: 20px;" class="btn btn-primary" type="submit"
+                                    onclick="chuyenSangMuaHang()">
+                                <a class="btn btn-book1 btn-md">
                                     <i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp;Mua ngay
                                 </a>
                             </button>
-                            <button style="background: #f3f3f3 !important;" class="btn btn-primary" type="submit">
-                                <a href="" class="btn btn-book1 btn-md">
+                            <button style="background: #f3f3f3 !important;" class="btn btn-primary" type="submit"
+                                    onclick="chuyenSangThemVaoGio()">
+                                <a class="btn btn-book1 btn-md">
                                     <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Thêm vào giỏ hàng
                                 </a>
                             </button>
                         </div>
-
                     </div>
                 </form>
             </div>
@@ -64,9 +71,7 @@
     </div>
 </section>
 
-<div class="chuongtrinhtour mg-bot30" style="display: flex;
-    flex-direction: column;
-    padding:0 10%;">
+<div class="chuongtrinhtour mg-bot30" style="display: flex; flex-direction: column; padding: 0 10%;">
     <div class="title-lg">
         <h2>Chương trình tour</h2>
     </div>
@@ -76,9 +81,7 @@
 @section styles
 {
     <style>
-        .detail-destination {
-            justify-content: space-around !important;
-        }
+        .detail-destination { justify-content: space-around !important; }
 
         .image-box {
             flex: 0 0 50%;
@@ -86,4 +89,48 @@
         }
     </style>
 
+}
+
+@section scripts
+{
+    <script>
+    /* attach a submit handler to the form */
+    $("#datve").submit(function(event) {
+
+        /* stop form from submitting normally */
+        event.preventDefault();
+
+        /* get the action attribute from the form element */
+        var $form = $(this),
+            url = $form.attr('action');
+        /* Send the data using post with element id name and name2*/
+        var posting = $.post(url,
+            {
+                maTour: $('[name ="MaTour"]')[0].getAttribute("value"),
+                maLoaiVe: $('select[name=MaLoaiVe] option').filter(':selected')[0].getAttribute("value"),
+                soLuong: $('[name ="SoLuong"]')[0].value
+            });
+        /* Alerts the results */
+        posting.done(function() {
+            var isRedirect = $('#IsRedirect')[0].getAttribute('value');
+            console.log(isRedirect);
+            if (isRedirect == 1) {
+                window.location.href = "/Cart";
+            } else {
+                window.alert("Thêm vào giỏ hàng thành công");
+            }
+        });
+        posting.fail(function(respone) {
+            window.alert(respone.responseJSON.errDetail);
+        });
+    });
+
+        function chuyenSangMuaHang() {
+            $('#IsRedirect')[0].setAttribute('value', 1)
+        }
+
+        function chuyenSangThemVaoGio() {
+            $('#IsRedirect')[0].setAttribute('value', 0)
+    }
+    </script>
 }
