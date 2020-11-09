@@ -7,6 +7,7 @@ namespace BanVeDiTourDuLich.ViewModels
 {
     public class ChiTietViewModel
     {
-        public ChiTiet ChiTiet { get; set; }
+        public Tour Tour { get; set; }
+        public List<LoaiVe> CacLoaiVe { get; set; }
     }
 }
