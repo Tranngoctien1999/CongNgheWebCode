@@ -9779,29 +9779,31 @@ h1, h2, h3, h4, h5,
 
 .project-wrap .text .days { font-size: 12px; }
 
-.project-wrap .text .price {
-    position: absolute;
-    top: -23px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    display: inline-block;
-    background: #f9ab30;
-    color: #fff;
-    margin: 0 auto;
-    padding: 8px;
-    font-size: 16px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    -ms-border-radius: 40px;
-    border-radius: 40px;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
+    .project-wrap .text .price {
+        text-align: center;
+        width: 14rem;
+        position: absolute;
+        top: -23px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        display: inline-block;
+        background: #f9ab30;
+        color: #fff;
+        margin: 0 auto;
+        padding: 8px;
+        font-size: 16px;
+        -webkit-border-radius: 40px;
+        -moz-border-radius: 40px;
+        -ms-border-radius: 40px;
+        border-radius: 40px;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
 
 .project-wrap .text h3 { font-size: 24px; }
 

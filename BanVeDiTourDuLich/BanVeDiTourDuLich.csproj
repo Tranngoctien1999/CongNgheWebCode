@@ -2381,6 +2381,7 @@
       <BrowseToURL>~/Tour/Index.</BrowseToURL>
     </Content>
     <Content Include="Views\Tour\TimKiemTour.cshtml" />
+    <Content Include="Views\Tour\ChitietTourDiemDen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
