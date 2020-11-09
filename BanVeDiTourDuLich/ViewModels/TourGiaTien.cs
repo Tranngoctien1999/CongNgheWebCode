@@ -9,5 +9,6 @@ namespace BanVeDiTourDuLich.ViewModels
     {
         public Tour Tour { get; set; }
         public double GiaTien { get; set; }
+        public DiaDiem DiaDiem { get; set; }
     }
 }

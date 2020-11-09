@@ -23,41 +23,41 @@ namespace BanVeDiTourDuLich.Controllers
 
             var query1 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
                          where diaDiem.TenDiaDiem.Contains(diemden)
 
-                         select new ChiTietTour() { DiaDiem = diaDiem,DuongDanAnh=diaDiem.DuongDanAnh,ThoiGianDi=tour.ThoigianDi,MaLoaiVe=loaive.MaLoaiVe, GiaTien = loaive.GiaTien };
+                         select new ChiTietTour() { DiaDiem = diaDiem,DuongDanAnh=diaDiem.DuongDanAnh,ThoiGianDi=tour.ThoigianDi,MaTour=tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
             var query2 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
                          where tour.ThoigianDi.ToString().Contains(ngaydi)
-                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaLoaiVe = loaive.MaLoaiVe, GiaTien = loaive.GiaTien };
+                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour, GiaTien=(double?)g.Min(p => p.GiaTien) ?? 0 };
             var query3 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
-                         where loaive.GiaTien <= gia
-                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaLoaiVe = loaive.MaLoaiVe, GiaTien = loaive.GiaTien };
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
+                         where g.Max(p=>p.GiaTien) <= gia
+                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
             var query4 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
                          where diaDiem.TenDiaDiem.Contains(diemden) && tour.ThoigianDi.ToString().Contains(ngaydi)
-                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaLoaiVe = loaive.MaLoaiVe, GiaTien = loaive.GiaTien };
+                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour,GiaTien= (double?)g.Min(p => p.GiaTien) ?? 0 };
             var query5 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
-                         where diaDiem.TenDiaDiem.Contains(diemden) && loaive.GiaTien <= gia
-                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaLoaiVe = loaive.MaLoaiVe, GiaTien = loaive.GiaTien };
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
+                         where diaDiem.TenDiaDiem.Contains(diemden) && g.Max(p=>p.GiaTien) <= gia
+                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
 
             var query6 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
-                         where tour.ThoigianDi.ToString().Contains(ngaydi) && loaive.GiaTien <= gia
-                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaLoaiVe = loaive.MaLoaiVe, GiaTien = loaive.GiaTien };
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
+                         where tour.ThoigianDi.ToString().Contains(ngaydi) && g.Max(p=>p.GiaTien) <= gia
+                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
             var query7 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour
-                         where tour.ThoigianDi.ToString().Contains(ngaydi) && loaive.GiaTien <= gia && diaDiem.TenDiaDiem.Contains(diemden)
-                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaLoaiVe = loaive.MaLoaiVe, GiaTien = loaive.GiaTien };
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
+                         where tour.ThoigianDi.ToString().Contains(ngaydi) && g.Max(p=>p.GiaTien) <= gia && diaDiem.TenDiaDiem.Contains(diemden)
+                         select new ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
             if (diemden != null && ngaydi == "" && gia == 0)
             {
                 searchViewModel.CacTour = query1.ToList();
@@ -98,7 +98,17 @@ namespace BanVeDiTourDuLich.Controllers
             chiTietViewModel.Tour = chuyenDi;
             return View(chiTietViewModel);
         }
-
+        public ActionResult ChitietTourDiemDen(string id)
+        {
+            SearchViewModel indexView = new SearchViewModel();
+            var query1 = from diaDiem in context.DiaDiems
+                         join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
+                         where diaDiem.MaDiaDiem.Contains(id)
+                         select new ViewModels.ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
+            indexView.CacTour = query1.ToList();
+            return View(indexView);
+        }
         public static string AddDotAndCommaToInteger(double amount)
         {
             string parts = amount.ToString("N0", new NumberFormatInfo()
