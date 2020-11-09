@@ -1,9 +1,17 @@
 ﻿@{
     DataContext context = new DataContext();
     TaiKhoan taiKhoan = context.TaiKhoans.Find(Session["MaTaiKhoan"]);
+    int soHang = 0;
+    if (Session["GioHang"] != null)
+    {
+
+        List<ThongTinVeTrongGio> gioHang = (List<ThongTinVeTrongGio>)Session["GioHang"];
+        soHang = gioHang.Count;
+    }
 }
 @using System.Web.UI.WebControls
 @using BanVeDiTourDuLich.Models
+@using BanVeDiTourDuLich.ViewModels
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,16 +40,17 @@
     <link rel="stylesheet" href="~/Content/css/flaticon.css" />
     <link rel="stylesheet" href="~/Content/css/icomoon.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <style>
         .cart {
             color: #283747 !important;
             background: #f3f3f3;
             position: relative;
-            border-radius: 5px; 
+            border-radius: 5px;
         }
+
         .cart::after {
-            content: "1";
+            content: "@soHang";
             padding: 10px;
             clip-path: circle(6px);
             background: red;
@@ -245,6 +254,6 @@
 <script src="~/Scripts/js/main.js"></script>
 @* Render Scripts for testing stop here *@
 @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </html>

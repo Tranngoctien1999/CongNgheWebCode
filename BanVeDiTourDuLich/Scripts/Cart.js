@@ -45,7 +45,7 @@ function recalculateCart(onlyTotal) {
 
   /* Sum up row totals */
   $('.basket-product').each(function() {
-    subtotal += parseFloat($(this).children('.subtotal').text());
+    subtotal += parseFloat(parseMoneyToValue($(this).children('.subtotal').text()));
   });
 
   /* Calculate totals */
@@ -66,14 +66,14 @@ function recalculateCart(onlyTotal) {
   if (onlyTotal) {
     /* Update total display */
     $('.total-value').fadeOut(fadeTime, function() {
-      $('#basket-total').html(total.toFixed(2));
+      $('#basket-total').html(parseValueToMoney(total));
       $('.total-value').fadeIn(fadeTime);
     });
   } else {
     /* Update summary display. */
     $('.final-value').fadeOut(fadeTime, function() {
-      $('#basket-subtotal').html(subtotal.toFixed(2));
-      $('#basket-total').html(total.toFixed(2));
+      $('#basket-subtotal').html(parseValueToMoney(subtotal));
+      $('#basket-total').html(parseValueToMoney(total));
       if (total == 0) {
         $('.checkout-cta').fadeOut(fadeTime);
       } else {
@@ -88,20 +88,17 @@ function recalculateCart(onlyTotal) {
 function updateQuantity(quantityInput) {
   /* Calculate line price */
   var productRow = $(quantityInput).parent().parent();
-  var price = parseFloat(productRow.children('.price').text());
+  var price = parseFloat(parseMoneyToValue(productRow.children('.price').text()));
   var quantity = $(quantityInput).val();
-  var linePrice = price * quantity;
-
+  var linePrice = parseValueToMoney(price * quantity);
   /* Update line price display and recalc cart totals */
   productRow.children('.subtotal').each(function() {
     $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice.toFixed(2));
+      $(this).text(linePrice);
       recalculateCart();
       $(this).fadeIn(fadeTime);
     });
   });
-
-  productRow.find('.item-quantity').text(quantity);
   updateSumItems();
 }
 
@@ -122,4 +119,17 @@ function removeItem(removeButton) {
     recalculateCart();
     updateSumItems();
   });
+}
+
+function parseMoneyToValue(Money) {
+    var value = Money.replaceAll('.', '');
+    return value;
+}
+
+function parseValueToMoney(value) {
+    var number = Number(value).toLocaleString('en', {
+        minimumFractionDigits: 0,
+    });
+    var money = number.replaceAll(',', '.');
+    return money;
 }
