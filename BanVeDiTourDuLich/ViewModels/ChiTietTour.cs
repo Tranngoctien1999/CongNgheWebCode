@@ -12,6 +12,6 @@ namespace BanVeDiTourDuLich.ViewModels
         public string TenDiaDiem { get; set; }
         public double GiaTien { get; set; }
         public DateTime ThoiGianDi { get; set; }
-        public string MaLoaiVe { get; set; }
+        public string MaTour { get; set; }
     }
 }

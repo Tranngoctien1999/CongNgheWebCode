@@ -216,7 +216,7 @@
     <Compile Include="Models\Ve.cs" />
     <Compile Include="ViewModels\ChiTietTour.cs" />
     <Compile Include="ViewModels\ChiTietViewModel.cs" />
-    <Compile Include="ViewModels\ThongTinHangTrongGio.cs" />
+    <Compile Include="ViewModels\ThongTinVeTrongGio.cs" />
     <Compile Include="ViewModels\TourGiaTien.cs" />
     <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
