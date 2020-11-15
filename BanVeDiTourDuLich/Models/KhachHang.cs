@@ -40,7 +40,7 @@ namespace BanVeDiTourDuLich
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
-
+        public virtual ICollection<TinNhan> TinNhans { get; set; }
         public virtual LoaiKhachHang LoaiKhachHang { get; set; }
         public virtual TaiKhoan TaiKhoan { get; set; }
     }

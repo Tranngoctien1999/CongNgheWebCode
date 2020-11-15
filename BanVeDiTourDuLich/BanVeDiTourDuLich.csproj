@@ -52,7 +52,25 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -129,12 +147,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DatVeController.cs" />
     <Compile Include="Controllers\QuanLyBanVeController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Common\Chat.cs" />
     <Compile Include="Migrations\202010050312514_Initial.cs" />
     <Compile Include="Migrations\202010050312514_Initial.designer.cs">
       <DependentUpon>202010050312514_Initial.cs</DependentUpon>
@@ -187,6 +207,18 @@
     <Compile Include="Migrations\202010260342036_Change name ChiTiet and TinhNang.designer.cs">
       <DependentUpon>202010260342036_Change name ChiTiet and TinhNang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011150136365_UpdateTinNhan.cs" />
+    <Compile Include="Migrations\202011150136365_UpdateTinNhan.designer.cs">
+      <DependentUpon>202011150136365_UpdateTinNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011150150245_UpdateTinNhanNoiDungRequired.cs" />
+    <Compile Include="Migrations\202011150150245_UpdateTinNhanNoiDungRequired.designer.cs">
+      <DependentUpon>202011150150245_UpdateTinNhanNoiDungRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011150514006_UpdateTinNhanThemThoiGianGui.cs" />
+    <Compile Include="Migrations\202011150514006_UpdateTinNhanThemThoiGianGui.designer.cs">
+      <DependentUpon>202011150514006_UpdateTinNhanThemThoiGianGui.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -209,6 +241,7 @@
     <Compile Include="Models\PhuongTien.cs" />
     <Compile Include="Models\TaiKhoan.cs" />
     <Compile Include="Models\TinhNang.cs" />
+    <Compile Include="Models\TinNhan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quyen.cs" />
     <Compile Include="Models\ThongTinLoaiQuyenLoaiNhanVien.cs" />
@@ -216,7 +249,7 @@
     <Compile Include="Models\Ve.cs" />
     <Compile Include="ViewModels\ChiTietTour.cs" />
     <Compile Include="ViewModels\ChiTietViewModel.cs" />
-    <Compile Include="ViewModels\ThongTinHangTrongGio.cs" />
+    <Compile Include="ViewModels\ThongTinVeTrongGio.cs" />
     <Compile Include="ViewModels\TourGiaTien.cs" />
     <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
@@ -2330,6 +2363,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2381,6 +2416,7 @@
       <BrowseToURL>~/Tour/Index.</BrowseToURL>
     </Content>
     <Content Include="Views\Tour\TimKiemTour.cshtml" />
+    <Content Include="Views\Tour\ChitietTourDiemDen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2439,6 +2475,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010260342036_Change name ChiTiet and TinhNang.resx">
       <DependentUpon>202010260342036_Change name ChiTiet and TinhNang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011150136365_UpdateTinNhan.resx">
+      <DependentUpon>202011150136365_UpdateTinNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011150150245_UpdateTinNhanNoiDungRequired.resx">
+      <DependentUpon>202011150150245_UpdateTinNhanNoiDungRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011150514006_UpdateTinNhanThemThoiGianGui.resx">
+      <DependentUpon>202011150514006_UpdateTinNhanThemThoiGianGui.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

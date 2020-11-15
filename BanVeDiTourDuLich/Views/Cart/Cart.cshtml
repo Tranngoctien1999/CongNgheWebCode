@@ -1,7 +1,11 @@
-﻿@model List<BanVeDiTourDuLich.ViewModels.ThongTinHangTrongGio>
+﻿@using System.Collections.ObjectModel
+@using BanVeDiTourDuLich.Controllers
+@model List<BanVeDiTourDuLich.ViewModels.ThongTinVeTrongGio>
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DataContext context = new DataContext();
+    double tongTien = 0;
 }
 <main>
     <div class="basket">
@@ -20,27 +24,31 @@
         </div>
         @foreach (var hang in @Model)
         {
+            {
+                var tour = @context.Tours.Find(hang.MaTour);
+                var loai = tour.LoaiVes.First(loaiVe => loaiVe.MaLoaiVe == hang.MaLoaiVe);
             <div class="basket-product">
                 <div class="item">
                     <div class="product-image">
-                        <img src="http://placehold.it/120x166" alt="Placholder Image 2" class="product-frame">
+                        <img src="@tour.DiaDiemDen.DuongDanAnh" alt="Placholder Image 2" class="product-frame">
                     </div>
                     <div class="product-details">
-                        <h1><strong><span class="item-quantity">@hang.SoLuong</span> @hang.MaTour</strong> @hang.MaLoaiVe</h1>
-                        <p><strong>Navy, Size 18</strong></p>
-                        <p>Product Code - 232321939</p>
+                        <p><strong>Mã Tour: @hang.MaTour</strong></p>
+                        <p>Mã Loại Vé: @hang.MaLoaiVe</p>
                     </div>
                 </div>
-                <div class="price">26.00</div>
+                <div class="price">@TourController.AddDotAndCommaToInteger(loai.GiaTien)</div>
                 <div class="quantity">
-                    <input type="number" value="4" min="1" class="quantity-field">
+                    <input type="number" value="@hang.SoLuong" min="1" class="quantity-field">
                 </div>
-                <div class="subtotal">104.00</div>
+                <div class="subtotal">@(@loai.GiaTien * @hang.SoLuong)</div>
+                 @{tongTien = tongTien +
+                     (@loai.GiaTien * @hang.SoLuong); }
                 <div class="remove">
                     <button>Xóa</button>
                 </div>
             </div>
-
+            }
         }
     </div>
     <aside>
@@ -48,24 +56,17 @@
             <div class="summary-total-items"><span class="total-items"></span> Đồ trong giỏ hàng</div>
             <div class="summary-subtotal">
                 <div class="subtotal-title">Tổng tiền</div>
-                <div class="subtotal-value final-value" id="basket-subtotal">130.00</div>
+                <div class="subtotal-value final-value" id="basket-subtotal">
+                    @TourController.AddDotAndCommaToInteger(tongTien)
+                </div>
                 <div class="summary-promo hide">
                     <div class="promo-title">Giảm giá</div>
                     <div class="promo-value final-value" id="basket-promo"></div>
                 </div>
             </div>
-            <div class="summary-delivery">
-                <select name="delivery-collection" class="summary-delivery-selection">
-                    <option value="0" selected="selected">Select Collection or Delivery</option>
-                    <option value="collection">Collection</option>
-                    <option value="first-class">Royal Mail 1st Class</option>
-                    <option value="second-class">Royal Mail 2nd Class</option>
-                    <option value="signed-for">Royal Mail Special Delivery</option>
-                </select>
-            </div>
             <div class="summary-total">
                 <div class="total-title">Tổng tiền thanh toán</div>
-                <div class="total-value final-value" id="basket-total">130.00</div>
+                <div class="total-value final-value" id="basket-total">@TourController.AddDotAndCommaToInteger(tongTien)</div>
             </div>
             <div class="summary-checkout">
                 <button class="checkout-cta">Thanh toán</button>

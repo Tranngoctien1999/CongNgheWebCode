@@ -1,9 +1,26 @@
 ﻿@{
     DataContext context = new DataContext();
     TaiKhoan taiKhoan = context.TaiKhoans.Find(Session["MaTaiKhoan"]);
+    bool isNhanVien = false;
+    if (taiKhoan != null)
+    {
+        if (taiKhoan.NhanVien != null)
+        {
+            isNhanVien = true;
+        }
+    }
+    int soHang = 0;
+    if (Session["GioHang"] != null)
+    {
+
+        List<ThongTinVeTrongGio> gioHang = (List<ThongTinVeTrongGio>)Session["GioHang"];
+        soHang = gioHang.Count;
+    }
 }
+@using System.Data.Entity
 @using System.Web.UI.WebControls
 @using BanVeDiTourDuLich.Models
+@using BanVeDiTourDuLich.ViewModels
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,16 +49,17 @@
     <link rel="stylesheet" href="~/Content/css/flaticon.css" />
     <link rel="stylesheet" href="~/Content/css/icomoon.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <style>
         .cart {
             color: #283747 !important;
             background: #f3f3f3;
             position: relative;
-            border-radius: 5px; 
+            border-radius: 5px;
         }
+
         .cart::after {
-            content: "1";
+            content: "@soHang";
             padding: 10px;
             clip-path: circle(6px);
             background: red;
@@ -50,7 +68,103 @@
             top: -2px;
             right: 0;
         }
-    </style>
+
+        .help-block {
+            position: fixed;
+            bottom: 5rem;
+            right: 5rem;
+            border-radius: 50%;
+            z-index: 100;
+        }
+
+        .help-button {
+            border: none;
+            text-decoration: none;
+            background-color: orange;
+            padding: 1.5rem 2rem;
+            clip-path: circle(50% at 50% 50%);
+        }
+
+        .msgbox {
+            position: fixed;
+            right: 10rem;
+            bottom: 6rem;
+            width: 20rem;
+            z-index: 99;
+        }
+        .infor-bar {
+            display: flex;
+            justify-content: space-between;
+            background: orange;
+            border-radius: 10px 10px 0px 0px;
+        }
+        .name {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+            color: white
+        }
+
+        .current-user-img {
+            width: 2rem;
+            height: 2rem;
+            clip-path: circle(50% at 50% 50%);
+            margin: 0 0.5rem;
+        }
+
+        .msg {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            height: 15rem;
+            border-radius: 6px;
+            border-color: orange;
+            border-style: solid;
+            overflow-y: auto
+        }
+
+        .msg-img {
+            display: flex;
+            margin-top: 0.2rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        .current {
+            margin-left: auto;
+        }
+
+        .end-user {
+            margin-right: auto;
+        }
+
+        .txt-msg {
+            padding: 0.5rem;
+            background: #C9CBF7;
+            border-radius: 20px;
+            margin-bottom: 0
+        }
+
+        .msg-input {
+            flex: 1;
+        }
+
+        .send__button {
+            width: 20%;
+            border: none
+        }
+
+        .container-input {
+            display: flex;
+            border: solid;
+            border-color: orange;
+        }
+
+        .btn {
+            border: none;
+        }
+
+            
+        </style>
     @* End Testing Renderer here *@
 
     @RenderSection("styles", false)
@@ -94,6 +208,7 @@
                     }
                     else
                     {
+
                         <li class="nav-item cta">
                             <a href="/Cart" class="nav-link cart" style="color: #283747;
                                            background: #f3f3f3;">
@@ -101,15 +216,57 @@
                             </a>
                         </li>
                         <li class="nav-item cta">
-                            <a href="/User/Signout" class="nav-link">Nguyễn Thành Công</a>
+                            <a href="/User/Signout" class="nav-link">@if (@isNhanVien)
+                                                                     {
+                                                                         @taiKhoan.NhanVien.Ten
+                            }
+                                                                     else
+                                                                     {
+                                                                         @taiKhoan.KhachHang.Ten
+                                                                     }</a>
                         </li>
+                        <input id="#MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
                     }
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- END nav -->
-    @RenderBody()
+<!-- END nav -->
+
+
+<div class="help-block">
+    <button class="help-button"><i class="fas fa-phone-square"></i></button>
+</div>
+
+<div class="msgbox">
+    <div class="infor-bar">
+        <p class="name">Nguyen Cong</p>
+        <div class="function-box">
+            <button class="btn">_</button>
+            <button class="btn">X</button>
+        </div>
+    </div>
+    <div class="msg">
+        <div class="msg-img current">
+            <p class="txt-msg">Chao Ban</p>
+            <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg" />
+        </div>
+        
+        <div class="msg-img end-user">
+            <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg" />
+            <p class="txt-msg">Chao Ban</p>
+        </div>
+
+    </div>
+    <div class="container-input">
+        <input class="msg-input"/>
+        <button class="send__button" id="#sendButton">Gửi</button>
+    </div>
+</div>
+
+
+
+@RenderBody()
     <footer class="ftco-footer bg-bottom"
             style="background-image: url(images/footer-bg.jpg)">
         <div class="container">
@@ -241,10 +398,44 @@
 <script src="~/Scripts/js/bootstrap-datepicker.js"></script>
 <script src="~/Scripts/js/scrollax.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="~/Scripts/js/google-map.js"></script>
+@*<script src="~/Scripts/js/google-map.js"></script>*@
 <script src="~/Scripts/js/main.js"></script>
 @* Render Scripts for testing stop here *@
 @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+<script src="~/signalr/hubs"></script>
+
+@RenderSection("scripts", required: false)
+<script>
+    var chat = $.connection.chat;
+    $.connection.hub.start().done(function () {
+        chat.server.hello();
+    });
+
+    chat.client.hello = function() {
+        alert("Dang Chat");
+    }
+
+    AddNewMessageToDb = function(msg , end_user_id , current_user_id)
+    {
+        chat.server.createnewmessage(end_user_id, current_user_id, msg);
+    }
+
+    $($('.send__button')[0]).click(function() {
+        var msgDetail = $('.msg-input')[0].value;
+        if (msgDetail !== '') {
+            var text = `<div class='msg-img current'>
+           <img class='current-user-img' src='/Content/images/Persions/ADMIN.jpg' />
+           <p class='txt-msg'>${msgDetail}</p>
+           </div>`;
+            $(".msg").children().last().after(text);
+            var msg = $('.msg')[0];
+            var clientId = $('#MaTaiKhoan').value;
+            AddNewMessageToDb(msgDetail, 'NHANVIEN01', clientId);
+            msg.scrollTop = msg.scrollHeight;
+            $('.msg-input')[0].value = '';
+        }
+    })
+</script>
 </html>

@@ -30,15 +30,15 @@ namespace BanVeDiTourDuLich.Controllers
                 return Json(new {errDetail = "Không có đủ vé"},JsonRequestBehavior.AllowGet);
             }
 
-            List<ThongTinHangTrongGio> gioHang;
+            List<ThongTinVeTrongGio> gioHang;
             if (Session["GioHang"] == null)
             {
-                Session["GioHang"] = new List<ThongTinHangTrongGio>();
-                gioHang = (List<ThongTinHangTrongGio>) Session["GioHang"];
+                Session["GioHang"] = new List<ThongTinVeTrongGio>();
+                gioHang = (List<ThongTinVeTrongGio>) Session["GioHang"];
             }
             else
             {
-                gioHang = (List<ThongTinHangTrongGio>) Session["GioHang"];
+                gioHang = (List<ThongTinVeTrongGio>) Session["GioHang"];
             }
 
             var checkList = gioHang.Where(hang => hang.MaTour == maTour && hang.MaLoaiVe == maLoaiVe);
@@ -48,7 +48,7 @@ namespace BanVeDiTourDuLich.Controllers
             }
             else
             {
-                gioHang.Add(new ThongTinHangTrongGio(){ MaTour =  maTour , MaLoaiVe = maLoaiVe , SoLuong = soLuong});
+                gioHang.Add(new ThongTinVeTrongGio(){ MaTour =  maTour , MaLoaiVe = maLoaiVe , SoLuong = soLuong});
             }
             return new HttpStatusCodeResult(HttpStatusCode.Accepted);
         }

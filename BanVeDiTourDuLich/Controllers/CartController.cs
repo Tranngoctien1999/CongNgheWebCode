@@ -14,15 +14,15 @@ namespace BanVeDiTourDuLich.Controllers
         {
             if (Session["MaTaiKhoan"] != null)
             {
-                List<ThongTinHangTrongGio> gioHang = new List<ThongTinHangTrongGio>();
+                List<ThongTinVeTrongGio> gioHang = new List<ThongTinVeTrongGio>();
                 if (Session["GioHang"] == null)
                 {
-                    Session["GioHang"] = new List<ThongTinHangTrongGio>();
-                    gioHang = (List<ThongTinHangTrongGio>)Session["GioHang"];
+                    Session["GioHang"] = new List<ThongTinVeTrongGio>();
+                    gioHang = (List<ThongTinVeTrongGio>)Session["GioHang"];
                 }
                 else
                 {
-                    gioHang = (List<ThongTinHangTrongGio>)Session["GioHang"];
+                    gioHang = (List<ThongTinVeTrongGio>)Session["GioHang"];
                 }
                 return View("~/Views/Cart/Cart.cshtml" , gioHang);
             }
