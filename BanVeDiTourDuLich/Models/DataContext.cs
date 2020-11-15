@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using BanVeDiTourDuLich.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace BanVeDiTourDuLich
 {
@@ -31,6 +33,7 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<ChiTietTour> ChiTietTours { get; set; }
         public virtual DbSet<TinhNang> TinhNangs { get; set; }
+        public virtual DbSet<TinNhan> TinNhans { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiaDiem>()
@@ -269,7 +272,7 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<TaiKhoan>()
                 .HasOptional(c => c.NhanVien)
-                .WithOptionalDependent(c => c.TaiKhoan);
+                .WithOptionalPrincipal(c => c.TaiKhoan);
 
             modelBuilder.Entity<ChiTietTour>()
                 .ToTable("ChiTietTour")
@@ -282,6 +285,19 @@ namespace BanVeDiTourDuLich
                 .HasKey(c => c.MaTinhNang)
                 .HasRequired(c => c.ChiTietTour)
                 .WithMany(c => c.TinhNangs);
+
+            modelBuilder.Entity<NhanVien>()
+                .HasMany(c => c.TinNhans)
+                .WithRequired(c => c.NhanVien)
+                .HasForeignKey(c => c.MaNhanVien);
+
+            modelBuilder.Entity<KhachHang>()
+                .HasMany(c => c.TinNhans)
+                .WithRequired(c => c.KhachHang)
+                .HasForeignKey(c => c.MaKhachHang);
+
+            modelBuilder.Entity<TinNhan>()
+                .ToTable("TinNhan");
         }
     }
 }

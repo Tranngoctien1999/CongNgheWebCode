@@ -44,5 +44,7 @@ namespace BanVeDiTourDuLich
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         public virtual TaiKhoan TaiKhoan { get; set; }
         public virtual LoaiNhanVien LoaiNhanVien { get; set; }
+        public virtual ICollection<TinNhan> TinNhans { get; set; }
+
     }
 }
