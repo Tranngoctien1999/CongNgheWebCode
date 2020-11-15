@@ -267,24 +267,12 @@ namespace BanVeDiTourDuLich
                 .ToTable("TaiKhoan");
 
             modelBuilder.Entity<TaiKhoan>()
-                .Property(c => c.MaTaiKhoan)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(c => c.MatKhau)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(c => c.TaiKhoanDangNhap)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
                 .HasOptional(c => c.KhachHang)
-                .WithRequired(c => c.TaiKhoan);
+                .WithOptionalDependent(c => c.TaiKhoan);
 
             modelBuilder.Entity<TaiKhoan>()
                 .HasOptional(c => c.NhanVien)
-                .WithRequired(c => c.TaiKhoan);
+                .WithOptionalPrincipal(c => c.TaiKhoan);
 
             modelBuilder.Entity<ChiTietTour>()
                 .ToTable("ChiTietTour")
