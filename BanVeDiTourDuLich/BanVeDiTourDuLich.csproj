@@ -223,10 +223,6 @@
     <Compile Include="Migrations\202011151528292_FixTaiKhoan.designer.cs">
       <DependentUpon>202011151528292_FixTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011151545194_pending.cs" />
-    <Compile Include="Migrations\202011151545194_pending.designer.cs">
-      <DependentUpon>202011151545194_pending.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2492,9 +2488,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011150514006_UpdateTinNhanThemThoiGianGui.resx">
       <DependentUpon>202011150514006_UpdateTinNhanThemThoiGianGui.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011151545194_pending.resx">
-      <DependentUpon>202011151545194_pending.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
