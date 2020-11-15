@@ -233,14 +233,7 @@ namespace BanVeDiTourDuLich.Migrations
                 NoiDung = "Tour này hay quá"
             };
             context.NhanXets.AddOrUpdate(nhanXet);
-            //add taikhoan
-            TaiKhoan account = new TaiKhoan()
-            {
-                MaTaiKhoan = nhanVien1.MaNhanVien,
-                TaiKhoanDangNhap = "user",
-                MatKhau = "123456",
-            };
-            context.TaiKhoans.AddOrUpdate(account);
+            
 
 
             // Them Chi tiet Tour
