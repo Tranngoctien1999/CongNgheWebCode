@@ -192,11 +192,11 @@
       <DependentUpon>202010130824111_AddDuongDanAnhVaoKhachHangVaNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202010140835500_AddTaiKhoan.cs" />
-    <Compile Include="Migrations\202010140835500_AddTaiKhoan.designer.cs">
+    <Compile Include="Migrations\202010140835500_AddTaiKhoan.Designer.cs">
       <DependentUpon>202010140835500_AddTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202010181645246_fixTaiKhoan.cs" />
-    <Compile Include="Migrations\202010181645246_fixTaiKhoan.designer.cs">
+    <Compile Include="Migrations\202010181645246_fixTaiKhoan.Designer.cs">
       <DependentUpon>202010181645246_fixTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202010260327251_Add ChiTiet and TinhNang.cs" />
@@ -218,6 +218,10 @@
     <Compile Include="Migrations\202011150514006_UpdateTinNhanThemThoiGianGui.cs" />
     <Compile Include="Migrations\202011150514006_UpdateTinNhanThemThoiGianGui.designer.cs">
       <DependentUpon>202011150514006_UpdateTinNhanThemThoiGianGui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011151528292_FixTaiKhoan.cs" />
+    <Compile Include="Migrations\202011151528292_FixTaiKhoan.designer.cs">
+      <DependentUpon>202011151528292_FixTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
