@@ -160,7 +160,7 @@ namespace BanVeDiTourDuLich.Migrations
                 Luong = 20000000,
                 NgaySinh = new DateTime(1999, 10, 29),
                 NgayVaoLam = new DateTime(2020, 09, 10),
-                DuongDanAnh = "/Content/images/Persions/NHANVIEN01.jpg"
+                DuongDanAnh = "/Content/images/Persions/NHANVIEN01.jpg",
             };
             context.NhanViens.AddOrUpdate(nhanVien1);
 
@@ -238,7 +238,7 @@ namespace BanVeDiTourDuLich.Migrations
             {
                 MaTaiKhoan = nhanVien1.MaNhanVien,
                 TaiKhoanDangNhap = "user",
-                MatKhau = "123456"
+                MatKhau = "123456",
             };
             context.TaiKhoans.AddOrUpdate(account);
 
