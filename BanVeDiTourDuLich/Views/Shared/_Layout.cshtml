@@ -219,13 +219,13 @@
                             <a href="/User/Signout" class="nav-link">@if (@isNhanVien)
                                                                      {
                                                                          @taiKhoan.NhanVien.Ten
-                            }
+                                                                     }
                                                                      else
                                                                      {
                                                                          @taiKhoan.KhachHang.Ten
                                                                      }</a>
                         </li>
-                        <input id="#MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
+                        <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
                     }
                 </ul>
             </div>
@@ -235,15 +235,15 @@
 
 
 <div class="help-block">
-    <button class="help-button"><i class="fas fa-phone-square"></i></button>
+    <button onclick="showChat()" class="help-button"><i class="fas fa-phone-square"></i></button>
 </div>
 
 <div class="msgbox">
     <div class="infor-bar">
         <p class="name">Nguyen Cong</p>
         <div class="function-box">
-            <button class="btn">_</button>
-            <button class="btn">X</button>
+            <button onclick="closeChat()" class="btn">_</button>
+            <button onclick="closeChat()" class="btn">X</button>
         </div>
     </div>
     <div class="msg">
@@ -410,17 +410,25 @@
 <script>
     var chat = $.connection.chat;
     $.connection.hub.start().done(function () {
-        chat.server.hello();
+        var clientId = $('.MaTaiKhoan')[0].value;
+        chat.server.addConnectionId(clientId , chat.connection.id);
     });
 
-    chat.client.hello = function() {
-        alert("Dang Chat");
+    AddNewMessageToDbAndManager = function(msg , managerId , userId)
+    {
+        chat.server.saveNewMessageFromKhachHangToNhanVien(managerId, userId, msg);
+        chat.server.sendMessageFromClientToManager(managerId, userId, msg);
     }
 
-    AddNewMessageToDb = function(msg , end_user_id , current_user_id)
-    {
-        chat.server.createnewmessage(end_user_id, current_user_id, msg);
+    chat.client.addNewMessageToManagerBrower = function(maKhachHang,msg) {
+        if (msg !== '') {
+            var text = `<div class='msg-img current'>
+           <img class='current-user-img' src='/Content/images/Persions/ADMIN.jpg' />
+           <p class='txt-msg'>${msg}</p>
+           </div>`;
+            $(".msg").children().last().after(text);
     }
+        }
 
     $($('.send__button')[0]).click(function() {
         var msgDetail = $('.msg-input')[0].value;
@@ -431,11 +439,21 @@
            </div>`;
             $(".msg").children().last().after(text);
             var msg = $('.msg')[0];
-            var clientId = $('#MaTaiKhoan').value;
-            AddNewMessageToDb(msgDetail, 'NHANVIEN01', clientId);
+            var clientId = $('.MaTaiKhoan')[0].value;
+            AddNewMessageToDbAndManager(msgDetail, 'NHANVIEN01', clientId);
             msg.scrollTop = msg.scrollHeight;
             $('.msg-input')[0].value = '';
         }
-    })
+    }
+    )
+    function closeChat() {
+        var box = $('.msgbox')[0];
+        $(box).hide();
+    }
+
+    function showChat() {
+        var box = $('.msgbox')[0];
+        $(box).show();
+    }
 </script>
 </html>

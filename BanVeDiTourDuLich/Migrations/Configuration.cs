@@ -164,6 +164,15 @@ namespace BanVeDiTourDuLich.Migrations
             };
             context.NhanViens.AddOrUpdate(nhanVien1);
 
+            TaiKhoan account = new TaiKhoan()
+            {
+                MaTaiKhoan = nhanVien1.MaNhanVien,
+                MatKhau = "123456",
+                TaiKhoanDangNhap = "user1"
+            };
+
+            context.TaiKhoans.AddOrUpdate(account);
+
             // Thêm Loại khách hàng
 
             LoaiKhachHang loaiKhachHang1 = new LoaiKhachHang()
@@ -186,6 +195,15 @@ namespace BanVeDiTourDuLich.Migrations
                 DuongDanAnh = "/Content/images/Persions/KH01.jpg"
             };
             context.KhachHangs.AddOrUpdate(khachHang1);
+
+            TaiKhoan account1 = new TaiKhoan()
+            {
+                MaTaiKhoan = khachHang1.MaKhachHang,
+                MatKhau = "123456",
+                TaiKhoanDangNhap = "user2"
+            };
+
+            context.TaiKhoans.AddOrUpdate(account1);
 
            // Thêm hóa đơn
            HoaDon hoaDon1 = new HoaDon()
