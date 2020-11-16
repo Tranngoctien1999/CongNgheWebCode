@@ -7,13 +7,13 @@ namespace BanVeDiTourDuLich.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class FixNhanVien : IMigrationMetadata
+    public sealed partial class FixTaiKhoan : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FixNhanVien));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixTaiKhoan));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011151125024_FixNhanVien"; }
+            get { return "202011151528292_FixTaiKhoan"; }
         }
         
         string IMigrationMetadata.Source
