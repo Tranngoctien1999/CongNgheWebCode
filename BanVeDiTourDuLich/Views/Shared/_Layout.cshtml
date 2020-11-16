@@ -141,7 +141,9 @@
             padding: 0.5rem;
             background: #C9CBF7;
             border-radius: 20px;
-            margin-bottom: 0
+            margin-bottom: 0;
+            position: relative;
+            max-width: 60%;
         }
 
         .msg-input {
@@ -161,6 +163,13 @@
 
         .btn {
             border: none;
+        }
+
+        .time-sent {
+            position: absolute;
+            bottom: -1rem;
+            left: 0.5rem;
+            font-size: 0.7rem;
         }
 
             
@@ -235,28 +244,22 @@
 
 
 <div class="help-block">
-    <button onclick="showChat()" class="help-button"><i class="fas fa-phone-square"></i></button>
+    <button onclick="showChat()" class="help-button"><span style="bottom: 20%;left: 30%;" class="time-sent">Hỗ trợ</span><i class="fas fa-phone-square"></i></button>
 </div>
 
 <div class="msgbox">
     <div class="infor-bar">
-        <p class="name">Nguyen Cong</p>
+        <p class="name">Nhân viên hỗ trợ</p>
         <div class="function-box">
             <button onclick="closeChat()" class="btn">_</button>
             <button onclick="closeChat()" class="btn">X</button>
         </div>
     </div>
     <div class="msg">
-        <div class="msg-img current">
-            <p class="txt-msg">Chao Ban</p>
-            <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg" />
-        </div>
-        
         <div class="msg-img end-user">
             <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg" />
-            <p class="txt-msg">Chao Ban</p>
+            <p class="txt-msg">Chào bạn ! Bạn có thể yêu cầu hỗ trợ trực tuyến qua tin nhắn này !<span class="time-sent">Đã gửi vào 12:00 23/12/2020</span></p>
         </div>
-
     </div>
     <div class="container-input">
         <input class="msg-input"/>
@@ -397,7 +400,6 @@
 <script src="~/Scripts/js/jquery.animateNumber.min.js"></script>
 <script src="~/Scripts/js/bootstrap-datepicker.js"></script>
 <script src="~/Scripts/js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 @*<script src="~/Scripts/js/google-map.js"></script>*@
 <script src="~/Scripts/js/main.js"></script>
 @* Render Scripts for testing stop here *@
@@ -417,7 +419,7 @@
     AddNewMessageToDbAndManager = function(msg , managerId , userId)
     {
         chat.server.saveNewMessageFromKhachHangToNhanVien(managerId, userId, msg);
-        chat.server.sendMessageFromClientToManager(managerId, userId, msg);
+        chat.server.sendMassageFromClientToAllManager(userId, msg);
     }
 
     chat.client.addNewMessageToManagerBrower = function(maKhachHang,msg) {

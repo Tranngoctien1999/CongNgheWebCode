@@ -14,6 +14,8 @@ namespace BanVeDiTourDuLich.Hubs
     public class Chat : Hub
     {
         public static List<ConnectionIdUser> connections = new List<ConnectionIdUser>();
+        public static List<ConnectionIdUser> manager = new List<ConnectionIdUser>();
+        public static List<ConnectionIdUser> user = new List<ConnectionIdUser>();
         public DataContext DataContext { get; set; }
         public Chat()
         {
@@ -35,6 +37,20 @@ namespace BanVeDiTourDuLich.Hubs
             DataContext.SaveChanges();
         }
 
+
+        public void SaveNewMessageFromKhachHang(string maKhachHang, string noiDung)
+        {
+            KhachHang khachHang = DataContext.KhachHangs.Find(maKhachHang);
+            TinNhan tinNhan = new TinNhan()
+            {
+                MaKhachHang = khachHang.MaKhachHang,
+                NoiDung = noiDung,
+                ThoiGianGui = DateTime.Now
+            };
+            DataContext.TinNhans.Add(tinNhan);
+            DataContext.SaveChanges();
+        }
+
         public void SendMessageFromClientToManager(string maNhanVien,string maKhachHang, string noiDung)
         {
             ConnectionIdUser connection = connections.Find(c => c.MaTaiKhoan == maNhanVien);
@@ -44,6 +60,11 @@ namespace BanVeDiTourDuLich.Hubs
             }
         }
 
+        public void SendMassageFromClientToAllManager(string maKhachHang, string noiDung)
+        {
+            Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessageToManagerBrower(maKhachHang,noiDung);
+        }
+
         public void AddConnectionId(string maTaiKhoan, string connectionId)
         {
             TaiKhoan taiKhoan = DataContext.TaiKhoans.Find(maTaiKhoan);
@@ -51,6 +72,14 @@ namespace BanVeDiTourDuLich.Hubs
             {
                 taiKhoan.ConnectionId = connectionId;
                 DataContext.SaveChanges();
+                if (taiKhoan.KhachHang != null)
+                {
+                    user.Add(new ConnectionIdUser(){MaTaiKhoan = taiKhoan.MaTaiKhoan , ConnectionId = taiKhoan.ConnectionId});
+                }
+                else
+                {
+                    manager.Add(new ConnectionIdUser(){MaTaiKhoan = taiKhoan.MaTaiKhoan , ConnectionId = taiKhoan.ConnectionId});
+                }
                 connections.Add(new ConnectionIdUser(){MaTaiKhoan = taiKhoan.MaTaiKhoan , ConnectionId = taiKhoan.ConnectionId});
             }
         }
