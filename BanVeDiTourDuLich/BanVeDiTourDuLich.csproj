@@ -231,6 +231,10 @@
     <Compile Include="Migrations\202011160140305_AddConnectionId.designer.cs">
       <DependentUpon>202011160140305_AddConnectionId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011161415336_FixTinNhan.cs" />
+    <Compile Include="Migrations\202011161415336_FixTinNhan.designer.cs">
+      <DependentUpon>202011161415336_FixTinNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2503,6 +2507,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011160140305_AddConnectionId.resx">
       <DependentUpon>202011160140305_AddConnectionId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011161415336_FixTinNhan.resx">
+      <DependentUpon>202011161415336_FixTinNhan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

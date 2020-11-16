@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace BanVeDiTourDuLich.Hubs
             DataContext = new DataContext();
         }
 
+        // Lưu lại tin nhắn gửi từ khách hàng tới nhân viên cụ thể
         public void SaveNewMessageFromKhachHangToNhanVien(string maNhanVien , string maKhachHang, string noiDung)
         {
             KhachHang khachHang = DataContext.KhachHangs.Find(maKhachHang);
@@ -37,7 +39,7 @@ namespace BanVeDiTourDuLich.Hubs
             DataContext.SaveChanges();
         }
 
-
+        // Lưu lại tin nhắn khách hàng gửi mà chưa có nhân viên trợ giúp
         public void SaveNewMessageFromKhachHang(string maKhachHang, string noiDung)
         {
             KhachHang khachHang = DataContext.KhachHangs.Find(maKhachHang);
@@ -50,21 +52,40 @@ namespace BanVeDiTourDuLich.Hubs
             DataContext.TinNhans.Add(tinNhan);
             DataContext.SaveChanges();
         }
-
-        public void SendMessageFromClientToManager(string maNhanVien,string maKhachHang, string noiDung)
+        //Gửi tin nhắn từ khách hàng tới đối tượng cụ thể
+        public void SendMessageFromClientToManager(string maNhanVien,string maKhachHang)
         {
+            TinNhan tinNhanCuoi = DataContext.TinNhans.Last(m => m.MaKhachHang == maKhachHang);
             ConnectionIdUser connection = connections.Find(c => c.MaTaiKhoan == maNhanVien);
-            if (connection != null)
+            if (connection != null && tinNhanCuoi != null)
             {
-                Clients.Client(connection.ConnectionId).addNewMessageToManagerBrower(maKhachHang,noiDung);
+                Clients.Client(connection.ConnectionId).addNewMessageToManager(maKhachHang,tinNhanCuoi.NoiDung , tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
             }
         }
 
+        // Gửi tin nhắn tới tất cả các nhân viên ( hàm này cần chỉnh sao cho phù hợp với admin page)
         public void SendMassageFromClientToAllManager(string maKhachHang, string noiDung)
         {
-            Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessageToManagerBrower(maKhachHang,noiDung);
+            TinNhan tinNhanCuoi = DataContext.TinNhans.Where(m => m.MaKhachHang == maKhachHang)
+                .OrderByDescending(c => c.ThoiGianGui).First();
+            if (tinNhanCuoi != null)
+            {
+                Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessageToManager(maKhachHang,noiDung,tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+            }
         }
 
+        public void SendMassageFromDbToCurrentBrower(string maKhachHang)
+        {
+            TinNhan tinNhanCuoi = DataContext.TinNhans.Where(m => m.MaKhachHang == maKhachHang)
+                .OrderByDescending(c => c.ThoiGianGui).First();
+            ConnectionIdUser connection = connections.Find(c => c.MaTaiKhoan == maKhachHang);
+            if (connection != null && tinNhanCuoi != null)
+            {
+                Clients.Client(connection.ConnectionId).addNewMessageCurrentClientBrower(tinNhanCuoi.NoiDung , tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+            }
+        }
+
+        // Thêm connection Id khi người dùng hoặc nhân viên đăng nhập vào
         public void AddConnectionId(string maTaiKhoan, string connectionId)
         {
             TaiKhoan taiKhoan = DataContext.TaiKhoans.Find(maTaiKhoan);
@@ -84,6 +105,7 @@ namespace BanVeDiTourDuLich.Hubs
             }
         }
 
+        // Xóa connection Id khi người dùng ngắt kết nối
         public void DeleteConnectionId(string maTaiKhoan, string connectionId)
         {
             TaiKhoan taiKhoan = DataContext.TaiKhoans.Find(maTaiKhoan);
