@@ -412,8 +412,12 @@
 
 @RenderSection("scripts", required: false)
 <script>
-
+    $.connection.hub.logging = true;
     var chat = $.connection.chat;
+    $.connection.hub.error(function (error) {
+        alert(error);
+        chat.server.addConnectionId(clientId, chat.connection.id);
+    });
     $.connection.hub.start().done(function () {
         var clientId = $('.MaTaiKhoan')[0].value;
         chat.server.addConnectionId(clientId , chat.connection.id);
@@ -429,11 +433,24 @@
         }
     }
 
-    chat.client.addNewMessageCurrentClientBrower = function (msg, timeSent) {
+    chat.client.sendMassageFromDbToCurrentClientBrower = function (msg, timeSent) {
         if (msg !== '') {
             var clientId = $('.MaTaiKhoan')[0].value;
             var text = `<div class='msg-img current'>
            <img class='current-user-img' src='/Content/images/Persions/${clientId}.jpg' />
+           <p class='txt-msg'>${msg}<span class="time-sent">Đã gửi vào ${timeSent}</span></p>
+           </div>`;
+            $(".msg").children().last().after(text);
+            var msgBox = $('.msg')[0];
+            msgBox.scrollTop = msgBox.scrollHeight;
+            $('.msg-input')[0].value = '';
+        }
+    }
+
+    chat.client.addNewMessageToClient = function (maNhanVien, msg, timeSent) {
+        if (msg !== '') {
+            var text = `<div class='msg-img end-user'>
+           <img class='current-user-img' src='/Content/images/Persions/${maNhanVien}.jpg' />
            <p class='txt-msg'>${msg}<span class="time-sent">Đã gửi vào ${timeSent}</span></p>
            </div>`;
             $(".msg").children().last().after(text);
@@ -442,17 +459,16 @@
 
     $($('.send__button')[0]).click(function() {
             var msgDetail = $('.msg-input')[0].value;
-            var msg = $('.msg')[0];
             if (msgDetail !== '') {
                 var clientId = $('.MaTaiKhoan')[0].value;
                 chat.server.saveNewMessageFromKhachHang(clientId, msgDetail);
                 chat.server.sendMassageFromClientToAllManager(clientId, msgDetail);
-                chat.server.sendMassageFromDbToCurrentBrower(clientId);
-                msg.scrollTop = msg.scrollHeight;
-                $('.msg-input')[0].value = '';
+                chat.server.sendMassageFromDbToCurrentClientBrower(clientId);
             }
         }
     )
+
+    
     function closeChat() {
         var box = $('.msgbox')[0];
         $(box).hide();
