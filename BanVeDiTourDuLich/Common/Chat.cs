@@ -88,7 +88,7 @@ namespace BanVeDiTourDuLich.Hubs
             if (tinNhanCuoi != null)
             {
                 Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessageToManager(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
-                Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addMessageInformationInCard(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+                Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessage(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
             }
         }
 

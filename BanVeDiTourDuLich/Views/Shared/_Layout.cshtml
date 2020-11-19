@@ -452,7 +452,7 @@
             var clientId = $('.MaTaiKhoan')[0].value;
             var text = `<div class='msg-img current'>
            <img class='current-user-img' src='/Content/images/Persions/${clientId}.jpg' />
-           <p class='txt-msg'>${msg}<span class="time-sent">Đã gửi vào ${timeSent}</span></p>
+           <p class='txt-msg'>${msg}<span class="time-sent-current">Đã gửi vào ${timeSent}</span></p>
            </div>`;
             $(".msg").children().last().after(text);
             var msgBox = $('.msg')[0];

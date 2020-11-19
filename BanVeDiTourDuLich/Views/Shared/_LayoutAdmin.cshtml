@@ -320,6 +320,56 @@
         }
     };
 
+    // Thêm tin nhắn vào cuộc trò chuyện đã có sẵn từ trước.
+    function addNewMessageToExistingTalk(msg , timeSent , clientId) {
+        if (msg != "") {
+            var directChat = $(`#directChat${clientId}`)[0];
+            if (directChat != null) {
+                var html = `<div class="direct-chat-msg">
+                                    <div class="direct-chat-infos clearfix">
+                                        <span class="direct-chat-name float-left">${clientId}</span>
+                                        <span class="direct-chat-timestamp float-right">${timeSent}</span>
+                                    </div>
+                                    <!-- /.direct-chat-infos -->
+                                    <img class="direct-chat-img" src="/Content/images/Persions/${clientId}.jpg" alt="message user image">
+                                    <!-- /.direct-chat-img -->
+                                    <div class="direct-chat-text">
+                                        ${msg}
+                                    </div>
+                                    <!-- /.direct-chat-text -->
+                                </div>`;
+                if ($(directChat).children().length == 0) {
+                    $(directChat)[0].innerHTML = html
+                } else {
+                    $(directChat).children().last().after(html);
+                }
+            }
+        }
+    }
+
+    // update newest msg in messsagesBox
+    function changeShowedMessage (clientId , msg , timeSent) {
+        if (msg != "") {
+            var timeSentElement = $(`#Messages${clientId} a div .contacts-list-name small`)[0];
+            var msgElement = $(`#Messages${clientId} a div .contacts-list-msg`)[0];
+            timeSentElement.innerText = timeSent;
+            msgElement.innerText = msg;
+        }
+    }
+
+    // Direct chat messages dược đặt id có dạng : directChat+clientId
+    function showMessageOnClick(clientId) {
+        var directChatList = $(".direct-chat-messages");
+        for (i = 0; i < directChatList.length; i++)
+        {
+            if ($(directChatList[i]).id == `directChat${clientId}`) {
+                $(chat).hide();
+            } else {
+                $(chat).show();
+            }
+        }
+        }
+
     $($('.send__button')[0]).click(function() {
             var msgDetail = $('.msg-input')[0].value;
             var msg = $('.msg')[0];
@@ -341,25 +391,50 @@
     };
 
     chat.client.changeMessageNotificationInCard = function(number) {
-
+        
     };
 
-    chat.client.addMessageInformationInCard = function (clientId, msg , timeSent ) {
-        var html = `<li>
-                        <a href="#">
-                            <img class="contacts-list-img" src="/Content/images/Persions/${clientId}.jpg" alt="User Avatar">
-                            <div class="contacts-list-info">
-                                <span class="contacts-list-name">
-                                    ${clientId}
-                                    <small class="contacts-list-date float-right">${timeSent}</small>
-                                </span>
-                                <span class="contacts-list-msg">${msg}</span>
-                            </div>
-                        </a>
-                    </li>`;
-        var list = $(".contacts-list")[0];
-        $(list).children().last().after(html);
-    };
+    chat.client.addNewMessage = function(clientId, msg, timeSent) {
+        var lists = $($(".contacts-list")[0]).children();
+        var checkIfTalkIsExisting = false;
+        for(i = 0 ; i < lists.length ; i++){
+            if (lists[i].id == `Messages${clientId}`) {
+                checkIfTalkIsExisting = true;
+                break;
+            }
+        }
+        console.log(checkIfTalkIsExisting);
+        if (checkIfTalkIsExisting) {
+            addNewMessageToExistingTalk(msg, timeSent, clientId);
+            changeShowedMessage(clientId, msg, timeSent);
+            showMessageOnClick(clientId);
+        } else {
+            addMessageInformationInCard(clientId, msg, timeSent);
+        }
+    }
+
+    // Thêm một dối tượng mới nhắn tin đến
+    // Id của tin nhắn của một người mới gửi tới dược đặt dạng : Messages+clientId
+        function addMessageInformationInCard(clientId, msg , timeSent ) {
+            var html = `<li id="Messages${clientId}">
+                            <a href="#">
+                                <img class="contacts-list-img" src="/Content/images/Persions/${clientId}.jpg" alt="User Avatar">
+                                <div class="contacts-list-info">
+                                    <span class="contacts-list-name">
+                                        ${clientId}
+                                        <small class="contacts-list-date float-right">${timeSent}</small>
+                                    </span>
+                                    <span class="contacts-list-msg">${msg}</span>
+                                </div>
+                            </a>
+                        </li>`;
+            var list = $(".contacts-list")[0];
+            $(list).children().last().after(html);
+            var html2 = `<div class="direct-chat-messages" id="directChat${clientId}">
+                        </div>`;
+            var cardBody = $("#card")[0];
+            $(cardBody).children().last().after(html2);
+        };
 
     chat.client.removeMessageInformationInCard = function() {
 
