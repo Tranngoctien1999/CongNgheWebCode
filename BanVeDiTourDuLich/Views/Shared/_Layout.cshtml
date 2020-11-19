@@ -174,6 +174,15 @@
             width: max-content;
         }
 
+        .time-sent-current {
+            right: -2rem;
+            position: absolute;
+            bottom: -1rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            width: max-content;
+        }
+
             
         </style>
     @* End Testing Renderer here *@
@@ -423,6 +432,11 @@
         chat.server.addConnectionId(clientId , chat.connection.id);
     });
 
+    $.connection.hub.disconnected(function() {
+        var clientId = $('.MaTaiKhoan')[0].value;
+        chat.server.deleteConnectionId(clientId);
+    })
+
     chat.client.addNewMessageToManager = function(maKhachHang,msg,timeSent) {
         if (msg !== '') {
             var text = `<div class='msg-img end-user'>
@@ -451,7 +465,7 @@
         if (msg !== '') {
             var text = `<div class='msg-img end-user'>
            <img class='current-user-img' src='/Content/images/Persions/${maNhanVien}.jpg' />
-           <p class='txt-msg'>${msg}<span class="time-sent">Đã gửi vào ${timeSent}</span></p>
+           <p class='txt-msg'>${msg}<span class="time-sent-current">Đã gửi vào ${timeSent}</span></p>
            </div>`;
             $(".msg").children().last().after(text);
         }
@@ -461,9 +475,7 @@
             var msgDetail = $('.msg-input')[0].value;
             if (msgDetail !== '') {
                 var clientId = $('.MaTaiKhoan')[0].value;
-                chat.server.saveNewMessageFromKhachHang(clientId, msgDetail);
-                chat.server.sendMassageFromClientToAllManager(clientId, msgDetail);
-                chat.server.sendMassageFromDbToCurrentClientBrower(clientId);
+                chat.server.sendNewMessageFromKhachHang(clientId, msgDetail);
             }
         }
     )
