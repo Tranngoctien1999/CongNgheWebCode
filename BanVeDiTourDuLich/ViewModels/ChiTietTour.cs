@@ -13,5 +13,6 @@ namespace BanVeDiTourDuLich.ViewModels
         public double GiaTien { get; set; }
         public DateTime ThoiGianDi { get; set; }
         public string MaTour { get; set; }
+        public string DiemKhoiHanh { get; set; }
     }
 }

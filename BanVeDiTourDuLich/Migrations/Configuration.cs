@@ -61,15 +61,29 @@ namespace BanVeDiTourDuLich.Migrations
                 TenDiaDiem = "Biển Hoằng Hóa",
                 DuongDanAnh = "/Content/images/Destinations/MADIADIEM5.jpg"
             };
+           
             DiaDiem diaDiem6 = new DiaDiem()
             {
                 MaDiaDiem = "DIADIEM6",
-                DiaChi = "Hạ Long , Quảng Ninh",
-                TenDiaDiem = "Vịnh Hạ Long",
-                DuongDanAnh = "/Content/images/Destinations/halong.jpg"
+                DiaChi = "Hà Nội",
+                TenDiaDiem = "Thành phố Hà Nội",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM6.jpg"
             };
-
-            context.DiaDiems.AddOrUpdate(diaDiem1, diaDiem2 , diaDiem3 , diaDiem4 , diaDiem5);
+            DiaDiem diaDiem7 = new DiaDiem()
+            {
+                MaDiaDiem = "DIADIEM7",
+                DiaChi = "Hồ Chí Minh",
+                TenDiaDiem = "Thành phố Hồ Chí Minh",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            DiaDiem diaDiem8 = new DiaDiem()
+            {
+                MaDiaDiem = "DIADIEM8",
+                DiaChi = "Sa Pa - Lào Cai",
+                TenDiaDiem = "Thị trấn Sa Pa mờ sương",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM8.jpg"
+            };
+            context.DiaDiems.AddOrUpdate(diaDiem1, diaDiem2 , diaDiem3 , diaDiem4 , diaDiem5,diaDiem6,diaDiem7,diaDiem8);
 
 
             // Thêm Tour
@@ -77,7 +91,7 @@ namespace BanVeDiTourDuLich.Migrations
             {
                 MaTour = "TOUR1",
                 MaDiemDen = diaDiem1.MaDiaDiem,
-                MaDiemDi = diaDiem2.MaDiaDiem,
+                MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 10,
                 ThoigianDi = new DateTime(2020, 10, 29),
             };
@@ -86,7 +100,7 @@ namespace BanVeDiTourDuLich.Migrations
             {
                 MaTour = "TOUR2",
                 MaDiemDen = diaDiem2.MaDiaDiem,
-                MaDiemDi = diaDiem3.MaDiaDiem,
+                MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 20,
                 ThoigianDi = new DateTime(2020, 10, 29),
             };
@@ -95,7 +109,7 @@ namespace BanVeDiTourDuLich.Migrations
             {
                 MaTour = "TOUR3",
                 MaDiemDen = diaDiem3.MaDiaDiem,
-                MaDiemDi = diaDiem4.MaDiaDiem,
+                MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 15,
                 ThoigianDi = new DateTime(2020, 10, 29),
             };
@@ -104,12 +118,45 @@ namespace BanVeDiTourDuLich.Migrations
             {
                 MaTour = "TOUR5",
                 MaDiemDen = diaDiem4.MaDiaDiem,
-                MaDiemDi = diaDiem5.MaDiaDiem,
+                MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 48,
                 ThoigianDi = new DateTime(2020, 10, 29),
             };
+            Tour tour5 = new Tour()
+            {
+                MaTour = "TOUR6",
+                MaDiemDen = diaDiem8.MaDiaDiem,
+                MaDiemDi = diaDiem6.MaDiaDiem,
+                SoGio = 48,
+                ThoigianDi = new DateTime(2020, 11, 29),
+            };
+            Tour tour6 = new Tour()
+            {
+                MaTour = "TOUR7",
+                MaDiemDen = diaDiem8.MaDiaDiem,
+                MaDiemDi = diaDiem7.MaDiaDiem,
+                SoGio = 48,
+                ThoigianDi = new DateTime(2020, 11, 18),
+            };
 
-            context.Tours.AddOrUpdate(tour , tour2 , tour3 , tour4);
+            Tour tour7 = new Tour()
+            {
+                MaTour = "TOUR8",
+                MaDiemDen = diaDiem4.MaDiaDiem,
+                MaDiemDi = diaDiem7.MaDiaDiem,
+                SoGio = 48,
+                ThoigianDi = new DateTime(2020, 11, 19),
+            };
+            Tour tour8 = new Tour()
+            {
+                MaTour = "TOUR9",
+                MaDiemDen = diaDiem3.MaDiaDiem,
+                MaDiemDi = diaDiem7.MaDiaDiem,
+                SoGio = 48,
+                ThoigianDi = new DateTime(2020, 11, 19),
+            };
+
+            context.Tours.AddOrUpdate(tour , tour2 , tour3 , tour4,tour5,tour6,tour7,tour8);
 
 
             // Thêm loại vé
@@ -131,7 +178,45 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = tour.MaTour,
                 GiaTien = 2000000
             };
-            context.LoaiVes.AddOrUpdate(loaiThuong);
+
+            LoaiVe loaiThuongGia1 = new LoaiVe()
+            {
+                MaLoaiVe = "VETHUONGGIATOUR2",
+                Ten = "Vé thương gia",
+                SoLuong = 10,
+                MaTour = tour2.MaTour,
+                GiaTien = 1000000
+            };
+            context.LoaiVes.AddOrUpdate(loaiThuongGia1);
+
+            LoaiVe loaiThuong1 = new LoaiVe()
+            {
+                MaLoaiVe = "VETHUONGTOUR2",
+                Ten = "Vé thường",
+                SoLuong = 20,
+                MaTour = tour2.MaTour,
+                GiaTien = 800000
+            };
+            context.LoaiVes.AddOrUpdate(loaiThuong1);
+            LoaiVe loaiThuongGia2 = new LoaiVe()
+            {
+                MaLoaiVe = "VETHUONGGIATOUR3",
+                Ten = "Vé thương gia",
+                SoLuong = 10,
+                MaTour = tour3.MaTour,
+                GiaTien = 1000000
+            };
+            context.LoaiVes.AddOrUpdate(loaiThuongGia2);
+
+            LoaiVe loaiThuong2 = new LoaiVe()
+            {
+                MaLoaiVe = "VETHUONGTOUR3",
+                Ten = "Vé thường",
+                SoLuong = 20,
+                MaTour = tour3.MaTour,
+                GiaTien = 800000
+            };
+            context.LoaiVes.AddOrUpdate(loaiThuong2);
 
             // Thêm Loại Nhân viên
             LoaiNhanVien nhanVien = new LoaiNhanVien()
@@ -163,6 +248,14 @@ namespace BanVeDiTourDuLich.Migrations
                 DuongDanAnh = "/Content/images/Persions/NHANVIEN01.jpg",
             };
             context.NhanViens.AddOrUpdate(nhanVien1);
+            //them tai khoan nhan vien
+            TaiKhoan tk1 = new TaiKhoan()
+            {
+                MaTaiKhoan = "NHANVIEN01",
+                TaiKhoanDangNhap = "user",
+                MatKhau = "123456",
+            };
+            context.TaiKhoans.AddOrUpdate(tk1);
 
             TaiKhoan account = new TaiKhoan()
             {
