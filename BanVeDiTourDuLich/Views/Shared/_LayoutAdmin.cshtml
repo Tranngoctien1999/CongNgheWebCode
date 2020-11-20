@@ -303,12 +303,12 @@
         chat.server.addConnectionId(managerId, chat.connection.id);
     });
 
-    chat.client.addNewMessageCurrentManagerBrower = function (clientId,msg, timeSent) {
+    chat.client.addNewMessageCurrentManagerBrower = function (clientId,msg, timeSent , managerName) {
         if (msg !== '') {
             var managerId = $('.MaTaiKhoan')[0].value;
             var text = `<div class="direct-chat-msg right">
         <div class="direct-chat-infos clearfix">
-        <span class="direct-chat-name float-right">${clientId}</span>
+        <span class="direct-chat-name float-right">${managerName}</span>
         <span class="direct-chat-timestamp float-left">${timeSent}</span>
         </div>
         <img class="direct-chat-img" src ='/Content/images/Persions/${managerId}.jpg' alt="message user image">
@@ -321,13 +321,13 @@
     };
 
     // Thêm tin nhắn vào cuộc trò chuyện đã có sẵn từ trước.
-    function addNewMessageToExistingTalk(msg, timeSent, clientId) {
+    function addNewMessageToExistingTalk(msg, timeSent, clientId , clientName) {
         if (msg != "") {
             var directChat = $(`#directChat${clientId}`)[0];
             if (directChat != null) {
                 var html = `<div class="direct-chat-msg">
                                     <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-left">${clientId}</span>
+                                        <span class="direct-chat-name float-left">${clientName}</span>
                                         <span class="direct-chat-timestamp float-right">${timeSent}</span>
                                     </div>
                                     <!-- /.direct-chat-infos -->
@@ -348,12 +348,14 @@
     }
 
     // update newest msg in messsagesBox
-    function changeShowedMessage(clientId, msg, timeSent) {
+    function changeShowedMessage(clientId, msg, timeSent , clientName) {
         if (msg != "") {
             var timeSentElement = $(`#Messages${clientId} a div .contacts-list-name small`)[0];
             var msgElement = $(`#Messages${clientId} a div .contacts-list-msg`)[0];
+            var nameElement = $(`#Messages${clientId} a div .contacts-list-name`)[0];
             timeSentElement.innerText = timeSent;
             msgElement.innerText = msg;
+            nameElement.innerHtml = `${clientName}<small class="contacts-list-date float-right">${timeSent}</small>`;
         }
     }
 
@@ -394,7 +396,7 @@
 
     };
 
-    chat.client.addNewMessage = function (clientId, msg, timeSent) {
+    chat.client.addNewMessage = function (clientId, msg, timeSent , clientName ) {
         var lists = $($(".contacts-list")[0]).children();
         var checkIfTalkIsExisting = false;
         for (i = 0; i < lists.length; i++) {
@@ -404,23 +406,23 @@
             }
         }
         if (checkIfTalkIsExisting) {
-            addNewMessageToExistingTalk(msg, timeSent, clientId);
-            changeShowedMessage(clientId, msg, timeSent);
+            addNewMessageToExistingTalk(msg, timeSent, clientId , clientName);
+            changeShowedMessage(clientId, msg, timeSent , clientName);
         } else {
-            addMessageInformationInCard(clientId, msg, timeSent);
-            addNewMessageToExistingTalk(msg, timeSent, clientId);
+            addMessageInformationInCard(clientId, msg, timeSent, clientName);
+            addNewMessageToExistingTalk(msg, timeSent, clientId , clientName);
         }
     }
 
     // Thêm một dối tượng mới nhắn tin đến
     // Id của tin nhắn của một người mới gửi tới dược đặt dạng : Messages+clientId
-    function addMessageInformationInCard(clientId, msg, timeSent) {
+    function addMessageInformationInCard(clientId, msg, timeSent , clientName) {
         var html = `<li id="Messages${clientId}">
                             <a>
                                 <img class="contacts-list-img" src="/Content/images/Persions/${clientId}.jpg" alt="User Avatar">
                                 <div class="contacts-list-info">
                                     <span class="contacts-list-name">
-                                        ${clientId}
+                                        ${clientName}
                                         <small class="contacts-list-date float-right">${timeSent}</small>
                                     </span>
                                     <span class="contacts-list-msg">${msg}</span>

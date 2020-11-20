@@ -85,7 +85,8 @@ namespace BanVeDiTourDuLich.Hubs
             ConnectionIdUser connection = connections.Find(c => c.MaTaiKhoan == maNhanVien);
             if (connection != null && tinNhanCuoi != null)
             {
-                Clients.Client(connection.ConnectionId).addNewMessage(maKhachHang, tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+                KhachHang client = await DataContext.KhachHangs.Where(khachHang => khachHang.MaKhachHang == maKhachHang).FirstAsync();
+                Clients.Client(connection.ConnectionId).addNewMessage(maKhachHang, tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy") , client.Ten);
             }
         }
 
@@ -99,7 +100,8 @@ namespace BanVeDiTourDuLich.Hubs
                 // Gửi trong trang thái đăng nhập tại user
                 Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessageToManager(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
                 // Gửi trong trnang thái đăng nhập với manager
-                Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessage(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+                KhachHang client = await DataContext.KhachHangs.Where(khachHang => khachHang.MaKhachHang == maKhachHang).FirstAsync();
+                Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessage(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy") ,client.Ten);
             }
         }
 
@@ -149,7 +151,8 @@ namespace BanVeDiTourDuLich.Hubs
             ConnectionIdUser connection = connections.Find(c => c.MaTaiKhoan == maTaiKhoan);
             if (connection != null && tinNhanCuoi != null)
             {
-                Clients.Client(connection.ConnectionId).addNewMessageCurrentManagerBrower(maKhachHang,tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+                NhanVien nhanVien = await DataContext.NhanViens.Where(n => n.MaNhanVien == maTaiKhoan).FirstAsync();
+                Clients.Client(connection.ConnectionId).addNewMessageCurrentManagerBrower(maKhachHang,tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy") ,nhanVien.Ten);
             }
         }
 
