@@ -38,9 +38,10 @@ namespace BanVeDiTourDuLich.Hubs
             await DataContext.SaveChangesAsync();
         }
 
+        
 
 
-        // Khách hàng gửi tin
+        #region Khách hàng gửi tin
 
         // Qua trinh khach hang gui tin toi tat ca nhan vien hien tai
 
@@ -54,6 +55,14 @@ namespace BanVeDiTourDuLich.Hubs
             await SendMessageFromDbToCurrentClientBrower(maKhachHang);
         }
 
+        // Quá trình khách hàng gửi tin nhắn tới nhân viên cụ thể
+
+        public async Task SendNewMessageFromSpecificClientToManager(string maKhachHang,string maNhanVien , string noiDung)
+        {
+            await SaveNewMessageBetweenNhanVienAndClient(maNhanVien, maKhachHang, noiDung);
+            await SendMessageFromClientToManager(maNhanVien, maKhachHang);
+            await SendMessageFromDbToCurrentClientBrower(maKhachHang);
+        }
 
         // Lưu lại tin nhắn khách hàng gửi mà chưa có nhân viên trợ giúp
         public async Task SaveNewMessageFromKhachHang(string maKhachHang, string noiDung)
@@ -76,7 +85,7 @@ namespace BanVeDiTourDuLich.Hubs
             ConnectionIdUser connection = connections.Find(c => c.MaTaiKhoan == maNhanVien);
             if (connection != null && tinNhanCuoi != null)
             {
-                Clients.Client(connection.ConnectionId).addNewMessageToManager(maKhachHang, tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+                Clients.Client(connection.ConnectionId).addNewMessage(maKhachHang, tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
             }
         }
 
@@ -87,7 +96,9 @@ namespace BanVeDiTourDuLich.Hubs
                 .OrderByDescending(c => c.ThoiGianGui).FirstAsync();
             if (tinNhanCuoi != null)
             {
+                // Gửi trong trang thái đăng nhập tại user
                 Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessageToManager(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+                // Gửi trong trnang thái đăng nhập với manager
                 Clients.Clients(manager.Select(m => m.ConnectionId).ToList()).addNewMessage(maKhachHang, noiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
             }
         }
@@ -104,10 +115,22 @@ namespace BanVeDiTourDuLich.Hubs
 
         }
 
-        // Nhân viên gửi tin
+        #endregion
+
+
+        #region Nhân viên gửi tin
+
+        // Gửi tin nhắn từ một nhân viên cụ thể đến khách hàng cụ thể
+        public async Task SendMessageFromSpecificManagerToSpecificClient(string maNhanVien, string maKhachHang,
+            string noiDung)
+        {
+            await SaveNewMessageBetweenNhanVienAndClient(maNhanVien, maKhachHang, noiDung);
+            await SendMassageFromManagerToClient(maNhanVien, maKhachHang);
+            await SendMassageFromDbToCurrentManagerBrower(maNhanVien , maKhachHang);
+        }
 
         // Gửi tin nhắn cho khách hàng
-        public async Task SendMassageFromManagerToClient(string maNhanVien, string maKhachHang, string noiDung)
+        public async Task SendMassageFromManagerToClient(string maNhanVien, string maKhachHang)
         {
             TinNhan tinNhanCuoi = await DataContext.TinNhans.Where(m => m.MaNhanVien == maNhanVien)
                 .OrderByDescending(c => c.ThoiGianGui).FirstAsync();
@@ -119,18 +142,21 @@ namespace BanVeDiTourDuLich.Hubs
         }
 
         // Gửi tin nhắn cho người nhân viên hiện tại
-        public async Task SendMassageFromDbToCurrentManagerBrower(string maTaiKhoan)
+        public async Task SendMassageFromDbToCurrentManagerBrower(string maTaiKhoan, string maKhachHang)
         {
             TinNhan tinNhanCuoi = await DataContext.TinNhans.Where(m => m.MaNhanVien == maTaiKhoan)
                 .OrderByDescending(c => c.ThoiGianGui).FirstAsync();
             ConnectionIdUser connection = connections.Find(c => c.MaTaiKhoan == maTaiKhoan);
             if (connection != null && tinNhanCuoi != null)
             {
-                Clients.Client(connection.ConnectionId).addNewMessageCurrentManagerBrower(tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
+                Clients.Client(connection.ConnectionId).addNewMessageCurrentManagerBrower(maKhachHang,tinNhanCuoi.NoiDung, tinNhanCuoi.ThoiGianGui.ToString("d dddd-M-yyyy"));
             }
         }
 
-        // 
+        #endregion
+
+
+        #region Người dùng đăng nhập
 
         // Thêm connection Id khi người dùng hoặc nhân viên đăng nhập vào
         public async Task AddConnectionId(string maTaiKhoan, string connectionId)
@@ -192,5 +218,8 @@ namespace BanVeDiTourDuLich.Hubs
                 }
             }
         }
+
+        #endregion
+        
     }
 }

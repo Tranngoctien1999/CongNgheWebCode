@@ -236,24 +236,26 @@
                             </a>
                         </li>
                         <li class="nav-item cta">
-                            <a href="/User/Signout" class="nav-link">@if (@isNhanVien)
-                                                                     {
-                                                                         @taiKhoan.NhanVien.Ten
-                                                                     }
-                                                                     else
-                                                                     {
-                                                                         @taiKhoan.KhachHang.Ten
-                                                                     }</a>
-                        </li>
-                        <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
-                    }
+                            <a href="/User/Signout" class="nav-link">
+                                @if (@isNhanVien)
+                                {
+                                    @taiKhoan.NhanVien.Ten
+                                }
+                                else
+                                {
+                                    @taiKhoan.KhachHang.Ten
+                                }
+                        </a>
+                    </li>
+                    <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
+                }
                 </ul>
             </div>
         </div>
     </nav>
 <!-- END nav -->
 
-
+<input type="hidden" id="managerId" />
 <div class="help-block">
     <button onclick="showChat()" class="help-button"><span style="bottom: 20%;left: 30%;" class="time-sent">Hỗ trợ</span><i class="fas fa-phone-square"></i></button>
 </div>
@@ -468,6 +470,7 @@
            <p class='txt-msg'>${msg}<span class="time-sent-current">Đã gửi vào ${timeSent}</span></p>
            </div>`;
             $(".msg").children().last().after(text);
+            updateManagerId(maNhanVien);
         }
     }
 
@@ -475,11 +478,19 @@
             var msgDetail = $('.msg-input')[0].value;
             if (msgDetail !== '') {
                 var clientId = $('.MaTaiKhoan')[0].value;
-                chat.server.sendNewMessageFromKhachHang(clientId, msgDetail);
+                var managerId = $('#managerId')[0].innerText;
+                if (managerId != "") {
+                    chat.server.sendNewMessageFromSpecificClientToManager(clientId , managerId  , msgDetail)
+                } else {
+                    chat.server.sendNewMessageFromKhachHang(clientId, msgDetail);
+                }
             }
         }
     )
 
+    function updateManagerId(managerId) {
+        $("#managerId")[0].innerText = managerId;
+    }
     
     function closeChat() {
         var box = $('.msgbox')[0];

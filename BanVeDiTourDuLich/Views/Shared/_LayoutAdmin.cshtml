@@ -298,12 +298,12 @@
 <script>
 
     var chat = $.connection.chat;
-    $.connection.hub.start().done(function() {
+    $.connection.hub.start().done(function () {
         var managerId = $('.MaTaiKhoan')[0].value;
         chat.server.addConnectionId(managerId, chat.connection.id);
     });
 
-    chat.client.addNewMessageCurrentManagerBrower = function(msg, timeSent) {
+    chat.client.addNewMessageCurrentManagerBrower = function (clientId,msg, timeSent) {
         if (msg !== '') {
             var managerId = $('.MaTaiKhoan')[0].value;
             var text = `<div class="direct-chat-msg right">
@@ -311,17 +311,17 @@
         <span class="direct-chat-name float-right">${clientId}</span>
         <span class="direct-chat-timestamp float-left">${timeSent}</span>
         </div>
-        < img class="direct-chat-img" src = '/Content/images/Persions/${managerId}.jpg' alt="message user image">
+        <img class="direct-chat-img" src ='/Content/images/Persions/${managerId}.jpg' alt="message user image">
         <div class="direct-chat-text">
         ${msg}
         </div>
         </div>`;
-            $(".direct-chat-messages").children().last().after(text);
+            $(`#directChat${clientId}`).children().last().after(text);
         }
     };
 
     // Thêm tin nhắn vào cuộc trò chuyện đã có sẵn từ trước.
-    function addNewMessageToExistingTalk(msg , timeSent , clientId) {
+    function addNewMessageToExistingTalk(msg, timeSent, clientId) {
         if (msg != "") {
             var directChat = $(`#directChat${clientId}`)[0];
             if (directChat != null) {
@@ -348,7 +348,7 @@
     }
 
     // update newest msg in messsagesBox
-    function changeShowedMessage (clientId , msg , timeSent) {
+    function changeShowedMessage(clientId, msg, timeSent) {
         if (msg != "") {
             var timeSentElement = $(`#Messages${clientId} a div .contacts-list-name small`)[0];
             var msgElement = $(`#Messages${clientId} a div .contacts-list-msg`)[0];
@@ -359,65 +359,64 @@
 
     // Direct chat messages dược đặt id có dạng : directChat+clientId
     function showMessageOnClick(clientId) {
+        //$($(".direct-chat-contacts")[0]).hide();
+        $('#btn-message').click();
         var directChatList = $(".direct-chat-messages");
-        for (i = 0; i < directChatList.length; i++)
-        {
-            if ($(directChatList[i]).id == `directChat${clientId}`) {
-                $(chat).hide();
+        for (i = 0; i < directChatList.length; i++) {
+            if (directChatList[i].id == `directChat${clientId}`) {
+                $(directChatList[i]).show();
             } else {
-                $(chat).show();
+                $(directChatList[i]).hide();
             }
         }
-        }
+    }
 
-    $($('.send__button')[0]).click(function() {
-            var msgDetail = $('.msg-input')[0].value;
-            var msg = $('.msg')[0];
-            if (msgDetail !== '') {
-                var managerId = $('.MaTaiKhoan')[0].value;
-                var clientId = $();
-                chat.server.saveNewMessageBetweenNhanVienAndClient(managerId, clientId, msgDetail);
-                chat.server.sendMassageFromManagerToClient(managerId, clientId, msgDetail);
-                chat.server.sendMassageFromDbToCurrentBrower(managerId);
-                msg.scrollTop = msg.scrollHeight;
-                $('.msg-input')[0].value = '';
-            }
+    $($('.send__button')[0]).click(function () {
+        var msgDetail = $('.msg-input')[0].value;
+        var clientId = $('#currentClientId')[0].innerText;
+        var msg = $(`#directChat${clientId}`)[0];
+        if (msgDetail !== '') {
+            var managerId = $('.MaTaiKhoan')[0].value;
+            var clientId = $("#currentClientId")[0].innerText;
+            chat.server.sendMessageFromSpecificManagerToSpecificClient(managerId , clientId , msgDetail)
+            msg.scrollTop = msg.scrollHeight;
+            $('.msg-input')[0].value = '';
         }
+    }
     );
 
-    chat.client.changeMessageNotificationInHeader = function(number) {
+    chat.client.changeMessageNotificationInHeader = function (number) {
         var notificationHeader = $(".notification-header")[0];
         notificationHeader.innerText = number;
     };
 
-    chat.client.changeMessageNotificationInCard = function(number) {
-        
+    chat.client.changeMessageNotificationInCard = function (number) {
+
     };
 
-    chat.client.addNewMessage = function(clientId, msg, timeSent) {
+    chat.client.addNewMessage = function (clientId, msg, timeSent) {
         var lists = $($(".contacts-list")[0]).children();
         var checkIfTalkIsExisting = false;
-        for(i = 0 ; i < lists.length ; i++){
+        for (i = 0; i < lists.length; i++) {
             if (lists[i].id == `Messages${clientId}`) {
                 checkIfTalkIsExisting = true;
                 break;
             }
         }
-        console.log(checkIfTalkIsExisting);
         if (checkIfTalkIsExisting) {
             addNewMessageToExistingTalk(msg, timeSent, clientId);
             changeShowedMessage(clientId, msg, timeSent);
-            showMessageOnClick(clientId);
         } else {
             addMessageInformationInCard(clientId, msg, timeSent);
+            addNewMessageToExistingTalk(msg, timeSent, clientId);
         }
     }
 
     // Thêm một dối tượng mới nhắn tin đến
     // Id của tin nhắn của một người mới gửi tới dược đặt dạng : Messages+clientId
-        function addMessageInformationInCard(clientId, msg , timeSent ) {
-            var html = `<li id="Messages${clientId}">
-                            <a href="#">
+    function addMessageInformationInCard(clientId, msg, timeSent) {
+        var html = `<li id="Messages${clientId}">
+                            <a>
                                 <img class="contacts-list-img" src="/Content/images/Persions/${clientId}.jpg" alt="User Avatar">
                                 <div class="contacts-list-info">
                                     <span class="contacts-list-name">
@@ -428,37 +427,43 @@
                                 </div>
                             </a>
                         </li>`;
-            var list = $(".contacts-list")[0];
-            $(list).children().last().after(html);
-            var html2 = `<div class="direct-chat-messages" id="directChat${clientId}">
+        var list = $(".contacts-list")[0];
+        $(list).children().last().after(html);
+        var html2 = `<div class="direct-chat-messages" id="directChat${clientId}">
                         </div>`;
-            var cardBody = $("#card")[0];
-            $(cardBody).children().last().after(html2);
-        };
+        var cardBody = $("#card")[0];
+        $(cardBody).children().last().after(html2);
+        $(`#directChat${clientId}`).hide();
+        $(`#Messages${clientId} a`)[0].onclick = function() {
+             showMessageOnClick(clientId);
+             $("#currentClientId")[0].innerText = clientId;
+        }
+    };
 
-    chat.client.removeMessageInformationInCard = function() {
+    chat.client.removeMessageInformationInCard = function () {
 
     };
 
-    chat.client.addMessageInformationInNotification = function() {
+    chat.client.addMessageInformationInNotification = function () {
 
     };
 
 
-    chat.client.removeMessageInformationInNotification = function() {
+    chat.client.removeMessageInformationInNotification = function () {
 
     };
 
-
-    function closeChat() {
-        var box = $('.msgbox')[0];
-        $(box).hide();
-    }
-
-    function showChat() {
-        var box = $('.msgbox')[0];
-        $(box).show();
-    }
+    //$('#btn-message').click(function() {
+    //    var check = $("#chatIsShown")[0];
+    //    if (check.value == "1") {
+    //        $($(".direct-chat-contacts")[0]).show();
+    //        check.value = "0";
+    //    } else {
+    //        $($(".direct-chat-contacts")[0]).hide();
+    //        check.value = "1";
+    //    }
+    //})
+    
 </script>
 </body>
 </html>

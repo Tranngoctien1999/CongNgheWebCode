@@ -138,6 +138,8 @@
                     </div>
                     <!-- /.card -->
                     <!-- DIRECT CHAT -->
+                    <input type="hidden" id="currentClientId" />
+                    <input type="hidden" id="chatIsShown" value="1" />
                     <div class="card direct-chat direct-chat-primary">
                         <div class="card-header">
                             <h3 class="card-title">Hỗ trợ trực tiếp</h3>
@@ -152,7 +154,8 @@
                                 <button type="button"
                                         class="btn btn-tool"
                                         title="Contacts"
-                                        data-widget="chat-pane-toggle">
+                                        data-widget="chat-pane-toggle"
+                                        id="btn-message">
                                     <i class="fas fa-comments"></i>
                                 </button>
                                 <button type="button"
@@ -235,7 +238,7 @@
                             </div>
                             <!--/.direct-chat-messages-->
                             <!-- Contacts are loaded here -->
-                            <div class="direct-chat-contacts">
+                            <div class="direct-chat-contacts index-20">
                                 <ul class="contacts-list" id="#">
                                     <li>
                                         <a href="#">
