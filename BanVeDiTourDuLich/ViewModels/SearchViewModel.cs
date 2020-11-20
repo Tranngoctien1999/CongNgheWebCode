@@ -9,5 +9,6 @@ namespace BanVeDiTourDuLich.ViewModels
     {
         public List<ChiTietTour> CacTour { get; set; }
         public string TuKhoaTimKiem { get; set; }
+        public List<string> DiemKhoiHanh { get; set; }
     }
 }
