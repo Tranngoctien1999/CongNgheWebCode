@@ -23,5 +23,7 @@ namespace BanVeDiTourDuLich.Models
         public virtual KhachHang KhachHang { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }
+
+        public string ConnectionId { get; set; }
     }
 }

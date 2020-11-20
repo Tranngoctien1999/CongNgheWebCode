@@ -141,7 +141,9 @@
             padding: 0.5rem;
             background: #C9CBF7;
             border-radius: 20px;
-            margin-bottom: 0
+            margin-bottom: 0;
+            position: relative;
+            max-width: 60%;
         }
 
         .msg-input {
@@ -161,6 +163,24 @@
 
         .btn {
             border: none;
+        }
+
+        .time-sent {
+            position: absolute;
+            bottom: -1rem;
+            left: 0.5rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            width: max-content;
+        }
+
+        .time-sent-current {
+            right: -2rem;
+            position: absolute;
+            bottom: -1rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            width: max-content;
         }
 
             
@@ -216,47 +236,43 @@
                             </a>
                         </li>
                         <li class="nav-item cta">
-                            <a href="/User/Signout" class="nav-link">@if (@isNhanVien)
-                                                                     {
-                                                                         @taiKhoan.NhanVien.Ten
-                            }
-                                                                     else
-                                                                     {
-                                                                         @taiKhoan.KhachHang.Ten
-                                                                     }</a>
-                        </li>
-                        <input id="#MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
-                    }
+                            <a href="/User/Signout" class="nav-link">
+                                @if (@isNhanVien)
+                                {
+                                    @taiKhoan.NhanVien.Ten
+                                }
+                                else
+                                {
+                                    @taiKhoan.KhachHang.Ten
+                                }
+                        </a>
+                    </li>
+                    <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
+                }
                 </ul>
             </div>
         </div>
     </nav>
 <!-- END nav -->
 
-
+<input type="hidden" id="managerId" />
 <div class="help-block">
-    <button class="help-button"><i class="fas fa-phone-square"></i></button>
+    <button onclick="showChat()" class="help-button"><span style="bottom: 20%;left: 30%;" class="time-sent">Hỗ trợ</span><i class="fas fa-phone-square"></i></button>
 </div>
 
 <div class="msgbox">
     <div class="infor-bar">
-        <p class="name">Nguyen Cong</p>
+        <p class="name">Nhân viên hỗ trợ</p>
         <div class="function-box">
-            <button class="btn">_</button>
-            <button class="btn">X</button>
+            <button onclick="closeChat()" class="btn">_</button>
+            <button onclick="closeChat()" class="btn">X</button>
         </div>
     </div>
     <div class="msg">
-        <div class="msg-img current">
-            <p class="txt-msg">Chao Ban</p>
-            <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg" />
-        </div>
-        
         <div class="msg-img end-user">
             <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg" />
-            <p class="txt-msg">Chao Ban</p>
+            <p class="txt-msg">Chào bạn ! Bạn có thể yêu cầu hỗ trợ trực tuyến qua tin nhắn này !<span class="time-sent">Đã gửi vào 12:00 23/12/2020</span></p>
         </div>
-
     </div>
     <div class="container-input">
         <input class="msg-input"/>
@@ -397,7 +413,6 @@
 <script src="~/Scripts/js/jquery.animateNumber.min.js"></script>
 <script src="~/Scripts/js/bootstrap-datepicker.js"></script>
 <script src="~/Scripts/js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 @*<script src="~/Scripts/js/google-map.js"></script>*@
 <script src="~/Scripts/js/main.js"></script>
 @* Render Scripts for testing stop here *@
@@ -408,34 +423,83 @@
 
 @RenderSection("scripts", required: false)
 <script>
+    $.connection.hub.logging = true;
     var chat = $.connection.chat;
+    $.connection.hub.error(function (error) {
+        alert(error);
+        chat.server.addConnectionId(clientId, chat.connection.id);
+    });
     $.connection.hub.start().done(function () {
-        chat.server.hello();
+        var clientId = $('.MaTaiKhoan')[0].value;
+        chat.server.addConnectionId(clientId , chat.connection.id);
     });
 
-    chat.client.hello = function() {
-        alert("Dang Chat");
+    $.connection.hub.disconnected(function() {
+        var clientId = $('.MaTaiKhoan')[0].value;
+        chat.server.deleteConnectionId(clientId);
+    })
+
+    chat.client.addNewMessageToManager = function(maKhachHang,msg,timeSent) {
+        if (msg !== '') {
+            var text = `<div class='msg-img end-user'>
+           <img class='current-user-img' src='/Content/images/Persions/${maKhachHang}.jpg' />
+           <p class='txt-msg'>${msg}<span class="time-sent">Đã gửi vào ${timeSent}</span></p>
+           </div>`;
+            $(".msg").children().last().after(text);
+        }
     }
 
-    AddNewMessageToDb = function(msg , end_user_id , current_user_id)
-    {
-        chat.server.createnewmessage(end_user_id, current_user_id, msg);
+    chat.client.sendMassageFromDbToCurrentClientBrower = function (msg, timeSent) {
+        if (msg !== '') {
+            var clientId = $('.MaTaiKhoan')[0].value;
+            var text = `<div class='msg-img current'>
+           <img class='current-user-img' src='/Content/images/Persions/${clientId}.jpg' />
+           <p class='txt-msg'>${msg}<span class="time-sent-current">Đã gửi vào ${timeSent}</span></p>
+           </div>`;
+            $(".msg").children().last().after(text);
+            var msgBox = $('.msg')[0];
+            msgBox.scrollTop = msgBox.scrollHeight;
+            $('.msg-input')[0].value = '';
+        }
+    }
+
+    chat.client.addNewMessageToClient = function (maNhanVien, msg, timeSent) {
+        if (msg !== '') {
+            var text = `<div class='msg-img end-user'>
+           <img class='current-user-img' src='/Content/images/Persions/${maNhanVien}.jpg' />
+           <p class='txt-msg'>${msg}<span class="time-sent-current">Đã gửi vào ${timeSent}</span></p>
+           </div>`;
+            $(".msg").children().last().after(text);
+            updateManagerId(maNhanVien);
+        }
     }
 
     $($('.send__button')[0]).click(function() {
-        var msgDetail = $('.msg-input')[0].value;
-        if (msgDetail !== '') {
-            var text = `<div class='msg-img current'>
-           <img class='current-user-img' src='/Content/images/Persions/ADMIN.jpg' />
-           <p class='txt-msg'>${msgDetail}</p>
-           </div>`;
-            $(".msg").children().last().after(text);
-            var msg = $('.msg')[0];
-            var clientId = $('#MaTaiKhoan').value;
-            AddNewMessageToDb(msgDetail, 'NHANVIEN01', clientId);
-            msg.scrollTop = msg.scrollHeight;
-            $('.msg-input')[0].value = '';
+            var msgDetail = $('.msg-input')[0].value;
+            if (msgDetail !== '') {
+                var clientId = $('.MaTaiKhoan')[0].value;
+                var managerId = $('#managerId')[0].innerText;
+                if (managerId != "") {
+                    chat.server.sendNewMessageFromSpecificClientToManager(clientId , managerId  , msgDetail)
+                } else {
+                    chat.server.sendNewMessageFromKhachHang(clientId, msgDetail);
+                }
+            }
         }
-    })
+    )
+
+    function updateManagerId(managerId) {
+        $("#managerId")[0].innerText = managerId;
+    }
+    
+    function closeChat() {
+        var box = $('.msgbox')[0];
+        $(box).hide();
+    }
+
+    function showChat() {
+        var box = $('.msgbox')[0];
+        $(box).show();
+    }
 </script>
 </html>
