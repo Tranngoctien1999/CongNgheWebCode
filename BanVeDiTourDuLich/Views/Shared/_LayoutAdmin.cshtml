@@ -303,7 +303,7 @@
         chat.server.addConnectionId(managerId, chat.connection.id);
     });
 
-    chat.client.addNewMessageCurrentManagerBrower = function (clientId,msg, timeSent , managerName) {
+    chat.client.addNewMessageCurrentManagerBrower = function (clientId,msg, timeSent , managerName , imagePath) {
         if (msg !== '') {
             var managerId = $('.MaTaiKhoan')[0].value;
             var text = `<div class="direct-chat-msg right">
@@ -311,7 +311,7 @@
         <span class="direct-chat-name float-right">${managerName}</span>
         <span class="direct-chat-timestamp float-left">${timeSent}</span>
         </div>
-        <img class="direct-chat-img" src ='/Content/images/Persions/${managerId}.jpg' alt="message user image">
+        <img class="direct-chat-img" src ='${imagePath}' alt="message user image">
         <div class="direct-chat-text">
         ${msg}
         </div>
@@ -321,7 +321,7 @@
     };
 
     // Thêm tin nhắn vào cuộc trò chuyện đã có sẵn từ trước.
-    function addNewMessageToExistingTalk(msg, timeSent, clientId , clientName) {
+    function addNewMessageToExistingTalk(msg, timeSent, clientId , clientName , imagePath) {
         if (msg != "") {
             var directChat = $(`#directChat${clientId}`)[0];
             if (directChat != null) {
@@ -331,7 +331,7 @@
                                         <span class="direct-chat-timestamp float-right">${timeSent}</span>
                                     </div>
                                     <!-- /.direct-chat-infos -->
-                                    <img class="direct-chat-img" src="/Content/images/Persions/${clientId}.jpg" alt="message user image">
+                                    <img class="direct-chat-img" src="${imagePath}" alt="message user image">
                                     <!-- /.direct-chat-img -->
                                     <div class="direct-chat-text">
                                         ${msg}
@@ -396,7 +396,7 @@
 
     };
 
-    chat.client.addNewMessage = function (clientId, msg, timeSent , clientName ) {
+    chat.client.addNewMessage = function (clientId, msg, timeSent , clientName , imagePath ) {
         var lists = $($(".contacts-list")[0]).children();
         var checkIfTalkIsExisting = false;
         for (i = 0; i < lists.length; i++) {
@@ -406,20 +406,20 @@
             }
         }
         if (checkIfTalkIsExisting) {
-            addNewMessageToExistingTalk(msg, timeSent, clientId , clientName);
+            addNewMessageToExistingTalk(msg, timeSent, clientId , clientName , imagePath);
             changeShowedMessage(clientId, msg, timeSent , clientName);
         } else {
-            addMessageInformationInCard(clientId, msg, timeSent, clientName);
-            addNewMessageToExistingTalk(msg, timeSent, clientId , clientName);
+            addMessageInformationInCard(clientId, msg, timeSent, clientName, imagePath);
+            addNewMessageToExistingTalk(msg, timeSent, clientId, clientName, imagePath);
         }
     }
 
     // Thêm một dối tượng mới nhắn tin đến
     // Id của tin nhắn của một người mới gửi tới dược đặt dạng : Messages+clientId
-    function addMessageInformationInCard(clientId, msg, timeSent , clientName) {
+    function addMessageInformationInCard(clientId, msg, timeSent , clientName , imagePath) {
         var html = `<li id="Messages${clientId}">
                             <a>
-                                <img class="contacts-list-img" src="/Content/images/Persions/${clientId}.jpg" alt="User Avatar">
+                                <img class="contacts-list-img" src="${imagePath}" alt="User Avatar">
                                 <div class="contacts-list-info">
                                     <span class="contacts-list-name">
                                         ${clientName}
