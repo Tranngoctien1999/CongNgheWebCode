@@ -276,7 +276,7 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(c => c.TaiKhoanDangNhap)
-                .IsUnicode(false);
+                .IsUnicode(false).IsOptional();
 
             modelBuilder.Entity<TaiKhoan>()
                 .HasOptional(c => c.KhachHang)
@@ -300,12 +300,12 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<NhanVien>()
                 .HasMany(c => c.TinNhans)
-                .WithRequired(c => c.NhanVien)
+                .WithOptional(c => c.NhanVien)
                 .HasForeignKey(c => c.MaNhanVien);
 
             modelBuilder.Entity<KhachHang>()
                 .HasMany(c => c.TinNhans)
-                .WithRequired(c => c.KhachHang)
+                .WithOptional(c => c.KhachHang)
                 .HasForeignKey(c => c.MaKhachHang);
 
             modelBuilder.Entity<TinNhan>()
