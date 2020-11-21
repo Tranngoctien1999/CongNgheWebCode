@@ -102,7 +102,7 @@ namespace BanVeDiTourDuLich.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SignInWithGoogle(string maKhachHang, string tenKhachHang, string duongDanAnh)
+        public async Task<ActionResult> SignInWithGoogleAndFacebook(string maKhachHang, string tenKhachHang, string duongDanAnh)
         {
             TaiKhoan taiKhoan = await _db.TaiKhoans.FindAsync(maKhachHang);
             if (taiKhoan != null)

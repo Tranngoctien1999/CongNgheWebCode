@@ -46,6 +46,44 @@
          * Function called when clicking the Login/Logout button.
          */
         // [START buttoncallback]
+        function toggleSignInFacebook() {
+            if (!firebase.auth().currentUser) {
+                // [START createprovider]
+                var provider = new firebase.auth.FacebookAuthProvider();
+                // [END createprovider]
+                // [START signin]
+                firebase.auth().signInWithPopup(provider).then(function(result) {
+                    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                    var token = result.credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                }).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    // [START_EXCLUDE]
+                    if (errorCode === 'auth/account-exists-with-different-credential') {
+                        alert('You have already signed up with a different auth provider for that email.');
+                        // If you are using multiple auth providers on your app you should handle linking
+                        // the user's accounts here.
+                    } else {
+                        console.error(error);
+                    }
+                    // [END_EXCLUDE]
+                });
+                // [END signin]
+            } else {
+                firebase.auth().signOut();
+            }
+        }
+
+
+
+        // [START buttoncallback]
         function toggleSignIn() {
             if (!firebase.auth().currentUser) {
                 // [START createprovider]
@@ -97,7 +135,7 @@
                     // User is signed in.
                     // Post to server
                     console.log(user);
-                    var posting = $.post("/user/signinwithgoogle",
+                    var posting = $.post("/user/signinwithgoogleandfacebook",
                         {
                             maKhachHang: user.uid,
                             tenKhachHang: user.displayName,
@@ -106,15 +144,20 @@
                     /* Alerts the results */
                     posting.done(function () {
                         window.alert("Đăng nhập thành công");
+                        window.location.href = "/";
                     });
                     posting.fail(function (respone) {
                         window.alert("Đăng nhập thất bại");
                     });
                 }
             });
+            
             document.getElementById('googleButton').addEventListener('click', toggleSignIn);
+            document.getElementById('facebookButton').addEventListener('click', toggleSignInFacebook);
+
         }
         window.onload = function () {
+            firebase.auth().signOut();
             initApp();
         };
     </script>
@@ -172,7 +215,7 @@
 
                 <div class="social-auth-links text-center mb-3">
                     <p>- Hoặc -</p>
-                    <a class="btn btn-block btn-primary">
+                    <a id="facebookButton" class="btn btn-block btn-primary">
                         <i class="fab fa-facebook mr-2"></i> Đăng nhập bằng Facebook
                     </a>
                     <a id="googleButton" class="btn btn-block btn-danger">
