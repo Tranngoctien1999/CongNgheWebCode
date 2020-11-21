@@ -12,10 +12,10 @@ namespace BanVeDiTourDuLich.Models
         [Key]
         public int MaTinNhan { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string MaNhanVien { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string MaKhachHang { get; set; }
 
         [Required]

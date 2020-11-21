@@ -235,6 +235,14 @@
     <Compile Include="Migrations\202011161415336_FixTinNhan.designer.cs">
       <DependentUpon>202011161415336_FixTinNhan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011201657067_IncreseLengthConstrainOfAccountAndClient.cs" />
+    <Compile Include="Migrations\202011201657067_IncreseLengthConstrainOfAccountAndClient.designer.cs">
+      <DependentUpon>202011201657067_IncreseLengthConstrainOfAccountAndClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011210256403_ChangeTenTaiKhoanToNullable.cs" />
+    <Compile Include="Migrations\202011210256403_ChangeTenTaiKhoanToNullable.designer.cs">
+      <DependentUpon>202011210256403_ChangeTenTaiKhoanToNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2434,6 +2442,8 @@
     </Content>
     <Content Include="Views\Tour\TimKiemTour.cshtml" />
     <Content Include="Views\Tour\ChitietTourDiemDen.cshtml" />
+    <Content Include="Views\Home\Tour.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2510,6 +2520,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011161415336_FixTinNhan.resx">
       <DependentUpon>202011161415336_FixTinNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011201657067_IncreseLengthConstrainOfAccountAndClient.resx">
+      <DependentUpon>202011201657067_IncreseLengthConstrainOfAccountAndClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011210256403_ChangeTenTaiKhoanToNullable.resx">
+      <DependentUpon>202011210256403_ChangeTenTaiKhoanToNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,7 +12,7 @@ namespace BanVeDiTourDuLich.Models
         [Key]
         public int MaNhanXet { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string MaKhachHang { get; set; }
 
         [StringLength(20)] 

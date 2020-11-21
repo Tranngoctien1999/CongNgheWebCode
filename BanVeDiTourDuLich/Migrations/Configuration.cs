@@ -277,6 +277,13 @@ namespace BanVeDiTourDuLich.Migrations
                 ChiTiet = "Khách hàng có số tiền tích lũy đạt 2.000.0000 VNĐ trở lên"
             };
 
+            LoaiKhachHang loaiKhachHang = new LoaiKhachHang()
+            {
+                MaLoaiKhachHang = "KHACHHANGTHUONG",
+                Ten = "Khách hàng loại thường",
+                ChiTiet = "Khách hàng mới đăng kí tài khoản"
+            };
+            context.LoaiKhachHangs.AddOrUpdate(loaiKhachHang);
             context.LoaiKhachHangs.AddOrUpdate(loaiKhachHang1);
 
             ////// Thêm khách hàng

@@ -10,11 +10,10 @@ namespace BanVeDiTourDuLich.Models
     public class TaiKhoan
     {  
         [Key]
-        [StringLength(20)]
+        [StringLength(50)]
         public string MaTaiKhoan { get; set; }
 
         [StringLength(20)]
-        [Required]
         public string TaiKhoanDangNhap { get; set; }
 
         [StringLength(20)]
