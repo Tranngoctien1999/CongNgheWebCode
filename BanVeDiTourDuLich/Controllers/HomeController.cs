@@ -65,8 +65,6 @@ namespace BanVeDiTourDuLich.Controllers
             return View(indexViewModel);
         }
 
-        
-
         public ActionResult About()
         {
             IndexViewModel indexView = new IndexViewModel();
