@@ -406,8 +406,45 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = tour.MaTour,
                 ChiTiet = "Di Ha Giang"
             };
+            ChiTietTour chiTiet2 = new ChiTietTour()
+            {
+                MaTour = tour2.MaTour,
+                ChiTiet = "Hàng năm, cứ đến mùa gió heo may thổi về vào khoảng tháng 9 âm lịch, là các loài cò, vạc và chim nước lại bay về quần tụ ở Đảo cò Chi Lăng Nam cho đến tận tháng 4 năm sau. Đặc biệt vào tháng 12, những ngày đất trời lập đông là thời điểm tập trung số lượng chim lớn nhất trong năm. Đến tham quan đảo cò Chi Lăng Nam mùa này, ấn tượng đầu tiên với du khách sẽ là cảm giác choáng ngợp trước khung cảnh hàng vạn chú chim đậu san sát trên các tầng cây, trông xa như những cành hoa điểm đầy bông trắng. Nhộn nhịp nhất là lúc bình mình vừa ló dạng, và hoàng hôn chiều ráng. Sáng sớm, từng đàn cò kéo nhau đi kiếm ăn, tung đôi cánh trắng chao lượn giữa không trung rồi mất hút. Tà dương, khi những tia nắng cuối ngày ngả dài trên mặt hồ phẳng lặng, từng đàn cò lại nối nhau bay về tổ, cất tiếng kêu huyên náo cả một vùng. Đây còn là lúc “giao ca” giữa cò và vạc. Trên một chiếc xuồng cỡ nhỏ để không làm náo động không gian, người chèo xuồng sẽ chầm chậm dạo quanh hồ, cho du khách thỏa thích quan sát cuộc sống sinh động của các lài chim. Bạn sẽ càng thích thú khi được xem tổ, ngắm những chú cò con tập tễnh, đôi chân vẫn còn chưa vững...Nếu đi ít người, bạn có thể thong thả đạp vịt, tự mình khám phá thiên nhiên kỳ thú nơi đây. Và nếu muốn tìm hiểu nhiều hơn về tập tính loài cò, vạc thì hãy ở lại một đêm bên Đảo cò Chi Lăng Nam. Đặc biệt, sẽ là một kỷ niệm khó quên khi xuồng lướt nhẹ trên mặt hồ sóng sánh ánh trăng.Với cảnh quan hữu tình và thế giới sinh động của các loài chim, Đảo cò Chi Lăng Nam sẽ mang đến cho bạn những phút giây thư thái, hòa mình cùng thiên nhiên."
+            };
+            ChiTietTour chiTiet3 = new ChiTietTour()
+            {
+                MaTour = tour3.MaTour,
+                ChiTiet = "Thị trấn Tam Đảo thuộc huyện Tam Đảo có tổng diện tích tự nhiên là 214,85ha. Dân số là 693 nhân khẩu với 259 hộ chia làm 02 thôn: Thôn 1 và thôn 2;  Khu du lịch Tam Đảo nằm chủ yếu tại thôn 1 và 1 phần của thôn 2 (Khu nghỉ dưỡng cao cấp Belvedere Resort . Khu du lịch Tam Đảo nằm trên dãy núi Tam Đảo ở độ cao trên 900 m so với mực nước biển. Cách thủ đô Hà Nội khoảng 80 km bao gồm 50 km theo quốc lộ 2 và khoảng 24 km theo đường quốc lộ 2B trong đó có 13 km đường đèo. Khu du lịch Tam Đảo có phong cảnh núi non hùng vĩ, baoquát cả một vùng đồng bằng Bắc bộ rộng lớn. Khí hậu mát mẻ quan năm, nhiệt độ trung bình là 18oC – 25oC. Mùa hè từ tháng 5 đến tháng 9 nhiệt độ tại các tỉnh đồng bằng thường oi bức từ khoảng 27oC – 38oC thì Tam Đảo là nơi nghỉ mát lý tưởng với sự luân chuyển rõ rệt 4 mùa trong một ngày. Buổi sáng se se gió xuân, buổi trưa nóng ấm mùa hạ, buổi chiều lãng đãng heo may mùa thu, buổi tối lạnh giá của mùa đông. Khu du lịch nhỏ bé, xinh xắn với những con đường lên xuống ngoằn ngoèo, quanh co nho nhỏ, một dòng suối như vệt nước cắt ngang chảy suốt bốn mùa. Cái tên Tam Đảo có được là do ba ngọn núi cao Thạch Bàn (1.388m), Thiên Thị (1.375m) và Phù Nghĩa(1.400m) nhô lên trên biển mây. Đứng giữa đất trời, nhìn ba hòn đảo nhấp nhô lên trên đám sóng mây, ta mới hiểu vì sao vùng đất mát mẻ này có tên là Tam Đảo.Khu du lịch Tam Ðảo được người Pháp phát hiện và xây dựng từ những năm đầu thế kỷ 19. Ðến năm 1940, Tam Ðảo đã là một đô thị trên núi cao với 145 tòa nhà, biệt thự cao cấp, lộng lẫy; trong số này có tới 60 biệt thự với kiến trúc theo nhiều kiểu cách khác nhau. Nay những tòa biệt thự ngày xưa chỉ còn là phế tích trong hoang tàn, đổ nát, trơ ra những móng, tường, công trình ngầm nằm lẫn với cỏ cây, rêu phong, nắng mưa..."
+            };
+            ChiTietTour chiTiet4 = new ChiTietTour()
+            {
+                MaTour = tour4.MaTour,
+                ChiTiet = "Quê thầy Phiêu có làng nghề code"
+            };
+            ChiTietTour chiTiet5 = new ChiTietTour()
+            {
+                MaTour = tour5.MaTour,
+                ChiTiet = "Sa Pa là một điểm du lịch cách trung tâm thành phố Lào Cai khoảng hơn 30 km. Nằm ở độ cao trung bình 1500 – 1800 m so với mặt nước biển, Thị Trấn Sapa luôn chìm trong làn mây bồng bềnh, tạo nên một bức tranh huyền ảo đẹp đến kỳ lạ. Nơi đây, có thứ tài nguyên vô giá đó là khí hậu quanh năm trong lành mát mẻ, với nhiệt độ trung bình 15-18°C. Khách du lịch đến đây không chỉ để tận hưởng không khí trong lành, sự yên bình giản dị của một vùng đất phía Tây Bắc, mà Sapa còn là điểm đến để bạn chiêm ngưỡng những vẻ đẹp hoang sơ của những ruộng bậc thang, thác nước, những ngọn vúi hùng vĩ, khám phá những phong tục tập quán, nét đẹp văn hóa của các dân tộc trên núi như : H’Mong đen, Dzao đỏ, Tày, Dzáy…"
+            };
+            ChiTietTour chiTiet6 = new ChiTietTour()
+            {
+                MaTour = tour6.MaTour,
+                ChiTiet = "Sa Pa là một điểm du lịch cách trung tâm thành phố Lào Cai khoảng hơn 30 km. Nằm ở độ cao trung bình 1500 – 1800 m so với mặt nước biển, Thị Trấn Sapa luôn chìm trong làn mây bồng bềnh, tạo nên một bức tranh huyền ảo đẹp đến kỳ lạ. Nơi đây, có thứ tài nguyên vô giá đó là khí hậu quanh năm trong lành mát mẻ, với nhiệt độ trung bình 15-18°C. Khách du lịch đến đây không chỉ để tận hưởng không khí trong lành, sự yên bình giản dị của một vùng đất phía Tây Bắc, mà Sapa còn là điểm đến để bạn chiêm ngưỡng những vẻ đẹp hoang sơ của những ruộng bậc thang, thác nước, những ngọn vúi hùng vĩ, khám phá những phong tục tập quán, nét đẹp văn hóa của các dân tộc trên núi như : H’Mong đen, Dzao đỏ, Tày, Dzáy…"
 
-            context.ChiTietTours.AddOrUpdate(chiTiet);
+            };
+            ChiTietTour chiTiet7 = new ChiTietTour()
+            {
+                MaTour = tour7.MaTour,
+                ChiTiet = "Quê thầy Phiêu có làng nghề code"
+            };
+            ChiTietTour chiTiet8 = new ChiTietTour()
+            {
+                MaTour = tour8.MaTour,
+                ChiTiet = "Thị trấn Tam Đảo thuộc huyện Tam Đảo có tổng diện tích tự nhiên là 214,85ha. Dân số là 693 nhân khẩu với 259 hộ chia làm 02 thôn: Thôn 1 và thôn 2;  Khu du lịch Tam Đảo nằm chủ yếu tại thôn 1 và 1 phần của thôn 2 (Khu nghỉ dưỡng cao cấp Belvedere Resort . Khu du lịch Tam Đảo nằm trên dãy núi Tam Đảo ở độ cao trên 900 m so với mực nước biển. Cách thủ đô Hà Nội khoảng 80 km bao gồm 50 km theo quốc lộ 2 và khoảng 24 km theo đường quốc lộ 2B trong đó có 13 km đường đèo. Khu du lịch Tam Đảo có phong cảnh núi non hùng vĩ, baoquát cả một vùng đồng bằng Bắc bộ rộng lớn. Khí hậu mát mẻ quan năm, nhiệt độ trung bình là 18oC – 25oC. Mùa hè từ tháng 5 đến tháng 9 nhiệt độ tại các tỉnh đồng bằng thường oi bức từ khoảng 27oC – 38oC thì Tam Đảo là nơi nghỉ mát lý tưởng với sự luân chuyển rõ rệt 4 mùa trong một ngày. Buổi sáng se se gió xuân, buổi trưa nóng ấm mùa hạ, buổi chiều lãng đãng heo may mùa thu, buổi tối lạnh giá của mùa đông. Khu du lịch nhỏ bé, xinh xắn với những con đường lên xuống ngoằn ngoèo, quanh co nho nhỏ, một dòng suối như vệt nước cắt ngang chảy suốt bốn mùa. Cái tên Tam Đảo có được là do ba ngọn núi cao Thạch Bàn (1.388m), Thiên Thị (1.375m) và Phù Nghĩa(1.400m) nhô lên trên biển mây. Đứng giữa đất trời, nhìn ba hòn đảo nhấp nhô lên trên đám sóng mây, ta mới hiểu vì sao vùng đất mát mẻ này có tên là Tam Đảo.Khu du lịch Tam Ðảo được người Pháp phát hiện và xây dựng từ những năm đầu thế kỷ 19. Ðến năm 1940, Tam Ðảo đã là một đô thị trên núi cao với 145 tòa nhà, biệt thự cao cấp, lộng lẫy; trong số này có tới 60 biệt thự với kiến trúc theo nhiều kiểu cách khác nhau. Nay những tòa biệt thự ngày xưa chỉ còn là phế tích trong hoang tàn, đổ nát, trơ ra những móng, tường, công trình ngầm nằm lẫn với cỏ cây, rêu phong, nắng mưa..."
+
+            };
+
+            context.ChiTietTours.AddOrUpdate(chiTiet,chiTiet2,chiTiet3,chiTiet4,chiTiet5,chiTiet6,chiTiet7,chiTiet8);
             // Them Cac Tinh Nang Cua Tour
 
             TinhNang tinhNangGanBien = new TinhNang()

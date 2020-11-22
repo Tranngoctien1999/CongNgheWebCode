@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BanVeDiTourDuLich.ViewModels
 {
-    public class ChiTietTour
+    public class ChiTietTour2
     {
         public DiaDiem DiaDiem { get; set; }
         public string DuongDanAnh { get; set; }

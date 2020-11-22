@@ -3,6 +3,7 @@ using BanVeDiTourDuLich.Models;
 using BanVeDiTourDuLich.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
+using PagedList;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -95,7 +96,7 @@ namespace BanVeDiTourDuLich.Controllers
             return View(indexView);
         }
 
-        public ActionResult Destination(string Id)
+        public ActionResult Destination(string Id,int? page)
         {
             if (Id != null)
             {
@@ -110,19 +111,21 @@ namespace BanVeDiTourDuLich.Controllers
                         select new ExpandedDiaDiemViewModel() { DiaDiem = diaDiem, SoChuyen = g.Count() };
             indexViewModel.CacDiaDiemBinhChon = query.Take(4).ToList();
             // Select 6 newest tour 
+            //thực hiện chức năng phân trang
+            //tạo biến số sản phẩm trên trang
+            int PageSize = 6;
+            //tạo biến số trang hiện tại
+            int pagenumber = (page ?? 1);
             var query1 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
                          join loaiVe in context.LoaiVes on tour.MaTour equals loaiVe.MaTour
                              into g
                          select new TourGiaTien() { Tour = tour,DiaDiem=diaDiem, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
-            if (query1.Count() >= 6)
+            if (query1.Count() >= 1)
             {
-                indexViewModel.CacTour = query1.Take(6).ToList();
+                indexViewModel.CacTour = query1.OrderBy(n => n.Tour.MaTour).ToPagedList(pagenumber, PageSize).ToList();
             }
-            else
-            {
-                indexViewModel.CacTour = query1.ToList();
-            }
+           
             // Select 6 newest comments
             var query2 = (from nhanXet in context.NhanXets
                           join KhachHang in context.KhachHangs
@@ -147,6 +150,7 @@ namespace BanVeDiTourDuLich.Controllers
                               TenKhachHang = nhanXetExpand.Ten
                           });
             indexViewModel.CacNhanXet = query2.ToList();
+           
             return View(indexViewModel);
         }
         public ActionResult Contact()
