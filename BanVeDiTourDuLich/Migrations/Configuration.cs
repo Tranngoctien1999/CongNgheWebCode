@@ -257,16 +257,16 @@ namespace BanVeDiTourDuLich.Migrations
             };
             context.TaiKhoans.AddOrUpdate(tk1);
 
-            TaiKhoan account = new TaiKhoan()
-            {
-                MaTaiKhoan = nhanVien1.MaNhanVien,
-                MatKhau = "123456",
-                TaiKhoanDangNhap = "user1"
-            };
+            //TaiKhoan account = new TaiKhoan()
+            //{
+            //    MaTaiKhoan = nhanVien1.MaNhanVien,
+            //    MatKhau = "123456",
+            //    TaiKhoanDangNhap = "user1"
+            //};
 
             
 
-            context.TaiKhoans.AddOrUpdate(account);
+            //context.TaiKhoans.AddOrUpdate(account);
 
             // Thêm Loại khách hàng
 
