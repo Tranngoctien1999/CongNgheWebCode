@@ -3,6 +3,7 @@ using System.Diagnostics;
 using BanVeDiTourDuLich.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -73,7 +74,77 @@ namespace BanVeDiTourDuLich.Controllers
             };
             return View(data);
         }
+        public ActionResult QuanLyTour()
+        {
+            SearchViewModel indexView = new SearchViewModel();
 
+            var query1 = from diaDiem in _context.DiaDiems
+                         join tour in _context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                         join loaive in _context.LoaiVes on tour.MaTour equals loaive.MaTour into g
+                         select new ViewModels.ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, TenDiaDiem = diaDiem.TenDiaDiem, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
+            indexView.CacTour = query1.ToList();
+            var query2 = from tour in _context.Tours
+                         join diaDiem in _context.DiaDiems on tour.MaDiemDi equals diaDiem.MaDiaDiem
+                         select diaDiem.TenDiaDiem;
+
+            indexView.DiemKhoiHanh = query2.ToList();
+            return View(indexView);
+        }
+        public ActionResult ThemMoiTour()
+        {
+            var model = _context.DiaDiems.Where(x => x.TenDiaDiem != null).ToList();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ThemMoiTour(Tour tour,LoaiVe loaiVe)
+        {
+            try
+            {
+                _context.Tours.Add(tour);
+                _context.SaveChanges();
+                _context.LoaiVes.Add(loaiVe);
+                _context.SaveChanges();
+                return RedirectToAction("QuanLyTour");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult XoaTour(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var tour = _context.Tours.Find(id);
+                if (tour != null)
+                {
+                    _context.Tours.Remove(tour);
+                    _context.SaveChanges();
+
+
+                    return RedirectToAction("QuanLyTour");
+                }
+            }
+            return HttpNotFound();
+        }
+        public ActionResult ThemDiaDiemMoi()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ThemDiaDiemMoi(DiaDiem diaDiem)
+        {
+            try
+            {
+                _context.DiaDiems.Add(diaDiem);
+                _context.SaveChanges();
+                return RedirectToAction("ThemMoiTour");
+            }
+            catch
+            {
+                return View();
+            }
+        }
         public bool CheckUser()
         {
             var userId = Session["MaTaiKhoan"];
