@@ -276,7 +276,7 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(c => c.TaiKhoanDangNhap)
-                .IsUnicode(false);
+                .IsUnicode(false).IsOptional();
 
             modelBuilder.Entity<TaiKhoan>()
                 .HasOptional(c => c.KhachHang)

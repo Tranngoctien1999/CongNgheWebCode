@@ -18,7 +18,7 @@ namespace BanVeDiTourDuLich
         }
 
         [Key]
-        [StringLength(20)]
+        [StringLength(50)]
         public string MaKhachHang { get; set; }
 
         [Required]

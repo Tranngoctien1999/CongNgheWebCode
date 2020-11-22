@@ -20,6 +20,152 @@
           href="/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
     <!-- Theme style -->
     <link rel="stylesheet" href="/Content/plugins/dist/css/adminlte.min.css" />
+    <!-- Google sign in script-->
+    <!-- Import and configure the Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDWGUXH7j6yW05MdmevSk1I0apXtHcn2dQ",
+            authDomain: "quanlytourdulich-f2bde.firebaseapp.com",
+            databaseURL: "https://quanlytourdulich-f2bde.firebaseio.com",
+            projectId: "quanlytourdulich-f2bde",
+            storageBucket: "quanlytourdulich-f2bde.appspot.com",
+            messagingSenderId: "262443238387",
+            appId: "1:262443238387:web:7af22aefaf9e0cc69d4886",
+            measurementId: "G-D2EKZP66DZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <script type="text/javascript">
+
+        /**
+         * Function called when clicking the Login/Logout button.
+         */
+        // [START buttoncallback]
+        function toggleSignInFacebook() {
+            if (!firebase.auth().currentUser) {
+                // [START createprovider]
+                var provider = new firebase.auth.FacebookAuthProvider();
+                // [END createprovider]
+                // [START signin]
+                firebase.auth().signInWithPopup(provider).then(function(result) {
+                    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                    var token = result.credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                }).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    // [START_EXCLUDE]
+                    if (errorCode === 'auth/account-exists-with-different-credential') {
+                        alert('You have already signed up with a different auth provider for that email.');
+                        // If you are using multiple auth providers on your app you should handle linking
+                        // the user's accounts here.
+                    } else {
+                        console.error(error);
+                    }
+                    // [END_EXCLUDE]
+                });
+                // [END signin]
+            } else {
+                firebase.auth().signOut();
+            }
+        }
+
+
+
+        // [START buttoncallback]
+        function toggleSignIn() {
+            if (!firebase.auth().currentUser) {
+                // [START createprovider]
+                var provider = new firebase.auth.GoogleAuthProvider();
+                // [END createprovider]
+                // [START addscopes]
+                provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+                // [END addscopes]
+                // [START signin]
+                firebase.auth().signInWithPopup(provider).then(function (result) {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    var token = result.credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                }).catch(function (error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    // [START_EXCLUDE]
+                    if (errorCode === 'auth/account-exists-with-different-credential') {
+                        alert('You have already signed up with a different auth provider for that email.');
+                        // If you are using multiple auth providers on your app you should handle linking
+                        // the user's accounts here.
+                    } else {
+                        console.error(error);
+                    }
+                    // [END_EXCLUDE]
+                });
+                // [END signin]
+            } else {
+                firebase.auth().signOut();
+            }
+        }
+        // [END buttoncallback]
+
+        /**
+         * initApp handles setting up UI event listeners and registering Firebase auth listeners:
+         *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
+         *    out, and that is where we update the UI.
+         */
+        function initApp() {
+            // Listening for auth state changes.
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    // User is signed in.
+                    // Post to server
+                    console.log(user);
+                    var posting = $.post("/user/signinwithgoogleandfacebook",
+                        {
+                            maKhachHang: user.uid,
+                            tenKhachHang: user.displayName,
+                            duongDanAnh: user.photoURL
+                        });
+                    /* Alerts the results */
+                    posting.done(function () {
+                        window.alert("Đăng nhập thành công");
+                        window.location.href = "/";
+                    });
+                    posting.fail(function (respone) {
+                        window.alert("Đăng nhập thất bại");
+                    });
+                }
+            });
+            
+            document.getElementById('googleButton').addEventListener('click', toggleSignIn);
+            document.getElementById('facebookButton').addEventListener('click', toggleSignInFacebook);
+
+        }
+        window.onload = function () {
+            firebase.auth().signOut();
+            initApp();
+        };
+    </script>
+
+
+
+
+    <!-- end here-->
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -69,10 +215,10 @@
 
                 <div class="social-auth-links text-center mb-3">
                     <p>- Hoặc -</p>
-                    <a href="#" class="btn btn-block btn-primary">
+                    <a id="facebookButton" class="btn btn-block btn-primary">
                         <i class="fab fa-facebook mr-2"></i> Đăng nhập bằng Facebook
                     </a>
-                    <a href="#" class="btn btn-block btn-danger">
+                    <a id="googleButton" class="btn btn-block btn-danger">
                         <i class="fab fa-google-plus mr-2"></i> Đăng nhập bằng Google+
                     </a>
                 </div>

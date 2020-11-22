@@ -22,11 +22,11 @@ namespace BanVeDiTourDuLich
         public DateTime ThoiGianXuat { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string MaKhachHang { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string MaNhanVien { get; set; }
 
         public virtual KhachHang KhachHang { get; set; }

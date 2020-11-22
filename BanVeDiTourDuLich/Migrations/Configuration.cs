@@ -247,7 +247,20 @@ namespace BanVeDiTourDuLich.Migrations
                 NgayVaoLam = new DateTime(2020, 09, 10),
                 DuongDanAnh = "/Content/images/Persions/NHANVIEN01.jpg",
             };
+
+            NhanVien nhanVien2 = new NhanVien()
+            {
+                MaNhanVien = "ADMIN",
+                Ten = "Bùi Đăng Việt",
+                MaLoaiNhanVien = nhanVien.MaLoaiNhanVien,
+                Luong = 200000,
+                NgaySinh = new DateTime(1999 , 12 , 20),
+                NgayVaoLam = DateTime.Now,
+                DuongDanAnh = "/Content/images/Persions/NHANVIEN0.jpg"
+            };
+
             context.NhanViens.AddOrUpdate(nhanVien1);
+            context.NhanViens.AddOrUpdate(nhanVien2);
             //them tai khoan nhan vien
             TaiKhoan tk1 = new TaiKhoan()
             {
@@ -256,6 +269,15 @@ namespace BanVeDiTourDuLich.Migrations
                 MatKhau = "123456",
             };
             context.TaiKhoans.AddOrUpdate(tk1);
+
+            TaiKhoan tk2 = new TaiKhoan()
+            {
+                MaTaiKhoan = "ADMIN",
+                TaiKhoanDangNhap = "admin",
+                MatKhau = "123456",
+            };
+            context.TaiKhoans.AddOrUpdate(tk1);
+            context.TaiKhoans.AddOrUpdate(tk2);
 
             TaiKhoan account = new TaiKhoan()
             {
@@ -277,6 +299,13 @@ namespace BanVeDiTourDuLich.Migrations
                 ChiTiet = "Khách hàng có số tiền tích lũy đạt 2.000.0000 VNĐ trở lên"
             };
 
+            LoaiKhachHang loaiKhachHang = new LoaiKhachHang()
+            {
+                MaLoaiKhachHang = "KHACHHANGTHUONG",
+                Ten = "Khách hàng loại thường",
+                ChiTiet = "Khách hàng mới đăng kí tài khoản"
+            };
+            context.LoaiKhachHangs.AddOrUpdate(loaiKhachHang);
             context.LoaiKhachHangs.AddOrUpdate(loaiKhachHang1);
 
             ////// Thêm khách hàng
