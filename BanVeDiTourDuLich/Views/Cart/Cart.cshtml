@@ -1,10 +1,11 @@
 ﻿@using System.Collections.ObjectModel
 @using BanVeDiTourDuLich.Controllers
-@model List<BanVeDiTourDuLich.ViewModels.ThongTinVeTrongGio>
+@model BanVeDiTourDuLich.ViewModels.CartViewModel
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
     DataContext context = new DataContext();
+    KhachHang khachHang = context.KhachHangs.Find(Session["MaTaiKhoan"]);
     double tongTien = 0;
 }
 <main>
@@ -22,7 +23,7 @@
                 <li class="subtotal">Tổng</li>
             </ul>
         </div>
-        @foreach (var hang in @Model)
+        @foreach (var hang in @Model.ThongTinVeTrongGios)
         {
             {
                 var tour = @context.Tours.Find(hang.MaTour);
@@ -69,7 +70,28 @@
                 <div class="total-value final-value" id="basket-total">@TourController.AddDotAndCommaToInteger(tongTien)</div>
             </div>
             <div class="summary-checkout">
-                <button class="checkout-cta">Thanh toán</button>
+                
+                <form id="pay" action="/Cart/Charge" method="POST">
+                    <input type="hidden" id="TextBox1" placeholder="amount" name="amount" value="@tongTien" />
+                    <input type="hidden" id="TextBox2" placeholder="name" name="name" value="@khachHang.Ten" />
+                    <input type="hidden" id="TextBox3" placeholder="description" name="description" value="Thanh Toán Cho @if (khachHang != null)
+                                                                                                                          {@khachHang.Ten
+                                                                                                                          }" />
+
+                    <script src="https://checkout.stripe.com/checkout.js"
+                            class="stripe-button"
+                            data-key="@Model.StripeKey.PublishableKey"
+                            data-name="Du Lịch Việt"
+                            data-description="Thanh Toán Cho @if (khachHang != null)
+                                                             {@khachHang.Ten
+                                                             }"
+                            data-amount="@tongTien"
+                            data-currency="VND">
+                    </script>
+                    <button type="submit" class="checkout-cta">Thanh toán</button>
+                </form>
+                
+                
             </div>
         </div>
     </aside>

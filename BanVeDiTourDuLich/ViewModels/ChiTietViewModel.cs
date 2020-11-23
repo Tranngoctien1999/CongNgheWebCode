@@ -9,5 +9,7 @@ namespace BanVeDiTourDuLich.ViewModels
     {
         public Tour Tour { get; set; }
         public List<LoaiVe> CacLoaiVe { get; set; }
+        public string chitiet { get; set; }
+
     }
 }

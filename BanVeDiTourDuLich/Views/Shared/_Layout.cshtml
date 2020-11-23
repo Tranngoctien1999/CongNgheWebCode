@@ -57,6 +57,9 @@
             position: relative;
             border-radius: 5px;
         }
+        .stripe-button-el {
+            display: none !important
+        }
 
         .cart::after {
             content: "@soHang";
@@ -449,11 +452,11 @@
         }
     }
 
-    chat.client.sendMassageFromDbToCurrentClientBrower = function (msg, timeSent) {
+    chat.client.sendMassageFromDbToCurrentClientBrower = function (msg, timeSent , imagePath) {
         if (msg !== '') {
             var clientId = $('.MaTaiKhoan')[0].value;
             var text = `<div class='msg-img current'>
-           <img class='current-user-img' src='/Content/images/Persions/${clientId}.jpg' />
+           <img class='current-user-img' src='${imagePath}' />
            <p class='txt-msg'>${msg}<span class="time-sent-current">Đã gửi vào ${timeSent}</span></p>
            </div>`;
             $(".msg").children().last().after(text);
@@ -463,10 +466,10 @@
         }
     }
 
-    chat.client.addNewMessageToClient = function (maNhanVien, msg, timeSent) {
+    chat.client.addNewMessageToClient = function (maNhanVien, msg, timeSent , imagePath) {
         if (msg !== '') {
             var text = `<div class='msg-img end-user'>
-           <img class='current-user-img' src='/Content/images/Persions/${maNhanVien}.jpg' />
+           <img class='current-user-img' src='${imagePath}' />
            <p class='txt-msg'>${msg}<span class="time-sent-current">Đã gửi vào ${timeSent}</span></p>
            </div>`;
             $(".msg").children().last().after(text);

@@ -1,6 +1,11 @@
-﻿@{
+﻿@using BanVeDiTourDuLich.Controllers
+@{
     ViewBag.Title = "IndexAdmin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int count = HomeController.Count;
+    DataContext context = new DataContext();
+    int user = context.KhachHangs.Count();
+    int ve = context.Ves.Count();
 }
 
 <div class="content-wrapper">
@@ -34,7 +39,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>@ve</h3>
 
                             <p>Số vé đặt mới</p>
                         </div>
@@ -62,7 +67,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>@user</h3>
 
                             <p>Số người dùng đăng kí mới</p>
                         </div>
@@ -76,7 +81,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>@count</h3>
 
                             <p>Số người vào trang web</p>
                         </div>

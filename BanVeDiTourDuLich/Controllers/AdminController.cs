@@ -81,7 +81,7 @@ namespace BanVeDiTourDuLich.Controllers
             var query1 = from diaDiem in _context.DiaDiems
                          join tour in _context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
                          join loaive in _context.LoaiVes on tour.MaTour equals loaive.MaTour into g
-                         select new ViewModels.ChiTietTour() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, TenDiaDiem = diaDiem.TenDiaDiem, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
+                         select new ViewModels.ChiTietTour2() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, TenDiaDiem = diaDiem.TenDiaDiem, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
             indexView.CacTour = query1.ToList();
             var query2 = from tour in _context.Tours
                          join diaDiem in _context.DiaDiems on tour.MaDiemDi equals diaDiem.MaDiaDiem
