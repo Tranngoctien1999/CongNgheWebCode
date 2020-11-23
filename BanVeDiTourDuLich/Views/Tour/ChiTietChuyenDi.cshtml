@@ -23,7 +23,7 @@
                 </div>
                 <div class="sec2">
                     <span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>
-                     Số giờ: <span class="songay">@Model.Tour.SoGio</span>
+                    Số giờ: <span class="songay">@Model.Tour.SoGio</span>
 
                 </div>
                 <div>    <span class="noikhoihanh">Nơi khởi hành: @Model.Tour.DiaDiemDen.TenDiaDiem</span></div>
@@ -35,8 +35,8 @@
                     </ul>
                 </div>
                 <form id="datve" action="/DatVe/" method="post">
-                    <input name="MaTour" value="@Model.Tour.MaTour" type="hidden"/>
-                    <input id="IsRedirect" type="hidden" value=""/>
+                    <input name="MaTour" value="@Model.Tour.MaTour" type="hidden" />
+                    <input id="IsRedirect" type="hidden" value="" />
                     <div class="sec3">
                         <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
                             <p style="margin-right: 50px">Giá Vé :</p>
@@ -74,21 +74,38 @@
     </div>
     <div class="container">
         <div> <h3>Giới thiệu về: @Model.Tour.DiaDiemDi.TenDiaDiem</h3></div>
-        <div><p>
-    @Model.chitiet
-</p></div>
         <div>
-            <h4>
-                Còn chần chừ gì nữa! Hãy xách balo lên và khám phá ngay đi nào!
-            </h4>
+            <p>
+                @Model.chitiet
+            </p>
         </div>
+        @foreach (var lichtrinh in Model.LichTrinh)
+        {
+            <div>
+                <div>
+                    <h4 font-size="20px" >
+                        Ngày @lichtrinh.Ngay : @lichtrinh.MoTa
+                    </h4>
+                </div>
+                
+                <div>
+                    <p>
+
+                        @lichtrinh.ChiTiet
+
+                    </p>
+                </div>
+            </div>
+        }
     </div>
 </section>
 
 @section styles
 {
     <style>
-        .detail-destination { justify-content: space-around !important; }
+        .detail-destination {
+            justify-content: space-around !important;
+        }
 
         .image-box {
             flex: 0 0 50%;
@@ -101,36 +118,36 @@
 @section scripts
 {
     <script>
-    /* attach a submit handler to the form */
-    $("#datve").submit(function(event) {
+        /* attach a submit handler to the form */
+        $("#datve").submit(function (event) {
 
-        /* stop form from submitting normally */
-        event.preventDefault();
+            /* stop form from submitting normally */
+            event.preventDefault();
 
-        /* get the action attribute from the form element */
-        var $form = $(this),
-            url = $form.attr('action');
-        /* Send the data using post with element id name and name2*/
-        var posting = $.post(url,
-            {
-                maTour: $('[name ="MaTour"]')[0].getAttribute("value"),
-                maLoaiVe: $('select[name=MaLoaiVe] option').filter(':selected')[0].getAttribute("value"),
-                soLuong: $('[name ="SoLuong"]')[0].value
+            /* get the action attribute from the form element */
+            var $form = $(this),
+                url = $form.attr('action');
+            /* Send the data using post with element id name and name2*/
+            var posting = $.post(url,
+                {
+                    maTour: $('[name ="MaTour"]')[0].getAttribute("value"),
+                    maLoaiVe: $('select[name=MaLoaiVe] option').filter(':selected')[0].getAttribute("value"),
+                    soLuong: $('[name ="SoLuong"]')[0].value
+                });
+            /* Alerts the results */
+            posting.done(function () {
+                var isRedirect = $('#IsRedirect')[0].getAttribute('value');
+                console.log(isRedirect);
+                if (isRedirect == 1) {
+                    window.location.href = "/Cart";
+                } else {
+                    window.alert("Thêm vào giỏ hàng thành công");
+                }
             });
-        /* Alerts the results */
-        posting.done(function() {
-            var isRedirect = $('#IsRedirect')[0].getAttribute('value');
-            console.log(isRedirect);
-            if (isRedirect == 1) {
-                window.location.href = "/Cart";
-            } else {
-                window.alert("Thêm vào giỏ hàng thành công");
-            }
+            posting.fail(function (respone) {
+                window.alert(respone.responseJSON.errDetail);
+            });
         });
-        posting.fail(function(respone) {
-            window.alert(respone.responseJSON.errDetail);
-        });
-    });
 
         function chuyenSangMuaHang() {
             $('#IsRedirect')[0].setAttribute('value', 1)
@@ -138,6 +155,6 @@
 
         function chuyenSangThemVaoGio() {
             $('#IsRedirect')[0].setAttribute('value', 0)
-    }
+        }
     </script>
 }

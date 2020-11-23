@@ -34,6 +34,7 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<ChiTietTour> ChiTietTours { get; set; }
         public virtual DbSet<TinhNang> TinhNangs { get; set; }
         public virtual DbSet<TinNhan> TinNhans { get; set; }
+        public virtual DbSet<LichTrinh> LichTrinhs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiaDiem>()
@@ -310,6 +311,9 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<TinNhan>()
                 .ToTable("TinNhan");
+
+            modelBuilder.Entity<LichTrinh>()
+                .ToTable("LichTrinh");
         }
     }
 }
