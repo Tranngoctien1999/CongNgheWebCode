@@ -86,6 +86,7 @@ namespace BanVeDiTourDuLich.Controllers
             {
                 searchViewModel.CacTour = query7.ToList();
             }
+
             return View(searchViewModel);
 
         }
