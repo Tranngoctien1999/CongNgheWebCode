@@ -9,10 +9,12 @@ namespace BanVeDiTourDuLich.Controllers
 {
     public class HomeController : Controller
     {
+        public static int Count = 0;
         private DataContext context = new DataContext();
 
         public ActionResult Index()
         {
+            Count++;
             IndexViewModel indexViewModel = new IndexViewModel();
             // Linq select top 4 poupular destionation base on number of tours
             var query = from diaDiem in context.DiaDiems
