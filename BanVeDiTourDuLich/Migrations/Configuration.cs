@@ -160,6 +160,7 @@ namespace BanVeDiTourDuLich.Migrations
 
 
             // Thêm loại vé
+
             LoaiVe loaiThuongGia = new LoaiVe()
             {
                 MaLoaiVe = "VETHUONGGIATOUR1",

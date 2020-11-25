@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -124,6 +125,18 @@ namespace BanVeDiTourDuLich.Controllers
             indexView.DiemKhoiHanh = query2.ToList();
             return View(indexView);
         }
+        [HttpPost]
+        public async Task<ActionResult> FindTourWithStartingAndDestinationPoint(string maDiemDi , string maDiemDen)
+        {
+            if (!string.IsNullOrEmpty(maDiemDi) && !string.IsNullOrEmpty(maDiemDen))
+            {
+                var list = await context.Tours.Where(tour => tour.MaDiemDen == maDiemDen && tour.MaDiemDi == maDiemDi /*&& tour.ThoigianDi > DateTime.Now*/).Select(tour => new {tour.MaTour , tour.ThoigianDi})
+                    .ToListAsync();
+                return Json( new { list  }, JsonRequestBehavior.AllowGet);
+            }
+            return HttpNotFound();
+        }
+
         public static string AddDotAndCommaToInteger(double amount)
         {
             string parts = amount.ToString("N0", new NumberFormatInfo()
@@ -133,6 +146,5 @@ namespace BanVeDiTourDuLich.Controllers
             });
             return parts;
         }
-
     }
 }
