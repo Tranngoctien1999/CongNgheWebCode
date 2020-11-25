@@ -253,7 +253,7 @@ namespace BanVeDiTourDuLich.Migrations
             {
                 MaNhanVien = "ADMIN",
                 Ten = "Bùi Đăng Việt",
-                MaLoaiNhanVien = nhanVien.MaLoaiNhanVien,
+                MaLoaiNhanVien = quanTriVien.MaLoaiNhanVien,
                 Luong = 200000,
                 NgaySinh = new DateTime(1999 , 12 , 20),
                 NgayVaoLam = DateTime.Now,
@@ -263,21 +263,12 @@ namespace BanVeDiTourDuLich.Migrations
             context.NhanViens.AddOrUpdate(nhanVien1);
             context.NhanViens.AddOrUpdate(nhanVien2);
             //them tai khoan nhan vien
-            TaiKhoan tk1 = new TaiKhoan()
-            {
-                MaTaiKhoan = "NHANVIEN01",
-                TaiKhoanDangNhap = "user",
-                MatKhau = "123456",
-            };
-            context.TaiKhoans.AddOrUpdate(tk1);
-
             TaiKhoan tk2 = new TaiKhoan()
             {
                 MaTaiKhoan = "ADMIN",
                 TaiKhoanDangNhap = "admin",
                 MatKhau = "123456",
             };
-            context.TaiKhoans.AddOrUpdate(tk1);
             context.TaiKhoans.AddOrUpdate(tk2);
 
             TaiKhoan account = new TaiKhoan()
@@ -286,8 +277,6 @@ namespace BanVeDiTourDuLich.Migrations
                 MatKhau = "123456",
                 TaiKhoanDangNhap = "user1"
             };
-
-            
 
             context.TaiKhoans.AddOrUpdate(account);
 

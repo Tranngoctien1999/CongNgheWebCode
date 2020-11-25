@@ -751,6 +751,58 @@
         });
     getTour.done(function(response) {
         listTour = response;
+    /* set calendar and tour time to current time */
+        var time = new Date();
+        var currentMonth = time.getMonth();
+        var currentYear = time.getFullYear();
+        var monthSelector = $(".monthselect option ");
+        var yearSelector = $(".yearselect option");
+        for (i = 0; i < monthSelector.length; i++) {
+            if ($(monthSelector[i]).val() < currentMonth) {
+                $(monthSelector[i]).attr("disabled", "disabled");
+                $(monthSelector[i]).attr("selected", null);
+            } else {
+                if ($(monthSelector[i]).val() == currentMonth) {
+                    $(monthSelector[i]).attr("disabled", null);
+                    $(monthSelector[i]).attr("selected", "selected");
+                } else {
+                    $(monthSelector[i]).attr("disabled", null);
+                    $(monthSelector[i]).attr("selected", null);
+                }
+            }
+        }
+
+        for (i = 0; i < yearSelector.length; i++) {
+            if ($(yearSelector[i]).val() < currentMonth) {
+                $(yearSelector[i]).attr("disable", "disable");
+                $(yearSelector[i]).attr("selected", null);
+            } else {
+                if ($(yearSelector[i]).val() == currentYear) {
+                    $(yearSelector[i]).attr("disable", null);
+                    $(yearSelector[i]).attr("selected", "selected");
+                } else {
+                    $(yearSelector[i]).attr("disable", null);
+                    $(yearSelector[i]).attr("selected", null);
+                }
+            }
+        }
+        updateCaLendar(currentMonth, currentYear);
+        updateLich(currentMonth, currentYear);
+
+        $('.monthselect').change(function(){ 
+            var value = $(this).val();
+            var selectedYear = $(".yearselect option[selected='selected']").val();
+            updateCaLendar(value, selectedYear);
+            updateLich(value, selectedYear);
+        });
+
+        $('.yearselect').change(function () {
+            var value = $(this).val();
+            var selectedMonth = $(".monthselect option[selected='selected']").val();
+            updateCaLendar(selectedMonth, value);
+            updateLich(selectedMonth, value);
+        });
+        
     });
 
     /* attach a submit handler to the form */
@@ -851,19 +903,17 @@
                     }
             }
         )};
-
-
     }
 
-        $(".date-input-group").click(function() {
-            var selector =
-                $(".dropdown-menu");
-            selector.toggle();
-        })
+        $(".date-input").click(function() {
+        var selector =
+            $(".dropdown-menu");
+        selector.toggle();
+    })
 
-        $(".plus-adult").click(function() {
-            var 
-        })
+        //$(".plus-adult").click(function() {
+        //    var 
+        //})
 
     </script>
 }

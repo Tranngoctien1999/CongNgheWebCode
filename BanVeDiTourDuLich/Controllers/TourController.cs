@@ -48,7 +48,6 @@ namespace BanVeDiTourDuLich.Controllers
                          join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
                          where diaDiem.TenDiaDiem.Contains(diemden) && g.Max(p=>p.GiaTien) <= gia
                          select new ChiTietTour2() { DiaDiem = diaDiem, DuongDanAnh = diaDiem.DuongDanAnh, ThoiGianDi = tour.ThoigianDi, MaTour = tour.MaTour, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
-
             var query6 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
                          join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g
@@ -117,11 +116,8 @@ namespace BanVeDiTourDuLich.Controllers
             indexView.CacTour = query1.ToList();
             var query2 = from tour in context.Tours
                          join diaDiem in context.DiaDiems on tour.MaDiemDi equals diaDiem.MaDiaDiem
-
-
                          where tour.MaDiemDen.Contains(id)
                          select diaDiem.TenDiaDiem;
-
             indexView.DiemKhoiHanh = query2.ToList();
             return View(indexView);
         }
@@ -130,7 +126,7 @@ namespace BanVeDiTourDuLich.Controllers
         {
             if (!string.IsNullOrEmpty(maDiemDi) && !string.IsNullOrEmpty(maDiemDen))
             {
-                var list = await context.Tours.Where(tour => tour.MaDiemDen == maDiemDen && tour.MaDiemDi == maDiemDi /*&& tour.ThoigianDi > DateTime.Now*/).Select(tour => new {tour.MaTour , tour.ThoigianDi})
+                var list = await context.Tours.Where(tour => tour.MaDiemDen == maDiemDen && tour.MaDiemDi == maDiemDi && tour.ThoigianDi > DateTime.Now).Select(tour => new {tour.MaTour , tour.ThoigianDi})
                     .ToListAsync();
                 return Json( new { list  }, JsonRequestBehavior.AllowGet);
             }
