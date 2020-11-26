@@ -93,7 +93,16 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem1.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 10,
-                ThoigianDi = new DateTime(2020, 10, 29),
+                ThoigianDi = new DateTime(2020, 11, 29),
+            };
+
+            Tour tour9 = new Tour()
+            {
+                MaTour = "TOUR10",
+                MaDiemDen = diaDiem1.MaDiaDiem,
+                MaDiemDi = diaDiem6.MaDiaDiem,
+                SoGio = 10,
+                ThoigianDi = new DateTime(2020, 11, 30)
             };
 
             Tour tour2 = new Tour()
@@ -156,68 +165,68 @@ namespace BanVeDiTourDuLich.Migrations
                 ThoigianDi = new DateTime(2020, 11, 19),
             };
 
-            context.Tours.AddOrUpdate(tour , tour2 , tour3 , tour4,tour5,tour6,tour7,tour8);
+            context.Tours.AddOrUpdate(tour , tour2 , tour3 , tour4,tour5,tour6,tour7,tour8 , tour9);
 
 
             // Thêm loại vé
 
-            LoaiVe loaiThuongGia = new LoaiVe()
+            LoaiVe loaiTreEm = new LoaiVe()
             {
-                MaLoaiVe = "VETHUONGGIATOUR1",
-                Ten = "Vé thương gia",
+                MaLoaiVe = "VETREEMTOUR1",
+                Ten = "Vé Trẻ Em",
                 SoLuong = 10,
-                MaTour = tour.MaTour,
-                GiaTien = 2500000
-            };
-            context.LoaiVes.AddOrUpdate(loaiThuongGia);
-
-            LoaiVe loaiThuong = new LoaiVe()
-            {
-                MaLoaiVe = "VETHUONGTOUR1",
-                Ten = "Vé thường",
-                SoLuong = 20,
                 MaTour = tour.MaTour,
                 GiaTien = 2000000
             };
+            context.LoaiVes.AddOrUpdate(loaiTreEm);
 
-            LoaiVe loaiThuongGia1 = new LoaiVe()
+            LoaiVe loaiNguoiLon = new LoaiVe()
             {
-                MaLoaiVe = "VETHUONGGIATOUR2",
-                Ten = "Vé thương gia",
-                SoLuong = 10,
-                MaTour = tour2.MaTour,
-                GiaTien = 1000000
-            };
-            context.LoaiVes.AddOrUpdate(loaiThuongGia1);
-
-            LoaiVe loaiThuong1 = new LoaiVe()
-            {
-                MaLoaiVe = "VETHUONGTOUR2",
-                Ten = "Vé thường",
+                MaLoaiVe = "VENGUOILONTOUR1",
+                Ten = "Vé Người Lớn",
                 SoLuong = 20,
+                MaTour = tour.MaTour,
+                GiaTien = 2500000
+            };
+
+            LoaiVe loaiNguoiLon1 = new LoaiVe()
+            {
+                MaLoaiVe = "VENGUOILONTOUR2",
+                Ten = "Vé Người Lớn",
+                SoLuong = 10,
                 MaTour = tour2.MaTour,
                 GiaTien = 800000
             };
-            context.LoaiVes.AddOrUpdate(loaiThuong1);
-            LoaiVe loaiThuongGia2 = new LoaiVe()
+            context.LoaiVes.AddOrUpdate(loaiNguoiLon1 , loaiNguoiLon);
+
+            LoaiVe loaiTreEm1 = new LoaiVe()
             {
-                MaLoaiVe = "VETHUONGGIATOUR3",
-                Ten = "Vé thương gia",
+                MaLoaiVe = "VETREEMTOUR2",
+                Ten = "Vé Trẻ Em",
+                SoLuong = 20,
+                MaTour = tour2.MaTour,
+                GiaTien = 100000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm1);
+            LoaiVe loaiNguoiLon2 = new LoaiVe()
+            {
+                MaLoaiVe = "VENGUOILONTOUR3",
+                Ten = "Vé Người Lớn",
                 SoLuong = 10,
                 MaTour = tour3.MaTour,
                 GiaTien = 1000000
             };
-            context.LoaiVes.AddOrUpdate(loaiThuongGia2);
+            context.LoaiVes.AddOrUpdate(loaiNguoiLon2);
 
-            LoaiVe loaiThuong2 = new LoaiVe()
+            LoaiVe loaiTreEm2 = new LoaiVe()
             {
-                MaLoaiVe = "VETHUONGTOUR3",
-                Ten = "Vé thường",
+                MaLoaiVe = "VETREEMTOUR3",
+                Ten = "Vé Trẻ Em",
                 SoLuong = 20,
                 MaTour = tour3.MaTour,
                 GiaTien = 800000
             };
-            context.LoaiVes.AddOrUpdate(loaiThuong2);
+            context.LoaiVes.AddOrUpdate(loaiTreEm2);
 
             // Thêm Loại Nhân viên
             LoaiNhanVien nhanVien = new LoaiNhanVien()
@@ -364,7 +373,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaVe = "Ve01",
                 MaTour = tour.MaTour,
                 MaHoaDon = hoaDon1.MaHoaDon,
-                MaLoaiVe = loaiThuongGia.MaLoaiVe,
+                MaLoaiVe = loaiNguoiLon.MaLoaiVe,
             };
 
             Ve ve1 = new Ve()
@@ -372,10 +381,9 @@ namespace BanVeDiTourDuLich.Migrations
                 MaVe = "Ve02",
                 MaTour = tour2.MaTour,
                 MaHoaDon = hoaDon2.MaHoaDon,
-                MaLoaiVe = loaiThuongGia.MaLoaiVe,
-                
+                MaLoaiVe = loaiNguoiLon1.MaLoaiVe,
             };
-            context.Ves.AddOrUpdate(ve ,ve1);
+            context.Ves.AddOrUpdate(ve, ve1);
 
             // Add Comment
 

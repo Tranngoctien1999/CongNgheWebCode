@@ -1,6 +1,7 @@
 ﻿using BanVeDiTourDuLich.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
@@ -92,10 +93,26 @@ namespace BanVeDiTourDuLich.Controllers
         }
         public ActionResult ChiTietChuyenDi(String id)
         {
+            StripeKey key = new StripeKey()
+            {
+                PublishableKey = ConfigurationManager.AppSettings["stripePublishableKey"],
+                SecretKey = ConfigurationManager.AppSettings["stripeSecretKey"]
+            };
             ChiTietViewModel chiTietViewModel = new ChiTietViewModel();
+            chiTietViewModel.StripeKey = key;
             var chuyenDi = context.Tours.Where(tour => tour.MaTour == id).Include(tour => tour.LoaiVes)
                 .Include(tour => tour.DiaDiemDen).FirstOrDefault();
-            chiTietViewModel.CacLoaiVe = chuyenDi.LoaiVes.ToList();
+            List<LoaiVe> loaiVes = chuyenDi.LoaiVes.ToList();
+            foreach (LoaiVe loaiVe in loaiVes)
+            {
+                LoaiVeSoLuongCon data = new LoaiVeSoLuongCon()
+                {
+                    LoaiVe = loaiVe,
+                    SoLuong = loaiVe.SoLuong - loaiVe.Ves.Where(ve => ve.MaHoaDon != string.Empty).Count()
+                };
+                chiTietViewModel.CacLoaiVe.Add(data);
+            }
+            
             chiTietViewModel.Tour = chuyenDi;
             var query1 = from tour in context.Tours
                          join ChiTietTour2 in context.ChiTietTours on tour.MaTour equals ChiTietTour2.MaTour
@@ -107,7 +124,6 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult ChitietTourDiemDen(string id)
         {
             SearchViewModel indexView = new SearchViewModel();
-            
             var query1 = from diaDiem in context.DiaDiems
                          join tour in context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
                          join loaive in context.LoaiVes on tour.MaTour equals loaive.MaTour into g

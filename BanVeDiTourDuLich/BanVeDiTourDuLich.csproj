@@ -303,6 +303,7 @@
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\ChiTietTour2.cs" />
     <Compile Include="ViewModels\ChiTietViewModel.cs" />
+    <Compile Include="ViewModels\LoaiVeSoLuongCon.cs" />
     <Compile Include="ViewModels\StripeKey.cs" />
     <Compile Include="ViewModels\ThongTinVeTrongGio.cs" />
     <Compile Include="ViewModels\TourGiaTien.cs" />

@@ -46,31 +46,32 @@ namespace BanVeDiTourDuLich.Controllers
         }
 
         [HttpPost]
-        public ActionResult Charge(long amount, string name , string discription ,string stripeToken, string tokenType ,string stripeEmail)
+        public ActionResult Charge(FormCollection formCollection)
         {
             Stripe.StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["stripePublishableKey"]);
             Stripe.StripeConfiguration.ApiKey = ConfigurationManager.AppSettings["stripeSecretKey"];
-    
             var myCharge = new Stripe.ChargeCreateOptions();
             // always set these properties
-            myCharge.Amount = amount;
+            myCharge.Amount = long.Parse(formCollection[0]);
             myCharge.Currency = "VND";
-            myCharge.ReceiptEmail = stripeEmail;
-            myCharge.Description = discription;
-            myCharge.Source = stripeToken;
+            var listVe = context.Ves.ToList();
+            string maVeCuoi = listVe[listVe.Count - 1].MaVe;
+            int identity = int.Parse(maVeCuoi.Substring(2));
+            for (int i = 0; i < formCollection.Count - 3; i+= 2)
+            {
+                Ve ve = new Ve()
+                {
+                    MaVe = "Ve" + identity.ToString("000"),
+                    MaTour = 
+                };
+            }
+            myCharge.ReceiptEmail = formCollection[formCollection.Count - 1];
+            myCharge.Source = formCollection[formCollection.Count - 3];
             myCharge.Capture = true;
             var chargeService = new Stripe.ChargeService();
             try
             {
                 Charge stripeCharge = chargeService.Create(myCharge);
-                var gioHang = (List<ThongTinVeTrongGio>)Session["GioHang"];
-                KhachHang khachHang = context.KhachHangs.Find("MaTaiKhoan");
-                //HoaDon hoaDon = new HoaDon(){MaHoaDon = "HoaDon" , MaKhachHang = khachHang.MaKhachHang , ThoiGianXuat = Date};
-                //foreach (var thongTinVeTrongGio in gioHang)
-                //{
-                //    context.Ves.Add(new Ve{})
-                //}
-                gioHang.Clear();
                 return View("ThanhCong");
             }
             catch (Exception e)
