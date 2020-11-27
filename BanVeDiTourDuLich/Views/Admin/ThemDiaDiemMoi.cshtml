@@ -68,7 +68,70 @@
             var items = $("#answer").children().length;
             return items;
         }
+        
+        // thêm text field, giới hạn chỉ có tối đa 10 cái
+        $("#add").click(function () {
+            var n = countItem();
+            if (n == 20) {
+                alert("Number of answers isn't greater than 10");
+            } else {
+                n++;
+                $("#answer").append("<div class='item'><label><span>Nguyên liệu " + n + ":</span><br/><input type='text' name='NL[]' placeholder='Tên nguyên liệu' class='NguyenLieu' /><input type='text' name='SL[]' placeholder='Số lượng' class='NguyenLieu' /></label><a href='javascript:void(0)' class='del'>Xóa</a></div>");
+            }
+        });
 
+        // xoá text filed khi click vào nút del ở dòng tương ứng
+        $(document).on("click", "a.del", function () {
+            var n = countItem();
+            if (n == 2) {
+                alert("Number of answers isn't less than 2");
+            } else {
+                var check = $(this).siblings().find("input").val();
+                // cách viết khác
+                // var check = $(this).parent().find("label input").val();
+
+                $(this).parent().remove();
+                for (i = 0; i < n - 1; i++) {
+                    $("#answer .item:eq(" + i + ") label span").html("Nguyên liệu " + (parseInt(i) + 1) + ":");
+
+                }
+            }
+        });
+        function countItem1() {
+            var items = $("#answer1").children().length;
+            return items;
+        }
+
+
+        // thêm text field, giới hạn chỉ có tối đa 10 cái
+        $("#add1").click(function () {
+            var n = countItem1();
+            if (n == 20) {
+                alert("Number of answers isn't greater than 10");
+            } else {
+                n++;
+                $("#answer1").append("<div class='item1'><label><span>Bước " + n + ":</span><br/><textarea rows='3' class='NoiDung' name='NoiDung[]' placeholder='Nhập nội dung công thức'></textarea></label><a href='javascript:void(0)' class='del1'>Xóa</a></div>");
+            }
+        });
+
+        // xoá text filed khi click vào nút del ở dòng tương ứng
+        $(document).on("click", "a.del1", function () {
+            var n = countItem1();
+            if (n == 2) {
+                alert("Number of answers isn't less than 2");
+            } else {
+                var check = $(this).siblings().find("input").val();
+                // cách viết khác
+                // var check = $(this).parent().find("label input").val();
+
+                $(this).parent().remove();
+                for (i = 0; i < n - 1; i++) {
+                    $("#answer1 .item1:eq(" + i + ") label span").html("Bước " + (parseInt(i) + 1) + ":");
+
+                }
+            }
+        });
+    });
 
     function removeUpload() {
         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
