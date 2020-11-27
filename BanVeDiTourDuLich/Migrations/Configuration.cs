@@ -170,6 +170,106 @@ namespace BanVeDiTourDuLich.Migrations
 
             // Thêm loại vé
 
+            LoaiVe loaiTreEm8 = new LoaiVe()
+            {
+                MaLoaiVe = "VETREEMTOUR8",
+                Ten = "Vé Trẻ Em",
+                SoLuong = 10,
+                MaTour = tour8.MaTour,
+                GiaTien = 2000000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm8);
+
+            LoaiVe loaiNguoiLon8 = new LoaiVe()
+            {
+                MaLoaiVe = "VENGUOILONTOUR8",
+                Ten = "Vé Người Lớn",
+                SoLuong = 20,
+                MaTour = tour8.MaTour,
+                GiaTien = 2500000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm8 , loaiNguoiLon8);
+            LoaiVe loaiTreEm7 = new LoaiVe()
+            {
+                MaLoaiVe = "VETREEMTOUR7",
+                Ten = "Vé Trẻ Em",
+                SoLuong = 10,
+                MaTour = tour7.MaTour,
+                GiaTien = 2000000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm7);
+
+            LoaiVe loaiNguoiLon7 = new LoaiVe()
+            {
+                MaLoaiVe = "VENGUOILONTOUR7",
+                Ten = "Vé Người Lớn",
+                SoLuong = 20,
+                MaTour = tour7.MaTour,
+                GiaTien = 2500000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm7 , loaiNguoiLon7);
+
+            LoaiVe loaiTreEm6 = new LoaiVe()
+            {
+                MaLoaiVe = "VETREEMTOUR6",
+                Ten = "Vé Trẻ Em",
+                SoLuong = 10,
+                MaTour = tour6.MaTour,
+                GiaTien = 2000000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm6);
+
+            LoaiVe loaiNguoiLon6 = new LoaiVe()
+            {
+                MaLoaiVe = "VENGUOILONTOUR6",
+                Ten = "Vé Người Lớn",
+                SoLuong = 20,
+                MaTour = tour6.MaTour,
+                GiaTien = 2500000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm6, loaiNguoiLon6);
+
+
+            LoaiVe loaiTreEm5 = new LoaiVe()
+            {
+                MaLoaiVe = "VETREEMTOUR5",
+                Ten = "Vé Trẻ Em",
+                SoLuong = 10,
+                MaTour = tour5.MaTour,
+                GiaTien = 2000000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm5);
+
+            LoaiVe loaiNguoiLon5 = new LoaiVe()
+            {
+                MaLoaiVe = "VENGUOILONTOUR5",
+                Ten = "Vé Người Lớn",
+                SoLuong = 20,
+                MaTour = tour5.MaTour,
+                GiaTien = 2500000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm5, loaiNguoiLon5);
+
+            LoaiVe loaiTreEm4 = new LoaiVe()
+            {
+                MaLoaiVe = "VETREEMTOUR4",
+                Ten = "Vé Trẻ Em",
+                SoLuong = 10,
+                MaTour = tour4.MaTour,
+                GiaTien = 2000000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm4);
+
+            LoaiVe loaiNguoiLon4 = new LoaiVe()
+            {
+                MaLoaiVe = "VENGUOILONTOUR4",
+                Ten = "Vé Người Lớn",
+                SoLuong = 20,
+                MaTour = tour4.MaTour,
+                GiaTien = 2500000
+            };
+            context.LoaiVes.AddOrUpdate(loaiTreEm4, loaiNguoiLon4);
+
             LoaiVe loaiTreEm = new LoaiVe()
             {
                 MaLoaiVe = "VETREEMTOUR1",
@@ -310,7 +410,7 @@ namespace BanVeDiTourDuLich.Migrations
             ////// Thêm khách hàng
             KhachHang khachHang1 = new KhachHang()
             {
-                MaKhachHang = "KH01",
+                MaKhachHang = "1",
                 Ten = "Trần Ngọc Tiến",
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,
@@ -330,7 +430,7 @@ namespace BanVeDiTourDuLich.Migrations
 
             KhachHang khachHang2 = new KhachHang()
             {
-                MaKhachHang = "KH02",
+                MaKhachHang = "2",
                 Ten = "Phạm Xuân Tiến",
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,

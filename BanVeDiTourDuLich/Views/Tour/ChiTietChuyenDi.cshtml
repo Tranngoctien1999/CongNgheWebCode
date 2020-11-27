@@ -778,6 +778,7 @@
         }
         updateCaLendar(currentMonth, currentYear);
         updateLich(currentMonth, currentYear);
+        updateIdTourInForm();
         $(".DateCheckinText")[0].innerText = "@Model.Tour.ThoigianDi.Day" +
             "-" +
             "@Model.Tour.ThoigianDi.Month" +
@@ -967,6 +968,10 @@
             $(".totalPrice")[0].innerText = totalMoney + "VNĐ";
             $("#TextBox1").attr("value", totalMoney);
             $(".stripe-button").attr("data-amount", totalMoney);
+        }
+
+        function updateIdTourInForm() {
+            $("[name = 'idTour']").attr("value", "@Model.Tour.MaTour");
         }
     </script>
 }

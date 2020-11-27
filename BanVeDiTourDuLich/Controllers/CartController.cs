@@ -57,14 +57,86 @@ namespace BanVeDiTourDuLich.Controllers
             var listVe = context.Ves.ToList();
             string maVeCuoi = listVe[listVe.Count - 1].MaVe;
             int identity = int.Parse(maVeCuoi.Substring(2));
-            for (int i = 0; i < formCollection.Count - 3; i+= 2)
+            var listHoaDon = context.HoaDons.ToList();
+            string maHoaDonCuoi = listHoaDon[listHoaDon.Count - 1].MaHoaDon;
+            int identityHoaDon = int.Parse(maHoaDonCuoi.Substring(2));
+            int identityKhachHang = 0;
+            var listKhachHang = context.KhachHangs.ToList();
+            for (int i = listKhachHang.Count - 1 ; i >= 0 ; i--)
             {
-                Ve ve = new Ve()
+                if (int.TryParse(listKhachHang[i].MaKhachHang, out identityKhachHang))
                 {
-                    MaVe = "Ve" + identity.ToString("000"),
-                    MaTour = 
-                };
+                    break;
+                }
             }
+
+            if (Session["MaTaiKhoan"] == null)
+            {
+                KhachHang khachHang = new KhachHang()
+                {
+                    ThoiGianDangKi = DateTime.Now,
+                    MaKhachHang = (identityKhachHang + 1).ToString(),
+                    NgaySinh = DateTime.Now,
+                    Ten = formCollection[formCollection.Count - 1],
+                    MaLoaiKhachHang = "KHACHHANGTHUONG"
+                };
+
+                context.KhachHangs.Add(khachHang);
+
+                var hoaDon = new HoaDon()
+                {
+                    MaHoaDon = "HD" + (identityHoaDon + 1).ToString("00"),
+                    MaKhachHang = khachHang.MaKhachHang,
+                    MaNhanVien = "ADMIN",
+                    ThoiGianXuat = DateTime.Now
+                };
+                context.HoaDons.Add(hoaDon);
+                string idTour = formCollection[1];
+                for (int i = 2; i < formCollection.Count - 3; i += 2)
+                {
+                    for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
+                    {
+                        Ve ve = new Ve()
+                        {
+                            MaVe = "Ve" + (identity + 1).ToString("00"),
+                            MaTour = idTour,
+                            MaLoaiVe = formCollection[i],
+                            MaHoaDon = hoaDon.MaHoaDon
+                        };
+                        context.Ves.Add(ve);
+                        identity++;
+                    }
+                }
+            }
+            else
+            {
+                KhachHang khachHang = context.KhachHangs.Find(Session["MaTaiKhoan"]);
+                var hoaDon = new HoaDon()
+                {
+                    MaHoaDon = "HD" + (identityHoaDon + 1).ToString("00"),
+                    MaKhachHang = khachHang.MaKhachHang,
+                    MaNhanVien = "ADMIN",
+                    ThoiGianXuat = DateTime.Now
+                };
+                context.HoaDons.Add(hoaDon);
+                string idTour = formCollection[1];
+                for (int i = 2; i < formCollection.Count - 3; i += 2)
+                {
+                    for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
+                    {
+                        Ve ve = new Ve()
+                        {
+                            MaVe = "Ve" + (identity + 1).ToString("00"),
+                            MaTour = idTour,
+                            MaLoaiVe = formCollection[i],
+                            MaHoaDon = hoaDon.MaHoaDon
+                        };
+                        context.Ves.Add(ve);
+                        identity++;
+                    }
+                }
+            }
+            
             myCharge.ReceiptEmail = formCollection[formCollection.Count - 1];
             myCharge.Source = formCollection[formCollection.Count - 3];
             myCharge.Capture = true;
@@ -72,6 +144,7 @@ namespace BanVeDiTourDuLich.Controllers
             try
             {
                 Charge stripeCharge = chargeService.Create(myCharge);
+                context.SaveChanges();
                 return View("ThanhCong");
             }
             catch (Exception e)
