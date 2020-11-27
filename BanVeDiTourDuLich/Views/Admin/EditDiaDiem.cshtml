@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "EditDiaDiem";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model DiaDiem
+<link href="~/Content/Admin/css/UploadImg.css" rel="stylesheet" />
+<script src="~/Content/Admin/js/UploadImg.js"></script>
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!-- Page Content -->
+<!-- Page Content -->
+<div class="content-wrapper">
+    <div class="content-header">
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="h3 mb-2 text-gray-800">
+                            Chỉnh sửa Địa Điểm
+                        </h1>
+                        <br />
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <div class="col-lg-7" style="padding-bottom:120px">
+                        <form action="/Admin/EditDiaDiem" method="POST" id="Recipe_add">
+                            <input name="ID_congthuc" style="width:0.1px;height:0.1px;border-width:0" />
+                            <div class="form-group">
+                                <label>Mã Địa Điểm</label>
+                                <input value="@Model.MaDiaDiem" type="text" class="form-control" name="MaDiaDiem" placeholder="Mã Địa Điểm"></>
+                            </div>
+                            <div class="form-group">
+                                <label>Tên Địa Điểm</label>
+                                <input value="@Model.TenDiaDiem" autocomplete="off" type="text" class="form-control" name="TenDiaDiem" placeholder=" Tên Địa Điểm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Địa Chỉ</label>
+                                <input value="@Model.DiaChi" autocomplete="off" class="form-control" name="DiaChi" placeholder=" Địa Chỉ" />
+
+                            </div>
+                            <div class="form-group">
+                                <label>Ảnh minh họa</label>
+                                <div class="file-upload">
+                                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Chọn ảnh</button>
+                                    <div class="image-upload-wrap">
+                                        <input class="file-upload-input" type="file" name="postfile" onchange="readURL(this);" accept="image/*" />
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <img style="width:552px" class="file-upload-image" src="@Model.DuongDanAnh" alt="your image" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()" class="remove-image">Bỏ chọn</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default" style="background-color:#4e73df; color: rgba(255,255,255,.8)">Cập nhật</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </div>
+</div>
+<!-- /#page-wrapper -->
+<!-- recipe_add Modal-->
+@*<div class="modal fade" id="recipe_addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Công thức đã được thêm. Tiếp tục thêm?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Chọn "Tiếp tục" để tiếp tục thêm công thức mới.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Tiếp tục</button>
+                    <a class="btn btn-primary" href="Recipe">Rời</a>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script language="javascript" type="text/javascript">
+
+    $("#name").bind('input', function () {
+        if (checkExists($('#name').val()) === true) {
+            var url = "";
+            var text = $('#name').val();
+            switch (text) {
+                case "ThemDiaDiemMoi":
+                    url = 'ThemDiaDiemMoi';
+                    break;
+                default:
+                    break;
+            }
+
+            window.location = url;
+        }
+    });
+
+    function checkExists(inputValue) {
+        console.log(inputValue);
+
+        var x = document.getElementById("danhsach");
+        var i;
+        var flag;
+        for (i = 0; i < x.options.length; i++) {
+            if (inputValue == x.options[x.options.length - 1].value) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+</script>
+
