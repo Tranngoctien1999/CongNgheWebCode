@@ -258,7 +258,8 @@ namespace BanVeDiTourDuLich.Controllers
                     postfile.SaveAs(paths + postfile.FileName);
                     diaDiem.DuongDanAnh = path + postfile.FileName;
                 }
-                diaDiem = dd;
+                dd.DiaChi = diaDiem.DiaChi;
+                dd.TenDiaDiem = diaDiem.TenDiaDiem;
                 _context.SaveChanges();
                 return RedirectToAction("QuanLyDiaDiem");
             }
