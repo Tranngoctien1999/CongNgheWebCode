@@ -64,13 +64,12 @@
 <script>
     $(document).ready(function () {
 
-        // hàm đếm số lượng text field đang có trên màn hình
         function countItem() {
             var items = $("#answer").children().length;
             return items;
         }
         
-        // thêm text field, giới hạn chỉ có tối đa 10 cái
+
         $("#add").click(function () {
             var n = countItem();
             if (n == 20) {
@@ -81,15 +80,14 @@
             }
         });
 
-        // xoá text filed khi click vào nút del ở dòng tương ứng
+
         $(document).on("click", "a.del", function () {
             var n = countItem();
             if (n == 2) {
                 alert("Number of answers isn't less than 2");
             } else {
                 var check = $(this).siblings().find("input").val();
-                // cách viết khác
-                // var check = $(this).parent().find("label input").val();
+
 
                 $(this).parent().remove();
                 for (i = 0; i < n - 1; i++) {
@@ -103,8 +101,6 @@
             return items;
         }
 
-
-        // thêm text field, giới hạn chỉ có tối đa 10 cái
         $("#add1").click(function () {
             var n = countItem1();
             if (n == 20) {
@@ -115,15 +111,13 @@
             }
         });
 
-        // xoá text filed khi click vào nút del ở dòng tương ứng
         $(document).on("click", "a.del1", function () {
             var n = countItem1();
             if (n == 2) {
                 alert("Number of answers isn't less than 2");
             } else {
                 var check = $(this).siblings().find("input").val();
-                // cách viết khác
-                // var check = $(this).parent().find("label input").val();
+
 
                 $(this).parent().remove();
                 for (i = 0; i < n - 1; i++) {
