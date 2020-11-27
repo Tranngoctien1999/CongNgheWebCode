@@ -23,7 +23,7 @@
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
                         <form action="/Admin/EditDiaDiem" method="POST" id="Recipe_add">
-                            <input name="ID_congthuc" style="width:0.1px;height:0.1px;border-width:0" />
+                            <input name="postfile" style="width:0.1px;height:0.1px;border-width:0" />
                             <div class="form-group">
                                 <label>Mã Địa Điểm</label>
                                 <input value="@Model.MaDiaDiem" type="text" class="form-control" name="MaDiaDiem" placeholder="Mã Địa Điểm"></>
@@ -42,10 +42,10 @@
                                 <div class="file-upload">
                                     <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Chọn ảnh</button>
                                     <div class="image-upload-wrap">
-                                        <input class="file-upload-input" type="file" name="postfile" onchange="readURL(this);" accept="image/*" />
+                                        <input class="file-upload-input" type="file" name="postfiles" onchange="readURL(this);" accept="image/*" />
                                     </div>
                                     <div class="file-upload-content">
-                                        <img style="width:552px" class="file-upload-image" src="@Model.DuongDanAnh" alt="your image" />
+                                        <img style="width:552px" class="file-upload-image" src="" alt="your image" />
                                         <div class="image-title-wrap">
                                             <button type="button" onclick="removeUpload()" class="remove-image">Bỏ chọn</button>
                                         </div>
