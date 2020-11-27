@@ -561,6 +561,77 @@ namespace BanVeDiTourDuLich.Migrations
             };
             context.TinhNangs.AddOrUpdate(tinhNangPhongNgu);
             context.TinhNangs.AddOrUpdate(tinhNangGanBien);
+            Models.LichTrinh lich1 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR3",
+                Ngay=1,
+                MoTa= "HÀ NỘI – TAM ĐẢO (ĂN TRƯA, TỐI)",
+                ChiTiet= "Xe và hướng dẫn viên của đón đoàn tại điểm hẹn trong phố Cổ hoặc Nhà hát lớn khởi hànhcho chuyến đi thăm quan Tam Đảo. Đến khu danh thắng Tây Thiên. Quý khách bách bộ đi thăm quan công trình Đại Bảo tháp Mandalamô phỏng theo phong cách của Ấ Độ. Sau đó thăm đền Thõng với cây đa chín cội. Quý khách bách bộ đi thăm quan Thiền Viện Trúc Lâm một trong những trường họcdành cho các tăng ni phật tử ở nước ta. Thăm quan Lầu Trống, Lầu Chuông, lớp học…Chỉnh phụclên được tầng cao nhất của Thiền Viện quý khách như được phóng tầm nhìn từ Thiên Đình xuống hạgiới một quang cảnh hiếm nơi nào có được.Chinh phục đỉnh Tây Thiên. Quý khách ngồi cáp treo ngắm cảnh núi rừng hùng vỹ củaTây Thiên, ngắm Thác Bạc từ trên cabin cáp treo. Lên tới đỉnh cáp, Quý khách tiếp tục chinh phụcđỉnh Tây Thiên với một loạt các công trình như: đền Cô Chín, đền Mẫu Địa, đền Thượng QuốcMẫu, Nhà thờ Tổ, một tổ Thiền Sư, chùa Tây Thiên rồi cuối cùng là chinh phục tới Bàn cờ Tiên ởtrên đỉnh Tây Thiên và nhiều các công trình khác (chưa bao gồm giá vé cáp treo Tây Thiên).Ăn trưa tại nhà hàng. Sau bữa trưa, Quý khách tiếp tục lên xe đi Tam Đảo.Đến Tam Đảo, Quý khách thăm quan chụp hình những cảnh đẹp xung quanh thị trấn như: Quảngtrường trung tâm Tam Đảo, khu phố sắc màu với lối kiến trúc độc đáo; Chụp hình với nhà thờ đá Tam Đảo với lối kiến trúc độc đáo được xây dựng trong những năm từ 1906 đến năm 1912, tọa lạc tại trung tâmthị trấn Tam Đảo, bên con đường dẫn lên đỉnh núi Thiên.Hướng dẫn viên dẫn Quý khách bách bộ đi thăm:Thác Bạc Tam Đảo: Đường dẫn xuống thác Bạc không quá dài, nhưng cheo leo, dựng đứng. Để đếnđây, bạn phải vượt qua những bậc tam cấp lót đá xanh. Con đường được mở trong núi, một bên lànúi, một bên là vực thẳm. Quán Gió Tam Đảo: Quán cafe vô cùng nổi tiếng tại đây để nhâm nhi ly cafe ấm nóng (chi phí tựtúc) và ngắm nhìn khung cảnh hùng vĩ, nên thơ của vùng đất này. Ăn tối. Buổi tối tự do nghỉ ngơi, tận hưởng không khí trong lành và mát mẻ tại thị trấn Tam Đảo về đêm. Nghỉ đêm tại thị trấn Tam Đảo.",
+            };
+            Models.LichTrinh lich11= new Models.LichTrinh()
+            {
+                MaTour = "TOUR3",
+                Ngay = 2,
+                MoTa = "TAM ĐẢO – HÀ NỘI (Ăn: Sáng/ Trưa)",
+                ChiTiet = "Ăn sáng tại khách sạn và nghỉ ngơi.- 08h30: Hướng dẫn viên đưa Quý khách đi chinh phục tháp Truyền hình Tam Đảo cao hơn 1400m so vớimực nước biển bằng việc leo bộ lên 1.400 bậc đá dẫn lên đỉnh Thiên Nhị. Cảm nhận cảm giác của một ngườichinh phục đỉnh cao, hít một hơi căng đầy lồng ngực bằng luồng không khí mát lạnh trong lành của TamĐảo, bỗng thấy lòng mình thanh thản. Tất cả những ưu phiền, sầu não, những lo toan hàng ngày dường nhưđã tan biến. Quý khách ghé thăm đền bà chúa Thượng Ngàn trên đường chinh phục ngọn tháp truyền hình.- 11h30: Quý khách trả phòng khách sạn (gửi đồ lễ tân), sau đó ăn trưa tại nhà hàng. Quý khách có thời giantự do mua sắm hoặc nhâm nhi ly cafe trước khi rời Tam Đảo về Hà Nội.- 15h30: Quý khách tập trung lên xe về Hà Nội.- 17h30: Về đến Hà Nội. Kết thúc chương trình. Hẹn gặp lại!",
+            };
+            //Models.LichTrinh lich10 = new Models.LichTrinh()
+            //{
+            //    MaTour = ,
+            //    Ngay = 0,
+            //    MoTa = "",
+            //    ChiTiet = "",
+            //};
+            Models.LichTrinh lich2 = new Models.LichTrinh()
+            {
+                MaTour ="TOUR6" ,
+                Ngay = 1,
+                MoTa = "Hà Nội – Sapa",
+                ChiTiet= "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa."
+            };
+            Models.LichTrinh lich3 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR6",
+                Ngay = 2,
+                MoTa = "SA PA - FANSIPAN (Ăn sáng, trưa, tối)",
+                ChiTiet = "Xe đưa đoàn ra ga Sapa, Quý khách trải nghiệm đến khu du lịch Fansipan Legend bằng Tàu hỏa leo núi Mường Hoa hiện đại nhất Việt Nam với tổng chiều dài gần 2000m, thưởng ngoạn bức tranh phong cảnh đầy màu sắc của cánh rừng nguyên sinh, thung lũng Mường Hoa. Đến khu du lịch Fansipan Legend quý khách tự do tham quan: Tham quan tiểu cảnh Vườn tre, Chiêm bái chùa Trình – Bảo An Thiền Tư hoặc tự do mua sắm…Chinh phục đỉnh núi Fansipan với độ cao 3.143m hùng vĩ bằng cáp treo (chi phí tự túc) và cầu phúc lộc, bình an cho gia đình tại Bích Vân Thiền Tự hay tự thưởng cho mình ly ca cao nóng tại Café Du Soleil – Quán cà phê cao nhất Đông Dương. Xe đưa Quý khách về khách sạn tự do nghỉ ngơi. Nghỉ đêm tại Sapa.",
+            };
+            Models.LichTrinh lich4 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR6",
+                Ngay = 3,
+                MoTa = "SaPa -Hà Nội",
+                ChiTiet = "Quý khách ăn sáng và trả phòng khách sạn. Xe đưa Quý khách đi tham quan:Cửa khẩu biên giới Việt - Trung “Lào Cai- Hà Khẩu”Mua sắm tại chợ Cốc Lếu - Trung tâm thương mại lớn nhất, của thành phố nói riêng và Tỉnh Lào Cai nói chung. Nơi đây bày bán đa dạng đủ các loại mặt hàng từ thủ công mỹ nghệ, tranh nghệ thuật phong cảnh đến quần áo…sẽ là một điểm mua sắm tuyệt vời với du khách.Theo cung đường cao tốc trở về Hà Nội. Xe đưa Quý khách ra sân bay Nội Bài đáp chuyến bay về Tp.HCM. Chia tay Quý khách và kết thúc chương trình du lịch tại sân bay Tân Sơn Nhất.",
+            };
+            //Models.LichTrinh lich5 = new Models.LichTrinh()
+            //{
+            //    MaTour = ,
+            //    Ngay = 0,
+            //    MoTa = "",
+            //    ChiTiet = "",
+            //};
+            //Models.LichTrinh lich6 = new Models.LichTrinh()
+            //{
+            //    MaTour = ,
+            //    Ngay = 0,
+            //    MoTa = "",
+            //    ChiTiet = "",
+            //};
+            //Models.LichTrinh lich7 = new Models.LichTrinh()
+            //{
+            //    MaTour = ,
+            //    Ngay = 0,
+            //    MoTa = "",
+            //    ChiTiet = "",
+            //};
+            //Models.LichTrinh lich8 = new Models.LichTrinh()
+            //{
+            //    MaTour = ,
+            //    Ngay = 0,
+            //    MoTa = "",
+            //    ChiTiet = "",
+            //};
+            context.LichTrinhs.AddOrUpdate(lich1, lich2, lich3, lich4, lich11);
         }
     }
 }
