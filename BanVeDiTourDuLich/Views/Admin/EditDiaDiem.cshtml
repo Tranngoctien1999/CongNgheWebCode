@@ -83,36 +83,98 @@
     </div>*@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script language="javascript" type="text/javascript">
+<script>
+    $(document).ready(function () {
 
-    $("#name").bind('input', function () {
-        if (checkExists($('#name').val()) === true) {
-            var url = "";
-            var text = $('#name').val();
-            switch (text) {
-                case "ThemDiaDiemMoi":
-                    url = 'ThemDiaDiemMoi';
-                    break;
-                default:
-                    break;
-            }
-
-            window.location = url;
+        function countItem() {
+            var items = $("#answer").children().length;
+            return items;
         }
+
+        $("#add").click(function () {
+            var n = countItem();
+            if (n == 20) {
+                alert("Number of answers isn't greater than 10");
+            } else {
+                n++;
+                $("#answer").append("<div class='item'><label><span>Nguyên liệu " + n + ":</span><br/><input type='text' name='NL[]' placeholder='Tên nguyên liệu' class='NguyenLieu' /><input type='text' name='SL[]' placeholder='Số lượng' class='NguyenLieu' /></label><a href='javascript:void(0)' class='del'>Xóa</a></div>");
+            }
+        });
+
+        $(document).on("click", "a.del", function () {
+            var n = countItem();
+            if (n == 2) {
+                alert("Number of answers isn't less than 2");
+            } else {
+                var check = $(this).siblings().find("input").val();
+
+
+                $(this).parent().remove();
+                for (i = 0; i < n - 1; i++) {
+                    $("#answer .item:eq(" + i + ") label span").html("Nguyên liệu " + (parseInt(i) + 1) + ":");
+
+                }
+            }
+        });
+        function countItem1() {
+            var items = $("#answer1").children().length;
+            return items;
+        }
+
+        $("#add1").click(function () {
+            var n = countItem1();
+            if (n == 20) {
+                alert("Number of answers isn't greater than 10");
+            } else {
+                n++;
+                $("#answer1").append("<div class='item1'><label><span>Bước " + n + ":</span><br/><textarea rows='3' class='NoiDung' name='NoiDung[]' placeholder='Nhập nội dung công thức'></textarea></label><a href='javascript:void(0)' class='del1'>Xóa</a></div>");
+            }
+        });
+
+        $(document).on("click", "a.del1", function () {
+            var n = countItem1();
+            if (n == 2) {
+                alert("Number of answers isn't less than 2");
+            } else {
+                var check = $(this).siblings().find("input").val();
+ 
+
+                $(this).parent().remove();
+                for (i = 0; i < n - 1; i++) {
+                    $("#answer1 .item1:eq(" + i + ") label span").html("Bước " + (parseInt(i) + 1) + ":");
+
+                }
+            }
+        });
     });
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
 
-    function checkExists(inputValue) {
-        console.log(inputValue);
+            var reader = new FileReader();
 
-        var x = document.getElementById("danhsach");
-        var i;
-        var flag;
-        for (i = 0; i < x.options.length; i++) {
-            if (inputValue == x.options[x.options.length - 1].value) {
-                flag = true;
-            }
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
         }
-        return flag;
     }
 </script>
-
