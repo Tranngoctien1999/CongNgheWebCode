@@ -307,9 +307,12 @@
     <Compile Include="Utilizer\ConnectionIdUser.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\ChiTietTour2.cs" />
+    <Compile Include="ViewModels\ChiTietTourAdmin.cs" />
     <Compile Include="ViewModels\ChiTietViewModel.cs" />
     <Compile Include="ViewModels\LoaiVeSoLuongCon.cs" />
+    <Compile Include="ViewModels\QuanLyTourViewModel.cs" />
     <Compile Include="ViewModels\StripeKey.cs" />
+    <Compile Include="ViewModels\ThongTinTourExpanded.cs" />
     <Compile Include="ViewModels\ThongTinVeTrongGio.cs" />
     <Compile Include="ViewModels\TourGiaTien.cs" />
     <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
@@ -2590,6 +2593,10 @@
     <Content Include="Views\Admin\ThemMoiTour.cshtml" />
     <Content Include="Views\Cart\ThanhCong.cshtml" />
     <Content Include="Views\Cart\ThatBai.cshtml" />
+    <Content Include="Views\Admin\QuanLyDiaDiem.cshtml" />
+    <Content Include="Views\Admin\EditTour.cshtml" />
+    <Content Include="Views\Admin\EditDiaDiem.cshtml" />
+    <Content Include="Views\Admin\ThemMoiDiaDiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

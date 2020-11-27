@@ -38,7 +38,7 @@
                             <div class="col-12">
                                 <h4>
                                     <i class="fas fa-globe"></i> Vacation, Inc.
-                                    <small class="float-right">Thời gian: 2/10/2014</small>
+                                    <small class="float-right">Thời gian: @Model.HoaDon.ThoiGianXuat.Day/@Model.HoaDon.ThoiGianXuat.Month/@Model.HoaDon.ThoiGianXuat.Year</small>
                                 </h4>
                             </div>
                             <!-- /.col -->
@@ -49,8 +49,6 @@
                                 Từ
                                 <address>
                                     <strong>@Model.NhanVien.Ten</strong><br />
-                                    Điện thoại: (804) 123-5432<br />
-                                    Email: info@almasaeedstudio.com
                                 </address>
                             </div>
                             <!-- /.col -->
@@ -58,16 +56,13 @@
                                 Tới
                                 <address>
                                     <strong>@Model.KhachHang.Ten</strong><br />
-                                    Điện thoại: (555) 539-1037<br />
-                                    Email: john.doe@example.com
                                 </address>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col">
                                 <b>Hóa Đơn @Model.HoaDon.MaHoaDon</b><br />
                                 <br />
-                                <b>Ngày mua:</b> 2/22/2014<br />
-                                <b>Tài khoản:</b> @*@Model.KhachHang.TaiKhoan.TaiKhoanDangNhap*@
+                                <b>Ngày mua:</b> @Model.HoaDon.ThoiGianXuat.Day/@Model.HoaDon.ThoiGianXuat.Month/@Model.HoaDon.ThoiGianXuat.Year <br />
                             </div>
                             <!-- /.col -->
                         </div>
@@ -114,13 +109,13 @@
                             <!-- accepted payments column -->
                             <div class="col-6">
                                 <p class="lead">Phương thức thanh toán:</p>
-                                <img src="../../dist/img/credit/visa.png" alt="Visa" />
+                                <img style="width: 3rem;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Former_Visa_%28company%29_logo.svg/3072px-Former_Visa_%28company%29_logo.svg.png" alt="Visa" />
                                 <p class="text-muted well well-sm shadow-none"
                                    style="margin-top: 10px"></p>
                             </div>
                             <!-- /.col -->
                             <div class="col-6">
-                                <p class="lead">Đã thanh toán vào 2/22/2014</p>
+                                <p class="lead">Đã thanh toán vào @Model.HoaDon.ThoiGianXuat.Day/@Model.HoaDon.ThoiGianXuat.Month/@Model.HoaDon.ThoiGianXuat.Year</p>
 
                                 <div class="table-responsive">
                                     <table class="table">
@@ -135,19 +130,6 @@
                         </div>
                         <!-- /.row -->
                         <!-- this row will not appear when printing -->
-                        <div class="row no-print">
-                            <div class="col-12">
-                                <a href="invoice-print.html"
-                                   rel="noopener"
-                                   target="_blank"
-                                   class="btn btn-default"><i class="fas fa-print"></i> In</a>
-                                <button type="button"
-                                        class="btn btn-primary float-right"
-                                        style="margin-right: 5px">
-                                    <i class="fas fa-download"></i> Tạo PDF
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <!-- /.invoice -->
                 </div>
