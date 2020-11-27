@@ -1,4 +1,6 @@
 ﻿@using BanVeDiTourDuLich.Controllers
+@using BanVeDiTourDuLich.ViewModels
+@using Microsoft.Ajax.Utilities
 @model BanVeDiTourDuLich.ViewModels.ChiTietViewModel
 @{
     ViewBag.Title = "ChiTietChuyenDi";
@@ -22,18 +24,61 @@
                     <span class="diadiem">Điểm đến:@Model.Tour.DiaDiemDi.TenDiaDiem</span>
                 </div>
                 <div class="sec2">
+                    @*<span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>*@
+                    Số giờ:
+                    <span class="songay">@Model.Tour.SoGio</span>
                     <span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>
                     Số giờ: <span class="songay">@Model.Tour.SoGio</span>
 
                 </div>
-                <div>    <span class="noikhoihanh">Nơi khởi hành: @Model.Tour.DiaDiemDen.TenDiaDiem</span></div>
+                <div>
+                    <span class="noikhoihanh">Nơi khởi hành: @Model.Tour.DiaDiemDen.TenDiaDiem</span>
+                </div>
                 <div class="sec4">
                     <ul>
-                        <li><span class="flaticon-shower"></span>2</li>
-                        <li><span class="flaticon-king-size"></span>3</li>
-                        <li><span class="flaticon-mountains"></span>Near Mountain</li>
+                        <li>
+                            <span class="flaticon-shower"></span>2
+                        </li>
+                        <li>
+                            <span class="flaticon-king-size"></span>3
+                        </li>
+                        <li>
+                            <span class="flaticon-mountains"></span>Near Mountain
+                        </li>
                     </ul>
                 </div>
+                @*<form id="datve" action="/DatVe/" method="post">
+                        <input name="MaTour" value="@Model.Tour.MaTour" type="hidden"/>
+                        <input id="IsRedirect" type="hidden" value=""/>
+                        <div class="sec3">
+                            <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
+                                <p style="margin-right: 50px">Giá Vé :</p>
+                                <select name="MaLoaiVe" id="" class="form-control" style="font-size: 15px; margin-bottom: 20px">
+                                    @foreach (var loaiVe in Model.CacLoaiVe)
+                                    {
+                                        <option value="@loaiVe.MaLoaiVe">@TourController.AddDotAndCommaToInteger(loaiVe.GiaTien) VNĐ (@loaiVe.Ten) <span>Hiện còn : @loaiVe.SoLuong vé</span></option>
+                                    }
+                                </select>
+                                <div class="quantity">
+                                    <p style="display: inline; margin-right: 50px;">Số Lượng:</p>
+                                    <input name="SoLuong" style="display: inline-block; margin-bottom: 10px; margin-left: 3px; width: 10%;"
+                                           type="number" min="1" class="quantity-field"
+                                           value="1">
+                                </div>
+                            </div>
+                            <div>
+                                <button style="margin-left: 0px; margin-right: 20px;" class="btn btn-primary" type="submit"
+                                        onclick="chuyenSangMuaHang()">
+                                    <a class="btn btn-book1 btn-md">
+                                        <i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp;Mua ngay
+                                    </a>
+                                </button>
+                                <button style="background: #f3f3f3 !important;" class="btn btn-primary" type="submit"
+                                        onclick="chuyenSangThemVaoGio()">
+                                    <a class="btn btn-book1 btn-md">
+                                        <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Thêm vào giỏ hàng
+                                    </a>
+                                </button>
                 <form id="datve" action="/DatVe/" method="post">
                     <input name="MaTour" value="@Model.Tour.MaTour" type="hidden" />
                     <input id="IsRedirect" type="hidden" value="" />
@@ -53,26 +98,234 @@
                                        value="1">
                             </div>
                         </div>
-                        <div>
-                            <button style="margin-left: 0px; margin-right: 20px;" class="btn btn-primary" type="submit"
-                                    onclick="chuyenSangMuaHang()">
-                                <a class="btn btn-book1 btn-md">
-                                    <i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp;Mua ngay
-                                </a>
+                    </form>*@
+
+            <div class="col-xs-12 floatBox highlight" style="width: 35rem;">
+                <div class="col-xs-12 no-padding v-margin-bottom-5 call-now">
+                    Đặt ngay, chỉ 2 phút. Hoặc gọi
+                    <a href="tel:02839338002">(028) 3933 8002</a>
+                </div>
+                <div class="col-xs-12 no-padding v-margin-bottom-15">
+                    <div class="form-group">
+                        <label for="DateCheckinField" class="col-xs-8 control-label no-padding">Chọn ngày khởi hành:</label>
+                        <div class="col-xs-4 no-padding" style="
+                                                                                                                          float: right;
+                                                                                                                          margin-right: 4rem;
+                                                                                                                      ">
+                            <div class="date-input-group">
+                                <label readonly="" type="text" class="form-control date-input dates-date btn-general DateCheckinField">
+                                    <span class="DateCheckinText">27-11-2020</span>
+                                </label>
+                                <input type="hidden" class="get_date" value="2020-11-27">
+                                <div class="daterangepicker dropdown-menu single opensleft daterangepicker_custom_class show-calendar" style="display: none;">
+                                    <div class="calendar left single" style="display: block;">
+                                        <div class="daterangepicker_input">
+                                            <input class="input-mini active" type="text" name="daterangepicker_start" value="" style="display: none;">
+                                            <i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i>
+                                            <div class="calendar-time" style="display: none;">
+                                                <div></div>
+                                                <i class="fa fa-clock-o glyphicon glyphicon-time" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-table">
+                                            <table class="table-condensed" styles="background: white;">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th colspan="5" class="month">
+                                                            <select class="monthselect"><option value="0" disabled="disabled">Th01</option><option value="1" disabled="disabled">Th02</option><option value="2" disabled="disabled">Th03</option><option value="3" disabled="disabled">Th04</option><option value="4" disabled="disabled">Th05</option><option value="5" disabled="disabled">Th06</option><option value="6" disabled="disabled">Th07</option><option value="7" disabled="disabled">Th08</option><option value="8" disabled="disabled">Th09</option><option value="9" disabled="disabled">Th10</option><option value="10" selected="selected">Th11</option><option value="11">Th12</option></select>
+                                                            <select class="yearselect"><option value="2020" selected="selected">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option></select>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>T2</th>
+                                                        <th>T3</th>
+                                                        <th>T4</th>
+                                                        <th>T5</th>
+                                                        <th>T6</th>
+                                                        <th>T7</th>
+                                                        <th>CN</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="off off disabled off disabled" data-title="r0c0">26</td>
+                                                        <td class="off off disabled off disabled" data-title="r0c1">27</td>
+                                                        <td class="off off disabled off disabled" data-title="r0c2">28</td>
+                                                        <td class="off off disabled off disabled" data-title="r0c3">29</td>
+                                                        <td class="off off disabled off disabled" data-title="r0c4">30</td>
+                                                        <td class="weekend off off disabled off disabled" data-title="r0c5">31</td>
+                                                        <td class="weekend off disabled off disabled" data-title="r0c6">1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="off disabled off disabled" data-title="r1c0">2</td>
+                                                        <td class="off disabled off disabled" data-title="r1c1">3</td>
+                                                        <td class="off disabled off disabled" data-title="r1c2">4</td>
+                                                        <td class="off disabled off disabled" data-title="r1c3">5</td>
+                                                        <td class="off disabled off disabled" data-title="r1c4">6</td>
+                                                        <td class="weekend off disabled off disabled" data-title="r1c5">7</td>
+                                                        <td class="weekend off disabled off disabled" data-title="r1c6">8</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="off disabled off disabled" data-title="r2c0">9</td>
+                                                        <td class="off disabled off disabled" data-title="r2c1">10</td>
+                                                        <td class="off disabled off disabled" data-title="r2c2">11</td>
+                                                        <td class="off disabled off disabled" data-title="r2c3">12</td>
+                                                        <td class="off disabled off disabled" data-title="r2c4">13</td>
+                                                        <td class="weekend off disabled off disabled" data-title="r2c5">14</td>
+                                                        <td class="weekend off disabled off disabled" data-title="r2c6">15</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="off disabled off disabled" data-title="r3c0">16</td>
+                                                        <td class="off disabled off disabled" data-title="r3c1">17</td>
+                                                        <td class="off disabled off disabled" data-title="r3c2">18</td>
+                                                        <td class="off disabled off disabled" data-title="r3c3">19</td>
+                                                        <td class="off disabled off disabled" data-title="r3c4">20</td>
+                                                        <td class="weekend off disabled off disabled" data-title="r3c5">21</td>
+                                                        <td class="weekend off disabled off disabled" data-title="r3c6">22</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="off disabled off disabled" data-title="r4c0">23</td>
+                                                        <td class="today off disabled" data-title="r4c1">24</td>
+                                                        <td class="off disabled" data-title="r4c2">25</td>
+                                                        <td class="off disabled" data-title="r4c3">26</td>
+                                                        <td class="active start-date active end-date available" data-title="r4c4">27</td>
+                                                        <td class="weekend off disabled" data-title="r4c5">28</td>
+                                                        <td class="weekend off disabled" data-title="r4c6">29</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="off disabled" data-title="r5c0">30</td>
+                                                        <td class="off off disabled" data-title="r5c1">1</td>
+                                                        <td class="off off disabled" data-title="r5c2">2</td>
+                                                        <td class="off off disabled" data-title="r5c3">3</td>
+                                                        <td class="off available" data-title="r5c4">4</td>
+                                                        <td class="weekend off off disabled" data-title="r5c5">5</td>
+                                                        <td class="weekend off off disabled" data-title="r5c6">6</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="note-calenda" style="width: max-content;">
+                                            <hr>*Ngày màu xanh lá: ngày có lịch khởi hành
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
+                {
+                    <div class="col-xs-12 no-padding v-margin-bottom-15 relative">
+                        <span id="@loaiVe.LoaiVe.MaLoaiVe" class="number-detail">0</span>
+                        <span class="text-detail">
+                            <span>@loaiVe.LoaiVe.Ten (còn @loaiVe.SoLuong vé)</span>
+                        </span>
+                        <span class="price-color hide-class"></span>
+                        <input id="@loaiVe.LoaiVe.MaLoaiVe-conlai" type="hidden" value="@loaiVe.SoLuong"/>
+                        <input id="@loaiVe.LoaiVe.MaLoaiVe-entity" class="entity" money="@loaiVe.LoaiVe.GiaTien" type="hidden" value="0"/>
+                        <span class="price-color"> x @loaiVe.LoaiVe.GiaTien</span>
+                        <div class="btn-group">
+                            <button type="button" id="@loaiVe.LoaiVe.MaLoaiVe-btnSub" class="btn number-button minus-adult btn-general" onclick="subLoaiVe(this)">
+                                <i class="fas fa-minus"></i>
                             </button>
-                            <button style="background: #f3f3f3 !important;" class="btn btn-primary" type="submit"
-                                    onclick="chuyenSangThemVaoGio()">
-                                <a class="btn btn-book1 btn-md">
-                                    <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Thêm vào giỏ hàng
-                                </a>
+                            <button type="button" id="@loaiVe.LoaiVe.MaLoaiVe-btnAdd" class="btn number-button plus-adult btn-general" onclick="addLoaiVe(this)">
+                                <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                </form>
+                }
+                <div class="col-xs-12 no-padding v-margin-bottom-15 showMsgAllotment hide-class">
+                    <span style="color:#ffbd00;">Chỗ cuối cùng đã được đặt vui lòng chọn ngày khác</span>
+                </div>
+                <div class="col-xs-12  no-padding v-margin-bottom-15 SpecialRateSurchargeAdult hide-class">
+                    <div class="col-xs-7 no-padding">
+                        <span>Phụ thu phòng đơn</span>
+                    </div>
+                    <div class="col-xs-5 no-padding text-right">
+                        <span class="price-color">0 VND</span>
+                    </div>
+                </div>
+                <div class="col-xs-12  no-padding v-margin-bottom-15 priceDiv">
+                    <span class="price-line price-line-detail"></span>
+                    <span class="labelPrice">Tổng cộng</span>
+                    <span class="price totalPrice">0<span class="tourItemCurrency">VND</span></span>
+                </div>
+                <div class="col-xs-12 no-padding v-margin-bottom-15 commistionRate hide-class">
+                    <div class="col-xs-7 no-padding">
+                        <span>Commission</span>
+                    </div>
+                    <div class="col-xs-5 no-padding text-right">
+                        <span class="price-commisson">0 VND</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 no-padding specialrate-wrap-inner hide-class">
+                    <label class="ivivuPoint-checkbox">
+                        <span class="specialName"></span>
+                        <span class="specialPrice"></span>
+                        <input type="checkbox" class="select-special-rate">
+                        <span class="checkmark"></span>
+                        <input type="hidden" class="SpecialTotalRate">
+                    </label>
+                </div>
+                <div class="col-xs-12 no-padding wrap-supplement">
+                    <div class="ls-supplement"></div>
+                    <input type="hidden" class="note_supplement" value="">
+                    <input type="hidden" class="JsonSurchargeFee" value="[]">
+                </div>
+                <div class="col-xs-12 no-padding">
+                    <div class="form-group no-margin">
+                        <label class="visible-sm">&nbsp;</label>
+                        <div class="col-xs-12 no-padding scroll-mobile">
+                            <div class="col-xs-12 no-padding request-Button">
+                                <form id="pay" action="/Cart/Charge" method="POST">
+                                    <input type="hidden" id="TextBox1" placeholder="amount" name="amount" value="0" />
+                                    <script src="https://checkout.stripe.com/checkout.js"
+                                            class="stripe-button"
+                                            data-key="@Model.StripeKey.PublishableKey"
+                                            data-name="Du Lịch Việt"
+                                            data-amount="0"
+                                            data-currency="VND">
+                                    </script>
+                                    <input type="hidden" name="idTour" value="" />
+                                    @{ int i = 0;}
+                                    @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
+                                    {
+                                        <input type="hidden" class="checkOutMaLoaiVe" name="MaLoaiVe-@i" value="@loaiVe.LoaiVe.MaLoaiVe" />
+                                        <input type="hidden" class="checkOutQuantity" id="@loaiVe.LoaiVe.MaLoaiVe-MaLoaiVe" name="quantity-@i" value="" />
+                                        i++;
+                                    }
+                                    <button class="btn btn-flat btn-action btn-md btn-block requestButton">Yêu cầu đặt</button>
+                                </form>
+                            </div>
+                            <div class="col-xs-12 no-padding check-Button hide-class">
+                                <button class="btn btn-flat btn-action btn-md btn-block checkButton requestPrice">Xem giá</button>
+                            </div>
+
+                            <div class="col-xs-12 no-padding book-Button hide-class">
+                                <button class="btn btn-flat btn-action btn-md btn-block bookButton">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="member-point check-point member-point__sidebar">
+                    <span></span>
+                </div>
+            </div>
+
             </div>
         </div>
     </div>
     <div class="container">
+        <div>
+            <h3>Giới thiệu về: @Model.Tour.DiaDiemDi.TenDiaDiem</h3>
+        </div>
+        <div>
+            <p>
+                @Model.chitiet
+            </p>
+        </div>
         <div> <h3>Giới thiệu về: @Model.Tour.DiaDiemDi.TenDiaDiem</h3></div>
         <div>
             <p>
@@ -98,6 +351,7 @@
             </div>
         }
     </div>
+
 </section>
 
 @section styles
@@ -111,15 +365,482 @@
             flex: 0 0 50%;
             max-width: 50%;
         }
-    </style>
 
+        .floatBox {
+            transition: all .2s ease-in-out;
+            padding-top: 15px;
+            background-color: rgba(0,60,113,.05);
+            border: 1px solid rgba(0,60,113,.05);
+        }
+
+        .col-xs-12 {
+            width: 100%;
+        }
+
+        .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+            float: left;
+        }
+
+        .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .floatBox.highlight .call-now {
+            color: #00467e;
+            font-weight: bold;
+        }
+
+        .v-margin-bottom-5 {
+            margin-bottom: 5px;
+        }
+
+        .no-padding {
+            padding: 0 !important;
+        }
+
+        .v-margin-bottom-15 {
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            color: #555863;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .floatBox.highlight .control-label {
+            margin-top: 5px;
+            height: 34px;
+            margin-bottom: 0;
+        }
+
+        .floatBox .form-group label {
+            font-weight: normal;
+            position: relative;
+            top: 7px;
+        }
+
+        .floatBox.highlight .date-input-group {
+            width: 100%;
+            float: right;
+        }
+
+            .floatBox.highlight .date-input-group .date-input {
+                padding-left: 15px;
+                cursor: pointer;
+                height: 34px;
+                background: #fff;
+                border-radius: 2px;
+            }
+
+        .floatBox .form-group label {
+            font-weight: normal;
+            position: relative;
+            top: 7px;
+        }
+
+        .floatBox.highlight input, .floatBox.highlight select, .floatBox.highlight .bookButton {
+            height: 40px;
+            border: 1px solid #d2d6de;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .number-detail {
+            font-size: 22px;
+            font-weight: 500;
+            padding-right: 10px;
+            color: #000;
+        }
+
+        .text-detail {
+            top: 6px;
+            position: absolute;
+        }
+
+            .text-detail .width-70 {
+                width: 70px;
+                display: inline-block;
+            }
+
+        .price-color {
+            color: #ffbd00;
+            font-size: 16px;
+            line-height: 20px;
+            position: absolute;
+            top: 6px;
+            right: 120px;
+        }
+
+        .hide-class {
+            display: none;
+        }
+
+        .price-color {
+            color: #ffbd00;
+            font-size: 16px;
+            line-height: 20px;
+            position: absolute;
+            top: 6px;
+            right: 120px;
+        }
+
+        .btn-group, .btn-group-vertical {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            float: right;
+        }
+
+        .floatBox.highlight .btn-group .number-button {
+            border: 1px solid #d2d6de;
+            background-color: #fff;
+            border-radius: 2px;
+            width: 55px;
+        }
+
+        .btn-group > .btn:first-child {
+            margin-left: 0;
+        }
+
+        .btn-group > .btn, .btn-group-vertical > .btn {
+            position: relative;
+            float: left;
+        }
+
+        .btn {
+            font-weight: bold;
+            background: orange;
+        }
+
+        .btn {
+            border-radius: 3px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border: 1px solid transparent;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .floatBox.highlight .btn-group .number-button .fa {
+            color: #003c71;
+        }
+
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .floatBox.highlight p {
+            font-size: 12px;
+            color: #828282;
+        }
+
+        .floatBox.highlight .child-ages {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            -moz-font-feature-settings: "liga" on;
+        }
+
+        .floatBox .priceDiv .price-line {
+            position: absolute;
+            right: 0;
+            top: -15px;
+            font-weight: 400;
+            color: #828282;
+            font-size: 15px;
+            text-decoration: line-through;
+            display: block;
+        }
+
+        .floatBox .priceDiv .labelPrice {
+            float: left;
+            color: #494b55;
+            margin-top: 1px;
+        }
+
+        .floatBox.highlight .priceDiv .price {
+            color: #ffbd00;
+            font-weight: bold;
+            float: right;
+            margin-right: 4rem;
+        }
+
+        .floatBox .priceDiv .price .tourItemCurrency {
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        .form-group {
+            color: #555863;
+        }
+
+        .floatBox .form-group label {
+            font-weight: normal;
+            position: relative;
+            top: 7px;
+        }
+
+        .floatBox.highlight .bookButton, .floatBox.highlight .checkButton, .floatBox.highlight .requestButton {
+            height: 47px;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+
+        .price-text {
+            float: right;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .daterangepicker.dropdown-menu {
+            max-width: none;
+            z-index: 3001;
+            left: -100%;
+        }
+
+        .daterangepicker:before {
+            top: -7px;
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+            border-bottom: 7px solid #ccc;
+        }
+
+        @@media (min-width: 564px) {
+            .daterangepicker.single .calendar.left {
+                clear: none;
+            }
+        }
+
+        @@media (min-width: 564px) {
+            .daterangepicker .left .daterangepicker_input {
+                padding-right: 12px;
+            }
+        }
+
+        .daterangepicker .input-mini.active {
+            border: 1px solid #08c;
+            border-radius: 4px;
+        }
+
+        .daterangepicker .daterangepicker_input i {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+        }
+
+        .daterangepicker .calendar-time {
+            text-align: center;
+            margin: 5px auto;
+            line-height: 30px;
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .daterangepicker .daterangepicker_input i {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+        }
+
+        @@media (min-width: 564px) {
+            .daterangepicker .calendar.left .calendar-table {
+                padding-right: 12px;
+                border-right: none;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border: none;
+            }
+        }
+
+        .daterangepicker.daterangepicker_custom_class table {
+            border-collapse: separate;
+            border-spacing: 5px;
+        }
+
+        .daterangepicker table {
+            width: 100%;
+            margin: 0;
+        }
+
+        .daterangepicker .calendar th, .daterangepicker .calendar td {
+            white-space: nowrap;
+            text-align: center;
+            min-width: 32px;
+        }
+
+        .daterangepicker th.month {
+            width: auto;
+        }
+
+        .daterangepicker select.monthselect {
+            margin-right: 2%;
+            width: 56%;
+        }
+
+        .daterangepicker select.yearselect {
+            width: 40%;
+        }
+
+        .daterangepicker .calendar th, .daterangepicker .calendar td {
+            white-space: nowrap;
+            text-align: center;
+            min-width: 32px;
+        }
+
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .daterangepicker .calendar-table table thead tr:nth-child(2) th:nth-last-child(1), .daterangepicker .calendar-table table thead tr:nth-child(2) th:nth-last-child(2) {
+            color: #d9534f;
+        }
+
+        .daterangepicker.daterangepicker_custom_class table td.off.disabled {
+            color: #333 !important;
+        }
+
+        .daterangepicker.daterangepicker_custom_class table td.active.start-date.end-date.available, .daterangepicker.daterangepicker_custom_class table td.start-date, .daterangepicker.daterangepicker_custom_class table td.end-date, .daterangepicker.daterangepicker_custom_class table td.available {
+            border-radius: 21px;
+        }
+
+        .daterangepicker td.active.start-date.end-date.available, .daterangepicker td.start-date, .daterangepicker td.end-date {
+            border-radius: 0;
+        }
+
+        .daterangepicker.daterangepicker_custom_class table td.available {
+            border: 1px #9fc43a solid;
+        }
+
+        .daterangepicker.daterangepicker_custom_class table td.active {
+            background: #9fc43a !important;
+        }
+
+        .daterangepicker.daterangepicker_custom_class .single .note-calenda hr {
+            margin-top: -5px;
+            margin-bottom: 15px;
+            
+        }
+
+        .daterangepicker.daterangepicker_custom_class .single .note-calenda {
+            color: #9fc43a;
+        }
+    </style>
 }
 
 @section scripts
 {
     <script>
-        /* attach a submit handler to the form */
-        $("#datve").submit(function (event) {
+    /* get list of tour has starting point and destination */
+    var listTour;
+    var getTour = $.post("/Tour/FindTourWithStartingAndDestinationPoint",
+        {
+            maDiemDi: '@Model.Tour.MaDiemDi',
+            maDiemDen: '@Model.Tour.MaDiemDen'
+        });
+    getTour.done(function(response) {
+        listTour = response;
+    /* set calendar and tour time to current time */
+        var time = new Date();
+        var currentMonth = time.getMonth();
+        var currentYear = time.getFullYear();
+        var monthSelector = $(".monthselect option ");
+        var yearSelector = $(".yearselect option");
+        for (i = 0; i < monthSelector.length; i++) {
+            if ($(monthSelector[i]).val() < currentMonth) {
+                $(monthSelector[i]).attr("disabled", "disabled");
+                $(monthSelector[i]).attr("selected", null);
+            } else {
+                if ($(monthSelector[i]).val() == currentMonth) {
+                    $(monthSelector[i]).attr("disabled", null);
+                    $(monthSelector[i]).attr("selected", "selected");
+                } else {
+                    $(monthSelector[i]).attr("disabled", null);
+                    $(monthSelector[i]).attr("selected", null);
+                }
+            }
+        }
+
+        for (i = 0; i < yearSelector.length; i++) {
+            if ($(yearSelector[i]).val() < currentMonth) {
+                $(yearSelector[i]).attr("disable", "disable");
+                $(yearSelector[i]).attr("selected", null);
+            } else {
+                if ($(yearSelector[i]).val() == currentYear) {
+                    $(yearSelector[i]).attr("disable", null);
+                    $(yearSelector[i]).attr("selected", "selected");
+                } else {
+                    $(yearSelector[i]).attr("disable", null);
+                    $(yearSelector[i]).attr("selected", null);
+                }
+            }
+        }
+        updateCaLendar(currentMonth, currentYear);
+        updateLich(currentMonth, currentYear);
+        updateIdTourInForm();
+        $(".DateCheckinText")[0].innerText = "@Model.Tour.ThoigianDi.Day" +
+            "-" +
+            "@Model.Tour.ThoigianDi.Month" +
+            "-" +
+            "@Model.Tour.ThoigianDi.Year";
+
+
+        $('.monthselect').change(function(){
+            var value = $(this).val();
+            var selectedYear = $(".yearselect option[selected='selected']").val();
+            updateCaLendar(value, selectedYear);
+            updateLich(value, selectedYear);
+        });
+
+        $('.yearselect').change(function () {
+            var value = $(this).val();
+            var selectedMonth = $(".monthselect option[selected='selected']").val();
+            updateCaLendar(selectedMonth, value);
+            updateLich(selectedMonth, value);
+        });
+    });
+
+    /* attach a submit handler to the form */
+    $("#datve").submit(function(event) {
 
             /* stop form from submitting normally */
             event.preventDefault();
@@ -149,12 +870,147 @@
             });
         });
 
-        function chuyenSangMuaHang() {
-            $('#IsRedirect')[0].setAttribute('value', 1)
+    function chuyenSangMuaHang() {
+        $('#IsRedirect')[0].setAttribute('value', 1)
+    }
+
+    function chuyenSangThemVaoGio() {
+        $('#IsRedirect')[0].setAttribute('value', 0)
+    }
+
+
+    function updateCaLendar(month, year) {
+        if (month < 12 && month > -1) {
+            var dayOfFirstDay = findFirstDayOfMonth(month, year);
+            var startCol = dayOfFirstDay;
+            var day = 1;
+            var numberOfDayInMonth = daysInMonth(month, year);
+            for (i = 0; i < 6; i++) {
+                for (j = 0; j < startCol; j++) {
+                    var value = 'r' + i + 'c' + j;
+                    var element = $("[data-title = " + value + "]")[0];
+                    element.innerText = " ";
+                }
+            }
+            for (i = 0; i < 6; i++) {
+                for (j = startCol; j < 7; j++) {
+
+                    var value = 'r' + i + 'c' + j;
+                    var element = $("[data-title = " + value + "]")[0];
+                    if (day > numberOfDayInMonth) {
+                        element.innerText = " ";
+                    } else {
+                        element.innerText = day;
+                    }
+                    day++;
+                }
+                startCol = 0;
+            }
+        }
+    }
+
+    function findFirstDayOfMonth(month, year) {
+        var day = new Date(year, month, 1);
+        return day.getDay();
+    }
+
+    function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+    }
+
+        function updateLich(month, year) {
+            var listDate = $("td");
+            for (i = 0; i < listDate.length; i++) {
+                if (listTour.list.length == 0) {
+                    $(listDate[i]).removeClass("available active");
+                    continue;
+                }
+                var check = false;
+                listTour.list.forEach(function (tour) {
+                    if (!check) {
+                        var len = tour.ThoigianDi.length;
+                        var date = new Date(+tour.ThoigianDi.substring(6, len - 2));
+                        var dateUpdate = date.getDate();
+                        var monthUpdate = date.getMonth();
+                        var yearUpdate = date.getFullYear();
+                        if (listDate[i].innerText == dateUpdate && monthUpdate == month && yearUpdate == year) {
+                            $(listDate[i]).addClass("available");
+                            $(listDate[i]).attr("idTour", tour.MaTour);
+                            $(listDate[i]).click(function() {
+                                window.location.href = "/Tour/ChiTietChuyenDi/" + $(this).attr("idTour");
+                                $(".date-input").click();
+                                $(".DateCheckinText")[0].innerText = dateUpdate +
+                                    "-" +
+                                    monthUpdate +
+                                    "-" +
+                                    yearUpdate;
+                            });
+                            if (listDate[i].innerText == '@Model.Tour.ThoigianDi.Day') {
+                                $(listDate[i]).addClass("active");
+                            }
+                            check = true;
+                        } else {
+                            $(listDate[i]).removeClass("available active");
+                        }
+                    }
+            }
+        )};
+    }
+
+        $(".date-input").click(function() {
+        var selector =
+            $(".dropdown-menu");
+        selector.toggle();
+    })
+
+        //$(".plus-adult").click(function() {
+        //    var
+        //})
+
+        function addLoaiVe(btn) {
+            var idBtn = $(btn).attr("id");
+            var id = idBtn.split("-");
+            var selectorString = "#" + id[0] + "-entity";
+            var currentEntity = $(selectorString).val();
+            var newEntity = Number(currentEntity) + 1;
+            var conLai = $("#" + id[0] + "-conlai").val();
+            if (newEntity <= Number(conLai)) {
+                $(selectorString).attr("value", newEntity );
+                $("#" + id[0])[0].innerText = "x" + newEntity;
+                $("#" + id[0] + "-MaLoaiVe").attr("value", newEntity);
+            }
+            updateMoney();
         }
 
-        function chuyenSangThemVaoGio() {
-            $('#IsRedirect')[0].setAttribute('value', 0)
+
+        function subLoaiVe(btn) {
+            var idBtn = $(btn).attr("id");
+            var id = idBtn.split("-");
+            var selectorString = "#" + id[0] + "-entity";
+            var currentEntity = $(selectorString).val();
+            var newEntity = Number(currentEntity) - 1;
+            if (newEntity >= 0) {
+                $(selectorString).attr("value", newEntity);
+                $("#" + id[0])[0].innerText = "x" + newEntity;
+                $("#" + id[0] + "-MaLoaiVe").attr("value", newEntity);
+            }
+            updateMoney();
+        }
+
+        function updateMoney() {
+            var selector = $(".entity");
+            var totalMoney = 0;
+            for (i = 0; i < selector.length; i++) {
+                totalMoney = totalMoney + Number($(selector[i]).attr("money")) * Number($(selector[i]).attr("value"));
+            }
+            $(".totalPrice")[0].innerText = totalMoney + "VNĐ";
+            $("#TextBox1").attr("value", totalMoney);
+            $(".stripe-button").attr("data-amount", totalMoney);
+        }
+
+        function updateIdTourInForm() {
+            $("[name = 'idTour']").attr("value", "@Model.Tour.MaTour");
+
         }
     </script>
 }

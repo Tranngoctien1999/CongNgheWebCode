@@ -9,8 +9,14 @@ namespace BanVeDiTourDuLich.ViewModels
     public class ChiTietViewModel
     {
         public Tour Tour { get; set; }
-        public List<LoaiVe> CacLoaiVe { get; set; }
+        public List<LoaiVeSoLuongCon> CacLoaiVe { get; set; }
         public string chitiet { get; set; }
+        public StripeKey StripeKey { get; set; }
+        public ChiTietViewModel()
+        {
+            CacLoaiVe = new List<LoaiVeSoLuongCon>();
+            LichTrinh = new List<LichTrinh>();
+        }
         public List<LichTrinh> LichTrinh { get; set; }
 
     }
