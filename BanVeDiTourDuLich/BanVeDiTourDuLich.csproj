@@ -274,6 +274,10 @@
     <Compile Include="Migrations\202011231139031_LichTrinh.Designer.cs">
       <DependentUpon>202011231139031_LichTrinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012140803457_Fix Ma Diem Den Di.cs" />
+    <Compile Include="Migrations\202012140803457_Fix Ma Diem Den Di.designer.cs">
+      <DependentUpon>202012140803457_Fix Ma Diem Den Di.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2682,6 +2686,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011231139031_LichTrinh.resx">
       <DependentUpon>202011231139031_LichTrinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012140803457_Fix Ma Diem Den Di.resx">
+      <DependentUpon>202012140803457_Fix Ma Diem Den Di.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

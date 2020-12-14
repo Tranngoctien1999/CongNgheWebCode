@@ -12,9 +12,6 @@
                 <div class="row">
                     <div class="col-xs-12 mg-bot15">
                         <div style="padding: 12px 10px;background-color:#f1f1f1;line-height:18px;">
-                            <span class="dep-place">
-                                <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Hà Nội
-                            </span>
                             <span>Có 26 tour khởi hành vào thời gian bạn chọn</span>
                         </div>
                     </div>
@@ -39,7 +36,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="tour-name">
-                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour" title=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)"><h3>Điểm đến: @destination.TenDiaDiem</h3></a>
+                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour"><h3>Điểm đến: @destination.DiaDiemDen.TenDiaDiem</h3></a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -49,8 +46,8 @@
                                                     <div><i class="fas fa-spinner"></i>&nbsp;&nbsp;Tiêu chuẩn</div>
                                                 </div>
                                             </div>
-                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour" title=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)">
-                                                <img src="@destination.DuongDanAnh" class="img-responsive pic-lt" alt=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)">
+                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour">
+                                                <img src="@destination.DiaDiemDen.DuongDanAnh" class="img-responsive pic-lt">
                                             </a>
                                         </div>
                                     </div>
@@ -114,7 +111,7 @@
 
                                                 <div class="col-md-12 col-sm-12 col-xs-12 mg-bot10">
                                                     <div class="f-left l"><img src="/Content/ThemeHe/i-dep.png"></div>
-                                                    <div class="f-left r">Nơi khởi hành:@Model.DiemKhoiHanh[i] <span class="font500"></span></div>
+                                                    <div class="f-left r">Nơi khởi hành:@destination.DiaDiemDi.TenDiaDiem <span class="font500"></span></div>
                                                     <div class="clear"></div>
                                                 </div>
 

@@ -93,16 +93,16 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem1.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 10,
-                ThoigianDi = new DateTime(2020, 11, 29),
+                ThoigianDi = new DateTime(2020, 12, 29),
             };
 
             Tour tour9 = new Tour()
             {
-                MaTour = "TOUR10",
+                MaTour = "TOUR12",
                 MaDiemDen = diaDiem1.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
-                SoGio = 10,
-                ThoigianDi = new DateTime(2020, 11, 30)
+                SoGio = 12,
+                ThoigianDi = new DateTime(2020, 12, 30)
             };
 
             Tour tour2 = new Tour()
@@ -111,7 +111,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem2.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 20,
-                ThoigianDi = new DateTime(2020, 10, 29),
+                ThoigianDi = new DateTime(2020, 12, 29),
             };
 
             Tour tour3 = new Tour()
@@ -120,7 +120,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem3.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 15,
-                ThoigianDi = new DateTime(2020, 10, 29),
+                ThoigianDi = new DateTime(2020, 12, 29),
             };
 
             Tour tour4 = new Tour()
@@ -129,7 +129,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem4.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 10, 29),
+                ThoigianDi = new DateTime(2020, 12, 29),
             };
             Tour tour5 = new Tour()
             {
@@ -137,7 +137,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem8.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 11, 29),
+                ThoigianDi = new DateTime(2020, 12, 29),
             };
             Tour tour6 = new Tour()
             {
@@ -145,7 +145,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem8.MaDiaDiem,
                 MaDiemDi = diaDiem7.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 11, 18),
+                ThoigianDi = new DateTime(2020, 12, 18),
             };
 
             Tour tour7 = new Tour()
@@ -154,7 +154,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem4.MaDiaDiem,
                 MaDiemDi = diaDiem7.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 11, 19),
+                ThoigianDi = new DateTime(2020, 12, 19),
             };
             Tour tour8 = new Tour()
             {
@@ -162,7 +162,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem3.MaDiaDiem,
                 MaDiemDi = diaDiem7.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 11, 19),
+                ThoigianDi = new DateTime(2020, 12, 19),
             };
 
             context.Tours.AddOrUpdate(tour , tour2 , tour3 , tour4,tour5,tour6,tour7,tour8 , tour9);
