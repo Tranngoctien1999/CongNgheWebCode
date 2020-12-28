@@ -278,6 +278,10 @@
     <Compile Include="Migrations\202012140803457_Fix Ma Diem Den Di.designer.cs">
       <DependentUpon>202012140803457_Fix Ma Diem Den Di.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012280730576_ThemThongTinChoKhachHang.cs" />
+    <Compile Include="Migrations\202012280730576_ThemThongTinChoKhachHang.designer.cs">
+      <DependentUpon>202012280730576_ThemThongTinChoKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2601,6 +2605,7 @@
     <Content Include="Views\Admin\EditTour.cshtml" />
     <Content Include="Views\Admin\EditDiaDiem.cshtml" />
     <Content Include="Views\Admin\ThemMoiDiaDiem.cshtml" />
+    <Content Include="Views\User\InforUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2689,6 +2694,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012140803457_Fix Ma Diem Den Di.resx">
       <DependentUpon>202012140803457_Fix Ma Diem Den Di.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012280730576_ThemThongTinChoKhachHang.resx">
+      <DependentUpon>202012280730576_ThemThongTinChoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

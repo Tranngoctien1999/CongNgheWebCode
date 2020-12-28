@@ -133,5 +133,63 @@ namespace BanVeDiTourDuLich.Controllers
             Session["MaTaiKhoan"] = newAccount.MaTaiKhoan;
             return new HttpStatusCodeResult(HttpStatusCode.Accepted);
         }
+
+        public ActionResult InforUser(string id)
+        {
+            bool check = false;
+            if (Session["MaTaiKhoan"] != null)
+            {
+                if (string.Compare(Session["MaTaiKhoan"].ToString(),id) == 0)
+                {
+                    check = true;
+                    KhachHang khachHang = _db.KhachHangs.Find(id);
+                    return View(khachHang);
+                }
+            }
+            return Content("Bạn không có quyền xem trang này!");
+        }
+
+        [HttpPost]
+        public ActionResult DoiMatKhau(string MatKhauCu , string MatKhauMoi , string NhapLaiMatKhauMoi)
+        {
+            if (Session["MaTaiKhoan"] != null)
+            {
+                KhachHang khachHang = _db.KhachHangs.Find(Session["MaTaiKhoan"].ToString());
+                if (khachHang == null)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                    return Json(  new { msg = "Không tìm được tài khoản của bạn! Hãy kiểm tra lại"} ,
+                        JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    if (string.Compare(khachHang.TaiKhoan.MatKhau, MatKhauCu) != 0)
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                        return Json(new { msg = "Mật khẩu cũ không đúng! Thử lại !" },
+                            JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        if (string.Compare(MatKhauMoi, NhapLaiMatKhauMoi) != 0)
+                        {
+                            Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                            return Json(new { msg = "Mật khẩu mới nhập vào không khớp" },
+                                JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            Response.StatusCode = (int)HttpStatusCode.Accepted;
+                            khachHang.TaiKhoan.MatKhau = MatKhauMoi;
+                            _db.SaveChanges();
+                            return Json(new { msg = "Đổi mật khẩu thành công!" },
+                                JsonRequestBehavior.AllowGet);
+
+                        }
+                    }
+                }
+            }
+            return Content("Bạn không có quyền xem trang này!");
+        }
     }
 }

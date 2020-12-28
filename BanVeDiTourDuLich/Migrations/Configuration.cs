@@ -415,7 +415,10 @@ namespace BanVeDiTourDuLich.Migrations
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,
                 ThoiGianDangKi = new DateTime(2020, 10, 1),
-                DuongDanAnh = "/Content/images/Persions/KH01.jpg"
+                DuongDanAnh = "/Content/images/Persions/KH01.jpg",
+                GioiTinh = true,
+                Email = "NgocTien123@gmail.com",
+                DiaChi = "236 Hoàng Quốc Việt",
             };
             context.KhachHangs.AddOrUpdate(khachHang1);
 
@@ -435,7 +438,10 @@ namespace BanVeDiTourDuLich.Migrations
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,
                 ThoiGianDangKi = new DateTime(2020, 10, 1),
-                DuongDanAnh = "/Content/images/Persions/KH02.jpg"
+                DuongDanAnh = "/Content/images/Persions/KH02.jpg",
+                GioiTinh = true,
+                Email = "NgocTien123@gmail.com",
+                DiaChi = "236 Hoàng Quốc Việt",
             };
             context.KhachHangs.AddOrUpdate(khachHang2);
 
