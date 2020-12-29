@@ -841,7 +841,7 @@
         var yearSelector = $(".yearselect option");
         for (i = 0; i < monthSelector.length; i++) {
             if ($(monthSelector[i]).val() < currentMonth) {
-                $(monthSelector[i]).attr("disabled", "disabled");
+                $(monthSelector[i]).attr("disabled", null);
                 $(monthSelector[i]).attr("selected", null);
             } else {
                 if ($(monthSelector[i]).val() == currentMonth) {
@@ -880,14 +880,15 @@
 
         $('.monthselect').change(function(){
             var value = $(this).val();
-            var selectedYear = $(".yearselect option[selected='selected']").val();
+            var selectedYear = $(".yearselect").val();
             updateCaLendar(value, selectedYear);
             updateLich(value, selectedYear);
         });
 
         $('.yearselect').change(function () {
             var value = $(this).val();
-            var selectedMonth = $(".monthselect option[selected='selected']").val();
+            $(this).attr('selected', 'selected');
+            var selectedMonth = $(".monthselect").val();
             updateCaLendar(selectedMonth, value);
             updateLich(selectedMonth, value);
         });
@@ -980,6 +981,7 @@
                     continue;
                 }
                 var check = false;
+                
                 listTour.list.forEach(function (tour) {
                     if (!check) {
                         var len = tour.ThoigianDi.length;
@@ -988,6 +990,7 @@
                         var monthUpdate = date.getMonth();
                         var yearUpdate = date.getFullYear();
                         if (listDate[i].innerText == dateUpdate && monthUpdate == month && yearUpdate == year) {
+                            console.log(listDate[i].innerText);
                             $(listDate[i]).addClass("available");
                             $(listDate[i]).attr("idTour", tour.MaTour);
                             $(listDate[i]).click(function() {
