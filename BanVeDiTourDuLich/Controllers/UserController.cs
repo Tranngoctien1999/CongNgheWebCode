@@ -315,5 +315,39 @@ namespace BanVeDiTourDuLich.Controllers
                     JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult GetListTour()
+        {
+            if (Session["MaTaiKhoan"] != null)
+            {
+                KhachHang khachHang = _db.KhachHangs.Find(Session["MaTaiKhoan"].ToString());
+                if (khachHang == null)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Không tìm được tài khoản của bạn! Hãy kiểm tra lại" },
+                        JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var data = khachHang.HoaDons.SelectMany(hoaDon => hoaDon.Ves
+                        .GroupBy(ve => new {ve.Tour.MaTour, ve.LoaiVe.MaLoaiVe}).Select(g => new
+                        {
+                            SoLuongVe = g.Count(),
+                            LoaiVe = _db.LoaiVes.Find(g.Key.MaLoaiVe).Ten,
+                            TongTien = _db.LoaiVes.Find(g.Key.MaLoaiVe).GiaTien * g.Count(),
+                            TourCode = g.Key.MaTour,
+                            NgayKhoiHanh = _db.Tours.Find(g.Key.MaTour).ThoigianDi.ToString("dd/MM/yyyy"),
+                            TinhTrang = _db.Tours.Find(g.Key.MaTour).ThoigianDi > DateTime.Now,
+                            TenTour = _db.Tours.Find(g.Key.MaTour).DiaDiemDen.TenDiaDiem,
+                            DiemDen = _db.Tours.Find(g.Key.MaTour).DiaDiemDen.TenDiaDiem
+                        }).ToList()).ToList();
+                    Response.StatusCode = 200;
+                    return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            Response.StatusCode = 400;
+            return Json(new { msg = "Bạn không có quyền vào trang này !" },
+                JsonRequestBehavior.AllowGet);
+        }
     }
 }
