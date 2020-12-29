@@ -121,41 +121,42 @@
             color: #fff;
         }
 
-        .form-control { height: 35px !important;
+        .form-control {
+            height: 35px !important;
             margin-bottom: 1rem;
         }
+
         .picture-box {
-            float: right;
+            align-items: center;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            float: right;
         }
+
         .picture__image {
-            width: 7rem;
             border-radius: 100%;
+            width: 7rem;
         }
 
         .picture__button, .picture__button:visited {
-            border: none;
-            padding: 0.7rem;
-            margin-top: 1rem;
             background: orange;
+            border: none;
             border-radius: 10px;
             color: white;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 1rem;
+            padding: 0.7rem;
             width: 50%;
         }
 
-        .modal {
-            top: 25%;
-        }
+        .modal { top: 25%; }
 
         #upload {
             display: flex;
             flex-direction: column;
         }
-        </style>
+    </style>
 
 
 }
@@ -171,7 +172,7 @@
                             <a href="/">Trang chủ</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="/User/InforUser">Thông tin tài khoản</a>
+                            <a class="ThongTinTaiKhoanNav">Thông tin tài khoản</a>
                         </li>
                     </ol>
                 </nav>
@@ -189,7 +190,7 @@
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 noidungtin">
-        
+
                             <div class="profile-sidebar">
 
                                 <div class="profile-usermenu">
@@ -210,13 +211,13 @@
                                     </style>
                                     <ul class="nav" style="background: #f6f6f3">
                                         <li class="active">
-                                            <a href="/User/InforUser">
+                                            <a class="ThongTinTaiKhoanNav">
                                                 <i style="color: #6f6f6f; font-size: 12px;" class="glyphicon glyphicon-home"></i>
                                                 &nbsp;Thông tin chung
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="/User/ListTour">
+                                            <a href="/User/ListTour" id="ListTourNav">
                                                 <i style="color: #6f6f6f; font-size: 12px;" class="fa fa-history"></i>
                                                 &nbsp;Lịch sử đi tour
                                             </a>
@@ -228,9 +229,9 @@
                         </div>
                         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 noidungtin">
                             <div class="picture-box">
-                                <img class="picture__image" src="@Model.DuongDanAnh" />
+                                <img class="picture__image" src="@Model.DuongDanAnh"/>
                                 <form id="upload" enctype="multipart/form-data" action="@Url.Action("UploadFile", "User")" method="POST">
-                                    <input type="file" name="fileUpload" id="fileUpload" size="23" />
+                                    <input type="file" name="fileUpload" id="fileUpload" size="23"/>
                                     <button class="picture__button">Đổi ảnh cá nhân</button>
                                 </form>
                             </div>
@@ -285,7 +286,7 @@
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-8">
                                         <select class="form-control" data-val="true" data-val-number="The field Gender must be a number." id="Gender" name="Gender">
-                                            @if (Model.GioiTinh == true)
+                                            @if (Model.GioiTinh)
                                             {
                                                 <option selected="selected" value="1">Nam</option>
                                                 <option value="0">Nữ</option>
@@ -314,6 +315,16 @@
                                         <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                        <label>Số điện thoại <span style="color: red">(*)</span>:</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-8">
+                                        <input type="text" name="SoDienThoai" id="SoDienThoai" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.SoDienThoai">
+                                    </div>
+                                </div>
+
                                 <div class="row mg-bot30 ">
                                     <div class="col-md-2 col-sm-2 col-xs-4">
                                         <label>Địa chỉ <span style="color: red">(*)</span>:</label>
@@ -416,14 +427,14 @@
                 type: "POST",
                 url: url,
                 data: form.serialize(),
-                success: function ({ msg }) {
+                success: function({ msg }) {
                     alert(msg);
                     $('#btnClose').click();
                 },
-                error: function (response) {
+                error: function(response) {
                     alert(response.responseJSON.msg);
                 }
-            })
+            });
         });
 
         $('#btnCapNhatMatKhau').click(() => {
@@ -441,7 +452,7 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function (data) {
+                success: function(data) {
                     alert(data.msg);
                 },
                 error: function(xhr, error, status) {
@@ -453,10 +464,10 @@
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-    
+
                 reader.onload = function(e) {
                     $('.picture__image').attr('src', e.target.result);
-                }
+                };
                 reader.readAsDataURL(input.files[0]); // convert to base64 string
             }
         }
@@ -466,23 +477,84 @@
         });
 
 
-        $('#frm').submit(function (e) {
+        $('#frm').submit(function(e) {
             e.preventDefault();
             var form = $(this);
             var url = form.attr('action');
-            console.log(url);
             $.ajax({
                 type: "POST",
                 url: url,
                 data: form.serialize(),
-                success: function ({ msg }) {
+                success: function({ msg }) {
                     alert(msg);
                 },
-                error: function (response) {
+                error: function(response) {
                     alert(response.responseJSON.msg);
                 }
-            })
+            });
         });
 
+        $('#ListTourNav').click(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: "GET",
+                url: "/user/GetListTour",
+                success: function({ data }) {
+                    var htmlContent = '';
+                    if (data.length == 0) {
+                        htmlContent = `<tr>
+<td colspan="9" data-th="Stt">Chưa có lịch sử đi tour</td>
+</tr>`;
+                    } else {
+                        var i = 1;
+                        data.forEach(function (item) {
+                                htmlContent += `<tr>
+    <td data-th="Stt">${i}</td>
+    <td data-th="Stt">${item.TourCode}</td>
+    <td data-th="Stt">${item.DiemDen}</td>
+    <td data-th="Stt">${item.NgayKhoiHanh}</td>
+    <td data-th="Stt">${item.DiemDen}</td>
+    <td data-th="Stt">${item.LoaiVe}</td>
+    <td data-th="Stt">${item.SoLuongVe}</td>
+    <td data-th="Stt">${item.TongTien}</td>
+    <td></td>
+</tr>`;
+                            }
+                        );
+                    }
+
+                    var content = $(".col-lg-9.col-md-12.col-sm-12.col-xs-12.noidungtin")[0];
+                    $(content).empty();
+                    var html = `<table id = "myTable" class="table table-hover table-striped">
+                                <thead style = "background: linear-gradient(to right, #f9ab30 , #ffc107);color: #fff;">
+                                <tr>  
+                                    <th style = "width: 4%"> Stt </th>
+                                    <th> Tourcode </th>  
+                                    <th> Tên tour </th>  
+                                    <th> Ngày khởi hành </th>  
+                                    <th> Điểm đến </th>  
+                                    <th> Loại tour </th>  
+                                    <th> Số Lượng </th>
+                                    <th> Giá </th>
+                                    <th></th> 
+                                </tr>
+                                </thead>  
+                                    <tbody>
+                                        ${htmlContent}
+                                     </tbody>
+                                </table>`;
+                    $(content).append(html);
+                }
+
+                , error: function(data) {
+                    alert(data.msg);
+                } 
+            });
+        });
+
+        $('.ThongTinTaiKhoanNav').click(function (event) {
+            event.preventDefault();
+            window.location.reload(false);
+        });
     </script>
 }
