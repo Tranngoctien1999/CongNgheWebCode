@@ -1,0 +1,488 @@
+﻿@model KhachHang
+@{
+    ViewBag.Title = "InforUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <style>
+        @@media (min-width: 1200px) {
+            .container { width: 1170px; }
+        }
+
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .noidungtin {
+            font-size: 15px;
+            line-height: 24px;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .noidungtin {
+            font-size: 15px;
+            line-height: 24px;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .noidungtin p { margin-bottom: 30px; }
+
+        .mg-bot30 { margin-bottom: 30px; }
+
+        .mg-bot30 { margin-bottom: 30px; }
+
+        .col-xs-12 { width: 100%; }
+
+        .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 { float: left; }
+
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            position: relative;
+        }
+
+        .text-center { text-align: center; }
+
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            border: 0;
+            font: inherit;
+            font-size: 100%;
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+        }
+
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        @@media (min-width: 1200px) {
+            .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9 { float: left; }
+        }
+        
+
+        @@media (min-width: 992px) {
+            .col-md-12 { width: 100%; }
+        }
+
+        @@media (min-width: 992px) {
+            .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 { float: left; }
+        }
+
+        @@media (min-width: 768px) {
+            .col-sm-12 { width: 100%; }
+        }
+
+        @@media (min-width: 768px) {
+            .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 { float: left; }
+        }
+
+        .nav {
+            list-style: none;
+            margin-bottom: 0;
+            padding-left: 0;
+        }
+
+        .nav .active {
+            background-color: #D0D0D0;
+            border-left: 2px solid;
+            color: #1e94f2;
+        }
+
+        .nav > li {
+            display: block;
+            position: relative;
+            width: 100%;
+        }
+
+        .nav > li > a {
+            display: block;
+            padding: 10px 15px;
+            position: relative;
+        }
+
+        .btn-default {
+            background: linear-gradient(to right, #ff5513, #ff2d21);
+            border: none !important;
+            color: #fff;
+        }
+
+        .form-control { height: 35px !important;
+            margin-bottom: 1rem;
+        }
+        .picture-box {
+            float: right;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .picture__image {
+            width: 7rem;
+            border-radius: 100%;
+        }
+
+        .picture__button, .picture__button:visited {
+            border: none;
+            padding: 0.7rem;
+            margin-top: 1rem;
+            background: orange;
+            border-radius: 10px;
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .modal {
+            top: 25%;
+        }
+
+        #upload {
+            display: flex;
+            flex-direction: column;
+        }
+        </style>
+
+
+}
+
+<div id="main-content">
+<div id="breadcrum" style="margin-top: 14rem">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/User/InforUser">Thông tin tài khoản</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main-content">
+    <div id="tuvankhachhang">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center mg-bot30">
+                    <h2 style="font-size: x-large; font-weight: 700;">Thông tin khách hàng</h2>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 noidungtin">
+        
+                            <div class="profile-sidebar">
+
+                                <div class="profile-usermenu">
+                                    <style>
+                                        .nav .active {
+                                            background-color: #D0D0D0;
+                                            border-left: 2px solid;
+                                            color: #1e94f2;
+                                        }
+
+                                        .profile-sidebar .nav > li:hover {
+                                            background-color: #D0D0D0;
+                                            border-left: 2px solid;
+                                            color: #1e94f2;
+                                        }
+
+                                        .profile-sidebar .nav > li a:hover { color: #1e94f2; }
+                                    </style>
+                                    <ul class="nav" style="background: #f6f6f3">
+                                        <li class="active">
+                                            <a href="/User/InforUser">
+                                                <i style="color: #6f6f6f; font-size: 12px;" class="glyphicon glyphicon-home"></i>
+                                                &nbsp;Thông tin chung
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="/User/ListTour">
+                                                <i style="color: #6f6f6f; font-size: 12px;" class="fa fa-history"></i>
+                                                &nbsp;Lịch sử đi tour
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 noidungtin">
+                            <div class="picture-box">
+                                <img class="picture__image" src="@Model.DuongDanAnh" />
+                                <form id="upload" enctype="multipart/form-data" action="@Url.Action("UploadFile", "User")" method="POST">
+                                    <input type="file" name="fileUpload" id="fileUpload" size="23" />
+                                    <button class="picture__button">Đổi ảnh cá nhân</button>
+                                </form>
+                            </div>
+                            <p>
+                                <strong style="color: #1583e0 !important; text-transform: uppercase;">I. Thông tin tài khoản</strong>
+                            </p>
+                            <div class="row mg-bot5">
+                                <div class="col-md-2 col-sm-3 col-xs-4">
+                                    <label>Mã khách hàng:</label>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-8">
+                                    <input class="form-control" disabled="disabled" id="CustomerNo" name="CustomerNo" type="text" value="@Model.MaKhachHang">
+                                </div>
+                            </div>
+                            <div class="row mg-bot5">
+                                <div class="col-md-2 col-sm-3 col-xs-4">
+                                    <label>Mật khẩu:</label>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-8">
+                                    <input class="form-control" disabled="disabled" id="Password" name="Password" type="password" value="**********">
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-xs-8">
+                                    <button class="btn btn-primary" onclick="DoiPass()">
+                                        Thay đổi &nbsp;<i class="fa fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row mg-bot5">
+                                <div class="col-md-2 col-sm-3 col-xs-4">
+                                    <label>Ngày đăng kí:</label>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-8">
+                                    <input class="form-control" disabled="disabled" name="RegistrationDay" value="@Model.ThoiGianDangKi.ToString("dd/MM/yyy")">
+                                </div>
+                            </div>
+                            <div class="row mg-bot5">
+                            </div>
+                            <p>
+                                <strong style="color: #1583e0 !important; text-transform: uppercase;">II. Thông tin khách hàng</strong>
+                            </p>
+                            <form action="/User/UpdateCustomerInformation" enctype="multipart/form-data" id="frm" method="post" name="frm" novalidate="novalidate">
+                                <div class="row mg-bot5">
+                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                        <label>Họ tên <span style="color: red">(*)</span>:</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-8">
+                                        <input type="text" name="CustomerName" id="CustomerName" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.Ten">
+                                        <div class="field-validation-valid text-danger" data-valmsg-for="CustomerName" data-valmsg-replace="true"></div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                        <label>Giới tính <span style="color: red">(*)</span>:</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-8">
+                                        <select class="form-control" data-val="true" data-val-number="The field Gender must be a number." id="Gender" name="Gender">
+                                            @if (Model.GioiTinh == true)
+                                            {
+                                                <option selected="selected" value="1">Nam</option>
+                                                <option value="0">Nữ</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="1">Nam</option>
+                                                <option selected="selected" value="0">Nữ</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                        <label>Ngày sinh <span style="color: red">(*)</span>:</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-8">
+                                        <input type="text" name="Birthday" id="Birthday" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.NgaySinh.ToString("dd/MM/yyyy")">
+                                        <div class="field-validation-valid text-danger" data-valmsg-for="Birthday" data-valmsg-replace="true"></div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                        <label>Email <span style="color: red">(*)</span>:</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-8">
+                                        <input class="form-control" data-val="true" data-val-email="Vui lòng nhập đúng định dạng email" data-val-required="Vui lòng nhập" id="Email" name="Email" type="email" value="@Model.Email">
+                                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></div>
+                                    </div>
+                                </div>
+                                <div class="row mg-bot30 ">
+                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                        <label>Địa chỉ <span style="color: red">(*)</span>:</label>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-8">
+                                        <input type="text" name="Address" id="Address" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.DiaChi">
+                                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="Address" data-valmsg-replace="true"></div>
+                                    </div>
+                                </div>
+                                <div class="row mg-bot30">
+                                    <div class="col-xs-12 text-right">
+                                        <button id="btCapNhat" type="submit" class="btn btn-md btn-default">Cập nhật&nbsp;&nbsp;<i class="fa fa-save"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModalDoiMatKhau">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">ĐỔI MẬT KHẨU</h4>
+            </div>
+            <form action="/User/DoiMatKhau" id="frmPass" method="post" novalidate="novalidate">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="mg-bot5">Mật khẩu cũ <span style="color: red">(*)</span>:</label>
+                        <div class="input-group" id="show_hide_password_MatKhauCu">
+                            <input type="password" name="MatKhauCu" id="MatKhauCu" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
+                            <div class="input-group-addon">
+                                <a onclick="HienMatKhau('MatKhauCu')">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="MatKhauCu" data-valmsg-replace="true"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mg-bot5">Mật khẩu mới <span style="color: red">(*)</span>:</label>
+                        <div class="input-group" id="show_hide_password_MatKhauMoi">
+                            <input data-val-length="Mật khẩu phải tối thiểu 8 ký tự" data-val-length-min="8" type="password" name="MatKhauMoi" id="MatKhauMoi" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
+                            <div class="input-group-addon">
+                                <a onclick="HienMatKhau('MatKhauMoi')">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="MatKhauMoi" data-valmsg-replace="true"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mg-bot5">Nhập lại mật khẩu mới <span style="color: red">(*)</span>:</label>
+                        <div class="input-group" id="show_hide_password_NhapLaiMatKhauMoi">
+                            <input data-val-length="Mật khẩu phải tối thiểu 8 ký tự" data-val-length-min="8" type="password" name="NhapLaiMatKhauMoi" id="NhapLaiMatKhauMoi" class="form-control" data-val="true" data-val-equalto="Nhập lại khẩu mới không chính xác" data-val-equalto-other="*.MatKhauMoi" data-val-required="Vui lòng nhập">
+                            <div class="input-group-addon">
+                                <a onclick="HienMatKhau('NhapLaiMatKhauMoi')">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="NhapLaiMatKhauMoi" data-valmsg-replace="true"></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="btnCapNhatMatKhau" class="btn btn-md btn-default">Cập nhật mật khẩu&nbsp;&nbsp;<i class="fab fa-telegram-plane"></i></button>
+                    <button id="btnClose" type="button" class="btn btn-md" onclick="DongDoiPass()">Đóng lại&nbsp;&nbsp;<i class="fas fa-times-circle"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+@section scripts
+{
+    <script>
+        function HienMatKhau(id) {
+            var idQuery = '#' + String(id);
+            var passwordBox = $(idQuery)[0];
+            if ($(passwordBox).attr('type') == 'password') {
+                $(passwordBox).attr('type', 'text');
+            } else {
+                $(passwordBox).attr('type', 'password');
+            }
+        }
+
+
+        $('#frmPass').submit(function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            console.log(url);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function ({ msg }) {
+                    alert(msg);
+                    $('#btnClose').click();
+                },
+                error: function (response) {
+                    alert(response.responseJSON.msg);
+                }
+            })
+        });
+
+        $('#btnCapNhatMatKhau').click(() => {
+            $('#frmPass').submit();
+        });
+
+
+        $('#upload').submit(function(e) {
+            e.preventDefault(); // stop the standard form submission
+
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: new FormData(this),
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert(data.msg);
+                },
+                error: function(xhr, error, status) {
+                    alert(error);
+                }
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+    
+                reader.onload = function(e) {
+                    $('.picture__image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#fileUpload").change(function() {
+            readURL(this);
+        });
+
+
+        $('#frm').submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            console.log(url);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function ({ msg }) {
+                    alert(msg);
+                },
+                error: function (response) {
+                    alert(response.responseJSON.msg);
+                }
+            })
+        });
+
+    </script>
+}

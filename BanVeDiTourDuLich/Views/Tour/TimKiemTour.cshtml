@@ -5,13 +5,15 @@
 }
 <link href="/Content/css/TourStyles/style.css" rel="stylesheet" />
 <link href="/Content/css/TourStyles/ThemeHe.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <div class="container n3-list-tour mg-bot40">
     <div class="row">
         <div class="list-tour" itemscope="" itemtype="http://schema.org/Place">
             <div class="list">
                 <div class="row">
                     <div class="col-xs-12 mg-bot15">
-                        <div style="padding: 12px 10px;background-color:#f1f1f1;line-height:18px;">
+                        <div style="padding: 12px 10px; background-color: #f1f1f1; line-height: 18px;">
+                            @Model.TuKhoaTimKiem
                         </div>
                     </div>
                     @*  Search Result Component *@
@@ -34,7 +36,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="tour-name">
-                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour" title=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)"><h3>Điểm đến: @destination.DiaDiem.TenDiaDiem</h3></a>
+                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour"><h3>Điểm đến: @destination.DiaDiemDen.TenDiaDiem</h3></a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -44,8 +46,8 @@
                                                     <div><i class="fas fa-spinner"></i>&nbsp;&nbsp;Tiêu chuẩn</div>
                                                 </div>
                                             </div>
-                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour" title=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)">
-                                                <img src="@destination.DuongDanAnh" class="img-responsive pic-lt" alt=" Huế - Đà Nẵng - Bà Nà - Hội An ( Khách sạn 4 sao)">
+                                            <a href="/Tour/ChiTietChuyenDi/@destination.MaTour">
+                                                <img src="@destination.DiaDiemDen.DuongDanAnh" class="img-responsive pic-lt">
                                             </a>
                                         </div>
                                     </div>
@@ -102,14 +104,14 @@
                                                 </div>
                                                 <div class="col-md-5 col-sm-5 col-xs-12">
                                                     <div class="f-left l"><img src="/Content/ThemeHe/i-calendar.png" alt="date"></div>
-                                                    <div class="f-left r">Số ngày: <span class="font500">4</span></div>
+                                                    <div class="f-left r">Số giờ đi: @destination.SoGio <span class="font500"></span></div>
                                                     <div class="clear"></div>
                                                 </div>
 
 
                                                 <div class="col-md-12 col-sm-12 col-xs-12 mg-bot10">
                                                     <div class="f-left l"><img src="/Content/ThemeHe/i-dep.png"></div>
-                                                    <div class="f-left r">Nơi khởi hành:Thành phố Hà Nội <span class="font500"></span></div>
+                                                    <div class="f-left r">@destination.DiaDiemDi.TenDiaDiem <span class="font500"></span></div>
                                                     <div class="clear"></div>
                                                 </div>
 

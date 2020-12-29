@@ -1,10 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "ThemMoiTour";
+    ViewBag.Title = "EditDiaDiem";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-@model List<DiaDiem>
-@using BanVeDiTourDuLich.Models
+@model DiaDiem
 <link href="~/Content/Admin/css/UploadImg.css" rel="stylesheet" />
 <script src="~/Content/Admin/js/UploadImg.js"></script>
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -17,73 +16,43 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="h3 mb-2 text-gray-800">
-                            Thêm Tour mới
+                            Chỉnh sửa Địa Điểm
                         </h1>
                         <br />
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        <form action="/Admin/ThemMoiTour" method="POST" id="Recipe_add">
-                            <input name="ID_congthuc" style="width:0.1px;height:0.1px;border-width:0" />
+                        <form action="/Admin/EditDiaDiem" method="POST" id="Recipe_add">
+                            <input name="postfile" style="width:0.1px;height:0.1px;border-width:0" />
                             <div class="form-group">
-                                <label>Mã Tour</label>
-                                <input type="text" class="form-control" name="MaTour" placeholder="Mã Tour"></>
+                                <label>Mã Địa Điểm</label>
+                                <input value="@Model.MaDiaDiem" type="text" class="form-control" name="MaDiaDiem" placeholder="Mã Địa Điểm"></>
                             </div>
                             <div class="form-group">
-                                <label>Điểm Đến</label>
-                                <input id="name" list="danhsach" autocomplete="off" type="text" class="form-control" name="MaDiemDen" placeholder="Nhập điểm đến" />
-                                <datalist id="danhsach">
-                                    @foreach (DiaDiem dd in Model)
-                                    {
-                                        <option value="@dd.MaDiaDiem">@dd.TenDiaDiem</option>
-                                    }
-                                    <option value="ThemDiaDiemMoi"></option>
-                                </datalist>
+                                <label>Tên Địa Điểm</label>
+                                <input value="@Model.TenDiaDiem" autocomplete="off" type="text" class="form-control" name="TenDiaDiem" placeholder=" Tên Địa Điểm" />
                             </div>
                             <div class="form-group">
-                                <label>Điểm Đi</label>
-                                <input id="name" list="danhsach" autocomplete="off" class="form-control" name="MaDiemDi" placeholder="Nhập điểm đi" />
-                                <datalist id="danhsach">
-                                    @foreach (DiaDiem dd in Model)
-                                    {
-                                        <option value="@dd.MaDiaDiem">@dd.TenDiaDiem</option>
-                                    }
-                                    <option value="ThemDiaDiemMoi"></option>
-                                </datalist>
+                                <label>Địa Chỉ</label>
+                                <input value="@Model.DiaChi" autocomplete="off" class="form-control" name="DiaChi" placeholder=" Địa Chỉ" />
+
                             </div>
-                            <div class="form-field">
-                                <div class="icon">
-                                    <span class="ion-ios-calendar"> Thời gian đi</span>
+                            <div class="form-group">
+                                <label>Ảnh minh họa</label>
+                                <div class="file-upload">
+                                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Chọn ảnh</button>
+                                    <div class="image-upload-wrap">
+                                        <input class="file-upload-input" type="file" name="postfiles" onchange="readURL(this);" accept="image/*" />
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <img style="width:552px" class="file-upload-image" src="" alt="your image" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()" class="remove-image">Bỏ chọn</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input type="date" name="ThoigianDi"
-                                       class="form-control checkin_date"
-                                       placeholder="Check In Date" />
                             </div>
-                            <div class="form-group">
-                                <label>Thời gian Tour</label>
-                                <input type="number" class="form-control" name="SoGio" placeholder="số giờ" />
-                            </div>
-                            <div class="form-group">
-                                <label>Chọn loại vé</label>
-                                <input list="dsloaive" autocomplete="off" type="text" class="form-control" name="Ten" placeholder="Loại vé" />
-                                <datalist id="dsloaive">
-                                    <option value="Vé Người Lớn"></option>
-                                    <option value="Vé Trẻ Em"></option>
-                                </datalist>
-                            </div>
-                            <div class="form-group">
-                                <label>số lượng vé</label>
-                                <input type="number" class="form-control" name="SoLuong" placeholder="Nhập số lượng vé" />
-                            </div>
-                            <div class="form-group">
-                                <label>Giá tiền</label>
-                                <input type="number" class="form-control" name="GiaTien" placeholder="Nhập giá tiền" />
-                            </div>
-                            <div class="form-group">
-                                <label>Mã Loại Vé</label>
-                                <input type="text" class="form-control" name="MaLoaiVe" placeholder="Mã loại vé" />
-                            </div>
-                            <button type="submit" class="btn btn-default" style="background-color:#4e73df; color: rgba(255,255,255,.8)">Lưu</button>
+                            <button type="submit" class="btn btn-default" style="background-color:#4e73df; color: rgba(255,255,255,.8)">Cập nhật</button>
                         </form>
                     </div>
                 </div>
@@ -114,54 +83,14 @@
     </div>*@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script language="javascript" type="text/javascript">
-
-    $("#name").bind('input', function () {
-        if (checkExists($('#name').val()) === true) {
-            var url = "";
-            var text = $('#name').val();
-            switch (text) {
-                case "ThemDiaDiemMoi":
-                    url = 'ThemDiaDiemMoi';
-                    break;
-                default:
-                    break;
-            }
-
-            window.location = url;
-        }
-    });
-
-    function checkExists(inputValue) {
-        console.log(inputValue);
-
-        var x = document.getElementById("danhsach");
-        var i;
-        var flag;
-        for (i = 0; i < x.options.length; i++) {
-            if (inputValue == x.options[x.options.length - 1].value) {
-                flag = true;
-            }
-        }
-        return flag;
-    }
-</script>
-
-
-
-
-
 <script>
     $(document).ready(function () {
 
-        // hàm đếm số lượng text field đang có trên màn hình
         function countItem() {
             var items = $("#answer").children().length;
             return items;
         }
 
-
-        // thêm text field, giới hạn chỉ có tối đa 10 cái
         $("#add").click(function () {
             var n = countItem();
             if (n == 20) {
@@ -172,15 +101,13 @@
             }
         });
 
-        // xoá text filed khi click vào nút del ở dòng tương ứng
         $(document).on("click", "a.del", function () {
             var n = countItem();
             if (n == 2) {
                 alert("Number of answers isn't less than 2");
             } else {
                 var check = $(this).siblings().find("input").val();
-                // cách viết khác
-                // var check = $(this).parent().find("label input").val();
+
 
                 $(this).parent().remove();
                 for (i = 0; i < n - 1; i++) {
@@ -194,8 +121,6 @@
             return items;
         }
 
-
-        // thêm text field, giới hạn chỉ có tối đa 10 cái
         $("#add1").click(function () {
             var n = countItem1();
             if (n == 20) {
@@ -206,15 +131,13 @@
             }
         });
 
-        // xoá text filed khi click vào nút del ở dòng tương ứng
         $(document).on("click", "a.del1", function () {
             var n = countItem1();
             if (n == 2) {
                 alert("Number of answers isn't less than 2");
             } else {
                 var check = $(this).siblings().find("input").val();
-                // cách viết khác
-                // var check = $(this).parent().find("label input").val();
+ 
 
                 $(this).parent().remove();
                 for (i = 0; i < n - 1; i++) {

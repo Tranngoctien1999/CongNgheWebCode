@@ -186,81 +186,102 @@
             width: max-content;
         }
 
-            
+        .inforSignIn {
+            display: flex;
+            flex-direction: column;
+            display: none;
+        }
+
+            .function-item {
+                display: block;
+                text-align: center;
+                padding: 0.5rem;
+                color: black;
+                background: white;
+                font-size: smaller;
+                cursor: pointer;
+            }
+
+        .mask {
+            position: fixed;
+            width: 100vw;
+            height: 120vh;
+            background-color: rgb(0 0 0 / 70%);
+            z-index: 4;
+            top: -10px;
+        }
         </style>
     @* End Testing Renderer here *@
 
     @RenderSection("styles", false)
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-         id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="/home/index">
-                Vacation<span>Travel Agency</span>
-            </a>
-            <button class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#ftco-nav"
-                    aria-controls="ftco-nav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Danh mục
-            </button>
+<div class="mask" style="display: none"></div>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+     id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="/home/index">
+            Vacation<span>Travel Agency</span>
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#ftco-nav"
+                aria-controls="ftco-nav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Danh mục
+        </button>
 
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a href="/home/index" class="nav-link">Trang chủ</a>
+        <div class="collapse navbar-collapse" id="ftco-nav" style="height: 10rem; align-items: end; margin-top: 2rem;">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a href="/home/index" class="nav-link">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/home/about" class="nav-link">Về chúng tôi</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/home/destination" class="nav-link">Điểm đến</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/home/contact" class="nav-link">Liên hệ</a>
+                </li>
+                @if (taiKhoan == null)
+                {
+                    <li class="nav-item cta">
+                        <a href="/user/index" class="nav-link">Đăng nhập</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/home/about" class="nav-link">Về chúng tôi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/home/destination" class="nav-link">Điểm đến</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/home/contact" class="nav-link">Liên hệ</a>
-                    </li>
-                    @if (taiKhoan == null)
-                    {
-                        <li class="nav-item cta">
-                            <a href="/user/index" class="nav-link">Đăng nhập</a>
-                        </li>
-                    }
-                    else
-                    {
-
-                        <li class="nav-item cta">
-                            <a href="/Cart" class="nav-link cart" style="color: #283747;
-                                           background: #f3f3f3;">
-                                <i class="fas fa-cart-plus"></i> Giỏ Hàng
-                            </a>
-                        </li>
-                        <li class="nav-item cta">
-                            <a href="/User/Signout" class="nav-link">
-                                @if (@isNhanVien)
-                                {
-                                    @taiKhoan.NhanVien.Ten
-                                }
-                                else
-                                {
-                                    @taiKhoan.KhachHang.Ten
-                                }
-                        </a>
-                    </li>
-                    <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
                 }
-                </ul>
-            </div>
+                else
+                {
+                    <li class="nav-item cta">
+                        <a class="nav-link" style="cursor: pointer" onclick="showFunction()">
+                            @if (@isNhanVien)
+                            {
+                                @taiKhoan.NhanVien.Ten
+                            }
+                            else
+                            {
+                                @taiKhoan.KhachHang.Ten
+                            }
+                        </a>
+                        <list class="inforSignIn">
+                            <a class="function-item" onclick="ChuyenTrangThongTinChiTiet()">Thông Tin Chi Tiết</a>
+                            <a href="/User/Signout" class="function-item">Đăng Xuất</a>
+                        </list>
+                    </li>
+                    <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan"/>
+                }
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 <!-- END nav -->
 
-<input type="hidden" id="managerId" />
+<input type="hidden" id="managerId"/>
 <div class="help-block">
-    <button onclick="showChat()" class="help-button"><span style="bottom: 20%;left: 30%;" class="time-sent">Hỗ trợ</span><i class="fas fa-phone-square"></i></button>
+    <button onclick="showChat()" class="help-button"><span style="bottom: 20%; left: 30%;" class="time-sent">Hỗ trợ</span><i class="fas fa-phone-square"></i></button>
 </div>
 
 <div class="msgbox">
@@ -273,7 +294,7 @@
     </div>
     <div class="msg">
         <div class="msg-img end-user">
-            <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg" />
+            <img class="current-user-img" src="~/Content/images/Persions/ADMIN.jpg"/>
             <p class="txt-msg">Chào bạn ! Bạn có thể yêu cầu hỗ trợ trực tuyến qua tin nhắn này !<span class="time-sent">Đã gửi vào 12:00 23/12/2020</span></p>
         </div>
     </div>
@@ -286,121 +307,121 @@
 
 
 @RenderBody()
-    <footer class="ftco-footer bg-bottom"
-            style="background-image: url(images/footer-bg.jpg)">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Vacation</h2>
-                        <p>Du lịch an toàn,thuận tiện</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate">
-                                <a href="#">
-                                    <span class="icon-twitter"></span>
-                                </a>
-                            </li>
-                            <li class="ftco-animate">
-                                <a href="#">
-                                    <span class="icon-facebook"></span>
-                                </a>
-                            </li>
-                            <li class="ftco-animate">
-                                <a href="#">
-                                    <span class="icon-instagram"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Thông tin</h2>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#" class="py-2 d-block">Câu hỏi thường gặp</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Riêng tư và điều khoản</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Chính sách hoàn tiền</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Gọi ngay</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Trải nghiệm</h2>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#" class="py-2 d-block">Chuyến đi</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Khách sạn và nhà hàng</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Bãi biển</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Tự nhiên</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Dã ngoại</a>
-                            </li>
-                            <li>
-                                <a href="#" class="py-2 d-block">Bữa tiệc</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Có câu hỏi?</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li>
-                                    <span class="icon icon-map-marker"></span>
-                                    <span class="text">
-                                        203 Fake St. Mountain View, San Francisco, California,
-                                        USA
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+<footer class="ftco-footer bg-bottom"
+        style="background-image: url(images/footer-bg.jpg)">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Vacation</h2>
+                    <p>Du lịch an toàn,thuận tiện</p>
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                        <li class="ftco-animate">
+                            <a href="#">
+                                <span class="icon-twitter"></span>
+                            </a>
+                        </li>
+                        <li class="ftco-animate">
+                            <a href="#">
+                                <span class="icon-facebook"></span>
+                            </a>
+                        </li>
+                        <li class="ftco-animate">
+                            <a href="#">
+                                <span class="icon-instagram"></span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        All rights reserved | This template is made with
-                        <i class="icon-heart color-danger" aria-hidden="true"></i> by
-                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4 ml-md-5">
+                    <h2 class="ftco-heading-2">Thông tin</h2>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#" class="py-2 d-block">Câu hỏi thường gặp</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Riêng tư và điều khoản</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Chính sách hoàn tiền</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Gọi ngay</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Trải nghiệm</h2>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#" class="py-2 d-block">Chuyến đi</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Khách sạn và nhà hàng</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Bãi biển</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Tự nhiên</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Dã ngoại</a>
+                        </li>
+                        <li>
+                            <a href="#" class="py-2 d-block">Bữa tiệc</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Có câu hỏi?</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li>
+                                <span class="icon icon-map-marker"></span>
+                                <span class="text">
+                                    203 Fake St. Mountain View, San Francisco, California,
+                                    USA
+                                </span>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    All rights reserved | This template is made with
+                    <i class="icon-heart color-danger" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 @* Render Scripts for the first version here *@
 <script src="~/Scripts/js/jquery.min.js"></script>
@@ -428,13 +449,13 @@
 <script>
     $.connection.hub.logging = true;
     var chat = $.connection.chat;
-    $.connection.hub.error(function (error) {
+    $.connection.hub.error(function(error) {
         alert(error);
         chat.server.addConnectionId(clientId, chat.connection.id);
     });
-    $.connection.hub.start().done(function () {
+    $.connection.hub.start().done(function() {
         var clientId = $('.MaTaiKhoan')[0].value;
-        chat.server.addConnectionId(clientId , chat.connection.id);
+        chat.server.addConnectionId(clientId, chat.connection.id);
     });
 
     $.connection.hub.disconnected(function() {
@@ -442,7 +463,7 @@
         chat.server.deleteConnectionId(clientId);
     })
 
-    chat.client.addNewMessageToManager = function(maKhachHang,msg,timeSent) {
+    chat.client.addNewMessageToManager = function(maKhachHang, msg, timeSent) {
         if (msg !== '') {
             var text = `<div class='msg-img end-user'>
            <img class='current-user-img' src='/Content/images/Persions/${maKhachHang}.jpg' />
@@ -452,7 +473,7 @@
         }
     }
 
-    chat.client.sendMassageFromDbToCurrentClientBrower = function (msg, timeSent , imagePath) {
+    chat.client.sendMassageFromDbToCurrentClientBrower = function(msg, timeSent, imagePath) {
         if (msg !== '') {
             var clientId = $('.MaTaiKhoan')[0].value;
             var text = `<div class='msg-img current'>
@@ -466,7 +487,7 @@
         }
     }
 
-    chat.client.addNewMessageToClient = function (maNhanVien, msg, timeSent , imagePath) {
+    chat.client.addNewMessageToClient = function(maNhanVien, msg, timeSent, imagePath) {
         if (msg !== '') {
             var text = `<div class='msg-img end-user'>
            <img class='current-user-img' src='${imagePath}' />
@@ -483,7 +504,7 @@
                 var clientId = $('.MaTaiKhoan')[0].value;
                 var managerId = $('#managerId')[0].innerText;
                 if (managerId != "") {
-                    chat.server.sendNewMessageFromSpecificClientToManager(clientId , managerId  , msgDetail)
+                    chat.server.sendNewMessageFromSpecificClientToManager(clientId, managerId, msgDetail)
                 } else {
                     chat.server.sendNewMessageFromKhachHang(clientId, msgDetail);
                 }
@@ -494,7 +515,7 @@
     function updateManagerId(managerId) {
         $("#managerId")[0].innerText = managerId;
     }
-    
+
     function closeChat() {
         var box = $('.msgbox')[0];
         $(box).hide();
@@ -504,5 +525,32 @@
         var box = $('.msgbox')[0];
         $(box).show();
     }
+
+    function showFunction() {
+        var listFunction = $('.inforSignIn')[0];
+        $(listFunction).toggle();
+    }
+
+    function ChuyenTrangThongTinChiTiet() {
+        var maTaiKhoanBox = $(".MaTaiKhoan")[0];
+        var maTaiKhoan = $(maTaiKhoanBox).val();
+        window.location.href = "/user/inforuser/" + maTaiKhoan;
+    }
+
+    function DoiPass() {
+        console.log(1);
+        var myModalDoiMatKhau = $("#myModalDoiMatKhau")[0];
+        var mask = $('.mask')[0];
+        $(mask).toggle();
+        $(myModalDoiMatKhau).toggle();
+    }
+
+    function DongDoiPass() {
+        var myModalDoiMatKhau = $("#myModalDoiMatKhau")[0];
+        var mask = $('.mask')[0];
+        $(mask).toggle();
+        $(myModalDoiMatKhau).toggle();
+    }
+
 </script>
 </html>

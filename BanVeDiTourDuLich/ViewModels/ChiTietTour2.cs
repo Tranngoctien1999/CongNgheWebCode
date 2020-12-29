@@ -7,12 +7,11 @@ namespace BanVeDiTourDuLich.ViewModels
 {
     public class ChiTietTour2
     {
-        public DiaDiem DiaDiem { get; set; }
-        public string DuongDanAnh { get; set; }
-        public string TenDiaDiem { get; set; }
+        public DiaDiem DiaDiemDen { get; set; }
+        public DiaDiem DiaDiemDi { get; set; }
         public double GiaTien { get; set; }
         public DateTime ThoiGianDi { get; set; }
         public string MaTour { get; set; }
-        public string DiemKhoiHanh { get; set; }
+        public int SoGio { get; set; }
     }
 }

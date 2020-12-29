@@ -1,5 +1,6 @@
 ﻿using BanVeDiTourDuLich.Models;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -132,6 +133,187 @@ namespace BanVeDiTourDuLich.Controllers
             await _db.SaveChangesAsync();
             Session["MaTaiKhoan"] = newAccount.MaTaiKhoan;
             return new HttpStatusCodeResult(HttpStatusCode.Accepted);
+        }
+
+        public ActionResult InforUser(string id)
+        {
+            bool check = false;
+            if (Session["MaTaiKhoan"] != null)
+            {
+                if (string.Compare(Session["MaTaiKhoan"].ToString(),id) == 0)
+                {
+                    check = true;
+                    KhachHang khachHang = _db.KhachHangs.Find(id);
+                    return View(khachHang);
+                }
+            }
+            return Content("Bạn không có quyền xem trang này!");
+        }
+
+        [HttpPost]
+        public ActionResult DoiMatKhau(string MatKhauCu , string MatKhauMoi , string NhapLaiMatKhauMoi)
+        {
+            if (Session["MaTaiKhoan"] != null)
+            {
+                KhachHang khachHang = _db.KhachHangs.Find(Session["MaTaiKhoan"].ToString());
+                if (khachHang == null)
+                {
+                    Response.StatusCode = 400;
+                    return Json(  new { msg = "Không tìm được tài khoản của bạn! Hãy kiểm tra lại"} ,
+                        JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    if (string.Compare(khachHang.TaiKhoan.MatKhau, MatKhauCu) != 0)
+                    {
+                        Response.StatusCode = 400;
+                        return Json(new { msg = "Mật khẩu cũ không đúng! Thử lại !" },
+                            JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        if (string.Compare(MatKhauMoi, NhapLaiMatKhauMoi) != 0)
+                        {
+                            Response.StatusCode = 400;
+                            return Json(new { msg = "Mật khẩu mới nhập vào không khớp" },
+                                JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            Response.StatusCode = (int)HttpStatusCode.Accepted;
+                            khachHang.TaiKhoan.MatKhau = MatKhauMoi;
+                            _db.SaveChanges();
+                            return Json(new { msg = "Đổi mật khẩu thành công!" },
+                                JsonRequestBehavior.AllowGet);
+
+                        }
+                    }
+                }
+            }
+            return Content("Bạn không có quyền xem trang này!");
+        }
+
+        public JsonResult UploadFile()
+        {
+            try
+            {
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    var file = Request.Files[i];
+                    if (Session["MaTaiKhoan"] != null)
+                    {
+                        string nameAndLocation = "/Content/images/Persions/" + file.FileName;
+                        file.SaveAs(Server.MapPath(nameAndLocation));
+                        KhachHang khachHang = _db.KhachHangs.Find(Session["MaTaiKhoan"].ToString());
+                        if (khachHang == null)
+                        {
+                            Response.StatusCode = 400;
+                            return Json(new { msg = "Không tìm được tài khoản của bạn! Hãy kiểm tra lại" },
+                                JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            khachHang.DuongDanAnh = nameAndLocation;
+                            _db.SaveChanges();
+                            Response.StatusCode = (int)HttpStatusCode.Accepted;
+                            return Json(new { msg = "Thành Công" }, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 400;
+                        return Json(new { msg = "Bạn không có quyền truy cập trang này" },
+                            JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json(new { msg = "Bạn không có quyền truy cập trang này" },
+                    JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                return Json(new { msg = e.Message });
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateCustomerInformation(string CustomerName, int Gender, string Birthday, string Email,
+            string Address)
+        {
+            DateTime? NgaySinh = null;
+            try
+            {
+                if (string.IsNullOrEmpty(CustomerName))
+                {
+                    throw new Exception("Lỗi Tên Khách Hàng");
+                }
+
+                if (Gender > 1 || Gender < 0)
+                {
+                    throw new Exception("Lỗi Giới Tính");
+                }
+
+                if (string.IsNullOrEmpty(Birthday))
+                {
+                    throw new Exception("Lỗi Ngày Sinh");
+                }
+                else
+                {
+                    try
+                    {
+                        NgaySinh = DateTime.ParseExact(Birthday, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    }
+                    catch (Exception e)
+                    {
+                        try
+                        {
+                            NgaySinh = DateTime.ParseExact(Birthday, "d/MM/yyyy", CultureInfo.InvariantCulture);
+                        }
+                        catch (Exception exception)
+                        {
+                            throw new Exception("Lỗi Ngày Sinh");
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = 400;
+                return Json(new {msg = e.Message}, JsonRequestBehavior.AllowGet);
+            }
+
+            if (Session["MaTaiKhoan"] != null)
+            {
+                KhachHang khachHang = _db.KhachHangs.Find(Session["MaTaiKhoan"].ToString());
+                if (khachHang == null)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new {msg = "Không tìm được tài khoản của bạn! Hãy kiểm tra lại"},
+                        JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    khachHang.Ten = CustomerName;
+                    khachHang.DiaChi = Address;
+                    khachHang.Email = Email;
+                    khachHang.NgaySinh = NgaySinh.Value;
+                    if (Gender == 0)
+                    {
+                        khachHang.GioiTinh = false;
+                    }
+                    _db.SaveChanges();
+                    Response.StatusCode = (int)HttpStatusCode.Accepted;
+                    return Json(new { msg = "Thành Công" },
+                        JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                Response.StatusCode = 400;
+                return Json(new { msg = "Bạn không có quyền truy cập trang này!" },
+                    JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
