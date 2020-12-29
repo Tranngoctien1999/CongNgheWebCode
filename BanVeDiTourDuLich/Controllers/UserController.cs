@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using BanVeDiTourDuLich.Utilizer;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -21,40 +22,100 @@ namespace BanVeDiTourDuLich.Controllers
         //POST: Register
         [HttpPost]
 
-        public ActionResult Register(TaiKhoan _user, string pass)
+        public ActionResult Register(string TenKhachHang , string Email , string TaiKhoanDangNhap , string MatKhau , string pass,
+            string DiaChi , int Gender , string NgaySinh)
         {
             if (ModelState.IsValid)
             {
-                var check = _db.TaiKhoans.FirstOrDefault(s => s.TaiKhoanDangNhap == _user.TaiKhoanDangNhap);
-                if (check == null)
+                try
                 {
-
-                    _db.Configuration.ValidateOnSaveEnabled = false;
-                    if (_user.MatKhau == pass)
+                    if (_db.TaiKhoans.Find(TaiKhoanDangNhap) != null)
                     {
-                        _db.TaiKhoans.Add(_user);
-                        _db.SaveChanges();
-                        return RedirectToAction("Index");
+                        throw new Exception("Tài khoản này đã được đăng kí ! Vui lòng chọn tên đăng nhập khác");
                     }
                     else
                     {
-                        ViewBag.error = "Mật khẩu phải giống nhau";
-                        return View();
+                        if (string.IsNullOrEmpty(TaiKhoanDangNhap))
+                        {
+                            throw new Exception("Lỗi Tài khoản đăng nhập");
+                        }
                     }
 
-                }
+                    if (string.IsNullOrEmpty(TenKhachHang))
+                    {
+                        throw new Exception("Lỗi Tên khách hàng");
+                    }
 
-                else
+
+
+                    if (!ValidationFunction.IsValidEmail(Email))
+                    {
+                        throw new Exception("Email không hợp lệ");
+                    }
+
+                    if (!ValidationFunction.IsValidPassword(MatKhau))
+                    {
+                        throw new Exception("Mật khẩu không hợp lệ ! Hãy nhập ít nhất 1 chữ số , một chữ cái viết hoa , dài ít nhất 8 kí tự");
+                    }
+
+                    if (string.Compare(MatKhau, pass) != 0)
+                    {
+                        throw new Exception("Hãy nhập mật khẩu khớp nhau");
+                    }
+
+
+                    if (Gender > 1 || Gender < 0)
+                    {
+                        throw new Exception("Lỗi thông tin giới tính");
+                    }
+
+                    try
+                    {
+                        DateTime.Parse(NgaySinh);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+                catch (Exception e)
                 {
-                    ViewBag.error = "Email already exists";
-                    return View();
+                    Response.StatusCode = 400;
+                    return Json(new {msg = e.Message}, JsonRequestBehavior.AllowGet);
                 }
 
+                IdentityTrace identity = _db.IdentityTraces.Find(1);
 
+                identity.KhachHangIdentity++;
+                KhachHang khachHang = new KhachHang()
+                {
+                        MaKhachHang = "KHACHHANG" + identity.KhachHangIdentity.ToString("00"),
+                        Email = Email,
+                        Ten = TenKhachHang,
+                        DiaChi = DiaChi,
+                        GioiTinh = Gender == 1 ? true : false,
+                        MaLoaiKhachHang = "KHACHHANGTHUONG",
+                        NgaySinh = DateTime.Parse(NgaySinh),
+                        ThoiGianDangKi = DateTime.Now,
+                };
+                _db.KhachHangs.Add(khachHang);
+                _db.SaveChanges();
+
+                TaiKhoan taiKhoan = new TaiKhoan()
+                {
+                    MaTaiKhoan = khachHang.MaKhachHang,
+                    TaiKhoanDangNhap = TaiKhoanDangNhap,
+                    MatKhau = MatKhau,
+                };
+
+                _db.TaiKhoans.Add(taiKhoan);
+                _db.SaveChanges();
+
+                Response.StatusCode = 200;
+                return Json(new { msg = "Thành Công" }, JsonRequestBehavior.AllowGet);
             }
-            return View("Index");
-
-
+            Response.StatusCode = 400;
+            return Json(new { msg = "Lỗi ! Hãy Thử trong vài giây nữa" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Index()

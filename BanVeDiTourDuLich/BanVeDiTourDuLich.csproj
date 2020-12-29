@@ -282,6 +282,14 @@
     <Compile Include="Migrations\202012280730576_ThemThongTinChoKhachHang.designer.cs">
       <DependentUpon>202012280730576_ThemThongTinChoKhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012290402282_IdentityTraceTable.cs" />
+    <Compile Include="Migrations\202012290402282_IdentityTraceTable.designer.cs">
+      <DependentUpon>202012290402282_IdentityTraceTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012290407158_addNhanVienIdentity.cs" />
+    <Compile Include="Migrations\202012290407158_addNhanVienIdentity.designer.cs">
+      <DependentUpon>202012290407158_addNhanVienIdentity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -292,6 +300,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HoaDon.cs" />
+    <Compile Include="Models\IdentityTrace.cs" />
     <Compile Include="Models\KhachHang.cs" />
     <Compile Include="Models\LichTrinh.cs" />
     <Compile Include="Models\LoaiKhachHang.cs" />
@@ -313,6 +322,7 @@
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Ve.cs" />
     <Compile Include="Utilizer\ConnectionIdUser.cs" />
+    <Compile Include="Utilizer\ValidationFunction.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\ChiTietTour2.cs" />
     <Compile Include="ViewModels\ChiTietTourAdmin.cs" />
@@ -2697,6 +2707,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012280730576_ThemThongTinChoKhachHang.resx">
       <DependentUpon>202012280730576_ThemThongTinChoKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012290402282_IdentityTraceTable.resx">
+      <DependentUpon>202012290402282_IdentityTraceTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012290407158_addNhanVienIdentity.resx">
+      <DependentUpon>202012290407158_addNhanVienIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

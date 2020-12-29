@@ -471,7 +471,6 @@
             e.preventDefault();
             var form = $(this);
             var url = form.attr('action');
-            console.log(url);
             $.ajax({
                 type: "POST",
                 url: url,
@@ -517,7 +516,7 @@
                     var content = $(".col-lg-9.col-md-12.col-sm-12.col-xs-12.noidungtin")[0];
                     $(content).empty();
                     var html = `<table id = "myTable" class="table table-hover table-striped">
-                                <thead style = "background: linear-gradient(to right, #1183f3 , #11aef3);color: #fff;">
+                                <thead style = "background: linear-gradient(to right, #f9ab30 , #ffc107);color: #fff;">
                                 <tr>  
                                     <th style = "width: 4%"> Stt </th>
                                     <th> Tourcode </th>  
