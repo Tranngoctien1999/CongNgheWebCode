@@ -335,11 +335,19 @@
                             </a>
                         </li>`;
         var list = $(".contacts-list")[0];
-        $(list).children().last().after(html);
+        if ($(list).children().length == 0) {
+            $(list).append(html);
+        } else {
+            $(list).children().last().after(html);
+        }
         var html2 = `<div class="direct-chat-messages" id="directChat${clientId}">
                         </div>`;
         var cardBody = $("#card")[0];
-        $(cardBody).children().last().after(html2);
+        if ($(cardBody).children().length == 0) {
+            $(cardBody).append(html2);
+        } else {
+            $(cardBody).children().last().after(html2);
+        }
         $(`#directChat${clientId}`).hide();
         $(`#Messages${clientId} a`)[0].onclick = function() {
              showMessageOnClick(clientId);

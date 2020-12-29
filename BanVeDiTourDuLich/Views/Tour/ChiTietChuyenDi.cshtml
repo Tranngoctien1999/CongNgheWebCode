@@ -330,7 +330,7 @@
                                             data-amount="0"
                                             data-currency="VND">
                                     </script>
-                                    <input type="hidden" name="idTour" value="" />
+                                    <input type="hidden" name="idTour" value="@Model.Tour.MaTour" />
                                     @{ int i = 0;}
                                     @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
                                     {
@@ -834,9 +834,16 @@
     getTour.done(function(response) {
         listTour = response;
     /* set calendar and tour time to current time */
-        var time = new Date();
-        var currentMonth = time.getMonth();
-        var currentYear = time.getFullYear();
+        var currentTourTime;
+        var MaTour = $("[name = 'idTour']").val();
+        listTour.list.forEach(function(item) {
+            if (item.MaTour == MaTour) {
+                var len = item.ThoigianDi.length;
+                currentTourTime = new Date(+item.ThoigianDi.substring(6, len - 2));
+            }
+        })
+        var currentMonth = currentTourTime.getMonth();
+        var currentYear = currentTourTime.getFullYear();
         var monthSelector = $(".monthselect option ");
         var yearSelector = $(".yearselect option");
         for (i = 0; i < monthSelector.length; i++) {
@@ -990,7 +997,6 @@
                         var monthUpdate = date.getMonth();
                         var yearUpdate = date.getFullYear();
                         if (listDate[i].innerText == dateUpdate && monthUpdate == month && yearUpdate == year) {
-                            console.log(listDate[i].innerText);
                             $(listDate[i]).addClass("available");
                             $(listDate[i]).attr("idTour", tour.MaTour);
                             $(listDate[i]).click(function() {
