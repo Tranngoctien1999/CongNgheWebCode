@@ -410,7 +410,7 @@ namespace BanVeDiTourDuLich.Migrations
             ////// Thêm khách hàng
             KhachHang khachHang1 = new KhachHang()
             {
-                MaKhachHang = "1",
+                MaKhachHang = "KHACHHANG01",
                 Ten = "Trần Ngọc Tiến",
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,
@@ -419,6 +419,7 @@ namespace BanVeDiTourDuLich.Migrations
                 GioiTinh = true,
                 Email = "NgocTien123@gmail.com",
                 DiaChi = "236 Hoàng Quốc Việt",
+                SoDienThoai = "0384863509"
             };
             context.KhachHangs.AddOrUpdate(khachHang1);
 
@@ -433,7 +434,7 @@ namespace BanVeDiTourDuLich.Migrations
 
             KhachHang khachHang2 = new KhachHang()
             {
-                MaKhachHang = "2",
+                MaKhachHang = "KHACHHANG02",
                 Ten = "Phạm Xuân Tiến",
                 NgaySinh = new DateTime(1999, 10, 29),
                 MaLoaiKhachHang = loaiKhachHang1.MaLoaiKhachHang,
@@ -442,6 +443,7 @@ namespace BanVeDiTourDuLich.Migrations
                 GioiTinh = true,
                 Email = "NgocTien123@gmail.com",
                 DiaChi = "236 Hoàng Quốc Việt",
+                SoDienThoai = "0384863509"
             };
             context.KhachHangs.AddOrUpdate(khachHang2);
 
@@ -454,6 +456,16 @@ namespace BanVeDiTourDuLich.Migrations
 
             context.TaiKhoans.AddOrUpdate(account2);
 
+            // add Identity
+
+            IdentityTrace identityTrace = new IdentityTrace()
+            {
+                Key = 1,
+                KhachHangIdentity = 2,
+                NhanVienIdentity = 1,
+            };
+
+            context.IdentityTraces.AddOrUpdate(identityTrace);
 
            // Thêm hóa đơn
            HoaDon hoaDon1 = new HoaDon()

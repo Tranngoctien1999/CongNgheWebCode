@@ -35,8 +35,15 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<TinhNang> TinhNangs { get; set; }
         public virtual DbSet<TinNhan> TinNhans { get; set; }
         public virtual DbSet<LichTrinh> LichTrinhs { get; set; }
+        public virtual DbSet<IdentityTrace> IdentityTraces { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<IdentityTrace>()
+                .ToTable("IdentityTrace");
+
+            modelBuilder.Entity<IdentityTrace>().HasKey(e => e.Key);
+
             modelBuilder.Entity<DiaDiem>()
                 .Property(e => e.MaDiaDiem)
                 .IsUnicode(false);

@@ -6,7 +6,50 @@
     ViewBag.Title = "ChiTietChuyenDi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="modal" id="myModalThemThongTin">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
+            <div class="modal-header">
+                <h4 class="modal-title">Thông tin khách hàng</h4>
+            </div>
+            <form action="/User/DoiMatKhau" id="frmThemThongTin" method="post" novalidate="novalidate">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="mg-bot5">Tên khách hàng <span style="color: red">(*)</span>:</label>
+                        <div class="input-group">
+                            <input type="text" name="TenKhachHang" id="TenKhachHang" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mg-bot5">Số điện thoại <span style="color: red">(*)</span>:</label>
+                        <div class="input-group">
+                            <input type="text" name="SoDienThoai" id="SoDienThoai" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mg-bot5">Email <span style="color: red">(*)</span>:</label>
+                        <div class="input-group">
+                            <input type="email" name="Email" id="Email" class="form-control" data-val="true">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="mg-bot5">Địa chỉ <span style="color: red">(*)</span>:</label>
+                        <div class="input-group" id="show_hide_password_NhapLaiMatKhauMoi">
+                            <input type="text" name="DiaChi" id="DiaChi" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="btnThemThongTin" class="btn btn-md btn-default">Thêm thông tin&nbsp;&nbsp;<i class="fab fa-telegram-plane"></i></button>
+                    <button id="btnClose" type="button" class="btn btn-md" onclick="DongThemThongTin()">Đóng lại&nbsp;&nbsp;<i class="fas fa-times-circle"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <section class="ftco-section">
     <div class="container">
@@ -295,15 +338,21 @@
                                         <input type="hidden" class="checkOutQuantity" id="@loaiVe.LoaiVe.MaLoaiVe-MaLoaiVe" name="quantity-@i" value="" />
                                         i++;
                                     }
-                                    <button class="btn btn-flat btn-action btn-md btn-block requestButton">Yêu cầu đặt</button>
+                                    @if (Session["MaTaiKhoan"] != null)
+                                    {
+                                        <button class="btn btn-flat btn-action btn-md btn-block requestButton">Đặt Ngay</button>
+                                    }
+                                    else
+                                    {
+                                        <button style="display: none" class="btn btn-flat btn-action btn-md btn-block requestButton">Đặt Ngay</button>
+                                    }
                                 </form>
                             </div>
-                            <div class="col-xs-12 no-padding check-Button hide-class">
-                                <button class="btn btn-flat btn-action btn-md btn-block checkButton requestPrice">Xem giá</button>
-                            </div>
-
-                            <div class="col-xs-12 no-padding book-Button hide-class">
-                                <button class="btn btn-flat btn-action btn-md btn-block bookButton">Đặt ngay</button>
+                            <div class="col-xs-12 no-padding check-Button">
+                                @if (Session["MaTaiKhoan"] == null)
+                                {
+                                    <button class="btn btn-flat btn-action btn-md btn-block checkButton requestPrice">Yêu Cầu Đặt</button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -765,6 +814,10 @@
         .daterangepicker.daterangepicker_custom_class .single .note-calenda {
             color: #9fc43a;
         }
+
+        .modal {
+            top: 6rem;
+        }
     </style>
 }
 
@@ -1013,5 +1066,42 @@
             $("[name = 'idTour']").attr("value", "@Model.Tour.MaTour");
 
         }
+
+        $('.check-Button').click(function () {
+            $('.mask').toggle();
+            $('#myModalThemThongTin').toggle();
+        })
+
+        function DongThemThongTin() {
+            $('.mask').toggle();
+            $('#myModalThemThongTin').toggle();
+        }
+
+        $('#frmThemThongTin').submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        $.ajax({
+            type: "POST",
+            url: "/User/ThemThongTin",
+            data: form.serialize(),
+            success: function({ msg }) {
+                alert(msg);
+            },
+            error: function(response) {
+                alert(response.responseJSON.msg);
+            }
+        });
+    });
+
+
+
+        $('#btnThemThongTin').click(function () {
+            $('#frmThemThongTin').submit();
+            DongThemThongTin();
+            $('.check-Button').toggle();
+            $('.requestButton').toggle();
+        })
+
     </script>
 }

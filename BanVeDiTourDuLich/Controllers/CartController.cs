@@ -60,52 +60,39 @@ namespace BanVeDiTourDuLich.Controllers
             var listHoaDon = context.HoaDons.ToList();
             string maHoaDonCuoi = listHoaDon[listHoaDon.Count - 1].MaHoaDon;
             int identityHoaDon = int.Parse(maHoaDonCuoi.Substring(2));
-            int identityKhachHang = 0;
             var listKhachHang = context.KhachHangs.ToList();
-            for (int i = listKhachHang.Count - 1 ; i >= 0 ; i--)
-            {
-                if (int.TryParse(listKhachHang[i].MaKhachHang, out identityKhachHang))
-                {
-                    break;
-                }
-            }
-
             if (Session["MaTaiKhoan"] == null)
             {
-                KhachHang khachHang = new KhachHang()
+                if (Session["MaKhachHangVangLai"] != null)
                 {
-                    ThoiGianDangKi = DateTime.Now,
-                    MaKhachHang = (identityKhachHang + 1).ToString(),
-                    NgaySinh = DateTime.Now,
-                    Ten = formCollection[formCollection.Count - 1],
-                    MaLoaiKhachHang = "KHACHHANGTHUONG"
-                };
-
-                context.KhachHangs.Add(khachHang);
-
-                var hoaDon = new HoaDon()
-                {
-                    MaHoaDon = "HD" + (identityHoaDon + 1).ToString("00"),
-                    MaKhachHang = khachHang.MaKhachHang,
-                    MaNhanVien = "ADMIN",
-                    ThoiGianXuat = DateTime.Now
-                };
-                context.HoaDons.Add(hoaDon);
-                string idTour = formCollection[1];
-                for (int i = 2; i < formCollection.Count - 3; i += 2)
-                {
-                    for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
+                    var hoaDon = new HoaDon()
                     {
-                        Ve ve = new Ve()
+                        MaHoaDon = "HD" + (identityHoaDon + 1).ToString("00"),
+                        MaKhachHang = Session["MaKhachHangVangLai"].ToString(),
+                        MaNhanVien = "ADMIN",
+                        ThoiGianXuat = DateTime.Now
+                    };
+                    context.HoaDons.Add(hoaDon);
+                    string idTour = formCollection[1];
+                    for (int i = 2; i < formCollection.Count - 3; i += 2)
+                    {
+                        for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
                         {
-                            MaVe = "Ve" + (identity + 1).ToString("00"),
-                            MaTour = idTour,
-                            MaLoaiVe = formCollection[i],
-                            MaHoaDon = hoaDon.MaHoaDon
-                        };
-                        context.Ves.Add(ve);
-                        identity++;
+                            Ve ve = new Ve()
+                            {
+                                MaVe = "Ve" + (identity + 1).ToString("00"),
+                                MaTour = idTour,
+                                MaLoaiVe = formCollection[i],
+                                MaHoaDon = hoaDon.MaHoaDon
+                            };
+                            context.Ves.Add(ve);
+                            identity++;
+                        }
                     }
+                }
+                else
+                {
+                    return Content("Bạn chưa điền thông tin! Hãy đăng nhập hoặc điền thông tin trước khi đặt");
                 }
             }
             else
