@@ -34,6 +34,7 @@ namespace BanVeDiTourDuLich
         public virtual DbSet<ChiTietTour> ChiTietTours { get; set; }
         public virtual DbSet<TinhNang> TinhNangs { get; set; }
         public virtual DbSet<TinNhan> TinNhans { get; set; }
+        public virtual DbSet<LichTrinh> LichTrinhs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DiaDiem>()
@@ -43,13 +44,13 @@ namespace BanVeDiTourDuLich
             modelBuilder.Entity<DiaDiem>()
                 .HasMany(e => e.Tours)
                 .WithRequired(e => e.DiaDiemDi)
-                .HasForeignKey(e => e.MaDiemDen)
+                .HasForeignKey(e => e.MaDiemDi)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DiaDiem>()
                 .HasMany(e => e.Tours1)
                 .WithRequired(e => e.DiaDiemDen)
-                .HasForeignKey(e => e.MaDiemDi)
+                .HasForeignKey(e => e.MaDiemDen)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<HoaDon>()
@@ -310,6 +311,9 @@ namespace BanVeDiTourDuLich
 
             modelBuilder.Entity<TinNhan>()
                 .ToTable("TinNhan");
+
+            modelBuilder.Entity<LichTrinh>()
+                .ToTable("LichTrinh");
         }
     }
 }

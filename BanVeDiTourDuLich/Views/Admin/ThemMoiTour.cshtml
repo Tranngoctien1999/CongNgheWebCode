@@ -30,8 +30,8 @@
                                 <input type="text" class="form-control" name="MaTour" placeholder="Mã Tour"></>
                             </div>
                             <div class="form-group">
-                                <label>Điểm Đi</label>
-                                <input id="name" list="danhsach" autocomplete="off" type="text" class="form-control" name="MaDiemDen" placeholder="Nhập điểm đi" />
+                                <label>Điểm Đến</label>
+                                <input id="name" list="danhsach" autocomplete="off" type="text" class="form-control" name="MaDiemDen" placeholder="Nhập điểm đến" />
                                 <datalist id="danhsach">
                                     @foreach (DiaDiem dd in Model)
                                     {
@@ -41,8 +41,8 @@
                                 </datalist>
                             </div>
                             <div class="form-group">
-                                <label>Điểm Đến</label>
-                                <input id="name" list="danhsach" autocomplete="off" class="form-control" name="MaDiemDi" placeholder="Nhập điểm đến" />
+                                <label>Điểm Đi</label>
+                                <input id="name" list="danhsach" autocomplete="off" class="form-control" name="MaDiemDi" placeholder="Nhập điểm đi" />
                                 <datalist id="danhsach">
                                     @foreach (DiaDiem dd in Model)
                                     {
@@ -67,8 +67,8 @@
                                 <label>Chọn loại vé</label>
                                 <input list="dsloaive" autocomplete="off" type="text" class="form-control" name="Ten" placeholder="Loại vé" />
                                 <datalist id="dsloaive">
-                                    <option value="Vé thương gia"></option>
-                                    <option value="Vé thường"></option>
+                                    <option value="Vé Người Lớn"></option>
+                                    <option value="Vé Trẻ Em"></option>
                                 </datalist>
                             </div>
                             <div class="form-group">

@@ -13,8 +13,6 @@ namespace BanVeDiTourDuLich
         [StringLength(20)]
         public string MaVe { get; set; }
 
-        
-
         [Required]
         [StringLength(20)]
         public string MaTour { get; set; }

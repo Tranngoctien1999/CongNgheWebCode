@@ -202,16 +202,16 @@ namespace BanVeDiTourDuLich.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ThemMoiDiaDiem(DiaDiem diaDiem, HttpPostedFileBase postfile)
+        public ActionResult ThemMoiDiaDiem(DiaDiem diaDiem, HttpPostedFileBase post)
         {
             try
             {
-                if (postfile != null)
+                if (post != null)
                 {
                     var paths = Server.MapPath("~/content/images/Destinations/");
                     var path = "/Content/images/Destinations/";
-                    postfile.SaveAs(paths + postfile.FileName);
-                    diaDiem.DuongDanAnh = path + postfile.FileName;
+                    post.SaveAs(paths + post.FileName);
+                    diaDiem.DuongDanAnh = path + post.FileName;
                 }
 
                 _context.DiaDiems.Add(diaDiem);
@@ -246,17 +246,17 @@ namespace BanVeDiTourDuLich.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditDiaDiem(DiaDiem diaDiem, HttpPostedFileBase postfile)
+        public ActionResult EditDiaDiem(DiaDiem diaDiem, HttpPostedFileBase postfiles)
         {
             try
             {
                 var dd = _context.DiaDiems.Find(diaDiem.MaDiaDiem);
-                if (postfile != null)
+                if (postfiles != null)
                 {
                     var paths = Server.MapPath("~/content/images/Destinations/");
                     var path = "/Content/images/Destinations/";
-                    postfile.SaveAs(paths + postfile.FileName);
-                    diaDiem.DuongDanAnh = path + postfile.FileName;
+                    postfiles.SaveAs(paths + postfiles.FileName);
+                    diaDiem.DuongDanAnh = path + postfiles.FileName;
                 }
                 dd.DiaChi = diaDiem.DiaChi;
                 dd.TenDiaDiem = diaDiem.TenDiaDiem;

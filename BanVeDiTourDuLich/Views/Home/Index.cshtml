@@ -49,20 +49,31 @@
                                         </div>
                                         <input type="text" name="diemden"
                                                class="form-control"
-                                               placeholder="Search place" />
+                                               placeholder="Tìm kiếm địa điểm" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg align-items-end">
                                 <div class="form-group">
-                                    <label for="#">Ngày check-in</label>
+                                    <label for="#">Ngày khởi hành</label>
                                     <div class="form-field">
                                         <div class="icon">
                                             <span class="ion-ios-calendar"></span>
                                         </div>
-                                        <input type="date" name="ngaydi"
+                                        <input data-provide="datepicker" name="ngaydi"
                                                class="form-control checkin_date"
-                                               placeholder="Check In Date" />
+                                               placeholder="Từ" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 10px">
+                                    <div class="form-field">
+                                        <div class="icon">
+                                            <span class="ion-ios-calendar"></span>
+                                        </div>
+                                        <input data-provide="datepicker" name="ngaygioihan"
+                                               class="form-control checkin_date"
+                                               placeholder="Tới" />
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +86,7 @@
                                             <div class="icon">
                                                 <span class="ion-ios-arrow-down"></span>
                                             </div>
-                                            <input name="gia" id="" class="form-control"/>
+                                            <input name="gia" id="" class="form-control" placeholder="Nhập giá"/>
                                                 
                                                 
                                             
@@ -87,7 +98,7 @@
                                 <div class="form-group">
                                     <div class="form-field">
                                         <input type="submit" 
-                                               value="Search"
+                                               value="Tìm Kiếm"
                                                class="form-control btn btn-primary" />
                                     </div>
                                 </div>

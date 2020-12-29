@@ -5,9 +5,9 @@ using System.Web;
 
 namespace BanVeDiTourDuLich.ViewModels
 {
-    public class SearchViewModel
+    public class LoaiVeSoLuongCon
     {
-        public List<ChiTietTour2> CacTour { get; set; }
-        public string TuKhoaTimKiem { get; set; }
+        public LoaiVe LoaiVe { get; set; }
+        public int SoLuong { get; set; }
     }
 }

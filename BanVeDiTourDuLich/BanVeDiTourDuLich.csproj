@@ -270,6 +270,18 @@
     <Compile Include="Migrations\202011210256403_ChangeTenTaiKhoanToNullable.designer.cs">
       <DependentUpon>202011210256403_ChangeTenTaiKhoanToNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011231139031_LichTrinh.cs" />
+    <Compile Include="Migrations\202011231139031_LichTrinh.Designer.cs">
+      <DependentUpon>202011231139031_LichTrinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012140803457_Fix Ma Diem Den Di.cs" />
+    <Compile Include="Migrations\202012140803457_Fix Ma Diem Den Di.designer.cs">
+      <DependentUpon>202012140803457_Fix Ma Diem Den Di.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012280730576_ThemThongTinChoKhachHang.cs" />
+    <Compile Include="Migrations\202012280730576_ThemThongTinChoKhachHang.designer.cs">
+      <DependentUpon>202012280730576_ThemThongTinChoKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -281,6 +293,7 @@
     </Compile>
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\KhachHang.cs" />
+    <Compile Include="Models\LichTrinh.cs" />
     <Compile Include="Models\LoaiKhachHang.cs" />
     <Compile Include="Models\LoaiNhanVien.cs" />
     <Compile Include="Models\LoaiPhuongTien.cs" />
@@ -302,8 +315,12 @@
     <Compile Include="Utilizer\ConnectionIdUser.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\ChiTietTour2.cs" />
+    <Compile Include="ViewModels\ChiTietTourAdmin.cs" />
     <Compile Include="ViewModels\ChiTietViewModel.cs" />
+    <Compile Include="ViewModels\LoaiVeSoLuongCon.cs" />
+    <Compile Include="ViewModels\QuanLyTourViewModel.cs" />
     <Compile Include="ViewModels\StripeKey.cs" />
+    <Compile Include="ViewModels\ThongTinTourExpanded.cs" />
     <Compile Include="ViewModels\ThongTinVeTrongGio.cs" />
     <Compile Include="ViewModels\TourGiaTien.cs" />
     <Compile Include="ViewModels\ExpandedDiaDiemViewModel.cs" />
@@ -2584,6 +2601,11 @@
     <Content Include="Views\Admin\ThemMoiTour.cshtml" />
     <Content Include="Views\Cart\ThanhCong.cshtml" />
     <Content Include="Views\Cart\ThatBai.cshtml" />
+    <Content Include="Views\Admin\QuanLyDiaDiem.cshtml" />
+    <Content Include="Views\Admin\EditTour.cshtml" />
+    <Content Include="Views\Admin\EditDiaDiem.cshtml" />
+    <Content Include="Views\Admin\ThemMoiDiaDiem.cshtml" />
+    <Content Include="Views\User\InforUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2666,6 +2688,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011210256403_ChangeTenTaiKhoanToNullable.resx">
       <DependentUpon>202011210256403_ChangeTenTaiKhoanToNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011231139031_LichTrinh.resx">
+      <DependentUpon>202011231139031_LichTrinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012140803457_Fix Ma Diem Den Di.resx">
+      <DependentUpon>202012140803457_Fix Ma Diem Den Di.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012280730576_ThemThongTinChoKhachHang.resx">
+      <DependentUpon>202012280730576_ThemThongTinChoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
