@@ -290,6 +290,10 @@
     <Compile Include="Migrations\202012290407158_addNhanVienIdentity.designer.cs">
       <DependentUpon>202012290407158_addNhanVienIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012290721261_ThemSoDienThoaiChoKhachHang.cs" />
+    <Compile Include="Migrations\202012290721261_ThemSoDienThoaiChoKhachHang.designer.cs">
+      <DependentUpon>202012290721261_ThemSoDienThoaiChoKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2713,6 +2717,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012290407158_addNhanVienIdentity.resx">
       <DependentUpon>202012290407158_addNhanVienIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012290721261_ThemSoDienThoaiChoKhachHang.resx">
+      <DependentUpon>202012290721261_ThemSoDienThoaiChoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

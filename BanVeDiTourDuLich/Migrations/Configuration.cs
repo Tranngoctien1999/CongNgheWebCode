@@ -419,6 +419,7 @@ namespace BanVeDiTourDuLich.Migrations
                 GioiTinh = true,
                 Email = "NgocTien123@gmail.com",
                 DiaChi = "236 Hoàng Quốc Việt",
+                SoDienThoai = "0384863509"
             };
             context.KhachHangs.AddOrUpdate(khachHang1);
 
@@ -442,6 +443,7 @@ namespace BanVeDiTourDuLich.Migrations
                 GioiTinh = true,
                 Email = "NgocTien123@gmail.com",
                 DiaChi = "236 Hoàng Quốc Việt",
+                SoDienThoai = "0384863509"
             };
             context.KhachHangs.AddOrUpdate(khachHang2);
 

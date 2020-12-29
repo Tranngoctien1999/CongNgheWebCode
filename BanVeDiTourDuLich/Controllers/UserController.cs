@@ -23,7 +23,7 @@ namespace BanVeDiTourDuLich.Controllers
         [HttpPost]
 
         public ActionResult Register(string TenKhachHang , string Email , string TaiKhoanDangNhap , string MatKhau , string pass,
-            string DiaChi , int Gender , string NgaySinh)
+            string DiaChi, string SoDienThoai, int Gender , string NgaySinh)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +46,10 @@ namespace BanVeDiTourDuLich.Controllers
                         throw new Exception("Lỗi Tên khách hàng");
                     }
 
-
+                    if (!SoDienThoai.ValidatePhoneNumber(true))
+                    {
+                        throw new Exception("Số điện thoại không hợp lệ");
+                    }
 
                     if (!ValidationFunction.IsValidEmail(Email))
                     {
@@ -97,6 +100,7 @@ namespace BanVeDiTourDuLich.Controllers
                         MaLoaiKhachHang = "KHACHHANGTHUONG",
                         NgaySinh = DateTime.Parse(NgaySinh),
                         ThoiGianDangKi = DateTime.Now,
+                        SoDienThoai = SoDienThoai
                 };
                 _db.KhachHangs.Add(khachHang);
                 _db.SaveChanges();
@@ -111,6 +115,58 @@ namespace BanVeDiTourDuLich.Controllers
                 _db.TaiKhoans.Add(taiKhoan);
                 _db.SaveChanges();
 
+                Response.StatusCode = 200;
+                return Json(new { msg = "Thành Công" }, JsonRequestBehavior.AllowGet);
+            }
+            Response.StatusCode = 400;
+            return Json(new { msg = "Lỗi ! Hãy Thử trong vài giây nữa" }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult ThemThongTin(string TenKhachHang , string SoDienThoai , string Email , string DiaChi)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(TenKhachHang))
+                    {
+                        throw new Exception("Lỗi Tên khách hàng");
+                    }
+
+                    if (!ValidationFunction.IsValidEmail(Email))
+                    {
+                        throw new Exception("Email không hợp lệ");
+                    }
+
+                    if (!SoDienThoai.ValidatePhoneNumber(true))
+                    {
+                        throw new Exception("Số điện thoại không hợp lệ");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                }
+
+                IdentityTrace identity = _db.IdentityTraces.Find(1);
+
+                identity.KhachHangIdentity++;
+                KhachHang khachHang = new KhachHang()
+                {
+                    MaKhachHang = "KHACHHANG" + identity.KhachHangIdentity.ToString("00"),
+                    Email = Email,
+                    Ten = TenKhachHang,
+                    DiaChi = DiaChi,
+                    MaLoaiKhachHang = "KHACHHANGTHUONG",
+                    ThoiGianDangKi = DateTime.Now,
+                    SoDienThoai = SoDienThoai
+                };
+                _db.KhachHangs.Add(khachHang);
+                _db.SaveChanges();
+                Session["MaKhachHangVangLai"] = khachHang.MaKhachHang;
                 Response.StatusCode = 200;
                 return Json(new { msg = "Thành Công" }, JsonRequestBehavior.AllowGet);
             }
@@ -299,8 +355,8 @@ namespace BanVeDiTourDuLich.Controllers
 
 
         [HttpPost]
-        public ActionResult UpdateCustomerInformation(string CustomerName, int Gender, string Birthday, string Email,
-            string Address)
+        public ActionResult UpdateCustomerInformation(string CustomerName, int Gender, string Birthday, string Email
+            , string SoDienThoai, string Address)
         {
             DateTime? NgaySinh = null;
             try
@@ -337,6 +393,11 @@ namespace BanVeDiTourDuLich.Controllers
                         }
                     }
                 }
+
+                if (!SoDienThoai.ValidatePhoneNumber(true))
+                {
+                    throw new Exception("Lỗi số điện thoại");
+                }
             }
             catch (Exception e)
             {
@@ -359,6 +420,7 @@ namespace BanVeDiTourDuLich.Controllers
                     khachHang.DiaChi = Address;
                     khachHang.Email = Email;
                     khachHang.NgaySinh = NgaySinh.Value;
+                    khachHang.SoDienThoai = SoDienThoai;
                     if (Gender == 0)
                     {
                         khachHang.GioiTinh = false;
@@ -410,5 +472,7 @@ namespace BanVeDiTourDuLich.Controllers
             return Json(new { msg = "Bạn không có quyền vào trang này !" },
                 JsonRequestBehavior.AllowGet);
         }
+
+        
     }
 }
