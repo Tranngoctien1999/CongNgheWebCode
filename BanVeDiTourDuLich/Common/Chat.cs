@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using BanVeDiTourDuLich.Controllers;
 
 namespace BanVeDiTourDuLich.Hubs
 {
@@ -14,7 +15,7 @@ namespace BanVeDiTourDuLich.Hubs
         public static List<ConnectionIdUser> connections = new List<ConnectionIdUser>();
         public static List<ConnectionIdUser> manager = new List<ConnectionIdUser>();
         public static List<ConnectionIdUser> user = new List<ConnectionIdUser>();
-        public DataContext DataContext { get; set; }
+        public static DataContext DataContext { get; set; }
         public Chat()
         {
             DataContext = new DataContext();
@@ -163,7 +164,7 @@ namespace BanVeDiTourDuLich.Hubs
         #region Người dùng đăng nhập
 
         // Thêm connection Id khi người dùng hoặc nhân viên đăng nhập vào
-        public async Task AddConnectionId(string maTaiKhoan, string connectionId)
+        public static async Task AddConnectionId(string maTaiKhoan, string connectionId)
         {
             TaiKhoan taiKhoan = await DataContext.TaiKhoans.FindAsync(maTaiKhoan);
             int count = connections.Where(c => c.MaTaiKhoan == maTaiKhoan).Count();
@@ -224,6 +225,29 @@ namespace BanVeDiTourDuLich.Hubs
         }
 
         #endregion
-        
+
+        public async Task InitManagerRun(string maTaiKhoan, string connectionId)
+        {
+            await InitManager(maTaiKhoan, connectionId);
+        }
+
+        public static async Task InitManager(string maTaiKhoan, string connectionId)
+        {
+            await AddConnectionId(maTaiKhoan, connectionId);
+            await GetChartData();
+        }
+
+
+        // Update Chart In Manager Brower
+        public static async Task UpdateChartToManagerBrower(string[] labels , int[] data)
+        {
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<Chat>();
+            hubContext.Clients.Clients(manager.Select(manager => manager.ConnectionId).ToList()).updateChart(labels, data);
+        }
+
+        public static async Task GetChartData()
+        {
+            await CartController.SumerizeRevenue();
+        }
     }
 }

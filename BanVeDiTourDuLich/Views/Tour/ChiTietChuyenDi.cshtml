@@ -330,7 +330,7 @@
                                             data-amount="0"
                                             data-currency="VND">
                                     </script>
-                                    <input type="hidden" name="idTour" value="" />
+                                    <input type="hidden" name="idTour" value="@Model.Tour.MaTour" />
                                     @{ int i = 0;}
                                     @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
                                     {
@@ -834,14 +834,21 @@
     getTour.done(function(response) {
         listTour = response;
     /* set calendar and tour time to current time */
-        var time = new Date();
-        var currentMonth = time.getMonth();
-        var currentYear = time.getFullYear();
+        var currentTourTime;
+        var MaTour = $("[name = 'idTour']").val();
+        listTour.list.forEach(function(item) {
+            if (item.MaTour == MaTour) {
+                var len = item.ThoigianDi.length;
+                currentTourTime = new Date(+item.ThoigianDi.substring(6, len - 2));
+            }
+        })
+        var currentMonth = currentTourTime.getMonth();
+        var currentYear = currentTourTime.getFullYear();
         var monthSelector = $(".monthselect option ");
         var yearSelector = $(".yearselect option");
         for (i = 0; i < monthSelector.length; i++) {
             if ($(monthSelector[i]).val() < currentMonth) {
-                $(monthSelector[i]).attr("disabled", "disabled");
+                $(monthSelector[i]).attr("disabled", null);
                 $(monthSelector[i]).attr("selected", null);
             } else {
                 if ($(monthSelector[i]).val() == currentMonth) {
@@ -880,14 +887,15 @@
 
         $('.monthselect').change(function(){
             var value = $(this).val();
-            var selectedYear = $(".yearselect option[selected='selected']").val();
+            var selectedYear = $(".yearselect").val();
             updateCaLendar(value, selectedYear);
             updateLich(value, selectedYear);
         });
 
         $('.yearselect').change(function () {
             var value = $(this).val();
-            var selectedMonth = $(".monthselect option[selected='selected']").val();
+            $(this).attr('selected', 'selected');
+            var selectedMonth = $(".monthselect").val();
             updateCaLendar(selectedMonth, value);
             updateLich(selectedMonth, value);
         });
@@ -980,6 +988,7 @@
                     continue;
                 }
                 var check = false;
+                
                 listTour.list.forEach(function (tour) {
                     if (!check) {
                         var len = tour.ThoigianDi.length;
