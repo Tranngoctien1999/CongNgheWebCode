@@ -356,6 +356,10 @@ namespace BanVeDiTourDuLich.Migrations
                 NgaySinh = new DateTime(1999, 10, 29),
                 NgayVaoLam = new DateTime(2020, 09, 10),
                 DuongDanAnh = "/Content/images/Persions/NHANVIEN01.jpg",
+                SoDienThoai = "0384863509",
+                Email = "Chubodoi.2910@gmail.com",
+                DiaChi = "236 Hoàng Quốc Việt",
+                GioiTinh = true,
             };
 
             NhanVien nhanVien2 = new NhanVien()
@@ -366,7 +370,11 @@ namespace BanVeDiTourDuLich.Migrations
                 Luong = 200000,
                 NgaySinh = new DateTime(1999 , 12 , 20),
                 NgayVaoLam = DateTime.Now,
-                DuongDanAnh = "/Content/images/Persions/NHANVIEN0.jpg"
+                DuongDanAnh = "/Content/images/Persions/NHANVIEN0.jpg",
+                SoDienThoai = "0384863509",
+                Email = "Chubodoi.2910@gmail.com",
+                DiaChi = "236 Hoàng Quốc Việt",
+                GioiTinh = true,
             };
 
             context.NhanViens.AddOrUpdate(nhanVien1);

@@ -1,4 +1,4 @@
-﻿@model KhachHang
+﻿@model BanVeDiTourDuLich.ViewModels.ThongTinChiTietViewModel
 @{
     ViewBag.Title = "InforUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -162,246 +162,354 @@
 }
 
 <div id="main-content">
-<div id="breadcrum" style="margin-top: 14rem">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="/">Trang chủ</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a class="ThongTinTaiKhoanNav">Thông tin tài khoản</a>
-                        </li>
-                    </ol>
-                </nav>
+    @if (Model.isCustomer)
+    {
+        <input id="isCustomer" type="hidden" value="1" />
+    }
+    else
+    {
+        <input id="isCustomer" type="hidden" value="0" />
+    }
+
+    <div id="breadcrum" style="margin-top: 14rem">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Trang chủ</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="ThongTinTaiKhoanNav">Thông tin tài khoản</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div id="main-content">
-    <div id="tuvankhachhang">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 text-center mg-bot30">
-                    <h2 style="font-size: x-large; font-weight: 700;">Thông tin khách hàng</h2>
-                </div>
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 noidungtin">
+    <div id="main-content">
+        <div id="tuvankhachhang">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center mg-bot30">
+                        <h2 style="font-size: x-large; font-weight: 700;">Thông tin khách hàng</h2>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 noidungtin">
 
-                            <div class="profile-sidebar">
+                                <div class="profile-sidebar">
 
-                                <div class="profile-usermenu">
-                                    <style>
-                                        .nav .active {
-                                            background-color: #D0D0D0;
-                                            border-left: 2px solid;
-                                            color: #1e94f2;
-                                        }
+                                    <div class="profile-usermenu">
+                                        <style>
+                                            .nav .active {
+                                                background-color: #D0D0D0;
+                                                border-left: 2px solid;
+                                                color: #1e94f2;
+                                            }
 
-                                        .profile-sidebar .nav > li:hover {
-                                            background-color: #D0D0D0;
-                                            border-left: 2px solid;
-                                            color: #1e94f2;
-                                        }
+                                            .profile-sidebar .nav > li:hover {
+                                                background-color: #D0D0D0;
+                                                border-left: 2px solid;
+                                                color: #1e94f2;
+                                            }
 
-                                        .profile-sidebar .nav > li a:hover { color: #1e94f2; }
-                                    </style>
-                                    <ul class="nav" style="background: #f6f6f3">
-                                        <li class="active">
-                                            <a class="ThongTinTaiKhoanNav">
-                                                <i style="color: #6f6f6f; font-size: 12px;" class="glyphicon glyphicon-home"></i>
-                                                &nbsp;Thông tin chung
-                                            </a>
-                                        </li>
-                                        <li class="">
-                                            <a href="/User/ListTour" id="ListTourNav">
-                                                <i style="color: #6f6f6f; font-size: 12px;" class="fa fa-history"></i>
-                                                &nbsp;Lịch sử đi tour
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                            .profile-sidebar .nav > li a:hover {
+                                                color: #1e94f2;
+                                            }
+                                        </style>
+                                        <ul class="nav" style="background: #f6f6f3">
+                                            <li class="active">
+                                                <a class="ThongTinTaiKhoanNav">
+                                                    <i style="color: #6f6f6f; font-size: 12px;" class="glyphicon glyphicon-home"></i>
+                                                    &nbsp;Thông tin chung
+                                                </a>
+                                            </li>
+                                            <li id="tourHistoryBtn">
+                                                <a href="/User/ListTour" id="ListTourNav">
+                                                    <i style="color: #6f6f6f; font-size: 12px;" class="fa fa-history"></i>
+                                                    &nbsp;Lịch sử đi tour
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                            </div>
-                        </div>
-                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 noidungtin">
-                            <div class="picture-box">
-                                <img class="picture__image" src="@Model.DuongDanAnh"/>
-                                <form id="upload" enctype="multipart/form-data" action="@Url.Action("UploadFile", "User")" method="POST">
-                                    <input type="file" name="fileUpload" id="fileUpload" size="23"/>
-                                    <button class="picture__button">Đổi ảnh cá nhân</button>
-                                </form>
-                            </div>
-                            <p>
-                                <strong style="color: #1583e0 !important; text-transform: uppercase;">I. Thông tin tài khoản</strong>
-                            </p>
-                            <div class="row mg-bot5">
-                                <div class="col-md-2 col-sm-3 col-xs-4">
-                                    <label>Mã khách hàng:</label>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-8">
-                                    <input class="form-control" disabled="disabled" id="CustomerNo" name="CustomerNo" type="text" value="@Model.MaKhachHang">
                                 </div>
                             </div>
-                            <div class="row mg-bot5">
-                                <div class="col-md-2 col-sm-3 col-xs-4">
-                                    <label>Mật khẩu:</label>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 noidungtin">
+                                <div class="picture-box">
+                                    @if (@Model.isCustomer)
+                                    {
+                                        <img class="picture__image" src="@Model.KhachHang.DuongDanAnh" />
+                                    }
+                                    else
+                                    {
+                                        <img class="picture__image" src="@Model.NhanVien.DuongDanAnh" />
+                                    }
+                                    <form id="upload" enctype="multipart/form-data" action="@Url.Action("UploadFile", "User")" method="POST">
+                                        <input type="file" name="fileUpload" id="fileUpload" size="23" />
+                                        <button class="picture__button">Đổi ảnh cá nhân</button>
+                                    </form>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-8">
-                                    <input class="form-control" disabled="disabled" id="Password" name="Password" type="password" value="**********">
-                                </div>
-                                <div class="col-md-5 col-sm-5 col-xs-8">
-                                    <button class="btn btn-primary" onclick="DoiPass()">
-                                        Thay đổi &nbsp;<i class="fa fa-edit"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row mg-bot5">
-                                <div class="col-md-2 col-sm-3 col-xs-4">
-                                    <label>Ngày đăng kí:</label>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-8">
-                                    <input class="form-control" disabled="disabled" name="RegistrationDay" value="@Model.ThoiGianDangKi.ToString("dd/MM/yyy")">
-                                </div>
-                            </div>
-                            <div class="row mg-bot5">
-                            </div>
-                            <p>
-                                <strong style="color: #1583e0 !important; text-transform: uppercase;">II. Thông tin khách hàng</strong>
-                            </p>
-                            <form action="/User/UpdateCustomerInformation" enctype="multipart/form-data" id="frm" method="post" name="frm" novalidate="novalidate">
+                                <p>
+                                    <strong style="color: #1583e0 !important; text-transform: uppercase;">I. Thông tin tài khoản</strong>
+                                </p>
                                 <div class="row mg-bot5">
-                                    <div class="col-md-2 col-sm-2 col-xs-4">
-                                        <label>Họ tên <span style="color: red">(*)</span>:</label>
+                                    <div class="col-md-2 col-sm-3 col-xs-4">
+                                        <label>Mã khách hàng:</label>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-8">
-                                        <input type="text" name="CustomerName" id="CustomerName" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.Ten">
-                                        <div class="field-validation-valid text-danger" data-valmsg-for="CustomerName" data-valmsg-replace="true"></div>
+                                        @if (Model.isCustomer)
+                                        {
+                                            <input class="form-control" disabled="disabled" id="CustomerNo" name="CustomerNo" type="text" value="@Model.KhachHang.MaKhachHang">
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control" disabled="disabled" id="CustomerNo" name="CustomerNo" type="text" value="@Model.NhanVien.MaNhanVien">
+                                        }
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-4">
-                                        <label>Giới tính <span style="color: red">(*)</span>:</label>
+                                </div>
+                                <div class="row mg-bot5">
+                                    <div class="col-md-2 col-sm-3 col-xs-4">
+                                        <label>Mật khẩu:</label>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-8">
-                                        <select class="form-control" data-val="true" data-val-number="The field Gender must be a number." id="Gender" name="Gender">
-                                            @if (Model.GioiTinh)
+                                        <input class="form-control" disabled="disabled" id="Password" name="Password" type="password" value="**********">
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-8">
+                                        <button class="btn btn-primary" onclick="DoiPass()">
+                                            Thay đổi &nbsp;<i class="fa fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row mg-bot5">
+                                    <div class="col-md-2 col-sm-3 col-xs-4">
+                                        @if (Model.isCustomer)
+                                        {
+                                            <label>Ngày đăng kí:</label>
+                                        }
+                                        else
+                                        {
+                                            <label>Ngày vào làm:</label>
+                                        }
+
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-8">
+                                        @if (Model.isCustomer)
+                                        {
+                                            <input class="form-control" disabled="disabled" name="RegistrationDay" value="@Model.KhachHang.ThoiGianDangKi.ToString("dd/MM/yyy")">
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control" disabled="disabled" name="RegistrationDay" value="@Model.NhanVien.NgayVaoLam.ToString("dd/MM/yyy")">
+                                        }
+                                    </div>
+                                </div>
+                            @if (!Model.isCustomer)
+                            {
+                                <div class="row mg-bot5">
+                                    <div class="col-md-2 col-sm-3 col-xs-4">
+                                        <label>Lương theo tháng:</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-8">
+                                        <input class="form-control" id="Luong" name="Luong" type="number" value="@Model.NhanVien.Luong.ToString()">
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-8">
+                                        <button class="btn btn-primary" onclick="DoiLuong()">
+                                            Thay đổi &nbsp;<i class="fa fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                                <div class="row mg-bot5">
+                                </div>
+                                <p>
+                                    <strong style="color: #1583e0 !important; text-transform: uppercase;">II. Thông tin khách hàng</strong>
+                                </p>
+                                <form action="/User/UpdateCustomerInformation" enctype="multipart/form-data" id="frm" method="post" name="frm" novalidate="novalidate">
+                                    <div class="row mg-bot5">
+                                        <div class="col-md-2 col-sm-2 col-xs-4">
+                                            <label>Họ tên <span style="color: red">(*)</span>:</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-8">
+                                            @if (Model.isCustomer)
                                             {
-                                                <option selected="selected" value="1">Nam</option>
-                                                <option value="0">Nữ</option>
+                                                <input type="text" name="CustomerName" id="CustomerName" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.KhachHang.Ten">
                                             }
                                             else
                                             {
-                                                <option value="1">Nam</option>
-                                                <option selected="selected" value="0">Nữ</option>
+                                                <input type="text" name="CustomerName" id="CustomerName" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.NhanVien.Ten">
                                             }
-                                        </select>
+                                            <div class="field-validation-valid text-danger" data-valmsg-for="CustomerName" data-valmsg-replace="true"></div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-4">
+                                            <label>Giới tính <span style="color: red">(*)</span>:</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-8">
+                                            <select class="form-control" data-val="true" data-val-number="The field Gender must be a number." id="Gender" name="Gender">
+                                                @if (Model.isCustomer)
+                                                {
+                                                    if (Model.KhachHang.GioiTinh)
+                                                    {
+                                                        <option selected="selected" value="1">Nam</option>
+                                                        <option value="0">Nữ</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="1">Nam</option>
+                                                        <option selected="selected" value="0">Nữ</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (Model.NhanVien.GioiTinh)
+                                                    {
+                                                        <option selected="selected" value="1">Nam</option>
+                                                        <option value="0">Nữ</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="1">Nam</option>
+                                                        <option selected="selected" value="0">Nữ</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-2 col-xs-4">
-                                        <label>Ngày sinh <span style="color: red">(*)</span>:</label>
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2 col-xs-4">
+                                            <label>Ngày sinh <span style="color: red">(*)</span>:</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-8">
+                                            @if (Model.isCustomer)
+                                            {
+                                                <input type="text" name="Birthday" id="Birthday" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.KhachHang.NgaySinh.ToString("dd/MM/yyyy")">
+                                            }
+                                            else
+                                            {
+                                                <input type="text" name="Birthday" id="Birthday" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.NhanVien.NgaySinh.ToString("dd/MM/yyyy")">
+                                            }
+                                            <div class="field-validation-valid text-danger" data-valmsg-for="Birthday" data-valmsg-replace="true"></div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-4">
+                                            <label>Email <span style="color: red">(*)</span>:</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-8">
+                                            @if (Model.isCustomer)
+                                            {
+                                                <input class="form-control" data-val="true" data-val-email="Vui lòng nhập đúng định dạng email" data-val-required="Vui lòng nhập" id="Email" name="Email" type="email" value="@Model.KhachHang.Email">
+                                            }
+                                            else
+                                            {
+                                                <input class="form-control" data-val="true" data-val-email="Vui lòng nhập đúng định dạng email" data-val-required="Vui lòng nhập" id="Email" name="Email" type="email" value="@Model.NhanVien.Email">
+                                            }
+                                            <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-8">
-                                        <input type="text" name="Birthday" id="Birthday" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.NgaySinh.ToString("dd/MM/yyyy")">
-                                        <div class="field-validation-valid text-danger" data-valmsg-for="Birthday" data-valmsg-replace="true"></div>
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2 col-xs-4">
+                                            <label>Số điện thoại <span style="color: red">(*)</span>:</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-8">
+                                            @if (Model.isCustomer)
+                                            {
+                                                <input type="text" name="SoDienThoai" id="SoDienThoai" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.KhachHang.SoDienThoai">
+                                            }
+                                            else
+                                            {
+                                                <input type="text" name="SoDienThoai" id="SoDienThoai" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.NhanVien.SoDienThoai">
+                                            }
+                                        </div>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-4">
-                                        <label>Email <span style="color: red">(*)</span>:</label>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-8">
-                                        <input class="form-control" data-val="true" data-val-email="Vui lòng nhập đúng định dạng email" data-val-required="Vui lòng nhập" id="Email" name="Email" type="email" value="@Model.Email">
-                                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></div>
-                                    </div>
-                                </div>
+                                    
+                                    
 
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-2 col-xs-4">
-                                        <label>Số điện thoại <span style="color: red">(*)</span>:</label>
+                                    <div class="row mg-bot30 ">
+                                        <div class="col-md-2 col-sm-2 col-xs-4">
+                                            <label>Địa chỉ <span style="color: red">(*)</span>:</label>
+                                        </div>
+                                        <div class="col-md-10 col-sm-10 col-xs-8">
+                                            @if (Model.isCustomer)
+                                            {
+                                                <input type="text" name="Address" id="Address" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.KhachHang.DiaChi">
+                                            }
+                                            else
+                                            {
+                                                <input type="text" name="Address" id="Address" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.NhanVien.DiaChi">
+                                            }
+                                            <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="Address" data-valmsg-replace="true"></div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-8">
-                                        <input type="text" name="SoDienThoai" id="SoDienThoai" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.SoDienThoai">
+                                    <div class="row mg-bot30">
+                                        <div class="col-xs-12 text-right">
+                                            <button id="btCapNhat" type="button" class="btn btn-md btn-default">Cập nhật&nbsp;&nbsp;<i class="fa fa-save"></i></button>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="row mg-bot30 ">
-                                    <div class="col-md-2 col-sm-2 col-xs-4">
-                                        <label>Địa chỉ <span style="color: red">(*)</span>:</label>
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-8">
-                                        <input type="text" name="Address" id="Address" class="form-control" data-val="true" data-val-required="Vui lòng nhập" value="@Model.DiaChi">
-                                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="Address" data-valmsg-replace="true"></div>
-                                    </div>
-                                </div>
-                                <div class="row mg-bot30">
-                                    <div class="col-xs-12 text-right">
-                                        <button id="btCapNhat" type="submit" class="btn btn-md btn-default">Cập nhật&nbsp;&nbsp;<i class="fa fa-save"></i></button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal" id="myModalDoiMatKhau">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal" id="myModalDoiMatKhau">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <h4 class="modal-title">ĐỔI MẬT KHẨU</h4>
+                <div class="modal-header">
+                    <h4 class="modal-title">ĐỔI MẬT KHẨU</h4>
+                </div>
+                <form action="/User/DoiMatKhau" id="frmPass" method="post" novalidate="novalidate">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="mg-bot5">Mật khẩu cũ <span style="color: red">(*)</span>:</label>
+                            <div class="input-group" id="show_hide_password_MatKhauCu">
+                                <input type="password" name="MatKhauCu" id="MatKhauCu" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
+                                <div class="input-group-addon">
+                                    <a onclick="HienMatKhau('MatKhauCu')">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="MatKhauCu" data-valmsg-replace="true"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mg-bot5">Mật khẩu mới <span style="color: red">(*)</span>:</label>
+                            <div class="input-group" id="show_hide_password_MatKhauMoi">
+                                <input data-val-length="Mật khẩu phải tối thiểu 8 ký tự" data-val-length-min="8" type="password" name="MatKhauMoi" id="MatKhauMoi" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
+                                <div class="input-group-addon">
+                                    <a onclick="HienMatKhau('MatKhauMoi')">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="MatKhauMoi" data-valmsg-replace="true"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mg-bot5">Nhập lại mật khẩu mới <span style="color: red">(*)</span>:</label>
+                            <div class="input-group" id="show_hide_password_NhapLaiMatKhauMoi">
+                                <input data-val-length="Mật khẩu phải tối thiểu 8 ký tự" data-val-length-min="8" type="password" name="NhapLaiMatKhauMoi" id="NhapLaiMatKhauMoi" class="form-control" data-val="true" data-val-equalto="Nhập lại khẩu mới không chính xác" data-val-equalto-other="*.MatKhauMoi" data-val-required="Vui lòng nhập">
+                                <div class="input-group-addon">
+                                    <a onclick="HienMatKhau('NhapLaiMatKhauMoi')">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="NhapLaiMatKhauMoi" data-valmsg-replace="true"></div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="btnCapNhatMatKhau" class="btn btn-md btn-default">Cập nhật mật khẩu&nbsp;&nbsp;<i class="fab fa-telegram-plane"></i></button>
+                        <button id="btnClose" type="button" class="btn btn-md" onclick="DongDoiPass()">Đóng lại&nbsp;&nbsp;<i class="fas fa-times-circle"></i></button>
+                    </div>
+                </form>
             </div>
-            <form action="/User/DoiMatKhau" id="frmPass" method="post" novalidate="novalidate">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="mg-bot5">Mật khẩu cũ <span style="color: red">(*)</span>:</label>
-                        <div class="input-group" id="show_hide_password_MatKhauCu">
-                            <input type="password" name="MatKhauCu" id="MatKhauCu" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
-                            <div class="input-group-addon">
-                                <a onclick="HienMatKhau('MatKhauCu')">
-                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="MatKhauCu" data-valmsg-replace="true"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="mg-bot5">Mật khẩu mới <span style="color: red">(*)</span>:</label>
-                        <div class="input-group" id="show_hide_password_MatKhauMoi">
-                            <input data-val-length="Mật khẩu phải tối thiểu 8 ký tự" data-val-length-min="8" type="password" name="MatKhauMoi" id="MatKhauMoi" class="form-control" data-val="true" data-val-required="Vui lòng nhập">
-                            <div class="input-group-addon">
-                                <a onclick="HienMatKhau('MatKhauMoi')">
-                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="MatKhauMoi" data-valmsg-replace="true"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="mg-bot5">Nhập lại mật khẩu mới <span style="color: red">(*)</span>:</label>
-                        <div class="input-group" id="show_hide_password_NhapLaiMatKhauMoi">
-                            <input data-val-length="Mật khẩu phải tối thiểu 8 ký tự" data-val-length-min="8" type="password" name="NhapLaiMatKhauMoi" id="NhapLaiMatKhauMoi" class="form-control" data-val="true" data-val-equalto="Nhập lại khẩu mới không chính xác" data-val-equalto-other="*.MatKhauMoi" data-val-required="Vui lòng nhập">
-                            <div class="input-group-addon">
-                                <a onclick="HienMatKhau('NhapLaiMatKhauMoi')">
-                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="margin-top: 5px" class="field-validation-valid text-danger" data-valmsg-for="NhapLaiMatKhauMoi" data-valmsg-replace="true"></div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" id="btnCapNhatMatKhau" class="btn btn-md btn-default">Cập nhật mật khẩu&nbsp;&nbsp;<i class="fab fa-telegram-plane"></i></button>
-                    <button id="btnClose" type="button" class="btn btn-md" onclick="DongDoiPass()">Đóng lại&nbsp;&nbsp;<i class="fas fa-times-circle"></i></button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 </div>
 
 @section scripts
@@ -556,5 +664,32 @@
             event.preventDefault();
             window.location.reload(false);
         });
+
+        var isCustomer = $('#isCustomer').val();
+        if (isCustomer == 0) {
+            $($('.help-block')[0]).remove();
+            $($('.msgbox')[0]).remove();
+            $('#tourHistoryBtn').remove();
+        }
+
+        function DoiLuong() {
+            var managerId = $('#CustomerNo').val();
+            var value = $('#Luong').val();
+            $.ajax({
+                method: "POST",
+                url: "/user/DoiLuong",
+                data: {
+                    maNhanVien: managerId,
+                    giaTri : value
+                },
+                success: function(data) {
+                    alert(data.msg);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            })
+        }
+
     </script>
 }

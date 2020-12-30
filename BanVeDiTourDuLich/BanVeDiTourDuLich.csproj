@@ -294,6 +294,10 @@
     <Compile Include="Migrations\202012290721261_ThemSoDienThoaiChoKhachHang.designer.cs">
       <DependentUpon>202012290721261_ThemSoDienThoaiChoKhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012300830217_ThemThongTinNhanVien.cs" />
+    <Compile Include="Migrations\202012300830217_ThemThongTinNhanVien.designer.cs">
+      <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -334,6 +338,7 @@
     <Compile Include="ViewModels\LoaiVeSoLuongCon.cs" />
     <Compile Include="ViewModels\QuanLyTourViewModel.cs" />
     <Compile Include="ViewModels\StripeKey.cs" />
+    <Compile Include="ViewModels\ThongTinChiTietViewModel.cs" />
     <Compile Include="ViewModels\ThongTinTourExpanded.cs" />
     <Compile Include="ViewModels\ThongTinVeTrongGio.cs" />
     <Compile Include="ViewModels\TourGiaTien.cs" />
@@ -2720,6 +2725,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012290721261_ThemSoDienThoaiChoKhachHang.resx">
       <DependentUpon>202012290721261_ThemSoDienThoaiChoKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012300830217_ThemThongTinNhanVien.resx">
+      <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
