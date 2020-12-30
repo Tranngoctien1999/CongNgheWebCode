@@ -70,13 +70,16 @@
                     @*<span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>*@
                     Số giờ:
                     <span class="songay">@Model.Tour.SoGio</span>
-                    <span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>
-                    Số giờ: <span class="songay">@Model.Tour.SoGio</span>
+                    @*Số giờ: <span class="songay">@Model.Tour.SoGio</span>*@
 
                 </div>
                 <div>
                     <span class="noikhoihanh">Nơi khởi hành: @Model.Tour.DiaDiemDi.TenDiaDiem</span>
                 </div>
+                <div>
+                    <span class="ngaykhoihanh">Thời gian khởi hành:@Model.Tour.ThoigianDi</span>
+                </div>
+                @*
                 <div class="sec4">
                     <ul>
                         <li>
@@ -89,7 +92,7 @@
                             <span class="flaticon-mountains"></span>
                         </li>
                     </ul>
-                </div>
+                </div>*@
                 @*<form id="datve" action="/DatVe/" method="post">
                         <input name="MaTour" value="@Model.Tour.MaTour" type="hidden"/>
                         <input id="IsRedirect" type="hidden" value=""/>

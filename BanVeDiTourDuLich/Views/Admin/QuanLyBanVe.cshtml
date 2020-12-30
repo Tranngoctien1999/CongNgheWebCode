@@ -66,10 +66,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{var _context = new DataContext();};
+                    @{var _context = new DataContext();}
+                    @{ int i = 1;}
                     @foreach (var thongTinVe in @Model.DanhSachThongTinVe)
                     {
-                        int i = 1;
                         <tr>
                             <td>@i</td>
                             <td>
@@ -103,6 +103,7 @@
                                 </form>
                             </td>
                         </tr>
+                        i++;
                     }
 
                 </tbody>

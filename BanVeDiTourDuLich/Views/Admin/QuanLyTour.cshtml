@@ -71,7 +71,6 @@
                 <tbody>
                     @foreach (var tour in Model.danhsachtour)
                     {
-                        int x = 0;
                         <tr>
                             <td>@i</td>
                             <td>
@@ -81,7 +80,7 @@
                             </td>
                             <td><img style="width:40%" src="@tour.DuongDanAnh" alt="Placholder Image 2" class="product-frame "></td>
                             <td>
-                                <p> @tour.DiaDiemDen</p>
+                                <p> @tour.DiaDiemDi.TenDiaDiem-@tour.DiaDiemDen.TenDiaDiem</p>
                             </td>
                             <td>
                                 <p>@tour.Ten</p>
@@ -112,7 +111,6 @@
 
                         </tr>
                         i++;
-                        x++;
                     }
 
                 </tbody>

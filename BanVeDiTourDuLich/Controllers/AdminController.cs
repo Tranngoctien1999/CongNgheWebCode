@@ -87,12 +87,10 @@ namespace BanVeDiTourDuLich.Controllers
                          {
                              Tour = tour,
                              DuongDanAnh = diaDiem.DuongDanAnh,
-                             TenDiaDiem = diaDiem.TenDiaDiem,
                              GiaTien = loaive.GiaTien,
                              Ten = loaive.Ten,
-                             DiaDiemDen = diaDiem.TenDiaDiem,
-                             DiaDiemDi = diaDiem.TenDiaDiem
-                             //DiaDiemDi = (from dd in _context.DiaDiems where dd.MaDiaDiem.Contains(tour.MaDiemDi) select dd.TenDiaDiem).ToString()
+                             DiaDiemDi=tour.DiaDiemDi,
+                             DiaDiemDen=tour.DiaDiemDen
                          };
             quanLyTourViewModel.danhsachtour = query1.ToList();
 
@@ -257,7 +255,9 @@ namespace BanVeDiTourDuLich.Controllers
                     var path = "/Content/images/Destinations/";
                     postfiles.SaveAs(paths + postfiles.FileName);
                     diaDiem.DuongDanAnh = path + postfiles.FileName;
+                    dd.DuongDanAnh = diaDiem.DuongDanAnh;
                 }
+                dd.MaDiaDiem = diaDiem.MaDiaDiem;
                 dd.DiaChi = diaDiem.DiaChi;
                 dd.TenDiaDiem = diaDiem.TenDiaDiem;
                 _context.SaveChanges();
