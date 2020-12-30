@@ -163,6 +163,43 @@ namespace BanVeDiTourDuLich.Hubs
 
         #region Người dùng đăng nhập
 
+
+        // Thêm connection Id khi người dùng hoặc nhân viên đăng nhập vào
+        public async Task AddConnectionIdUser(string maTaiKhoan, string connectionId)
+        {
+            TaiKhoan taiKhoan = await DataContext.TaiKhoans.FindAsync(maTaiKhoan);
+            int count = connections.Where(c => c.MaTaiKhoan == maTaiKhoan).Count();
+            if (taiKhoan != null)
+            {
+                taiKhoan.ConnectionId = connectionId;
+                await DataContext.SaveChangesAsync();
+                if (count > 0)
+                {
+                    if (taiKhoan.KhachHang != null)
+                    {
+                        user.Where(u => u.MaTaiKhoan == maTaiKhoan).First().ConnectionId = connectionId;
+                    }
+                    else
+                    {
+                        manager.Where(m => m.MaTaiKhoan == maTaiKhoan).First().ConnectionId = connectionId;
+                    }
+                    connections.Where(c => c.MaTaiKhoan == maTaiKhoan).First().ConnectionId = connectionId;
+                }
+                else
+                {
+                    if (taiKhoan.KhachHang != null)
+                    {
+                        user.Add(new ConnectionIdUser() { MaTaiKhoan = taiKhoan.MaTaiKhoan, ConnectionId = taiKhoan.ConnectionId });
+                    }
+                    else
+                    {
+                        manager.Add(new ConnectionIdUser() { MaTaiKhoan = taiKhoan.MaTaiKhoan, ConnectionId = taiKhoan.ConnectionId });
+                    }
+                    connections.Add(new ConnectionIdUser() { MaTaiKhoan = taiKhoan.MaTaiKhoan, ConnectionId = taiKhoan.ConnectionId });
+                }
+            }
+        }
+
         // Thêm connection Id khi người dùng hoặc nhân viên đăng nhập vào
         public static async Task AddConnectionId(string maTaiKhoan, string connectionId)
         {
@@ -239,10 +276,16 @@ namespace BanVeDiTourDuLich.Hubs
 
 
         // Update Chart In Manager Brower
-        public static async Task UpdateChartToManagerBrower(string[] labels , int[] data)
+        public static async Task UpdateChartToManagerBrower(string[] labels , int[] data , int soVeDatTrongThang , int soKhachHangDangKiTrongThang)
         {
+            float value =((float)(data[data.Length - 1] - data[data.Length - 2]) / data[data.Length - 2]) * 100;
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<Chat>();
-            hubContext.Clients.Clients(manager.Select(manager => manager.ConnectionId).ToList()).updateChart(labels, data);
+            await hubContext.Clients.Clients(manager.Select(manager => manager.ConnectionId).ToList()).updateChart(labels, data);
+            await hubContext.Clients.Clients(manager.Select(manager => manager.ConnectionId).ToList()).updateTangTruong(value);
+            await hubContext.Clients.Clients(manager.Select(manager => manager.ConnectionId).ToList())
+                .updateSoVeDatMoi(soVeDatTrongThang);
+            await hubContext.Clients.Clients(manager.Select(manager => manager.ConnectionId).ToList())
+                .updateSoKhachHangMoi(soKhachHangDangKiTrongThang);
         }
 
         public static async Task GetChartData()

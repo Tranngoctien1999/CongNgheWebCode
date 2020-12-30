@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -162,10 +163,16 @@ namespace BanVeDiTourDuLich.Controllers
                 {
                     Thang = g.Key.Month,
                     Nam = g.Key.Year,
-                    TongTien = g.Select(hoaDon => hoaDon.Ves.Sum(ve => ve.LoaiVe.GiaTien)).FirstOrDefault()
+                    TongTien = g.Sum(hoaDon => hoaDon.Ves.Sum(ve => ve.LoaiVe.GiaTien))
                 }).ToList();
+
+            int soVeDatTrongThang = context.Ves.Where(ve => ve.HoaDon.ThoiGianXuat.Month == DateTime.Now.Month).Count();
+
+            int soKhachHangDangKiTrongThang =
+                context.KhachHangs.Where(khachHang => khachHang.ThoiGianDangKi.Month == DateTime.Now.Month).Count();
+
             await Chat.UpdateChartToManagerBrower(data.Select(c => c.Thang.ToString()).ToArray(),
-                data.Select(c => Int32.Parse(c.TongTien.ToString())).ToArray());
+                data.Select(c => Int32.Parse(c.TongTien.ToString())).ToArray() , soVeDatTrongThang , soKhachHangDangKiTrongThang);
         }
     }
 }

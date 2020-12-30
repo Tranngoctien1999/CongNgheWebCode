@@ -451,11 +451,11 @@
     var chat = $.connection.chat;
     $.connection.hub.error(function(error) {
         alert(error);
-        chat.server.addConnectionId(clientId, chat.connection.id);
+        chat.server.addConnectionIdUser(clientId, chat.connection.id);
     });
     $.connection.hub.start().done(function() {
         var clientId = $('.MaTaiKhoan')[0].value;
-        chat.server.addConnectionId(clientId, chat.connection.id);
+        chat.server.addConnectionIdUser(clientId, chat.connection.id);
     });
 
     $.connection.hub.disconnected(function() {
