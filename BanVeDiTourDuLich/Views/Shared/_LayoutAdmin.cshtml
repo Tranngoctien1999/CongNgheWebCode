@@ -371,9 +371,21 @@
 
 
     chat.client.updateChart = function (labels, data) {
-        console.log(123);
         UpdateChart(labels, data);
     };
+
+    chat.client.updateTangTruong = function(value) {
+        $('#so_hieu_tang_truong')[0].innerText = value + "%";
+    }
+
+    chat.client.updateSoVeDatMoi = function(value) {
+        $('#sovedatmoi')[0].innerText = value;
+    }
+
+
+    chat.client.updateSoKhachHangMoi = function (value) {
+        $('#sokhachhangmoi')[0].innerText = value;
+    }
 
 
     //$('#btn-message').click(function() {
