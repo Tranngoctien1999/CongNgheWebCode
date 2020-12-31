@@ -330,6 +330,8 @@
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Ve.cs" />
     <Compile Include="Utilizer\ConnectionIdUser.cs" />
+    <Compile Include="Utilizer\SearchAdminInformation.cs" />
+    <Compile Include="Utilizer\TimKiemTongHop.cs" />
     <Compile Include="Utilizer\ValidationFunction.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\ChiTietTour2.cs" />

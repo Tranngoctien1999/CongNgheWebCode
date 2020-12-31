@@ -55,6 +55,43 @@
             cursor: pointer;
             background: #343a40;
         }
+
+        .searbar-wrap {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .result__item {
+            display: flex;
+            height: 3rem;
+            justify-content: space-around;
+            padding: 0.2rem;
+        }
+
+        .result__item__image {
+            width: 2rem;
+        }
+
+        .result__box {
+            padding: 10px;
+            background: aliceblue;
+            border-bottom-color: gray;
+            border-bottom-width: 1px;
+            border-bottom: groove;
+            position: absolute;
+            top: 120%;
+            width: 150%;
+            overflow-y: auto;
+            max-height: 800%;
+        }
+
+        .result__item__icon {
+            display: flex;
+        }
+
+        .result__item__discription {
+            position: relative;
+        }
     </style>
     @RenderSection("styles", false)
 </head>
@@ -84,15 +121,29 @@
 
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar"
-                   type="search"
-                   placeholder="Tìm Kiếm"
-                   aria-label="Search"/>
-            <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
+        <div class="input-group input-group-sm" style="display: flex;
+                                           flex-direction: column;">
+            <div class="searbar-wrap">
+                <input class="form-control form-control-navbar"
+                       type="search"
+                       placeholder="Tìm Kiếm"
+                       aria-label="Search"
+                       id="searchbar"/>
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div style="display: none" id="resultBox" class="result__box">
+                @*<div class="result__item">
+                    <img class="result__item__image" src="~/Content/images/Persions/ADMIN.jpg">
+                    <p class="result__item__text">Người dùng 1</p>
+                    <div class="result__item__icon">
+                        <p class="result__item__discription">Trong nhân viên <i style="position: absolute;
+                                                                                                           right: -10px" class="fas fa-info"></i></p>
+                    </div>
+                </div>*@
             </div>
         </div>
     </form>
@@ -439,6 +490,63 @@
         var maTaiKhoan = $(maTaiKhoanBox).val();
         window.location.href = "/user/inforuser/" + maTaiKhoan;
     }
+
+    $('#searchbar').keydown(function () {
+        console.log(123);
+        var value = $(this).val();
+        $.ajax({
+            method : "POST",
+            url: "/Admin/TimKiemTongHop",
+            data: {tuKhoa : value},
+            success: function (data) {
+                console.log(data);
+                UpdateSearchResult(data);
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        })
+    })
+
+    function UpdateSearchResult(data) {
+        $('#resultBox').empty();
+        data.forEach(function(item) {
+            var html = `<a href="${item.DuongDan}/${item.Id}">
+<div class="result__item">
+                    <img class="result__item__image" src="${item.DuongDanAnhThongTin}">
+                    <p class="result__item__text">${item.TenThongTin}</p>
+                    <div class="result__item__icon">
+                        <p class="result__item__discription">Trong ${item.ViTriTimKiem} <i style="position: absolute;
+                                                                                                           right: -10px" class="fas fa-info"></i></p>
+                    </div>
+                </div>
+</a>`;
+
+            if ($('#resultBox').children().length == 0) {
+                $('#resultBox').append(html);
+            } else {
+                $('#resultBox').children().last().after(html);
+            }
+        });
+    }
+
+    var checkHoverResultBox = false;
+    $('#resultBox').hover(function() {
+        checkHoverResultBox = !checkHoverResultBox;
+    })
+    $('#searchbar').focusout(function () {
+        if (!checkHoverResultBox) {
+            $('#resultBox').hide();
+            $('#searchbar').show();
+        }
+    })
+
+    $('#searchbar').focus(function () {
+        $('#resultBox').show();
+    })
+
+
+   
 
 
     //$('#btn-message').click(function() {
