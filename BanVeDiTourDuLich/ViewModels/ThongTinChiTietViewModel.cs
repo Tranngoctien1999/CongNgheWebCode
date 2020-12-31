@@ -11,6 +11,8 @@ namespace BanVeDiTourDuLich.ViewModels
 
         public KhachHang KhachHang { get; set; }
 
-        public NhanVien NhanVien { get; set; }  
+        public NhanVien NhanVien { get; set; }
+
+        public bool isCustomerViewing { get; set; }
     }
 }

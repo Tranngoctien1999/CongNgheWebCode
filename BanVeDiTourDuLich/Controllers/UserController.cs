@@ -226,29 +226,49 @@ namespace BanVeDiTourDuLich.Controllers
         public ActionResult InforUser(string id)
         {
             var check = false;
+            var isCustomerViewing = false;
             if (Session["MaTaiKhoan"] != null)
+
                 if (string.Compare(Session["MaTaiKhoan"].ToString(), id) == 0)
                 {
                     check = true;
-                    var khachHang = _db.KhachHangs.Find(id);
-                    if (khachHang == null)
-                    {
-                        var nhanVien = _db.NhanViens.Find(id);
-                        var thongTin = new ThongTinChiTietViewModel
-                        {
-                            NhanVien = nhanVien,
-                            isCustomer = false
-                        };
-                        return View(thongTin);
-                    }
-
-                    var thongTin1 = new ThongTinChiTietViewModel
-                    {
-                        KhachHang = khachHang,
-                        isCustomer = true
-                    };
-                    return View(thongTin1);
+                    isCustomerViewing = true;
                 }
+                else
+                {
+                    if (_db.NhanViens.Find(Session["MaTaiKhoan"].ToString()) != null)
+                    {
+                        if (string.Compare("ADMIN", id) == 0)
+                        {
+                            return Content("Bạn không được phép truy cập vào tài khoản này!");
+                        }
+                        check = true;
+                    }
+                }
+
+            if (check)
+            {
+                var khachHang = _db.KhachHangs.Find(id);
+                if (khachHang == null)
+                {
+                    var nhanVien = _db.NhanViens.Find(id);
+                    var thongTin = new ThongTinChiTietViewModel
+                    {
+                        NhanVien = nhanVien,
+                        isCustomer = false,
+                        isCustomerViewing = isCustomerViewing
+                    };
+                    return View(thongTin);
+                }
+
+                var thongTin1 = new ThongTinChiTietViewModel
+                {
+                    KhachHang = khachHang,
+                    isCustomer = true,
+                    isCustomerViewing = isCustomerViewing
+                };
+                return View(thongTin1);
+            }
             return Content("Bạn không có quyền xem trang này!");
         }
 
@@ -344,11 +364,18 @@ namespace BanVeDiTourDuLich.Controllers
                         var khachHang = _db.KhachHangs.Find(Session["MaTaiKhoan"].ToString());
                         if (khachHang == null)
                         {
-                            Response.StatusCode = 400;
-                            return Json(new {msg = "Không tìm được tài khoản của bạn! Hãy kiểm tra lại"},
-                                JsonRequestBehavior.AllowGet);
+                            var nhanVien = _db.NhanViens.Find(Session["MaTaiKhoan"].ToString());
+                            if (nhanVien == null)
+                            {
+                                Response.StatusCode = 400;
+                                return Json(new { msg = "Không tìm được tài khoản của bạn! Hãy kiểm tra lại" },
+                                    JsonRequestBehavior.AllowGet);
+                            }
+                            nhanVien.DuongDanAnh = nameAndLocation;
+                            _db.SaveChanges();
+                            Response.StatusCode = (int)HttpStatusCode.Accepted;
+                            return Json(new { msg = "Thành Công" }, JsonRequestBehavior.AllowGet);
                         }
-
                         khachHang.DuongDanAnh = nameAndLocation;
                         _db.SaveChanges();
                         Response.StatusCode = (int) HttpStatusCode.Accepted;

@@ -2625,6 +2625,7 @@
     <Content Include="Views\Admin\EditDiaDiem.cshtml" />
     <Content Include="Views\Admin\ThemMoiDiaDiem.cshtml" />
     <Content Include="Views\User\InforUser.cshtml" />
+    <Content Include="Views\Admin\QuanLyNhanVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -71,7 +71,9 @@ namespace BanVeDiTourDuLich.Controllers
                 {
                     TenNguoiDung = khach.Ten,
                     SoTienMua = tongTien,
-                    SoVeMua = soVe
+                    SoVeMua = soVe,
+                    NgayTaoTaiKhoan = khach.ThoiGianDangKi,
+                    MaNguoiDung = khach.MaKhachHang
                 });
             };
             return View(data);
@@ -280,6 +282,40 @@ namespace BanVeDiTourDuLich.Controllers
                 }
             }
             return true;
+        }
+
+        public bool CheckAdmin()
+        {
+            var userId = Session["MaTaiKhoan"];
+            if (userId != null)
+            {
+                NhanVien nhanVien = _context.NhanViens.Find(userId);
+                if (nhanVien == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (nhanVien.MaNhanVien != "ADMIN")
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public ActionResult QuanLyNhanVien()
+        {
+            if (CheckAdmin())
+            {
+                var data = _context.NhanViens.ToList();
+                return View(data);
+            }
+            else
+            {
+                return Content("Bạn không có quyền truy cập trang này");
+            }
         }
     }
 }
