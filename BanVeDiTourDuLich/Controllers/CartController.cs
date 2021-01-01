@@ -14,7 +14,7 @@ using Stripe;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         public static DataContext context = new DataContext();
         // GET: Cart

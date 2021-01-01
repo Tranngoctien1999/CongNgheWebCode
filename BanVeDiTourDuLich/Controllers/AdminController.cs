@@ -12,7 +12,7 @@ using BanVeDiTourDuLich.Utilizer;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private DataContext _context;
         public AdminController()
@@ -25,6 +25,40 @@ namespace BanVeDiTourDuLich.Controllers
             if (CheckUser())
             {
                 return View("Index");
+            }
+            return HttpNotFound("Hãy Đăng Nhập");
+        }
+
+        public ActionResult QuanLyBanVe(string id)
+        {
+            if (CheckUser())
+            {
+                if (id != null)
+                {
+                    ThongTinHoaDon thongTin = new ThongTinHoaDon();
+                    thongTin.HoaDon = _context.Ves.Find(id).HoaDon;
+                    thongTin.CacVe = thongTin.HoaDon.Ves.ToList();
+                    thongTin.KhachHang = thongTin.HoaDon.KhachHang;
+                    thongTin.NhanVien = thongTin.HoaDon.NhanVien;
+                    return View("~/Views/Admin/ChiTietVe.cshtml", thongTin);
+                }
+                QuanLyVeViewModel quanLyVeViewModel = new QuanLyVeViewModel();
+                quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours, ve => ve.MaTour, tour => tour.MaTour,
+                    (ve, tour) =>
+                        new
+                        {
+                            Ve = ve,
+                            DiaDiemDen = tour.DiaDiemDen,
+                            DiaDiemDi = tour.DiaDiemDi
+                        }).Join(_context.LoaiVes, c => c.Ve.MaLoaiVe, loaiVe => loaiVe.MaLoaiVe,
+                    (c, loaiVe) => new ThongTinVeExpanded()
+                    {
+                        Ve = c.Ve,
+                        GiaTien = loaiVe.GiaTien,
+                        DiaDiemDen = c.DiaDiemDen,
+                        DiaDiemDi = c.DiaDiemDi
+                    }).ToList();
+                return View("QuanLyBanVe", quanLyVeViewModel);
             }
             return HttpNotFound("Hãy Đăng Nhập");
         }
@@ -395,12 +429,12 @@ namespace BanVeDiTourDuLich.Controllers
             }
         }
 
-        public ActionResult QuanLyNhanVien(string id)
+        public ActionResult QuanLyNhanVienSingle(string id)
         {
             if (CheckAdmin())
             {
                 var data = _context.NhanViens.Where(nhanVien => nhanVien.MaNhanVien == id).ToList();
-                return View(data);
+                return View("QuanLyNhanVien" , data);
             }
             else
             {

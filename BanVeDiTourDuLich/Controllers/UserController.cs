@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using BanVeDiTourDuLich.Models;
 using BanVeDiTourDuLich.Utilizer;
@@ -11,7 +12,7 @@ using BanVeDiTourDuLich.ViewModels;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly DataContext _db = new DataContext();
         // GET: User
@@ -162,28 +163,44 @@ namespace BanVeDiTourDuLich.Controllers
                 {
                     if (data.First().NhanVien != null)
                     {
+                        Response.Cookies["TaiKhoanDangNhap"].Expires = DateTime.Now.AddMinutes(30);
+                        Response.Cookies["password"].Expires = DateTime.Now.AddMinutes(30);
+                        Response.Cookies["TaiKhoanDangNhap"].Value = TaiKhoanDangNhap;
+                        Response.Cookies["password"].Value = password;
                         //add session
                         Session["MaTaiKhoan"] = data.FirstOrDefault().MaTaiKhoan;
                         Session["TaiKhoanDangNhap"] = data.FirstOrDefault().TaiKhoanDangNhap;
                         return RedirectToAction("Index", "Admin");
                     }
 
+                    Response.Cookies["TaiKhoanDangNhap"].Expires = DateTime.Now.AddMinutes(1);
+                    Response.Cookies["password"].Expires = DateTime.Now.AddMinutes(1);
+                    Response.Cookies["TaiKhoanDangNhap"].Value = TaiKhoanDangNhap;
+                    Response.Cookies["password"].Value = password;
                     //add session
                     Session["MaTaiKhoan"] = data.FirstOrDefault().MaTaiKhoan;
                     Session["TaiKhoanDangNhap"] = data.FirstOrDefault().TaiKhoanDangNhap;
                     return RedirectToAction("Index", "Home");
-                }
 
+                }
                 ViewBag.error = "Login failed";
                 return RedirectToAction("Index");
             }
-
             return View();
         }
 
         public ActionResult Signout()
         {
             if (Session["MaTaiKhoan"] != null) Session.Clear();
+            if (Request.Cookies["TaiKhoanDangNhap"] != null)
+            {
+                var c = new HttpCookie("TaiKhoanDangNhap");
+                var c1 = new HttpCookie("password");
+                c.Expires = DateTime.Now.AddDays(-1);
+                c1.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(c);
+                Response.Cookies.Add(c1);
+            }
             return RedirectToAction("Index", "Home");
         }
 

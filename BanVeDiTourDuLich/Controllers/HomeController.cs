@@ -8,7 +8,7 @@ using PagedList;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public static int Count = 0;
         private DataContext context = new DataContext();
