@@ -12,6 +12,7 @@ namespace BanVeDiTourDuLich.Controllers
         {
             base.OnActionExecuting(context);
             // your code here
+            HomeController.Count++;
             if (Session["TaiKhoanDangNhap"] == null)
             {
                 DataContext _db = new DataContext();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -61,7 +62,18 @@ namespace BanVeDiTourDuLich.Utilizer
                     DuongDan = "/Admin/QuanLyTourSingle/"
                 }).ToList();
 
-            return listTour.Union(listCustomer).Union(listCustomer).Union(listDiemDen).Union(listManager).ToList();
+            List<Ve> ves = await context.Ves.ToListAsync();
+            List<SearchAdminInformation> listVe = ves.Where(ve => ve.CheckInformationTicket(tuKhoa))
+                .Select(ve => new SearchAdminInformation()
+                {
+                    DuongDanAnhThongTin = @"/Content/images/ticket.png",
+                    TenThongTin = ve.MaVe,
+                    Id = ve.MaVe,
+                    ViTriTimKiem = ViTriStrings[(int)ViTri.Ve],
+                    DuongDan = "/Admin/QuanLyVeSingle/"
+                }).ToList();
+
+            return listTour.Union(listCustomer).Union(listCustomer).Union(listDiemDen).Union(listManager).Union(listVe).ToList();
         }
 
         public static bool CheckInformationCustomer(this KhachHang khacHang , string tuKhoa )
@@ -154,7 +166,7 @@ namespace BanVeDiTourDuLich.Utilizer
             }
 
             DateTime timeTry;
-            if (DateTime.TryParse(tuKhoa, out timeTry))
+            if (DateTime.TryParseExact(tuKhoa , "dd/MM/yyyy" , new CultureInfo(CultureInfo.CurrentCulture.Name),DateTimeStyles.None ,  out timeTry))
             {
                 if (nhanVien.NgaySinh.Date == timeTry)
                 {
@@ -162,7 +174,7 @@ namespace BanVeDiTourDuLich.Utilizer
                 }
             }
 
-            if (DateTime.TryParse(tuKhoa, out timeTry))
+            if (DateTime.TryParseExact(tuKhoa, "dd/MM/yyyy", new CultureInfo(CultureInfo.CurrentCulture.Name), DateTimeStyles.None, out timeTry))
             {
                 if (nhanVien.NgayVaoLam.Date == timeTry)
                 {
@@ -242,7 +254,7 @@ namespace BanVeDiTourDuLich.Utilizer
                 }
             }
 
-
+            return false;
         }
 
 
@@ -255,6 +267,6 @@ namespace BanVeDiTourDuLich.Utilizer
             Ve
         }
 
-        public static string[] ViTriStrings = new string[]{"Nhân Viên" , "Khách Hàng", "Điểm Đến" , "Tour"};
+        public static string[] ViTriStrings = new string[]{"Nhân Viên" , "Khách Hàng", "Điểm Đến" , "Tour" , "Vé"};
     }
 }

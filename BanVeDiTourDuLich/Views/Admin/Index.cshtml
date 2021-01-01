@@ -5,7 +5,6 @@
     int count = HomeController.Count;
     DataContext context = new DataContext();
 }
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -81,7 +80,7 @@
                         <div class="inner">
                             <h3>@count</h3>
 
-                            <p>Số người vào trang web</p>
+                            <p>Số lần truy cập trang web</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -217,5 +216,88 @@
         .index-20{
             z-index: 20;
         }
+
+        .notification__box {
+            position: fixed;
+            z-index: 1000;
+            padding: 1rem;
+            bottom: 1rem;
+            right: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .notification__items {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notification__item {
+            display: flex;
+            height: 5rem;
+            justify-content: space-evenly;
+            padding: 1rem;
+            align-items: center;
+            background: aliceblue;
+            animation: notification_in;
+            animation-duration: 1s;
+        }
+
+        .notification__item__outanimation {
+            animation: notification_out;
+            animation-duration: 1s;
+        }
+
+        .notification__image {
+            height: 100%;
+            margin-right: 1rem;
+        }
+
+        .notification__text {
+            font-family: 'Font Awesome 5 Free';
+            margin-right: 2rem;
+            display: inline-block;
+        }
+
+        .notification__button, .notification__button:focus {
+            border: none;
+            height: 100%;
+            background: inherit;
+            outline: none;
+        }
+
+        .notification__icon {
+            background: inherit;
+            color: red;
+        }
+
+        @@keyframes notification_in {
+        from {transform: translateX(10rem)}
+            to {
+                transform: translateX(0)
+            }
+        }
+
+        @@keyframes notification_out {
+            from {transform: translateX(0)}
+            to {
+                transform: translateX(25rem)
+            }
+        }
     </style>
+}
+
+@section scripts
+{
+    <script>
+        function addOutAnimation(button) {
+            var notification_item = $(button).parent();
+            $(notification_item).addClass('notification__item__outanimation');
+            setTimeout(function () {
+                    $(notification_item).remove();
+                },
+                1000);
+        }
+    </script>
+    
+
 }

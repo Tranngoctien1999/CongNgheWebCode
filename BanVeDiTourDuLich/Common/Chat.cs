@@ -70,14 +70,17 @@ namespace BanVeDiTourDuLich.Hubs
         public async Task SaveNewMessageFromKhachHang(string maKhachHang, string noiDung)
         {
             KhachHang khachHang = await DataContext.KhachHangs.FindAsync(maKhachHang);
-            TinNhan tinNhan = new TinNhan()
+            if (khachHang != null)
             {
-                MaKhachHang = khachHang.MaKhachHang,
-                NoiDung = noiDung,
-                ThoiGianGui = DateTime.Now
-            };
-            DataContext.TinNhans.Add(tinNhan);
-            await DataContext.SaveChangesAsync();
+                TinNhan tinNhan = new TinNhan()
+                {
+                    MaKhachHang = khachHang.MaKhachHang,
+                    NoiDung = noiDung,
+                    ThoiGianGui = DateTime.Now
+                };
+                DataContext.TinNhans.Add(tinNhan);
+                await DataContext.SaveChangesAsync();
+            }
         }
         //Gửi tin nhắn từ khách hàng tới đối tượng cụ thể
         public async Task SendMessageFromClientToManager(string maNhanVien, string maKhachHang)
