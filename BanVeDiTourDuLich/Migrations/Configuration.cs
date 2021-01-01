@@ -438,6 +438,8 @@ namespace BanVeDiTourDuLich.Migrations
                 TaiKhoanDangNhap = "user2"
             };
 
+
+
             context.TaiKhoans.AddOrUpdate(account1);
 
             KhachHang khachHang2 = new KhachHang()
@@ -471,6 +473,7 @@ namespace BanVeDiTourDuLich.Migrations
                 Key = 1,
                 KhachHangIdentity = 2,
                 NhanVienIdentity = 1,
+                KhachHangOptionalIdentity = 0
             };
 
             context.IdentityTraces.AddOrUpdate(identityTrace);

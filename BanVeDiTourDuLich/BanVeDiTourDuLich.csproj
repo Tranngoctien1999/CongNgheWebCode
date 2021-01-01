@@ -299,6 +299,10 @@
     <Compile Include="Migrations\202012300830217_ThemThongTinNhanVien.designer.cs">
       <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.cs" />
+    <Compile Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.designer.cs">
+      <DependentUpon>202101010217239_AddIdentityOptionalCustomerTrace.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -550,10 +554,13 @@
     <Content Include="Content\images\Destinations\place-2.jpg" />
     <Content Include="Content\images\Destinations\place-3.jpg" />
     <Content Include="Content\images\Destinations\place-4.jpg" />
+    <Content Include="Content\images\Persions\574704-200.png" />
     <Content Include="Content\images\Persions\ADMIN.jpg" />
+    <Content Include="Content\images\Persions\inspirational-quoute-by-bruce-lee-qhd-1920x1080.jpg" />
     <Content Include="Content\images\Persions\KH01.jpg" />
     <Content Include="Content\images\Persions\NHANVIEN0.jpg" />
     <Content Include="Content\images\Persions\NHANVIEN01.jpg" />
+    <Content Include="Content\images\Persions\z2216139190897_5a767a647ff8b5c55547abe03921d461.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
@@ -2732,6 +2739,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012300830217_ThemThongTinNhanVien.resx">
       <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.resx">
+      <DependentUpon>202101010217239_AddIdentityOptionalCustomerTrace.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

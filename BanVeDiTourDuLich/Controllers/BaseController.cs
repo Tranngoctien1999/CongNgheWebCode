@@ -35,6 +35,10 @@ namespace BanVeDiTourDuLich.Controllers
                         Session["TaiKhoanDangNhap"] = data.FirstOrDefault().TaiKhoanDangNhap;
                     }
                 }
+                else
+                {
+                    
+                }
             }
         }
     }
