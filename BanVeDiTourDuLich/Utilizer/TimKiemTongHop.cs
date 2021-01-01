@@ -232,13 +232,27 @@ namespace BanVeDiTourDuLich.Utilizer
             return false;
         }
 
+        public static bool CheckInformationTicket(this Ve ve, string tuKhoa)
+        {
+            if (!string.IsNullOrEmpty(ve.MaVe))
+            {
+                if (ve.MaVe.ToLower().Contains(tuKhoa.ToLower()))
+                {
+                    return true;
+                }
+            }
+
+
+        }
+
 
         public enum ViTri
         {
             NhanVien,
             KhachHang,
             DiemDen,
-            Tour
+            Tour,
+            Ve
         }
 
         public static string[] ViTriStrings = new string[]{"Nhân Viên" , "Khách Hàng", "Điểm Đến" , "Tour"};
