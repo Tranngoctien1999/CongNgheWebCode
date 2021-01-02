@@ -80,17 +80,21 @@ namespace BanVeDiTourDuLich.Controllers
                     string idTour = formCollection[1];
                     for (int i = 2; i < formCollection.Count - 3; i += 2)
                     {
-                        for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
+                        int quantity = 0;
+                        if(Int32.TryParse(formCollection[i + 1] , out quantity))
                         {
-                            Ve ve = new Ve()
+                            for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
                             {
-                                MaVe = "Ve" + (identity + 1).ToString("00"),
-                                MaTour = idTour,
-                                MaLoaiVe = formCollection[i],
-                                MaHoaDon = hoaDon.MaHoaDon
-                            };
-                            context.Ves.Add(ve);
-                            identity++;
+                                Ve ve = new Ve()
+                                {
+                                    MaVe = "Ve" + (identity + 1).ToString("00"),
+                                    MaTour = idTour,
+                                    MaLoaiVe = formCollection[i],
+                                    MaHoaDon = hoaDon.MaHoaDon
+                                };
+                                context.Ves.Add(ve);
+                                identity++;
+                            }
                         }
                     }
                 }
