@@ -468,15 +468,15 @@ namespace BanVeDiTourDuLich.Migrations
 
             // add Identity
 
-            IdentityTrace identityTrace = new IdentityTrace()
-            {
-                Key = 1,
-                KhachHangIdentity = 2,
-                NhanVienIdentity = 1,
-                KhachHangOptionalIdentity = 0
-            };
+            //IdentityTrace identityTrace = new IdentityTrace()
+            //{
+            //    Key = 1,
+            //    KhachHangIdentity = 2,
+            //    NhanVienIdentity = 1,
+            //    KhachHangOptionalIdentity = 0
+            //};
 
-            context.IdentityTraces.AddOrUpdate(identityTrace);
+            //context.IdentityTraces.AddOrUpdate(identityTrace);
 
            // Thêm hóa đơn
            HoaDon hoaDon1 = new HoaDon()
