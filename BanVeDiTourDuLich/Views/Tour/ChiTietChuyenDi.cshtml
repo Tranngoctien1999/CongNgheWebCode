@@ -6,6 +6,7 @@
     ViewBag.Title = "ChiTietChuyenDi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*<link href="~/Content/ThemeHe/stylechitiet.css" rel="stylesheet" />*@
 <div class="modal" id="myModalThemThongTin">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -33,7 +34,7 @@
                             <input type="email" name="Email" id="Email" class="form-control" data-val="true">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="mg-bot5">Địa chỉ <span style="color: red">(*)</span>:</label>
                         <div class="input-group" id="show_hide_password_NhapLaiMatKhauMoi">
@@ -57,9 +58,9 @@
             <div class="col-md-4 ftco-animate image-box">
                 <div class="project-wrap">
                     <a href="#" class="img" style="background-image: url(@Model.Tour.DiaDiemDen.DuongDanAnh);
-        border-radius: 6px;
-        background-position: center;
-"></a>
+                                                                                                                                                                                                                                                                                                                                                                                border-radius: 6px;
+                                                                                                                                                                                                                                                                                                                                                                                background-position: center;
+                                                                                                                                                                                                                                                                                                                                                                            "></a>
                 </div>
             </div>
             <div class="motachitiet" style="flex: 0.8; font-weight: 600">
@@ -70,29 +71,64 @@
                     @*<span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>*@
                     Số giờ:
                     <span class="songay">@Model.Tour.SoGio</span>
-                    <span class="ngaykhoihanh">Khởi hành:@Model.Tour.ThoigianDi</span>
-                    Số giờ: <span class="songay">@Model.Tour.SoGio</span>
+                    @*Số giờ: <span class="songay">@Model.Tour.SoGio</span>*@
 
                 </div>
                 <div>
                     <span class="noikhoihanh">Nơi khởi hành: @Model.Tour.DiaDiemDi.TenDiaDiem</span>
                 </div>
-                <div class="sec4">
-                    <ul>
-                        <li>
-                            <span class="flaticon-shower"></span>2
-                        </li>
-                        <li>
-                            <span class="flaticon-king-size"></span>3
-                        </li>
-                        <li>
-                            <span class="flaticon-mountains"></span>
-                        </li>
-                    </ul>
+                <div>
+                    <span class="ngaykhoihanh">Thời gian khởi hành:@Model.Tour.ThoigianDi</span>
                 </div>
+                @*
+                    <div class="sec4">
+                        <ul>
+                            <li>
+                                <span class="flaticon-shower"></span>2
+                            </li>
+                            <li>
+                                <span class="flaticon-king-size"></span>3
+                            </li>
+                            <li>
+                                <span class="flaticon-mountains"></span>
+                            </li>
+                        </ul>
+                    </div>*@
                 @*<form id="datve" action="/DatVe/" method="post">
-                        <input name="MaTour" value="@Model.Tour.MaTour" type="hidden"/>
-                        <input id="IsRedirect" type="hidden" value=""/>
+                            <input name="MaTour" value="@Model.Tour.MaTour" type="hidden"/>
+                            <input id="IsRedirect" type="hidden" value=""/>
+                            <div class="sec3">
+                                <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
+                                    <p style="margin-right: 50px">Giá Vé :</p>
+                                    <select name="MaLoaiVe" id="" class="form-control" style="font-size: 15px; margin-bottom: 20px">
+                                        @foreach (var loaiVe in Model.CacLoaiVe)
+                                        {
+                                            <option value="@loaiVe.MaLoaiVe">@TourController.AddDotAndCommaToInteger(loaiVe.GiaTien) VNĐ (@loaiVe.Ten) <span>Hiện còn : @loaiVe.SoLuong vé</span></option>
+                                        }
+                                    </select>
+                                    <div class="quantity">
+                                        <p style="display: inline; margin-right: 50px;">Số Lượng:</p>
+                                        <input name="SoLuong" style="display: inline-block; margin-bottom: 10px; margin-left: 3px; width: 10%;"
+                                               type="number" min="1" class="quantity-field"
+                                               value="1">
+                                    </div>
+                                </div>
+                                <div>
+                                    <button style="margin-left: 0px; margin-right: 20px;" class="btn btn-primary" type="submit"
+                                            onclick="chuyenSangMuaHang()">
+                                        <a class="btn btn-book1 btn-md">
+                                            <i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp;Mua ngay
+                                        </a>
+                                    </button>
+                                    <button style="background: #f3f3f3 !important;" class="btn btn-primary" type="submit"
+                                            onclick="chuyenSangThemVaoGio()">
+                                        <a class="btn btn-book1 btn-md">
+                                            <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Thêm vào giỏ hàng
+                                        </a>
+                                    </button>
+                    <form id="datve" action="/DatVe/" method="post">
+                        <input name="MaTour" value="@Model.Tour.MaTour" type="hidden" />
+                        <input id="IsRedirect" type="hidden" value="" />
                         <div class="sec3">
                             <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
                                 <p style="margin-right: 50px">Giá Vé :</p>
@@ -109,298 +145,321 @@
                                            value="1">
                                 </div>
                             </div>
-                            <div>
-                                <button style="margin-left: 0px; margin-right: 20px;" class="btn btn-primary" type="submit"
-                                        onclick="chuyenSangMuaHang()">
-                                    <a class="btn btn-book1 btn-md">
-                                        <i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp;Mua ngay
-                                    </a>
-                                </button>
-                                <button style="background: #f3f3f3 !important;" class="btn btn-primary" type="submit"
-                                        onclick="chuyenSangThemVaoGio()">
-                                    <a class="btn btn-book1 btn-md">
-                                        <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Thêm vào giỏ hàng
-                                    </a>
-                                </button>
-                <form id="datve" action="/DatVe/" method="post">
-                    <input name="MaTour" value="@Model.Tour.MaTour" type="hidden" />
-                    <input id="IsRedirect" type="hidden" value="" />
-                    <div class="sec3">
-                        <div style="margin-bottom: 7px;" itemscope="" itemtype="http://schema.org/PriceSpecification">
-                            <p style="margin-right: 50px">Giá Vé :</p>
-                            <select name="MaLoaiVe" id="" class="form-control" style="font-size: 15px; margin-bottom: 20px">
-                                @foreach (var loaiVe in Model.CacLoaiVe)
-                                {
-                                    <option value="@loaiVe.MaLoaiVe">@TourController.AddDotAndCommaToInteger(loaiVe.GiaTien) VNĐ (@loaiVe.Ten) <span>Hiện còn : @loaiVe.SoLuong vé</span></option>
-                                }
-                            </select>
-                            <div class="quantity">
-                                <p style="display: inline; margin-right: 50px;">Số Lượng:</p>
-                                <input name="SoLuong" style="display: inline-block; margin-bottom: 10px; margin-left: 3px; width: 10%;"
-                                       type="number" min="1" class="quantity-field"
-                                       value="1">
-                            </div>
-                        </div>
-                    </form>*@
+                        </form>*@
 
-            <div class="col-xs-12 floatBox highlight" style="width: 35rem;">
-                <div class="col-xs-12 no-padding v-margin-bottom-5 call-now">
-                    Đặt ngay, chỉ 2 phút. Hoặc gọi
-                    <a href="tel:02839338002">(028) 3933 8002</a>
-                </div>
-                <div class="col-xs-12 no-padding v-margin-bottom-15">
-                    <div class="form-group">
-                        <label for="DateCheckinField" class="col-xs-8 control-label no-padding">Chọn ngày khởi hành:</label>
-                        <div class="col-xs-4 no-padding" style="
-                                                                                                                          float: right;
-                                                                                                                          margin-right: 4rem;
-                                                                                                                      ">
-                            <div class="date-input-group">
-                                <label readonly="" type="text" class="form-control date-input dates-date btn-general DateCheckinField">
-                                    <span class="DateCheckinText">27-11-2020</span>
-                                </label>
-                                <input type="hidden" class="get_date" value="2020-11-27">
-                                <div class="daterangepicker dropdown-menu single opensleft daterangepicker_custom_class show-calendar" style="display: none;">
-                                    <div class="calendar left single" style="display: block;">
-                                        <div class="daterangepicker_input">
-                                            <input class="input-mini active" type="text" name="daterangepicker_start" value="" style="display: none;">
-                                            <i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i>
-                                            <div class="calendar-time" style="display: none;">
-                                                <div></div>
-                                                <i class="fa fa-clock-o glyphicon glyphicon-time" style="display: none;"></i>
+                <div class="col-xs-12 floatBox highlight" style="width: 35rem;">
+                    <div class="col-xs-12 no-padding v-margin-bottom-5 call-now">
+                        Đặt ngay, chỉ 2 phút. Hoặc gọi
+                        <a href="tel:02839338002">(028) 3933 8002</a>
+                    </div>
+                    <div class="col-xs-12 no-padding v-margin-bottom-15">
+                        <div class="form-group">
+                            <label for="DateCheckinField" class="col-xs-8 control-label no-padding">Chọn ngày khởi hành:</label>
+                            <div class="col-xs-4 no-padding" style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          float: right;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          margin-right: 4rem;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ">
+                                <div class="date-input-group">
+                                    <label readonly="" type="text" class="form-control date-input dates-date btn-general DateCheckinField">
+                                        <span class="DateCheckinText">27-11-2020</span>
+                                    </label>
+                                    <input type="hidden" class="get_date" value="2020-11-27">
+                                    <div class="daterangepicker dropdown-menu single opensleft daterangepicker_custom_class show-calendar" style="display: none;">
+                                        <div class="calendar left single" style="display: block;">
+                                            <div class="daterangepicker_input">
+                                                <input class="input-mini active" type="text" name="daterangepicker_start" value="" style="display: none;">
+                                                <i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i>
+                                                <div class="calendar-time" style="display: none;">
+                                                    <div></div>
+                                                    <i class="fa fa-clock-o glyphicon glyphicon-time" style="display: none;"></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="calendar-table">
-                                            <table class="table-condensed" styles="background: white;">
-                                                <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th colspan="5" class="month">
-                                                            <select class="monthselect"><option value="0" disabled="disabled">Th01</option><option value="1" disabled="disabled">Th02</option><option value="2" disabled="disabled">Th03</option><option value="3" disabled="disabled">Th04</option><option value="4" disabled="disabled">Th05</option><option value="5" disabled="disabled">Th06</option><option value="6" disabled="disabled">Th07</option><option value="7" disabled="disabled">Th08</option><option value="8" disabled="disabled">Th09</option><option value="9" disabled="disabled">Th10</option><option value="10" selected="selected">Th11</option><option value="11">Th12</option></select>
-                                                            <select class="yearselect"><option value="2020" selected="selected">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option></select>
-                                                        </th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>T2</th>
-                                                        <th>T3</th>
-                                                        <th>T4</th>
-                                                        <th>T5</th>
-                                                        <th>T6</th>
-                                                        <th>T7</th>
-                                                        <th>CN</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="off off disabled off disabled" data-title="r0c0">26</td>
-                                                        <td class="off off disabled off disabled" data-title="r0c1">27</td>
-                                                        <td class="off off disabled off disabled" data-title="r0c2">28</td>
-                                                        <td class="off off disabled off disabled" data-title="r0c3">29</td>
-                                                        <td class="off off disabled off disabled" data-title="r0c4">30</td>
-                                                        <td class="weekend off off disabled off disabled" data-title="r0c5">31</td>
-                                                        <td class="weekend off disabled off disabled" data-title="r0c6">1</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="off disabled off disabled" data-title="r1c0">2</td>
-                                                        <td class="off disabled off disabled" data-title="r1c1">3</td>
-                                                        <td class="off disabled off disabled" data-title="r1c2">4</td>
-                                                        <td class="off disabled off disabled" data-title="r1c3">5</td>
-                                                        <td class="off disabled off disabled" data-title="r1c4">6</td>
-                                                        <td class="weekend off disabled off disabled" data-title="r1c5">7</td>
-                                                        <td class="weekend off disabled off disabled" data-title="r1c6">8</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="off disabled off disabled" data-title="r2c0">9</td>
-                                                        <td class="off disabled off disabled" data-title="r2c1">10</td>
-                                                        <td class="off disabled off disabled" data-title="r2c2">11</td>
-                                                        <td class="off disabled off disabled" data-title="r2c3">12</td>
-                                                        <td class="off disabled off disabled" data-title="r2c4">13</td>
-                                                        <td class="weekend off disabled off disabled" data-title="r2c5">14</td>
-                                                        <td class="weekend off disabled off disabled" data-title="r2c6">15</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="off disabled off disabled" data-title="r3c0">16</td>
-                                                        <td class="off disabled off disabled" data-title="r3c1">17</td>
-                                                        <td class="off disabled off disabled" data-title="r3c2">18</td>
-                                                        <td class="off disabled off disabled" data-title="r3c3">19</td>
-                                                        <td class="off disabled off disabled" data-title="r3c4">20</td>
-                                                        <td class="weekend off disabled off disabled" data-title="r3c5">21</td>
-                                                        <td class="weekend off disabled off disabled" data-title="r3c6">22</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="off disabled off disabled" data-title="r4c0">23</td>
-                                                        <td class="today off disabled" data-title="r4c1">24</td>
-                                                        <td class="off disabled" data-title="r4c2">25</td>
-                                                        <td class="off disabled" data-title="r4c3">26</td>
-                                                        <td class="active start-date active end-date available" data-title="r4c4">27</td>
-                                                        <td class="weekend off disabled" data-title="r4c5">28</td>
-                                                        <td class="weekend off disabled" data-title="r4c6">29</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="off disabled" data-title="r5c0">30</td>
-                                                        <td class="off off disabled" data-title="r5c1">1</td>
-                                                        <td class="off off disabled" data-title="r5c2">2</td>
-                                                        <td class="off off disabled" data-title="r5c3">3</td>
-                                                        <td class="off available" data-title="r5c4">4</td>
-                                                        <td class="weekend off off disabled" data-title="r5c5">5</td>
-                                                        <td class="weekend off off disabled" data-title="r5c6">6</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="note-calenda" style="width: max-content;">
-                                            <hr>*Ngày màu xanh lá: ngày có lịch khởi hành
+                                            <div class="calendar-table">
+                                                <table class="table-condensed" styles="background: white;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th colspan="5" class="month">
+                                                                <select class="monthselect"><option value="0" disabled="disabled">Th01</option><option value="1" disabled="disabled">Th02</option><option value="2" disabled="disabled">Th03</option><option value="3" disabled="disabled">Th04</option><option value="4" disabled="disabled">Th05</option><option value="5" disabled="disabled">Th06</option><option value="6" disabled="disabled">Th07</option><option value="7" disabled="disabled">Th08</option><option value="8" disabled="disabled">Th09</option><option value="9" disabled="disabled">Th10</option><option value="10" selected="selected">Th11</option><option value="11">Th12</option></select>
+                                                                <select class="yearselect"><option value="2020" selected="selected">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option></select>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>T2</th>
+                                                            <th>T3</th>
+                                                            <th>T4</th>
+                                                            <th>T5</th>
+                                                            <th>T6</th>
+                                                            <th>T7</th>
+                                                            <th>CN</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="off off disabled off disabled" data-title="r0c0">26</td>
+                                                            <td class="off off disabled off disabled" data-title="r0c1">27</td>
+                                                            <td class="off off disabled off disabled" data-title="r0c2">28</td>
+                                                            <td class="off off disabled off disabled" data-title="r0c3">29</td>
+                                                            <td class="off off disabled off disabled" data-title="r0c4">30</td>
+                                                            <td class="weekend off off disabled off disabled" data-title="r0c5">31</td>
+                                                            <td class="weekend off disabled off disabled" data-title="r0c6">1</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="off disabled off disabled" data-title="r1c0">2</td>
+                                                            <td class="off disabled off disabled" data-title="r1c1">3</td>
+                                                            <td class="off disabled off disabled" data-title="r1c2">4</td>
+                                                            <td class="off disabled off disabled" data-title="r1c3">5</td>
+                                                            <td class="off disabled off disabled" data-title="r1c4">6</td>
+                                                            <td class="weekend off disabled off disabled" data-title="r1c5">7</td>
+                                                            <td class="weekend off disabled off disabled" data-title="r1c6">8</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="off disabled off disabled" data-title="r2c0">9</td>
+                                                            <td class="off disabled off disabled" data-title="r2c1">10</td>
+                                                            <td class="off disabled off disabled" data-title="r2c2">11</td>
+                                                            <td class="off disabled off disabled" data-title="r2c3">12</td>
+                                                            <td class="off disabled off disabled" data-title="r2c4">13</td>
+                                                            <td class="weekend off disabled off disabled" data-title="r2c5">14</td>
+                                                            <td class="weekend off disabled off disabled" data-title="r2c6">15</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="off disabled off disabled" data-title="r3c0">16</td>
+                                                            <td class="off disabled off disabled" data-title="r3c1">17</td>
+                                                            <td class="off disabled off disabled" data-title="r3c2">18</td>
+                                                            <td class="off disabled off disabled" data-title="r3c3">19</td>
+                                                            <td class="off disabled off disabled" data-title="r3c4">20</td>
+                                                            <td class="weekend off disabled off disabled" data-title="r3c5">21</td>
+                                                            <td class="weekend off disabled off disabled" data-title="r3c6">22</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="off disabled off disabled" data-title="r4c0">23</td>
+                                                            <td class="today off disabled" data-title="r4c1">24</td>
+                                                            <td class="off disabled" data-title="r4c2">25</td>
+                                                            <td class="off disabled" data-title="r4c3">26</td>
+                                                            <td class="active start-date active end-date available" data-title="r4c4">27</td>
+                                                            <td class="weekend off disabled" data-title="r4c5">28</td>
+                                                            <td class="weekend off disabled" data-title="r4c6">29</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="off disabled" data-title="r5c0">30</td>
+                                                            <td class="off off disabled" data-title="r5c1">1</td>
+                                                            <td class="off off disabled" data-title="r5c2">2</td>
+                                                            <td class="off off disabled" data-title="r5c3">3</td>
+                                                            <td class="off available" data-title="r5c4">4</td>
+                                                            <td class="weekend off off disabled" data-title="r5c5">5</td>
+                                                            <td class="weekend off off disabled" data-title="r5c6">6</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="note-calenda" style="width: max-content;">
+                                                <hr>*Ngày màu xanh lá: ngày có lịch khởi hành
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
-                {
-                    <div class="col-xs-12 no-padding v-margin-bottom-15 relative">
-                        <span id="@loaiVe.LoaiVe.MaLoaiVe" class="number-detail">0</span>
-                        <span class="text-detail">
-                            <span>@loaiVe.LoaiVe.Ten (còn @loaiVe.SoLuong vé)</span>
-                        </span>
-                        <span class="price-color hide-class"></span>
-                        <input id="@loaiVe.LoaiVe.MaLoaiVe-conlai" type="hidden" value="@loaiVe.SoLuong"/>
-                        <input id="@loaiVe.LoaiVe.MaLoaiVe-entity" class="entity" money="@loaiVe.LoaiVe.GiaTien" type="hidden" value="0"/>
-                        <span class="price-color"> x @loaiVe.LoaiVe.GiaTien</span>
-                        <div class="btn-group">
-                            <button type="button" id="@loaiVe.LoaiVe.MaLoaiVe-btnSub" class="btn number-button minus-adult btn-general" onclick="subLoaiVe(this)">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" id="@loaiVe.LoaiVe.MaLoaiVe-btnAdd" class="btn number-button plus-adult btn-general" onclick="addLoaiVe(this)">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                }
-                <div class="col-xs-12 no-padding v-margin-bottom-15 showMsgAllotment hide-class">
-                    <span style="color:#ffbd00;">Chỗ cuối cùng đã được đặt vui lòng chọn ngày khác</span>
-                </div>
-                <div class="col-xs-12  no-padding v-margin-bottom-15 SpecialRateSurchargeAdult hide-class">
-                    <div class="col-xs-7 no-padding">
-                        <span>Phụ thu phòng đơn</span>
-                    </div>
-                    <div class="col-xs-5 no-padding text-right">
-                        <span class="price-color">0 VND</span>
-                    </div>
-                </div>
-                <div class="col-xs-12  no-padding v-margin-bottom-15 priceDiv">
-                    <span class="price-line price-line-detail"></span>
-                    <span class="labelPrice">Tổng cộng</span>
-                    <span class="price totalPrice">0<span class="tourItemCurrency">VND</span></span>
-                </div>
-                <div class="col-xs-12 no-padding v-margin-bottom-15 commistionRate hide-class">
-                    <div class="col-xs-7 no-padding">
-                        <span>Commission</span>
-                    </div>
-                    <div class="col-xs-5 no-padding text-right">
-                        <span class="price-commisson">0 VND</span>
-                    </div>
-                </div>
-                <div class="col-xs-12 no-padding specialrate-wrap-inner hide-class">
-                    <label class="ivivuPoint-checkbox">
-                        <span class="specialName"></span>
-                        <span class="specialPrice"></span>
-                        <input type="checkbox" class="select-special-rate">
-                        <span class="checkmark"></span>
-                        <input type="hidden" class="SpecialTotalRate">
-                    </label>
-                </div>
-                <div class="col-xs-12 no-padding wrap-supplement">
-                    <div class="ls-supplement"></div>
-                    <input type="hidden" class="note_supplement" value="">
-                    <input type="hidden" class="JsonSurchargeFee" value="[]">
-                </div>
-                <div class="col-xs-12 no-padding">
-                    <div class="form-group no-margin">
-                        <label class="visible-sm">&nbsp;</label>
-                        <div class="col-xs-12 no-padding scroll-mobile">
-                            <div class="col-xs-12 no-padding request-Button">
-                                <form id="pay" action="/Cart/Charge" method="POST">
-                                    <input type="hidden" id="TextBox1" placeholder="amount" name="amount" value="0" />
-                                    <script src="https://checkout.stripe.com/checkout.js"
-                                            class="stripe-button"
-                                            data-key="@Model.StripeKey.PublishableKey"
-                                            data-name="Du Lịch Việt"
-                                            data-amount="0"
-                                            data-currency="VND">
-                                    </script>
-                                    <input type="hidden" name="idTour" value="@Model.Tour.MaTour" />
-                                    @{ int i = 0;}
-                                    @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
-                                    {
-                                        <input type="hidden" class="checkOutMaLoaiVe" name="MaLoaiVe-@i" value="@loaiVe.LoaiVe.MaLoaiVe" />
-                                        <input type="hidden" class="checkOutQuantity" id="@loaiVe.LoaiVe.MaLoaiVe-MaLoaiVe" name="quantity-@i" value="" />
-                                        i++;
-                                    }
-                                    @if (Session["MaTaiKhoan"] != null)
-                                    {
-                                        <button class="btn btn-flat btn-action btn-md btn-block requestButton">Đặt Ngay</button>
-                                    }
-                                    else
-                                    {
-                                        <button style="display: none" class="btn btn-flat btn-action btn-md btn-block requestButton">Đặt Ngay</button>
-                                    }
-                                </form>
-                            </div>
-                            <div class="col-xs-12 no-padding check-Button">
-                                @if (Session["MaTaiKhoan"] == null)
-                                {
-                                    <button class="btn btn-flat btn-action btn-md btn-block checkButton requestPrice">Yêu Cầu Đặt</button>
-                                }
+                    @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
+                    {
+                        <div class="col-xs-12 no-padding v-margin-bottom-15 relative">
+                            <span id="@loaiVe.LoaiVe.MaLoaiVe" class="number-detail">0</span>
+                            <span class="text-detail">
+                                <span>@loaiVe.LoaiVe.Ten (còn @loaiVe.SoLuong vé)</span>
+                            </span>
+                            <span class="price-color hide-class"></span>
+                            <input id="@loaiVe.LoaiVe.MaLoaiVe-conlai" type="hidden" value="@loaiVe.SoLuong" />
+                            <input id="@loaiVe.LoaiVe.MaLoaiVe-entity" class="entity" money="@loaiVe.LoaiVe.GiaTien" type="hidden" value="0" />
+                            <span class="price-color"> x @loaiVe.LoaiVe.GiaTien</span>
+                            <div class="btn-group">
+                                <button type="button" id="@loaiVe.LoaiVe.MaLoaiVe-btnSub" class="btn number-button minus-adult btn-general" onclick="subLoaiVe(this)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" id="@loaiVe.LoaiVe.MaLoaiVe-btnAdd" class="btn number-button plus-adult btn-general" onclick="addLoaiVe(this)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
                         </div>
+                    }
+                    <div class="col-xs-12 no-padding v-margin-bottom-15 showMsgAllotment hide-class">
+                        <span style="color:#ffbd00;">Chỗ cuối cùng đã được đặt vui lòng chọn ngày khác</span>
+                    </div>
+                    <div class="col-xs-12  no-padding v-margin-bottom-15 SpecialRateSurchargeAdult hide-class">
+                        <div class="col-xs-7 no-padding">
+                            <span>Phụ thu phòng đơn</span>
+                        </div>
+                        <div class="col-xs-5 no-padding text-right">
+                            <span class="price-color">0 VND</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12  no-padding v-margin-bottom-15 priceDiv">
+                        <span class="price-line price-line-detail"></span>
+                        <span class="labelPrice">Tổng cộng</span>
+                        <span class="price totalPrice">0<span class="tourItemCurrency">VND</span></span>
+                    </div>
+                    <div class="col-xs-12 no-padding v-margin-bottom-15 commistionRate hide-class">
+                        <div class="col-xs-7 no-padding">
+                            <span>Commission</span>
+                        </div>
+                        <div class="col-xs-5 no-padding text-right">
+                            <span class="price-commisson">0 VND</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 no-padding specialrate-wrap-inner hide-class">
+                        <label class="ivivuPoint-checkbox">
+                            <span class="specialName"></span>
+                            <span class="specialPrice"></span>
+                            <input type="checkbox" class="select-special-rate">
+                            <span class="checkmark"></span>
+                            <input type="hidden" class="SpecialTotalRate">
+                        </label>
+                    </div>
+                    <div class="col-xs-12 no-padding wrap-supplement">
+                        <div class="ls-supplement"></div>
+                        <input type="hidden" class="note_supplement" value="">
+                        <input type="hidden" class="JsonSurchargeFee" value="[]">
+                    </div>
+                    <div class="col-xs-12 no-padding">
+                        <div class="form-group no-margin">
+                            <label class="visible-sm">&nbsp;</label>
+                            <div class="col-xs-12 no-padding scroll-mobile">
+                                <div class="col-xs-12 no-padding request-Button">
+                                    <form id="pay" action="/Cart/Charge" method="POST">
+                                        <input type="hidden" id="TextBox1" placeholder="amount" name="amount" value="0" />
+                                        <script src="https://checkout.stripe.com/checkout.js"
+                                                class="stripe-button"
+                                                data-key="@Model.StripeKey.PublishableKey"
+                                                data-name="Du Lịch Việt"
+                                                data-amount="0"
+                                                data-currency="VND">
+                                        </script>
+                                        <input type="hidden" name="idTour" value="@Model.Tour.MaTour" />
+                                        @{ int i = 0;}
+                                        @foreach (LoaiVeSoLuongCon loaiVe in @Model.CacLoaiVe)
+                                        {
+                                            <input type="hidden" class="checkOutMaLoaiVe" name="MaLoaiVe-@i" value="@loaiVe.LoaiVe.MaLoaiVe" />
+                                            <input type="hidden" class="checkOutQuantity" id="@loaiVe.LoaiVe.MaLoaiVe-MaLoaiVe" name="quantity-@i" value="" />
+                                            i++;
+                                        }
+                                        @if (Session["MaTaiKhoan"] != null)
+                                        {
+                                            <button class="btn btn-flat btn-action btn-md btn-block requestButton">Đặt Ngay</button>
+                                        }
+                                        else
+                                        {
+                                            <button style="display: none" class="btn btn-flat btn-action btn-md btn-block requestButton">Đặt Ngay</button>
+                                        }
+                                    </form>
+                                </div>
+                                <div class="col-xs-12 no-padding check-Button">
+                                    @if (Session["MaTaiKhoan"] == null)
+                                    {
+                                        <button class="btn btn-flat btn-action btn-md btn-block checkButton requestPrice">Yêu Cầu Đặt</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="member-point check-point member-point__sidebar">
+                        <span></span>
                     </div>
                 </div>
-                <div class="clearfix"></div>
-                <div class="member-point check-point member-point__sidebar">
-                    <span></span>
-                </div>
-            </div>
 
             </div>
         </div>
     </div>
-    <div class="container">
-        <div>
-            <h3>Giới thiệu về: @Model.Tour.DiaDiemDi.TenDiaDiem</h3>
-        </div>
-        <div>
-            <p>
-                @Model.chitiet
-            </p>
-        </div>
-        <div> <h3>Giới thiệu về: @Model.Tour.DiaDiemDi.TenDiaDiem</h3></div>
-        <div>
-            <p>
-                @Model.chitiet
-            </p>
-        </div>
-        @foreach (var lichtrinh in Model.LichTrinh)
-        {
+    @*<div class="container">
             <div>
+                <h3>Giới thiệu về: @Model.Tour.DiaDiemDi.TenDiaDiem</h3>
+            </div>
+            <div>
+                <p>
+                    @Model.chitiet
+                </p>
+            </div>
+            <div> <h3>Giới thiệu về: @Model.Tour.DiaDiemDi.TenDiaDiem</h3></div>
+            <div>
+                <p>
+                    @Model.chitiet
+                </p>
+            </div>
+            @foreach (var lichtrinh in Model.LichTrinh)
+            {
                 <div>
-                    <h4 font-size="20px" >
-                        Ngày @lichtrinh.Ngay : @lichtrinh.MoTa
-                    </h4>
+                    <div>
+                        <h4 font-size="20px">
+                            Ngày @lichtrinh.Ngay : @lichtrinh.MoTa
+                        </h4>
+                    </div>
+
+                    <div>
+                        <p>
+
+                            @lichtrinh.ChiTiet
+
+                        </p>
+                    </div>
                 </div>
-                
-                <div>
-                    <p>
+            }
+        </div>*@
+    <link href="~/Content/ThemeHe/stylechitiet.css" rel="stylesheet" />
+    <div class="container n3-tour-description mg-bot-30">
+        <div class="container n3-tour-detail ">
+            <div class="row">
+                <div class="chuongtrinhtour mg-bot30">
+                    <div class="title-lg"><h2>Chương trình tour</h2></div>
+                    <div class="sec-content itinerary">
+                        <div class="list">
+                            @{
+                                int i1 = 1;
+                                string id = "d" + i1.ToString();
+                                string id1 = "ah" + i1.ToString();
+                            }
+                            @foreach (var lichtrinh in Model.LichTrinh)
+                            {
+                                <div class="list__item">
+                                    <div class="list__time">
+                                        <div class="num">Ngày @lichtrinh.Ngay</div>
+                                    </div>
+                                    <div class="list__border"></div>
+                                    <div class="list__desc">
+                                        <h3 class="font500 name"><img src="~/Content/ThemeHe/i-marker.png" alt="marker">&nbsp;&nbsp;&nbsp;@lichtrinh.MoTa</h3>
+                                        <div class="@id detail" style="max-height: 90px; overflow-y: hidden;">
+                                            <div style="text-align: justify;">
+                                                <div>
+                                                    @lichtrinh.ChiTiet
+                                                </div>
+                                            </div>
+                                            <div style="text-align: justify;">
+                                                <div>
+                                                    <img class="destination__image" src="@lichtrinh.DuongDanAnh"/>
+                                                </div>
+                                            </div>
 
-                        @lichtrinh.ChiTiet
-
-                    </p>
+                                        </div>
+                                        <div class="an-hien @id1">
+                                            <div class="hienra" style="display: block;">
+                                                <a href="#"> Xem thêm &nbsp;<i class="fas fa-arrow-down"></i></a>
+                                            </div>
+                                            <div class="andi" style="display: none;">
+                                                <a href="#"> Ẩn đi &nbsp;<i class="fas fa-arrow-up"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="border"></div>
+                                    </div>
+                                </div>
+                                i1++;
+                                id = "d" + i1.ToString();
+                                id1 = "ah" + i1.ToString();
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
-        }
+        </div>
     </div>
-
 </section>
 
 @section styles
@@ -479,13 +538,13 @@
             float: right;
         }
 
-            .floatBox.highlight .date-input-group .date-input {
-                padding-left: 15px;
-                cursor: pointer;
-                height: 34px;
-                background: #fff;
-                border-radius: 2px;
-            }
+        .floatBox.highlight .date-input-group .date-input {
+            padding-left: 15px;
+            cursor: pointer;
+            height: 34px;
+            background: #fff;
+            border-radius: 2px;
+        }
 
         .floatBox .form-group label {
             font-weight: normal;
@@ -512,10 +571,10 @@
             position: absolute;
         }
 
-            .text-detail .width-70 {
-                width: 70px;
-                display: inline-block;
-            }
+        .text-detail .width-70 {
+            width: 70px;
+            display: inline-block;
+        }
 
         .price-color {
             color: #ffbd00;
@@ -808,7 +867,6 @@
         .daterangepicker.daterangepicker_custom_class .single .note-calenda hr {
             margin-top: -5px;
             margin-bottom: 15px;
-            
         }
 
         .daterangepicker.daterangepicker_custom_class .single .note-calenda {
@@ -817,6 +875,16 @@
 
         .modal {
             top: 6rem;
+        }
+
+        .input-group > .form-control, .input-group > .form-control-plaintext, .input-group > .custom-select, .input-group > .custom-file {
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            box-shadow: inset 0 0 0 transparent;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .destination__image {
+            width: 20rem;
         }
     </style>
 }
@@ -988,7 +1056,7 @@
                     continue;
                 }
                 var check = false;
-                
+
                 listTour.list.forEach(function (tour) {
                     if (!check) {
                         var len = tour.ThoigianDi.length;
@@ -1111,6 +1179,18 @@
             $('.check-Button').toggle();
             $('.requestButton').toggle();
         })
+         $('.ah1 .hienra').click(function(event){event.preventDefault();$('.n3-tour-detail .chuongtrinhtour .d1.detail').css("max-height","initial");$('.n3-tour-detail .chuongtrinhtour .d1.detail').css("overflow-y","initial");$('.ah1 .andi').css("display","block");$('.ah1 .hienra').css("display","none");})
+
+
+    $('.ah1 .andi').click(function (event) { event.preventDefault(); $('.n3-tour-detail .chuongtrinhtour .d1.detail').css("max-height", "90px"); $('.n3-tour-detail .chuongtrinhtour .d1.detail').css("overflow-y", "hidden"); $('.ah1 .andi').css("display", "none"); $('.ah1 .hienra').css("display", "block"); })
+    $('.ah2 .hienra').click(function(event){event.preventDefault();$('.n3-tour-detail .chuongtrinhtour .d2.detail').css("max-height","initial");$('.n3-tour-detail .chuongtrinhtour .d2.detail').css("overflow-y","initial");$('.ah2 .andi').css("display","block");$('.ah2 .hienra').css("display","none");})
+
+
+    $('.ah2 .andi').click(function (event) { event.preventDefault(); $('.n3-tour-detail .chuongtrinhtour .d2.detail').css("max-height", "90px"); $('.n3-tour-detail .chuongtrinhtour .d2.detail').css("overflow-y", "hidden"); $('.ah2 .andi').css("display", "none"); $('.ah2 .hienra').css("display", "block"); })
+    $('.ah3 .hienra').click(function(event){event.preventDefault();$('.n3-tour-detail .chuongtrinhtour .d3.detail').css("max-height","initial");$('.n3-tour-detail .chuongtrinhtour .d3.detail').css("overflow-y","initial");$('.ah3 .andi').css("display","block");$('.ah3 .hienra').css("display","none");})
+
+
+    $('.ah3 .andi').click(function (event) { event.preventDefault(); $('.n3-tour-detail .chuongtrinhtour .d3.detail').css("max-height", "90px"); $('.n3-tour-detail .chuongtrinhtour .d3.detail').css("overflow-y", "hidden"); $('.ah3 .andi').css("display", "none"); $('.ah3 .hienra').css("display", "block"); })
 
     </script>
 }

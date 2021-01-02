@@ -16,5 +16,6 @@ namespace BanVeDiTourDuLich.Models
         public int Ngay { get; set; }
         public string MoTa { get; set; }
         public string ChiTiet { get; set; }
+        public string DuongDanAnh { get; set; }
     }
 }

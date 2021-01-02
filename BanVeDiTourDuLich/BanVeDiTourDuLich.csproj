@@ -299,9 +299,17 @@
     <Compile Include="Migrations\202012300830217_ThemThongTinNhanVien.designer.cs">
       <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012311342577_AddDuongDanAnhvaoLichTrinh.cs" />
+    <Compile Include="Migrations\202012311342577_AddDuongDanAnhvaoLichTrinh.Designer.cs">
+      <DependentUpon>202012311342577_AddDuongDanAnhvaoLichTrinh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.cs" />
     <Compile Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.designer.cs">
       <DependentUpon>202101010217239_AddIdentityOptionalCustomerTrace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101020244087_seeSomethingchange.cs" />
+    <Compile Include="Migrations\202101020244087_seeSomethingchange.designer.cs">
+      <DependentUpon>202101020244087_seeSomethingchange.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
@@ -2415,7 +2423,9 @@
     <Content Include="Content\ThemeHe\i-code.png" />
     <Content Include="Content\ThemeHe\i-date.png" />
     <Content Include="Content\ThemeHe\i-dep.png" />
+    <Content Include="Content\ThemeHe\i-marker.png" />
     <Content Include="Content\ThemeHe\i-price.png" />
+    <Content Include="Content\ThemeHe\stylechitiet.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\flaticon\backup.txt" />
     <Content Include="Content\fonts\flaticon\font\flaticon.css" />
@@ -2731,8 +2741,14 @@
     <EmbeddedResource Include="Migrations\202012300830217_ThemThongTinNhanVien.resx">
       <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012311342577_AddDuongDanAnhvaoLichTrinh.resx">
+      <DependentUpon>202012311342577_AddDuongDanAnhvaoLichTrinh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.resx">
       <DependentUpon>202101010217239_AddIdentityOptionalCustomerTrace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101020244087_seeSomethingchange.resx">
+      <DependentUpon>202101020244087_seeSomethingchange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

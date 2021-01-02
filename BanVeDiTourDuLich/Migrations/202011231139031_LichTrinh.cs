@@ -10,13 +10,13 @@
             CreateTable(
                 "dbo.LichTrinh",
                 c => new
-                    {
-                        MaTinhNang = c.Int(nullable: false, identity: true),
-                        MaTour = c.String(),
-                        Ngay = c.Int(nullable: false),
-                        MoTa = c.String(),
-                        ChiTiet = c.String(),
-                    })
+                {
+                    MaTinhNang = c.Int(nullable: false, identity: true),
+                    MaTour = c.String(),
+                    Ngay = c.Int(nullable: false),
+                    MoTa = c.String(),
+                    ChiTiet = c.String(),
+                })
                 .PrimaryKey(t => t.MaTinhNang);
             
         }
