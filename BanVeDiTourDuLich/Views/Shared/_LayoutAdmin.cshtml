@@ -35,214 +35,297 @@
     <link rel="stylesheet" href="/Content/plugins/daterangepicker/daterangepicker.css"/>
     <!-- summernote -->
     <link rel="stylesheet" href="/Content/plugins/summernote/summernote-bs4.min.css"/>
+    <style>
+        .inforSignIn {
+            top: 10px;
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            z-index: 10;
+            padding: 0.5rem;
+            background: #343a40;
+        }
+
+        .function-item {
+            display: block;
+            text-align: center;
+            padding: 0.5rem;
+            color: #c2c7d0 !important;
+            font-size: smaller;
+            cursor: pointer;
+            background: #343a40;
+        }
+
+        .searbar-wrap {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .result__item {
+            display: flex;
+            height: 3rem;
+            justify-content: space-around;
+            padding: 0.2rem;
+        }
+
+        .result__item__image {
+            width: 2rem;
+        }
+
+        .result__box {
+            padding: 10px;
+            background: aliceblue;
+            border-bottom-color: gray;
+            border-bottom-width: 1px;
+            border-bottom: groove;
+            position: absolute;
+            top: 120%;
+            width: 150%;
+            overflow-y: auto;
+            max-height: 800%;
+        }
+
+        .result__item__icon {
+            display: flex;
+        }
+
+        .result__item__discription {
+            position: relative;
+        }
+    </style>
     @RenderSection("styles", false)
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-<!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-                <i class="fas fa-bars"></i>
-            </a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Trang chủ</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Liên hệ</a>
-        </li>
-    </ul>
-
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar"
-                   type="search"
-                   placeholder="Tìm Kiếm"
-                   aria-label="Search"/>
-            <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
+    <div class="notification__box">
+        <div class="notification__items">
+            @*<div class="notification__item">
+                <img class="notification__image" src="/Content/images/Persions/ADMIN.jpg" />
+                <p class="notification__text">Khách hàng gửi tin nhắn cho bạn</p>
+                <button class="notification__button" onclick="addOutAnimation(this)">
+                    <i class="notification__icon fas fa-minus-circle"></i>
                 </button>
-            </div>
+            </div>*@
         </div>
-    </form>
+    </div>
 
-</nav>
-<!-- /.navbar -->
-<!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="@nhanvien.DuongDanAnh"
-                     class="img-circle elevation-2"
-                     alt="User Image"/>
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">@nhanvien.Ten</a>
-                <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan"/>
-            </div>
-        </div>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar"
-                       type="search"
-                       placeholder="Tìm Kiếm"
-                       aria-label="Search"/>
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+            <!-- Thông Tin Chi Tiết -->
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column"
-                data-widget="treeview"
-                role="menu"
-                data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+            <list class="inforSignIn">
+                <a class="function-item" onclick="ChuyenTrangThongTinChiTiet()">Thông Tin Chi Tiết</a>
+                <a href="/User/Signout" class="function-item">Đăng Xuất</a>
+            </list>
+
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a id="#TongQuanLink" href="/admin/index" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Tổng quan</p>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                        <i class="fas fa-bars"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a id="#QuanLyVeLink" href="/admin/QuanLyTour" class="nav-link">
-                        <i class="nav-icon fas fa-ticket-alt"></i>
-                        <p>Quản lý Tour</p>
-                    </a>
-                </li>
-                <!-- Quản lý đặt vé -->
-                <li class="nav-item">
-                    <a id="#QuanLyVeLink" href="/admin/QuanLyBanVe" class="nav-link">
-                        <i class="nav-icon fas fa-ticket-alt"></i>
-                        <p>Quản lý bán vé</p>
-                    </a>
-                </li>
-                <!-- /. Quản lý đặt vé -->
-                <!-- Quản lý người dùng -->
-                <li class="nav-item">
-                    <a id="#QuanLyNguoiDungLink" href="/admin/quanlynguoidung" class="nav-link">
-                        <i class="nav-icon fas fas fa-users"></i>
-                        <p>Quản lý người dùng</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a id="#QuanLyNguoiDungLink" href="/admin/QuanLyDiaDiem" class="nav-link">
-                        <i class="nav-icon fas fas fa-users"></i>
-                        <p>Quản lý địa điểm</p>
-                    </a>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="index3.html" class="nav-link">Trang chủ</a>
                 </li>
             </ul>
+
+            <!-- SEARCH FORM -->
+            <form class="form-inline ml-3">
+                <div class="input-group input-group-sm" style="display: flex; flex-direction: column;">
+                    <div class="searbar-wrap">
+                        <input class="form-control form-control-navbar"
+                               type="search"
+                               placeholder="Tìm Kiếm"
+                               aria-label="Search"
+                               id="searchbar" />
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div style="display: none" id="resultBox" class="result__box">
+                        @*<div class="result__item">
+                                <img class="result__item__image" src="~/Content/images/Persions/ADMIN.jpg">
+                                <p class="result__item__text">Người dùng 1</p>
+                                <div class="result__item__icon">
+                                    <p class="result__item__discription">Trong nhân viên <i style="position: absolute;
+                                                                                                                       right: -10px" class="fas fa-info"></i></p>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </form>
+
         </nav>
-        <!-- /.sidebar-menu -->
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div id="chiTiet" class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="@nhanvien.DuongDanAnh"
+                             class="img-circle elevation-2"
+                             alt="User Image" />
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">@nhanvien.Ten</a>
+                        <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
+                    </div>
+
+                </div>
+
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column"
+                        data-widget="treeview"
+                        role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                        with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a id="#TongQuanLink" href="/admin/index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>Tổng quan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="#QuanLyVeLink" href="/admin/QuanLyTour" class="nav-link">
+                                <i class="fas fa-paper-plane"></i>
+                                <p>Quản lý Tour</p>
+                            </a>
+                        </li>
+                        <!-- Quản lý đặt vé -->
+                        <li class="nav-item">
+                            <a id="#QuanLyVeLink" href="/admin/QuanLyBanVe" class="nav-link">
+                                <i class="nav-icon fas fa-ticket-alt"></i>
+                                <p>Quản lý bán vé</p>
+                            </a>
+                        </li>
+                        <!-- /. Quản lý đặt vé -->
+                        <!-- Quản lý người dùng -->
+                        <li class="nav-item">
+                            <a id="#QuanLyNguoiDungLink" href="/admin/quanlynguoidung" class="nav-link">
+                                <i class="fas fa-user-tie"></i>
+                                <p>Quản lý người dùng</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="#QuanLyNguoiDungLink" href="/admin/QuanLyDiaDiem" class="nav-link">
+                                <i class="fas fa-map"></i>
+                                <p>Quản lý địa điểm</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="#QuanLyNguoiDungLink" href="/admin/QuanLyNhanVien" class="nav-link">
+                                <i class="nav-icon fas fas fa-users"></i>
+                                <p>Quản lý nhân viên</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        @RenderBody()
+        <footer class="main-footer">
+            <strong>Bản quyền &copy; 2014-2020 <a href="#">Vacation</a>.</strong>
+            Đã đăng kí bản quyền
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Phiên bản</b> 3.1.0-pre
+            </div>
+        </footer>
     </div>
-    <!-- /.sidebar -->
-</aside>
-@RenderBody()
-<footer class="main-footer">
-    <strong>Bản quyền &copy; 2014-2020 <a href="#">Vacation</a>.</strong>
-    Đã đăng kí bản quyền
-    <div class="float-right d-none d-sm-inline-block">
-        <b>Phiên bản</b> 3.1.0-pre
-    </div>
-</footer>
-</div>
-<!-- ./wrapper -->
-<!-- jQuery -->
-<script src="/Content/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>$.widget.bridge("uibutton", $.ui.button);</script>
-<!-- Bootstrap 4 -->
-<script src="/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="/Content/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="/Content/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="/Content/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/Content/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="/Content/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="/Content/plugins/moment/moment.min.js"></script>
-<script src="/Content/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="/Content/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/Content/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/Content/dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/Content/dist/js/pages/dashboard.js"></script>
-<script src="/Content/dist/js/AdminScript.js"></script>
-<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
-<script src="~/signalr/hubs"></script>
-@RenderSection("scripts", false)
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>$.widget.bridge("uibutton", $.ui.button);</script>
+    <!-- Bootstrap 4 -->
+    <script src="/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="/Content/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="/Content/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="/Content/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/Content/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="/Content/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="/Content/plugins/moment/moment.min.js"></script>
+    <script src="/Content/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="/Content/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/Content/dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/Content/dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="/Content/dist/js/pages/dashboard.js"></script>
+    <script src="/Content/dist/js/AdminScript.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    @RenderSection("scripts", false)
 <script>
 
     var chat = $.connection.chat;
     $.connection.hub.start().done(function () {
         var managerId = $('.MaTaiKhoan')[0].value;
-        chat.server.addConnectionId(managerId, chat.connection.id);
+        chat.server.initManagerRun(managerId, chat.connection.id);
+        //chat.server.getChartData();
     });
 
-    chat.client.addNewMessageCurrentManagerBrower = function (clientId,msg, timeSent , managerName , imagePath) {
+    chat.client.addNewMessageCurrentManagerBrower = function (clientId, msg, timeSent, managerName, imagePath) {
         if (msg !== '') {
             var managerId = $('.MaTaiKhoan')[0].value;
             var text = `<div class="direct-chat-msg right">
-        <div class="direct-chat-infos clearfix">
-        <span class="direct-chat-name float-right">${managerName}</span>
-        <span class="direct-chat-timestamp float-left">${timeSent}</span>
-        </div>
-        <img class="direct-chat-img" src ='${imagePath}' alt="message user image">
-        <div class="direct-chat-text">
-        ${msg}
-        </div>
-        </div>`;
+            <div class="direct-chat-infos clearfix">
+            <span class="direct-chat-name float-right">${managerName}</span>
+            <span class="direct-chat-timestamp float-left">${timeSent}</span>
+            </div>
+            <img class="direct-chat-img" src ='${imagePath}' alt="message user image">
+            <div class="direct-chat-text">
+            ${msg}
+            </div>
+            </div>`;
             $(`#directChat${clientId}`).children().last().after(text);
         }
     };
 
     // Thêm tin nhắn vào cuộc trò chuyện đã có sẵn từ trước.
-    function addNewMessageToExistingTalk(msg, timeSent, clientId , clientName , imagePath) {
+    function addNewMessageToExistingTalk(msg, timeSent, clientId, clientName, imagePath) {
         if (msg != "") {
             var directChat = $(`#directChat${clientId}`)[0];
             if (directChat != null) {
                 var html = `<div class="direct-chat-msg">
-                                    <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-left">${clientName}</span>
-                                        <span class="direct-chat-timestamp float-right">${timeSent}</span>
-                                    </div>
-                                    <!-- /.direct-chat-infos -->
-                                    <img class="direct-chat-img" src="${imagePath}" alt="message user image">
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        ${msg}
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>`;
+                                        <div class="direct-chat-infos clearfix">
+                                            <span class="direct-chat-name float-left">${clientName}</span>
+                                            <span class="direct-chat-timestamp float-right">${timeSent}</span>
+                                        </div>
+                                        <!-- /.direct-chat-infos -->
+                                        <img class="direct-chat-img" src="${imagePath}" alt="message user image">
+                                        <!-- /.direct-chat-img -->
+                                        <div class="direct-chat-text">
+                                            ${msg}
+                                        </div>
+                                        <!-- /.direct-chat-text -->
+                                    </div>`;
                 if ($(directChat).children().length == 0) {
                     $(directChat)[0].innerHTML = html
                 } else {
@@ -253,7 +336,7 @@
     }
 
     // update newest msg in messsagesBox
-    function changeShowedMessage(clientId, msg, timeSent , clientName) {
+    function changeShowedMessage(clientId, msg, timeSent, clientName) {
         if (msg != "") {
             var timeSentElement = $(`#Messages${clientId} a div .contacts-list-name small`)[0];
             var msgElement = $(`#Messages${clientId} a div .contacts-list-msg`)[0];
@@ -285,7 +368,7 @@
         if (msgDetail !== '') {
             var managerId = $('.MaTaiKhoan')[0].value;
             var clientId = $("#currentClientId")[0].innerText;
-            chat.server.sendMessageFromSpecificManagerToSpecificClient(managerId , clientId , msgDetail)
+            chat.server.sendMessageFromSpecificManagerToSpecificClient(managerId, clientId, msgDetail)
             msg.scrollTop = msg.scrollHeight;
             $('.msg-input')[0].value = '';
         }
@@ -301,7 +384,7 @@
 
     };
 
-    chat.client.addNewMessage = function (clientId, msg, timeSent , clientName , imagePath ) {
+    chat.client.addNewMessage = function (clientId, msg, timeSent, clientName, imagePath) {
         var lists = $($(".contacts-list")[0]).children();
         var checkIfTalkIsExisting = false;
         for (i = 0; i < lists.length; i++) {
@@ -311,39 +394,49 @@
             }
         }
         if (checkIfTalkIsExisting) {
-            addNewMessageToExistingTalk(msg, timeSent, clientId , clientName , imagePath);
-            changeShowedMessage(clientId, msg, timeSent , clientName);
+            addNewMessageToExistingTalk(msg, timeSent, clientId, clientName, imagePath);
+            changeShowedMessage(clientId, msg, timeSent, clientName);
         } else {
             addMessageInformationInCard(clientId, msg, timeSent, clientName, imagePath);
             addNewMessageToExistingTalk(msg, timeSent, clientId, clientName, imagePath);
         }
+
+        addNotificationToAdmin(imagePath, `Khách hàng ${clientName} gửi tin nhắn tới bạn`);
     }
 
     // Thêm một dối tượng mới nhắn tin đến
     // Id của tin nhắn của một người mới gửi tới dược đặt dạng : Messages+clientId
-    function addMessageInformationInCard(clientId, msg, timeSent , clientName , imagePath) {
+    function addMessageInformationInCard(clientId, msg, timeSent, clientName, imagePath) {
         var html = `<li id="Messages${clientId}">
-                            <a>
-                                <img class="contacts-list-img" src="${imagePath}" alt="User Avatar">
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        ${clientName}
-                                        <small class="contacts-list-date float-right">${timeSent}</small>
-                                    </span>
-                                    <span class="contacts-list-msg">${msg}</span>
-                                </div>
-                            </a>
-                        </li>`;
+                                <a>
+                                    <img class="contacts-list-img" src="${imagePath}" alt="User Avatar">
+                                    <div class="contacts-list-info">
+                                        <span class="contacts-list-name">
+                                            ${clientName}
+                                            <small class="contacts-list-date float-right">${timeSent}</small>
+                                        </span>
+                                        <span class="contacts-list-msg">${msg}</span>
+                                    </div>
+                                </a>
+                            </li>`;
         var list = $(".contacts-list")[0];
-        $(list).children().last().after(html);
+        if ($(list).children().length == 0) {
+            $(list).append(html);
+        } else {
+            $(list).children().last().after(html);
+        }
         var html2 = `<div class="direct-chat-messages" id="directChat${clientId}">
-                        </div>`;
+                            </div>`;
         var cardBody = $("#card")[0];
-        $(cardBody).children().last().after(html2);
+        if ($(cardBody).children().length == 0) {
+            $(cardBody).append(html2);
+        } else {
+            $(cardBody).children().last().after(html2);
+        }
         $(`#directChat${clientId}`).hide();
-        $(`#Messages${clientId} a`)[0].onclick = function() {
-             showMessageOnClick(clientId);
-             $("#currentClientId")[0].innerText = clientId;
+        $(`#Messages${clientId} a`)[0].onclick = function () {
+            showMessageOnClick(clientId);
+            $("#currentClientId")[0].innerText = clientId;
         }
     };
 
@@ -360,17 +453,141 @@
 
     };
 
-    //$('#btn-message').click(function() {
-    //    var check = $("#chatIsShown")[0];
-    //    if (check.value == "1") {
-    //        $($(".direct-chat-contacts")[0]).show();
-    //        check.value = "0";
-    //    } else {
-    //        $($(".direct-chat-contacts")[0]).hide();
-    //        check.value = "1";
-    //    }
-    //})
-    
+
+    chat.client.updateChart = function (labels, data) {
+        UpdateChart(labels, data);
+    };
+
+    chat.client.updateTangTruong = function (value) {
+        $('#so_hieu_tang_truong')[0].innerText = value + "%";
+    }
+
+    chat.client.updateSoVeDatMoi = function (value) {
+        var currentValue = Number($('#sovedatmoi')[0].innerText);
+        var newValue = Number(value) - currentValue;
+        $('#sovedatmoi')[0].innerText = value;
+        console.log(newValue);
+        if (newValue != 0) {
+            console.log(123123);
+            addNotificationToAdmin('/Content/images/ticket.png', `${newValue} được đặt mới`);
+        }
+    }
+
+    chat.client.updateSoKhachHangMoi = function (value) {
+        $('#sokhachhangmoi')[0].innerText = value;
+    }
+
+    var isHoverInformation = false;
+
+    $($('.inforSignIn')[0]).hover(function () {
+        isHoverInformation = !isHoverInformation;
+        if (!isHoverInformation)
+            if ($(this).css('display') == 'none') {
+                $(this).css('display', 'flex');
+            } else {
+                $(this).css('display', 'none');
+            }
+    })
+
+    $('#chiTiet').hover(function () {
+        console.log(123);
+        var element = $($('.inforSignIn')[0]);
+        if ($(element).css('display') == 'none') {
+            $(element).css('display', 'flex');
+        } else {
+            setTimeout(function () {
+                if (!isHoverInformation)
+                    $(element).css('display', 'none')
+            },
+                1000);
+        };
+    });
+
+
+    function ChuyenTrangThongTinChiTiet() {
+        var maTaiKhoanBox = $(".MaTaiKhoan")[0];
+        var maTaiKhoan = $(maTaiKhoanBox).val();
+        window.location.href = "/user/inforuser/" + maTaiKhoan;
+    }
+
+    $('#searchbar').keydown(function () {
+        console.log(123);
+        var value = $(this).val();
+        $.ajax({
+            method: "POST",
+            url: "/Admin/TimKiemTongHop",
+            data: { tuKhoa: value },
+            success: function (data) {
+                console.log(data);
+                UpdateSearchResult(data);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+    })
+
+    function UpdateSearchResult(data) {
+        $('#resultBox').empty();
+        data.forEach(function (item) {
+            var html = `<a href="${item.DuongDan}/${item.Id}">
+<div class="result__item">
+                        <img class="result__item__image" src="${item.DuongDanAnhThongTin}">
+                        <p class="result__item__text">${item.TenThongTin}</p>
+                        <div class="result__item__icon">
+                            <p class="result__item__discription">Trong ${item.ViTriTimKiem} <i style="position: absolute;
+                                                                                                               right: -10px" class="fas fa-info"></i></p>
+                        </div>
+                    </div>
+</a>`;
+
+            if ($('#resultBox').children().length == 0) {
+                $('#resultBox').append(html);
+            } else {
+                $('#resultBox').children().last().after(html);
+            }
+        });
+    }
+
+    var checkHoverResultBox = false;
+    $('#resultBox').hover(function () {
+        checkHoverResultBox = !checkHoverResultBox;
+    })
+    $('#searchbar').focusout(function () {
+        if (!checkHoverResultBox) {
+            $('#resultBox').hide();
+            $('#searchbar').show();
+        }
+    })
+
+    $('#searchbar').focus(function () {
+        $('#resultBox').show();
+    })
+
+    function addNotificationToAdmin(duongDanAnh, thongBao) {
+        var html = `<div class="notification__item">
+                <img class="notification__image" src="${duongDanAnh}" />
+                <p class="notification__text">${thongBao}</p>
+                <button class="notification__button" onclick="addOutAnimation(this)">
+                    <i class="notification__icon fas fa-minus-circle"></i>
+                </button>
+            </div>`;
+
+        var notificationItems = $($('.notification__items')[0]);
+        $(notificationItems).append(html);
+    }
+
+        //$('#btn-message').click(function() {
+        //    var check = $("#chatIsShown")[0];
+        //    if (check.value == "1") {
+        //        $($(".direct-chat-contacts")[0]).show();
+        //        check.value = "0";
+        //    } else {
+        //        $($(".direct-chat-contacts")[0]).hide();
+        //        check.value = "1";
+        //    }
+        //})
+
 </script>
 </body>
 </html>

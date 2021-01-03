@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class QuanLyBanVeController : Controller
+    public class QuanLyBanVeController : BaseController
     {
         private DataContext _context;
 

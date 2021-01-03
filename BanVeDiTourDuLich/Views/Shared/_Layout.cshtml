@@ -252,6 +252,7 @@
                     <li class="nav-item cta">
                         <a href="/user/index" class="nav-link">Đăng nhập</a>
                     </li>
+                    <input class="MaTaiKhoan" type="hidden" value="" />
                 }
                 else
                 {
@@ -271,7 +272,10 @@
                             <a href="/User/Signout" class="function-item">Đăng Xuất</a>
                         </list>
                     </li>
-                    <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan"/>
+                    if (taiKhoan != null)
+                    {
+                        <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
+                    }
                 }
             </ul>
         </div>
@@ -451,11 +455,11 @@
     var chat = $.connection.chat;
     $.connection.hub.error(function(error) {
         alert(error);
-        chat.server.addConnectionId(clientId, chat.connection.id);
+        chat.server.addConnectionIdUser(clientId, chat.connection.id);
     });
     $.connection.hub.start().done(function() {
         var clientId = $('.MaTaiKhoan')[0].value;
-        chat.server.addConnectionId(clientId, chat.connection.id);
+        chat.server.addConnectionIdUser(clientId, chat.connection.id);
     });
 
     $.connection.hub.disconnected(function() {
@@ -498,6 +502,10 @@
         }
     }
 
+    chat.client.receiveOptionalIdCustomer = function (customerId) {
+        $($('.MaTaiKhoan')[0]).val(customerId);
+    }
+
     $($('.send__button')[0]).click(function() {
             var msgDetail = $('.msg-input')[0].value;
             if (msgDetail !== '') {
@@ -515,6 +523,8 @@
     function updateManagerId(managerId) {
         $("#managerId")[0].innerText = managerId;
     }
+
+    
 
     function closeChat() {
         var box = $('.msgbox')[0];
@@ -538,7 +548,6 @@
     }
 
     function DoiPass() {
-        console.log(1);
         var myModalDoiMatKhau = $("#myModalDoiMatKhau")[0];
         var mask = $('.mask')[0];
         $(mask).toggle();

@@ -9,7 +9,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class DatVeController : Controller
+    public class DatVeController : BaseController
     {
         private DataContext context = new DataContext();
         [HttpPost]

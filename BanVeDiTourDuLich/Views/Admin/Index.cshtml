@@ -4,10 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     int count = HomeController.Count;
     DataContext context = new DataContext();
-    int user = context.KhachHangs.Count();
-    int ve = context.Ves.Count();
 }
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -39,9 +36,9 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>@ve</h3>
+                            <h3 id="sovedatmoi">0</h3>
 
-                            <p>Số vé đặt mới</p>
+                            <p>Số vé đặt trong tháng</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -53,7 +50,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3 id="so_hieu_tang_truong">0<sup style="font-size: 20px">%</sup></h3>
 
                             <p>Số liệu tăng trưởng</p>
                         </div>
@@ -67,9 +64,9 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>@user</h3>
+                            <h3 id="sokhachhangmoi">0</h3>
 
-                            <p>Số người dùng đăng kí mới</p>
+                            <p>Số người dùng đăng kí mới trong tháng</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -83,7 +80,7 @@
                         <div class="inner">
                             <h3>@count</h3>
 
-                            <p>Số người vào trang web</p>
+                            <p>Số lần truy cập trang web</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -96,7 +93,7 @@
             <!-- Main row -->
             <div class="row">
                 <!-- Left col -->
-                <section class="col-lg-7 connectedSortable">
+                <section class="col-lg-12 connectedSortable">
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="card">
                         <div class="card-header">
@@ -110,11 +107,6 @@
                                         <a class="nav-link active"
                                            href="#revenue-chart"
                                            data-toggle="tab">Biểu đồ miền</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link"
-                                           href="#sales-chart"
-                                           data-toggle="tab">Biểu đồ tròn</a>
                                     </li>
                                 </ul>
                             </div>
@@ -175,93 +167,16 @@
                             <!-- Conversations are loaded here -->
                             <div class="direct-chat-messages" id="#">
                                 <!-- Message. Default to the left -->
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                        <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-infos -->
-                                    <img class="direct-chat-img"
-                                         src="/Content/dist/img/user1-128x128.jpg"
-                                         alt="message user image" />
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        Is this template really for free? That's unbelievable!
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
+                                
                                 <!-- /.direct-chat-msg -->
                                 <!-- Message to the right -->
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-right">Sarah Bullock</span>
-                                        <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-infos -->
-                                    <img class="direct-chat-img"
-                                         src="/Content/dist/img/user3-128x128.jpg"
-                                         alt="message user image" />
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        You better believe it!
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
-                                <!-- Message. Default to the left -->
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                        <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-infos -->
-                                    <img class="direct-chat-img"
-                                         src="/Content/dist/img/user1-128x128.jpg"
-                                         alt="message user image" />
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        Working with AdminLTE on a great new app! Wanna join?
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
-                                <!-- Message to the right -->
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-right">Sarah Bullock</span>
-                                        <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-infos -->
-                                    <img class="direct-chat-img"
-                                         src="/Content/dist/img/user3-128x128.jpg"
-                                         alt="message user image" />
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">I would love to.</div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
+                                
                                 <!-- /.direct-chat-msg -->
                             </div>
                             <!--/.direct-chat-messages-->
                             <!-- Contacts are loaded here -->
                             <div class="direct-chat-contacts index-20">
                                 <ul class="contacts-list" id="#">
-                                    <li>
-                                        <a href="#">
-                                            <img class="contacts-list-img"
-                                                 src="/Content/dist/img/user1-128x128.jpg"
-                                                 alt="User Avatar" />
-
-                                            <div class="contacts-list-info">
-                                                <span class="contacts-list-name">
-                                                    Count Dracula
-                                                    <small class="contacts-list-date float-right">2/28/2015</small>
-                                                </span>
-                                                <span class="contacts-list-msg">How have you been? I was...</span>
-                                            </div>
-                                            <!-- /.contacts-list-info -->
-                                        </a>
-                                    </li>
-                                    <!-- End Contact Item -->
                                 </ul>
                                 <!-- /.contacts-list -->
                             </div>
@@ -288,170 +203,6 @@
                     <!--/.direct-chat -->
                 </section>
                 <!-- /.Left col -->
-                <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                <section class="col-lg-5 connectedSortable">
-                    <!-- Map card -->
-                    <div class="card bg-gradient-primary">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                Số người dùng
-                            </h3>
-                            <!-- card tools -->
-                            <div class="card-tools">
-                                <button type="button"
-                                        class="btn btn-primary btn-sm daterange"
-                                        title="Date range">
-                                    <i class="far fa-calendar-alt"></i>
-                                </button>
-                                <button type="button"
-                                        class="btn btn-primary btn-sm"
-                                        data-card-widget="collapse"
-                                        title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                            <!-- /.card-tools -->
-                        </div>
-                        <div class="card-body">
-                            <div id="world-map"
-                                 style="height: 250px; width: 100%"></div>
-                        </div>
-                        <!-- /.card-body-->
-                        <div class="card-footer bg-transparent">
-                            <div class="row">
-                                <div class="col-4 text-center">
-                                    <div id="sparkline-1"></div>
-                                    <div class="text-white">Người dùng</div>
-                                </div>
-                                <!-- ./col -->
-                                <div class="col-4 text-center">
-                                    <div id="sparkline-2"></div>
-                                    <div class="text-white">Trực tuyến</div>
-                                </div>
-                                <!-- ./col -->
-                                <div class="col-4 text-center">
-                                    <div id="sparkline-3"></div>
-                                    <div class="text-white">Số vé đã bán</div>
-                                </div>
-                                <!-- ./col -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                    </div>
-                    <!-- /.card -->
-                    <!-- solid sales graph -->
-                    <div class="card bg-gradient-info">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">
-                                <i class="fas fa-th mr-1"></i>
-                                Biểu đồ bán vé
-                            </h3>
-
-                            <div class="card-tools">
-                                <button type="button"
-                                        class="btn bg-info btn-sm"
-                                        data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button"
-                                        class="btn bg-info btn-sm"
-                                        data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <canvas class="chart"
-                                    id="line-chart"
-                                    style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              min-height: 250px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              height: 250px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              max-height: 250px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              max-width: 100%;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          "></canvas>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer bg-transparent">
-                            <div class="row">
-                                <!-- ./col -->
-                                <div class="col-4 text-center">
-                                    <input type="text"
-                                           class="knob"
-                                           data-readonly="true"
-                                           value="50"
-                                           data-width="60"
-                                           data-height="60"
-                                           data-fgColor="#39CCCC" />
-
-                                    <div class="text-white">Trực tuyến</div>
-                                </div>
-                                <!-- ./col -->
-                                <div class="col-4 text-center">
-                                    <input type="text"
-                                           class="knob"
-                                           data-readonly="true"
-                                           value="30"
-                                           data-width="60"
-                                           data-height="60"
-                                           data-fgColor="#39CCCC" />
-
-                                    <div class="text-white">Tại cửa hàng</div>
-                                </div>
-                                <!-- ./col -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.card-footer -->
-                    </div>
-                    <!-- /.card -->
-                    <!-- Calendar -->
-                    <div class="card bg-gradient-success">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">
-                                <i class="far fa-calendar-alt"></i>
-                                Calendar
-                            </h3>
-                            <!-- tools card -->
-                            <div class="card-tools">
-                                <!-- button with a dropdown -->
-                                <div class="btn-group">
-                                    <button type="button"
-                                            class="btn btn-success btn-sm dropdown-toggle"
-                                            data-toggle="dropdown"
-                                            data-offset="-52">
-                                        <i class="fas fa-bars"></i>
-                                    </button>
-                                    <div class="dropdown-menu" role="menu">
-                                        <a href="#" class="dropdown-item">Thêm sự kiện</a>
-                                        <a href="#" class="dropdown-item">Xóa sự kiện</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item">Xem lịch</a>
-                                    </div>
-                                </div>
-                                <button type="button"
-                                        class="btn btn-success btn-sm"
-                                        data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button"
-                                        class="btn btn-success btn-sm"
-                                        data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <!-- /. tools -->
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body pt-0">
-                            <!--The calendar -->
-                            <div id="calendar" style="width: 100%"></div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </section>
-                <!-- right col -->
             </div>
             <!-- /.row (main row) -->
         </div>
@@ -465,5 +216,88 @@
         .index-20{
             z-index: 20;
         }
+
+        .notification__box {
+            position: fixed;
+            z-index: 1000;
+            padding: 1rem;
+            bottom: 1rem;
+            right: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .notification__items {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notification__item {
+            display: flex;
+            height: 5rem;
+            justify-content: space-evenly;
+            padding: 1rem;
+            align-items: center;
+            background: aliceblue;
+            animation: notification_in;
+            animation-duration: 1s;
+        }
+
+        .notification__item__outanimation {
+            animation: notification_out;
+            animation-duration: 1s;
+        }
+
+        .notification__image {
+            height: 100%;
+            margin-right: 1rem;
+        }
+
+        .notification__text {
+            font-family: 'Font Awesome 5 Free';
+            margin-right: 2rem;
+            display: inline-block;
+        }
+
+        .notification__button, .notification__button:focus {
+            border: none;
+            height: 100%;
+            background: inherit;
+            outline: none;
+        }
+
+        .notification__icon {
+            background: inherit;
+            color: red;
+        }
+
+        @@keyframes notification_in {
+        from {transform: translateX(10rem)}
+            to {
+                transform: translateX(0)
+            }
+        }
+
+        @@keyframes notification_out {
+            from {transform: translateX(0)}
+            to {
+                transform: translateX(25rem)
+            }
+        }
     </style>
+}
+
+@section scripts
+{
+    <script>
+        function addOutAnimation(button) {
+            var notification_item = $(button).parent();
+            $(notification_item).addClass('notification__item__outanimation');
+            setTimeout(function () {
+                    $(notification_item).remove();
+                },
+                1000);
+        }
+    </script>
+    
+
 }

@@ -8,8 +8,8 @@ namespace BanVeDiTourDuLich.ViewModels
     public class ThongTinTourExpanded
     {
         public Tour Tour { get; set; }
-        public string DiaDiemDi { get; set; }
-        public string DiaDiemDen { get; set; }
+        public DiaDiem DiaDiemDi { get; set; }
+        public DiaDiem DiaDiemDen { get; set; }
         public string DuongDanAnh { get; set; }
         public string TenDiaDiem { get; set; }
         public double GiaTien { get; set; }

@@ -14,5 +14,7 @@ namespace BanVeDiTourDuLich.Models
         public int KhachHangIdentity { get; set; }
 
         public int NhanVienIdentity { get; set; }
+
+        public int KhachHangOptionalIdentity { get; set; }
     }
 }

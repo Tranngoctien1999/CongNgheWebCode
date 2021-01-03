@@ -92,8 +92,8 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = "TOUR1",
                 MaDiemDen = diaDiem1.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
-                SoGio = 10,
-                ThoigianDi = new DateTime(2020, 12, 29),
+                SoGio = 48,
+                ThoigianDi = new DateTime(2021, 1, 29),
             };
 
             Tour tour9 = new Tour()
@@ -101,8 +101,8 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = "TOUR12",
                 MaDiemDen = diaDiem1.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
-                SoGio = 12,
-                ThoigianDi = new DateTime(2020, 12, 30)
+                SoGio = 72,
+                ThoigianDi = new DateTime(2021, 1, 30)
             };
 
             Tour tour2 = new Tour()
@@ -110,8 +110,8 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = "TOUR2",
                 MaDiemDen = diaDiem2.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
-                SoGio = 20,
-                ThoigianDi = new DateTime(2020, 12, 29),
+                SoGio = 72,
+                ThoigianDi = new DateTime(2021, 1, 3),
             };
 
             Tour tour3 = new Tour()
@@ -119,8 +119,8 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = "TOUR3",
                 MaDiemDen = diaDiem3.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
-                SoGio = 15,
-                ThoigianDi = new DateTime(2020, 12, 29),
+                SoGio = 72,
+                ThoigianDi = new DateTime(2021, 1, 4),
             };
 
             Tour tour4 = new Tour()
@@ -128,16 +128,16 @@ namespace BanVeDiTourDuLich.Migrations
                 MaTour = "TOUR5",
                 MaDiemDen = diaDiem4.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
-                SoGio = 48,
-                ThoigianDi = new DateTime(2020, 12, 29),
+                SoGio = 72,
+                ThoigianDi = new DateTime(2021, 1, 5),
             };
             Tour tour5 = new Tour()
             {
                 MaTour = "TOUR6",
                 MaDiemDen = diaDiem8.MaDiaDiem,
                 MaDiemDi = diaDiem6.MaDiaDiem,
-                SoGio = 48,
-                ThoigianDi = new DateTime(2020, 12, 29),
+                SoGio = 72,
+                ThoigianDi = new DateTime(2021, 1, 2),
             };
             Tour tour6 = new Tour()
             {
@@ -145,7 +145,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem8.MaDiaDiem,
                 MaDiemDi = diaDiem7.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 12, 18),
+                ThoigianDi = new DateTime(2021, 1, 9),
             };
 
             Tour tour7 = new Tour()
@@ -154,7 +154,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem4.MaDiaDiem,
                 MaDiemDi = diaDiem7.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 12, 19),
+                ThoigianDi = new DateTime(2021, 1, 10),
             };
             Tour tour8 = new Tour()
             {
@@ -162,7 +162,7 @@ namespace BanVeDiTourDuLich.Migrations
                 MaDiemDen = diaDiem3.MaDiaDiem,
                 MaDiemDi = diaDiem7.MaDiaDiem,
                 SoGio = 48,
-                ThoigianDi = new DateTime(2020, 12, 19),
+                ThoigianDi = new DateTime(2021, 1, 11),
             };
 
             context.Tours.AddOrUpdate(tour , tour2 , tour3 , tour4,tour5,tour6,tour7,tour8 , tour9);
@@ -356,6 +356,10 @@ namespace BanVeDiTourDuLich.Migrations
                 NgaySinh = new DateTime(1999, 10, 29),
                 NgayVaoLam = new DateTime(2020, 09, 10),
                 DuongDanAnh = "/Content/images/Persions/NHANVIEN01.jpg",
+                SoDienThoai = "0384863509",
+                Email = "Chubodoi.2910@gmail.com",
+                DiaChi = "236 Hoàng Quốc Việt",
+                GioiTinh = true,
             };
 
             NhanVien nhanVien2 = new NhanVien()
@@ -366,7 +370,11 @@ namespace BanVeDiTourDuLich.Migrations
                 Luong = 200000,
                 NgaySinh = new DateTime(1999 , 12 , 20),
                 NgayVaoLam = DateTime.Now,
-                DuongDanAnh = "/Content/images/Persions/NHANVIEN0.jpg"
+                DuongDanAnh = "/Content/images/Persions/NHANVIEN0.jpg",
+                SoDienThoai = "0384863509",
+                Email = "Chubodoi.2910@gmail.com",
+                DiaChi = "236 Hoàng Quốc Việt",
+                GioiTinh = true,
             };
 
             context.NhanViens.AddOrUpdate(nhanVien1);
@@ -430,6 +438,8 @@ namespace BanVeDiTourDuLich.Migrations
                 TaiKhoanDangNhap = "user2"
             };
 
+
+
             context.TaiKhoans.AddOrUpdate(account1);
 
             KhachHang khachHang2 = new KhachHang()
@@ -458,14 +468,15 @@ namespace BanVeDiTourDuLich.Migrations
 
             // add Identity
 
-            IdentityTrace identityTrace = new IdentityTrace()
-            {
-                Key = 1,
-                KhachHangIdentity = 2,
-                NhanVienIdentity = 1,
-            };
+            //IdentityTrace identityTrace = new IdentityTrace()
+            //{
+            //    Key = 1,
+            //    KhachHangIdentity = 2,
+            //    NhanVienIdentity = 1,
+            //    KhachHangOptionalIdentity = 0
+            //};
 
-            context.IdentityTraces.AddOrUpdate(identityTrace);
+            //context.IdentityTraces.AddOrUpdate(identityTrace);
 
            // Thêm hóa đơn
            HoaDon hoaDon1 = new HoaDon()
@@ -585,27 +596,48 @@ namespace BanVeDiTourDuLich.Migrations
                 Ngay = 1,
                 MoTa = "HÀ NỘI – TAM ĐẢO (ĂN TRƯA, TỐI)",
                 ChiTiet = "Xe và hướng dẫn viên của đón đoàn tại điểm hẹn trong phố Cổ hoặc Nhà hát lớn khởi hànhcho chuyến đi thăm quan Tam Đảo. Đến khu danh thắng Tây Thiên. Quý khách bách bộ đi thăm quan công trình Đại Bảo tháp Mandalamô phỏng theo phong cách của Ấ Độ. Sau đó thăm đền Thõng với cây đa chín cội. Quý khách bách bộ đi thăm quan Thiền Viện Trúc Lâm một trong những trường họcdành cho các tăng ni phật tử ở nước ta. Thăm quan Lầu Trống, Lầu Chuông, lớp học…Chỉnh phụclên được tầng cao nhất của Thiền Viện quý khách như được phóng tầm nhìn từ Thiên Đình xuống hạgiới một quang cảnh hiếm nơi nào có được.Chinh phục đỉnh Tây Thiên. Quý khách ngồi cáp treo ngắm cảnh núi rừng hùng vỹ củaTây Thiên, ngắm Thác Bạc từ trên cabin cáp treo. Lên tới đỉnh cáp, Quý khách tiếp tục chinh phụcđỉnh Tây Thiên với một loạt các công trình như: đền Cô Chín, đền Mẫu Địa, đền Thượng QuốcMẫu, Nhà thờ Tổ, một tổ Thiền Sư, chùa Tây Thiên rồi cuối cùng là chinh phục tới Bàn cờ Tiên ởtrên đỉnh Tây Thiên và nhiều các công trình khác (chưa bao gồm giá vé cáp treo Tây Thiên).Ăn trưa tại nhà hàng. Sau bữa trưa, Quý khách tiếp tục lên xe đi Tam Đảo.Đến Tam Đảo, Quý khách thăm quan chụp hình những cảnh đẹp xung quanh thị trấn như: Quảngtrường trung tâm Tam Đảo, khu phố sắc màu với lối kiến trúc độc đáo; Chụp hình với nhà thờ đá Tam Đảo với lối kiến trúc độc đáo được xây dựng trong những năm từ 1906 đến năm 1912, tọa lạc tại trung tâmthị trấn Tam Đảo, bên con đường dẫn lên đỉnh núi Thiên.Hướng dẫn viên dẫn Quý khách bách bộ đi thăm:Thác Bạc Tam Đảo: Đường dẫn xuống thác Bạc không quá dài, nhưng cheo leo, dựng đứng. Để đếnđây, bạn phải vượt qua những bậc tam cấp lót đá xanh. Con đường được mở trong núi, một bên lànúi, một bên là vực thẳm. Quán Gió Tam Đảo: Quán cafe vô cùng nổi tiếng tại đây để nhâm nhi ly cafe ấm nóng (chi phí tựtúc) và ngắm nhìn khung cảnh hùng vĩ, nên thơ của vùng đất này. Ăn tối. Buổi tối tự do nghỉ ngơi, tận hưởng không khí trong lành và mát mẻ tại thị trấn Tam Đảo về đêm. Nghỉ đêm tại thị trấn Tam Đảo.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
             Models.LichTrinh lich11 = new Models.LichTrinh()
             {
                 MaTour = "TOUR3",
                 Ngay = 2,
+                MoTa = "TAM ĐẢO  (Ăn: Sáng/ Trưa)",
+                ChiTiet = "Ăn sáng tại khách sạn và nghỉ ngơi.- 08h30: Hướng dẫn viên đưa Quý khách đi chinh phục tháp Truyền hình Tam Đảo cao hơn 1400m so vớimực nước biển bằng việc leo bộ lên 1.400 bậc đá dẫn lên đỉnh Thiên Nhị. Cảm nhận cảm giác của một ngườichinh phục đỉnh cao, hít một hơi căng đầy lồng ngực bằng luồng không khí mát lạnh trong lành của TamĐảo, bỗng thấy lòng mình thanh thản. Tất cả những ưu phiền, sầu não, những lo toan hàng ngày dường nhưđã tan biến. Quý khách ghé thăm đền bà chúa Thượng Ngàn trên đường chinh phục ngọn tháp truyền hình.- 11h30: Quý khách trả phòng khách sạn (gửi đồ lễ tân), sau đó ăn trưa tại nhà hàng. Quý khách có thời giantự do mua sắm hoặc nhâm nhi ly cafe trước khi rời Tam Đảo về Hà Nội.- 15h30: Quý khách tập trung lên xe về Hà Nội.- 17h30: Về đến Hà Nội. Kết thúc chương trình. Hẹn gặp lại!",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM8.jpg"
+            };
+            Models.LichTrinh l13 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR3",
+                Ngay = 3,
                 MoTa = "TAM ĐẢO – HÀ NỘI (Ăn: Sáng/ Trưa)",
                 ChiTiet = "Ăn sáng tại khách sạn và nghỉ ngơi.- 08h30: Hướng dẫn viên đưa Quý khách đi chinh phục tháp Truyền hình Tam Đảo cao hơn 1400m so vớimực nước biển bằng việc leo bộ lên 1.400 bậc đá dẫn lên đỉnh Thiên Nhị. Cảm nhận cảm giác của một ngườichinh phục đỉnh cao, hít một hơi căng đầy lồng ngực bằng luồng không khí mát lạnh trong lành của TamĐảo, bỗng thấy lòng mình thanh thản. Tất cả những ưu phiền, sầu não, những lo toan hàng ngày dường nhưđã tan biến. Quý khách ghé thăm đền bà chúa Thượng Ngàn trên đường chinh phục ngọn tháp truyền hình.- 11h30: Quý khách trả phòng khách sạn (gửi đồ lễ tân), sau đó ăn trưa tại nhà hàng. Quý khách có thời giantự do mua sắm hoặc nhâm nhi ly cafe trước khi rời Tam Đảo về Hà Nội.- 15h30: Quý khách tập trung lên xe về Hà Nội.- 17h30: Về đến Hà Nội. Kết thúc chương trình. Hẹn gặp lại!",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM1.jpg"
             };
             Models.LichTrinh lich10 = new Models.LichTrinh()
             {
                 MaTour = "TOUR1",
                 Ngay = 1,
-                MoTa = "Thăm quan học viện kỹ thuật quân sự",
+                MoTa = "NHÀ TRUYỀN THỐNG",
                 ChiTiet = "Học viện Kỹ thuật Quân sự, tên gọi khác: Trường Đại học Lê Quý Đôn, là một viện đại học kỹ thuật tổng hợp, đa ngành, đa lĩnh vực, trường đại học trọng điểm quốc gia Việt Nam, là đại học nghiên cứu- ứng dụng [1] và đào tạo kỹ sư, kỹ sư trưởng, công trình sư, nhà quản trị khoa học và công nghiệp trình độ Đại học, Thạc sĩ, Tiến sĩ trong các ngành khoa học kỹ thuật, công nghệ quân sự, công nghiệp quốc phòng và công nghệ cao phục vụ sự nghiệp hiện đại hoá quân đội và các ngành kinh tế quốc dân.[2]. Mục tiêu đến năm 2030, Học viện sẽ trở thành một trong 5 trường đại học hàng đầu của Việt Nam và nằm trong top 500 trường đại học hàng đầu thế giới [3].",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM1.jpg"
             };
+            Models.LichTrinh l11 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR1",
+                Ngay = 2,
+                MoTa = "SÂN BÓNG HỌC VIỆN",
+                ChiTiet = "Học viện Kỹ thuật Quân sự, tên gọi khác: Trường Đại học Lê Quý Đôn, là một viện đại học kỹ thuật tổng hợp, đa ngành, đa lĩnh vực, trường đại học trọng điểm quốc gia Việt Nam, là đại học nghiên cứu- ứng dụng [1] và đào tạo kỹ sư, kỹ sư trưởng, công trình sư, nhà quản trị khoa học và công nghiệp trình độ Đại học, Thạc sĩ, Tiến sĩ trong các ngành khoa học kỹ thuật, công nghệ quân sự, công nghiệp quốc phòng và công nghệ cao phục vụ sự nghiệp hiện đại hoá quân đội và các ngành kinh tế quốc dân.[2]. Mục tiêu đến năm 2030, Học viện sẽ trở thành một trong 5 trường đại học hàng đầu của Việt Nam và nằm trong top 500 trường đại học hàng đầu thế giới [3].",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM3.jpg"
+            };
+
             Models.LichTrinh lich2 = new Models.LichTrinh()
             {
                 MaTour = "TOUR6",
                 Ngay = 1,
-                MoTa = "Hà Nội – Sapa",
-                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa."
+                MoTa = "HÀ NỘI-SAPA",
+                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM2.jpg"
             };
             Models.LichTrinh lich3 = new Models.LichTrinh()
             {
@@ -613,43 +645,97 @@ namespace BanVeDiTourDuLich.Migrations
                 Ngay = 2,
                 MoTa = "SA PA - FANSIPAN (Ăn sáng, trưa, tối)",
                 ChiTiet = "Xe đưa đoàn ra ga Sapa, Quý khách trải nghiệm đến khu du lịch Fansipan Legend bằng Tàu hỏa leo núi Mường Hoa hiện đại nhất Việt Nam với tổng chiều dài gần 2000m, thưởng ngoạn bức tranh phong cảnh đầy màu sắc của cánh rừng nguyên sinh, thung lũng Mường Hoa. Đến khu du lịch Fansipan Legend quý khách tự do tham quan: Tham quan tiểu cảnh Vườn tre, Chiêm bái chùa Trình – Bảo An Thiền Tư hoặc tự do mua sắm…Chinh phục đỉnh núi Fansipan với độ cao 3.143m hùng vĩ bằng cáp treo (chi phí tự túc) và cầu phúc lộc, bình an cho gia đình tại Bích Vân Thiền Tự hay tự thưởng cho mình ly ca cao nóng tại Café Du Soleil – Quán cà phê cao nhất Đông Dương. Xe đưa Quý khách về khách sạn tự do nghỉ ngơi. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
             Models.LichTrinh lich4 = new Models.LichTrinh()
             {
                 MaTour = "TOUR6",
                 Ngay = 3,
-                MoTa = "SaPa -Hà Nội",
+                MoTa = "SAPA -HÀ NỘI",
                 ChiTiet = "Quý khách ăn sáng và trả phòng khách sạn. Xe đưa Quý khách đi tham quan:Cửa khẩu biên giới Việt - Trung “Lào Cai- Hà Khẩu”Mua sắm tại chợ Cốc Lếu - Trung tâm thương mại lớn nhất, của thành phố nói riêng và Tỉnh Lào Cai nói chung. Nơi đây bày bán đa dạng đủ các loại mặt hàng từ thủ công mỹ nghệ, tranh nghệ thuật phong cảnh đến quần áo…sẽ là một điểm mua sắm tuyệt vời với du khách.Theo cung đường cao tốc trở về Hà Nội. Xe đưa Quý khách ra sân bay Nội Bài đáp chuyến bay về Tp.HCM. Chia tay Quý khách và kết thúc chương trình du lịch tại sân bay Tân Sơn Nhất.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
             Models.LichTrinh lich5 = new Models.LichTrinh()
             {
                 MaTour = "TOUR5",
                 Ngay = 1,
-                MoTa = "Hà Nội-Thanh Hóa(ăn trưa, tối)",
+                MoTa = "HÀ NỘI - THANH HÓA(ăn trưa, tối)",
                 ChiTiet = "6h00:Xe và hướng dẫn viên của công ty du lịch Linh Bình sẽ đón qúy khách tại điểm hẹn, bắt đầu khởi hành chuyến đi tham quan danh thắng nổi tiếng trong tỉnh.7h00:xe đưa quí khách đến Thành nhà Hồ Di sãn Văn hóa thế giới(45km) – di tích lịch sử còn lưu lại dấu tích cũ nhiều giá trị. Nghe hướng dẫn viên kể về những bí ẩn của ngôi thành này.8h00 : Rời Thành nhà Hồ xe đưa quí khách đến suối cá thần Cẩm Lương – nơi đã được đưa lên chương trình” Chuyện lạ Việt Nam”, nếu may mắn quí khách có cơ hội nhìn thấy cá chúa nặng tới 30kg. Tiếp đó quí khách leo núi thăm động Đăng, Động Tăng với những thạch nhũ phát sáng lạ mắt.11h30 rời suối cá, xe đưa quí khách trở lại thị trấn Cẩm Thủy dùng bữa trưa tại đây với những món ăn lạ miệng như: Dê núi, gà rừng, …",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
             Models.LichTrinh lich6 = new Models.LichTrinh()
             {
                 MaTour = "TOUR5",
                 Ngay = 2,
+                MoTa = "LÀNG NGHỀ 17",
+                ChiTiet = "Qúy khách tự do dạo chơi tham quan Thành Phố.Xe và HDV đưa Qúy khách khởi hành quý khách lên xe đi Sầm sơn , thăm Đền Độc Cước, hòn Trống Mái,Chùa Cô Tiên với những câu chuyện sự tích huyền thoại. Sau đó Qúy khách tự do dạo chơi tắm biển.Chiều tối: Xe đón Qúy khách Về khách sạn nghỉ ngơi.Kết Thúc Chương Trình tour du lịch thanh hóa 2 ngày 1 đêmHẹn gặp lại Qúy khách trong những lộ trình sau.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            Models.LichTrinh l14 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR5",
+                Ngay = 3,
                 MoTa = "Thanh Hóa - Hà Nội",
                 ChiTiet = "Qúy khách tự do dạo chơi tham quan Thành Phố.Xe và HDV đưa Qúy khách khởi hành quý khách lên xe đi Sầm sơn , thăm Đền Độc Cước, hòn Trống Mái,Chùa Cô Tiên với những câu chuyện sự tích huyền thoại. Sau đó Qúy khách tự do dạo chơi tắm biển.Chiều tối: Xe đón Qúy khách Về khách sạn nghỉ ngơi.Kết Thúc Chương Trình tour du lịch thanh hóa 2 ngày 1 đêmHẹn gặp lại Qúy khách trong những lộ trình sau.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
             Models.LichTrinh lich7 = new Models.LichTrinh()
             {
                 MaTour = "TOUR2",
                 Ngay = 1,
-                MoTa = "HÀ NỘI – HẢI DƯƠNG (ĂN TRƯA, TỐI)",
+                MoTa = "HÀ NỘI – ĐẢO CÒ (ĂN TRƯA, TỐI)",
                 ChiTiet = "07h00: Xe và HDV đón quý khách tại điểm hẹn trong TP.Hà Nội khởi hành đi Hải Dương. Trên đường đi, quý khách sẽ được ngắm nhìn toàn cảnh vùng nông thôn đồng bằng Bắc Bộ Việt Nam. 09h00: Xe tới Hải Dương, quý khách dừng chân tham quan và thưởng thức nghệ thuật Múa rối nước của phường rối nước Hồng Phong – nơi những người nông dân cũng chính là những người nghệ sĩ chuyên nghiệp nhất. Quý khách sẽ được khám phá và tìm hiểu về loại hình nghệ thuật truyền thống và lâu đời của Việt Nam qua nhiều tích trò đặc sắc.10h30: Quý khách đến với Khu du lịch Sinh thái Đảo Cò – Chi Lăng Nam; đi thuyền khám phá vùng không gian xanh mát mang đậm nét thôn quê Bắc Bộ với những cánh cò cánh vạc; tiếng chim hót líu lo và thiên nhiên tươi đẹp, yên bình.12h00: Quý khách thưởng thức bữa trưa với các đặc sản cây nhà lá vườn, sau đó nghỉ ngơi.Buổi chiều: Quý khách tìm hiểu và khám phá cuộc sống thôn quê với các hoạt động dân dã hàng ngày của người dân địa phương:- Học cách cuốc đất trồng rau, quý khách sẽ được thực hành các công đoạn từ lúc làm đất, vun luống, trồng rau, tưới rau, chăm sóc và thu hoạch rau. Trải nghiệm cách làm cần câu, cách móc mồi câu và thư giãn với trò câu cá. Sản phẩm câu được sẽ được chế biến thành món ăn hấp dẫn cho bữa tối.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
             Models.LichTrinh lich8 = new Models.LichTrinh()
             {
                 MaTour = "TOUR2",
-                Ngay = 1,
-                MoTa = "HẢI DƯƠNG – HÀ NỘI (ĂN SÁNG, TRƯA)",
+                Ngay = 2,
+                MoTa = "ĐẢO CÒ (ĂN SÁNG, TRƯA)",
                 ChiTiet = "05h00 – 05h30: Quý khách có thể dậy sớm cùng đón bình minh trên hồ An Dương với cảnh hàng nghìn con cò chao lượn, phủ trắng một vùng trời.06h00 – 07h00: Quý khách đạp xe khám phá phiên chợ quê thanh bình, thưởng thức bữa sáng với đặc sản bánh đa cá rô Hải Dương và mua các đặc sản địa phương về làm quà.08h30 – 09h30: Quý khách tham gia 1 số trò chơi tập thể vô cùng vui nhộn như “Vượt chướng ngại vật – đi qua Cầu khỉ”;  “Bịt mắt bắt vịt trên cạn”Sau đó, quý khách tự do khám phá và chụp hình lưu niệm tại Khu Du lịch Đảo Cò.11h00 - 12h00: Quý khách chuẩn bị bữa trưa với chiến lợi phẩm thu về từ trò chơi bắt vịt.12h30 – 13h30: Quý khách thưởng thức bữa trưa và nghỉ ngơi.14h00: Quý khách lên thuyền trở lại bến đò, chia tay đảo Cò15h00: Xe đón quý khách trở về Hà Nội. Trên đường về đoàn dừng chân mua đặc sản Hải Dương như bánh đậu xanh về làm quà cho gia đình.17h00: Xe đưa quý khách về đến Hà Nội, kết thúc chương trình. Xin kính chào và hẹn gặp lại quý khách trong những hành trình tiếp theo.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
-            context.LichTrinhs.AddOrUpdate(lich1, lich2, lich3, lich4, lich11, lich5, lich6, lich7, lich8, lich10);
+            Models.LichTrinh l12 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR2",
+                Ngay = 3,
+                MoTa = "ĐẢO CÒ (ĂN SÁNG, TRƯA)",
+                ChiTiet = "05h00 – 05h30: Quý khách có thể dậy sớm cùng đón bình minh trên hồ An Dương với cảnh hàng nghìn con cò chao lượn, phủ trắng một vùng trời.06h00 – 07h00: Quý khách đạp xe khám phá phiên chợ quê thanh bình, thưởng thức bữa sáng với đặc sản bánh đa cá rô Hải Dương và mua các đặc sản địa phương về làm quà.08h30 – 09h30: Quý khách tham gia 1 số trò chơi tập thể vô cùng vui nhộn như “Vượt chướng ngại vật – đi qua Cầu khỉ”;  “Bịt mắt bắt vịt trên cạn”Sau đó, quý khách tự do khám phá và chụp hình lưu niệm tại Khu Du lịch Đảo Cò.11h00 - 12h00: Quý khách chuẩn bị bữa trưa với chiến lợi phẩm thu về từ trò chơi bắt vịt.12h30 – 13h30: Quý khách thưởng thức bữa trưa và nghỉ ngơi.14h00: Quý khách lên thuyền trở lại bến đò, chia tay đảo Cò15h00: Xe đón quý khách trở về Hà Nội. Trên đường về đoàn dừng chân mua đặc sản Hải Dương như bánh đậu xanh về làm quà cho gia đình.17h00: Xe đưa quý khách về đến Hà Nội, kết thúc chương trình. Xin kính chào và hẹn gặp lại quý khách trong những hành trình tiếp theo.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            Models.LichTrinh l15 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR7",
+                Ngay = 1,
+                MoTa = "TP HỒ CHÍ MINH – Sapa",
+                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            Models.LichTrinh l16 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR7",
+                Ngay = 2,
+                MoTa = "SAPA",
+                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg" 
+            };
+            Models.LichTrinh l17 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR8",
+                Ngay = 1,
+                MoTa = "TP HỒ CHÍ MINH-THANH HÓA",
+                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            Models.LichTrinh l18 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR8",
+                Ngay = 2,
+                MoTa = "LÀNG NGHỀ 17",
+                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            context.LichTrinhs.AddOrUpdate(lich1, lich2, lich3, lich4, lich11, lich5, lich6, lich7, lich8, lich10,l11,l12,l13,l14,l15,l17,l18);
         }
     }
 }
