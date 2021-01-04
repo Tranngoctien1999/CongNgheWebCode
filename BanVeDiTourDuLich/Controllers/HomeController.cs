@@ -121,10 +121,22 @@ namespace BanVeDiTourDuLich.Controllers
                          join loaiVe in context.LoaiVes on tour.MaTour equals loaiVe.MaTour
                              into g
                          select new TourGiaTien() { Tour = tour,DiaDiem=diaDiem, GiaTien = (double?)g.Min(p => p.GiaTien) ?? 0 };
-            if (query1.Count() >= 1)
+            double soTrangCheck = query1.ToList().Count() / PageSize;
+            int soTrang = 0;
+            if (soTrangCheck > (int)soTrangCheck)
             {
-                indexViewModel.CacTour = query1.OrderBy(n => n.Tour.MaTour).ToPagedList(pagenumber, PageSize).ToList();
+                soTrang = (int)soTrangCheck + 1;
             }
+            else
+            {
+                soTrang = (int)soTrangCheck+1;
+            }
+            
+            indexViewModel.SoTrang = soTrang;
+            indexViewModel.STT = (pagenumber - 1) * PageSize + 1;
+            
+                indexViewModel.CacTour = query1.OrderBy(n => n.Tour.MaTour).ToPagedList(pagenumber, PageSize).ToList();
+            
            
             // Select 6 newest comments
             var query2 = (from nhanXet in context.NhanXets
