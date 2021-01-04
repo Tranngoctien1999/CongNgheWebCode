@@ -222,6 +222,58 @@ namespace BanVeDiTourDuLich.Controllers
             return HttpNotFound("Hãy Đăng Nhập");
         }
 
+        [HttpPost]
+        public async Task<ActionResult> XoaNguoiDung(string id)
+        {
+            if (CheckUser())
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    KhachHang khachHang = _context.KhachHangs.Find(id);
+                    if (khachHang != null)
+                    {
+                        try
+                        {
+                            if (khachHang.TinNhans.Count > 0)
+                            {
+                                _context.TinNhans.RemoveRange(khachHang.TinNhans);
+                            }
+                            if (khachHang.TaiKhoan != null)
+                            {
+                                _context.TaiKhoans.Remove(khachHang.TaiKhoan);
+                            }
+
+                            if (khachHang.HoaDons != null)
+                            {
+                                foreach (var hoaDon in khachHang.HoaDons)
+                                {
+                                    _context.Ves.RemoveRange(hoaDon.Ves);
+                                    _context.HoaDons.Remove(hoaDon);
+                                }
+                            }
+                            await _context.SaveChangesAsync();
+                            //_context.KhachHangs.Remove(khachHang);
+                            //_context.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            Response.StatusCode = 400;
+                            return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                        }
+                        Response.StatusCode = 200;
+                        return Json( new { msg = "Xóa thành công!"} , JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        Response.StatusCode = 400;
+                        return Json( new { msg = "Không tìm thấy khách hàng này!"} , JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            Response.StatusCode = 400;
+            return Json(new { msg = "Bạn không có quyền xóa khách hàng này!" }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult QuanLyNguoiDungSort(string sortValue, int? sortDirection)
         {
             QuanLyNguoiDungViewModel data = new QuanLyNguoiDungViewModel();
@@ -286,7 +338,7 @@ namespace BanVeDiTourDuLich.Controllers
                 }
             }
 
-            if (string.Compare("SoVe", sortValue) == 0)
+            if (string.Compare("NgayTao", sortValue) == 0)
             {
                 if (sortDirection == 0)
                 {

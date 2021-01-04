@@ -105,6 +105,15 @@
                                     Chỉnh sửa
                                 </a>
                             </button>
+                            <form class="deleteForm" action="/Admin/XoaNguoiDung/" method="post">
+                                <input name='id' type="hidden" value="@thongTinNguoiDung.MaNguoiDung" />
+                                <button class="btn-delete" type='submit'>
+                                    <a class="btn btn-danger btn-sm btn-max-width js-xoa">
+                                        <i class="fas fa-trash"> </i>
+                                        Xóa
+                                    </a>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                         {
@@ -185,5 +194,23 @@
                 window.location.href = `/admin/QuanLyNguoiDungSort?sortValue=${value}&sortDirection=${direction}`;
             }
         })
+
+        $('.deleteForm').submit(function(e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            var url = $(this).attr('action');
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: data,
+                success: function({ msg }) {
+                    alert(msg);
+                    window.location.reload();
+                },
+                error: function(data) {
+                    alert(data.responseJSON.msg);
+                }
+            });
+        });
     </script>
 }
