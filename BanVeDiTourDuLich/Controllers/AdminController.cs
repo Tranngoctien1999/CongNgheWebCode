@@ -156,7 +156,7 @@ namespace BanVeDiTourDuLich.Controllers
             QuanLyTourViewModel quanLyTourViewModel = new QuanLyTourViewModel();
             //thực hiện chức năng phân trang
             //tạo biến số sản phẩm trên trang
-            int PageSize = 10;
+            int PageSize = 5;
             //tạo biến số trang hiện tại
             int pagenumber = (page ?? 1);
             var query1 = from diaDiem in _context.DiaDiems
@@ -171,9 +171,20 @@ namespace BanVeDiTourDuLich.Controllers
                              DiaDiemDi=tour.DiaDiemDi,
                              DiaDiemDen=tour.DiaDiemDen
                          };
+            double soTrangCheck = query1.ToList().Count() / PageSize;
+            int soTrang = 0;
+            if (soTrangCheck > (int) soTrangCheck)
+            {
+                soTrang = (int) soTrangCheck + 1;
+            }
+            else
+            {
+                soTrang = (int) soTrangCheck;
+            }
             quanLyTourViewModel.danhsachtour = query1.OrderBy(n => n.Tour.MaTour).ToPagedList(pagenumber, PageSize).ToList();
+            quanLyTourViewModel.SoTrang = soTrang;
+            quanLyTourViewModel.STT = (pagenumber - 1) * PageSize + 1;
             return View(quanLyTourViewModel);
-
         }
 
         public ActionResult QuanLyTourSingle(string id)
