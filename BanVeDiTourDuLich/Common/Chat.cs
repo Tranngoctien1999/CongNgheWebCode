@@ -4,6 +4,7 @@ using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 using BanVeDiTourDuLich.Controllers;
@@ -69,14 +70,17 @@ namespace BanVeDiTourDuLich.Hubs
         public async Task SaveNewMessageFromKhachHang(string maKhachHang, string noiDung)
         {
             KhachHang khachHang = await DataContext.KhachHangs.FindAsync(maKhachHang);
-            TinNhan tinNhan = new TinNhan()
+            if (khachHang != null)
             {
-                MaKhachHang = khachHang.MaKhachHang,
-                NoiDung = noiDung,
-                ThoiGianGui = DateTime.Now
-            };
-            DataContext.TinNhans.Add(tinNhan);
-            await DataContext.SaveChangesAsync();
+                TinNhan tinNhan = new TinNhan()
+                {
+                    MaKhachHang = khachHang.MaKhachHang,
+                    NoiDung = noiDung,
+                    ThoiGianGui = DateTime.Now
+                };
+                DataContext.TinNhans.Add(tinNhan);
+                await DataContext.SaveChangesAsync();
+            }
         }
         //Gửi tin nhắn từ khách hàng tới đối tượng cụ thể
         public async Task SendMessageFromClientToManager(string maNhanVien, string maKhachHang)
@@ -167,6 +171,7 @@ namespace BanVeDiTourDuLich.Hubs
         // Thêm connection Id khi người dùng hoặc nhân viên đăng nhập vào
         public async Task AddConnectionIdUser(string maTaiKhoan, string connectionId)
         {
+
             TaiKhoan taiKhoan = await DataContext.TaiKhoans.FindAsync(maTaiKhoan);
             int count = connections.Where(c => c.MaTaiKhoan == maTaiKhoan).Count();
             if (taiKhoan != null)
@@ -197,6 +202,33 @@ namespace BanVeDiTourDuLich.Hubs
                     }
                     connections.Add(new ConnectionIdUser() { MaTaiKhoan = taiKhoan.MaTaiKhoan, ConnectionId = taiKhoan.ConnectionId });
                 }
+            }
+            else
+            {
+                IdentityTrace identityTrace = await DataContext.IdentityTraces.FindAsync(1);
+                int identityNewCustomer = identityTrace.KhachHangOptionalIdentity;
+                KhachHang khachHang = new KhachHang()
+                {
+                    MaKhachHang = "KHACHHANGTEMP" + identityNewCustomer.ToString(),
+                    DuongDanAnh = "/Content/images/Persions/574704-200.png",
+                    Ten = "NONAME",
+                    ThoiGianDangKi = DateTime.Now,
+                    MaLoaiKhachHang = "KHACHHANGTHUONG",
+                };
+                DataContext.KhachHangs.AddOrUpdate(khachHang);
+                await DataContext.SaveChangesAsync();
+
+                TaiKhoan taiKhoanTemp = new TaiKhoan()
+                {
+                    MaTaiKhoan = "KHACHHANGTEMP" + identityNewCustomer.ToString(),
+                    ConnectionId = connectionId,
+                };
+                DataContext.TaiKhoans.AddOrUpdate(taiKhoanTemp);
+                identityTrace.KhachHangOptionalIdentity++;
+                await DataContext.SaveChangesAsync();
+                user.Add(new ConnectionIdUser() { MaTaiKhoan = taiKhoanTemp.MaTaiKhoan, ConnectionId = taiKhoanTemp.ConnectionId });
+                connections.Add(new ConnectionIdUser() { MaTaiKhoan = taiKhoanTemp.MaTaiKhoan, ConnectionId = taiKhoanTemp.ConnectionId });
+                Clients.Client(taiKhoanTemp.ConnectionId).receiveOptionalIdCustomer(taiKhoanTemp.MaTaiKhoan);
             }
         }
 

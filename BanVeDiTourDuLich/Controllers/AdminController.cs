@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using BanVeDiTourDuLich.ViewModels;
 using System.Linq;
@@ -6,10 +7,12 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Web;
 using System.IO;
+using System.Threading.Tasks;
+using BanVeDiTourDuLich.Utilizer;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private DataContext _context;
         public AdminController()
@@ -55,7 +58,41 @@ namespace BanVeDiTourDuLich.Controllers
                         DiaDiemDen = c.DiaDiemDen,
                         DiaDiemDi = c.DiaDiemDi
                     }).ToList();
-                return View(quanLyVeViewModel);
+                return View("QuanLyBanVe", quanLyVeViewModel);
+            }
+            return HttpNotFound("Hãy Đăng Nhập");
+        }
+
+        public ActionResult QuanLyBanVeSingle(string id)
+        {
+            if (CheckUser())
+            {
+                if (id != null)
+                {
+                    ThongTinHoaDon thongTin = new ThongTinHoaDon();
+                    thongTin.HoaDon = _context.Ves.Find(id).HoaDon;
+                    thongTin.CacVe = thongTin.HoaDon.Ves.ToList();
+                    thongTin.KhachHang = thongTin.HoaDon.KhachHang;
+                    thongTin.NhanVien = thongTin.HoaDon.NhanVien;
+                    return View("~/Views/Admin/ChiTietVe.cshtml", thongTin);
+                }
+                QuanLyVeViewModel quanLyVeViewModel = new QuanLyVeViewModel();
+                quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours, ve => ve.MaTour, tour => tour.MaTour,
+                    (ve, tour) =>
+                        new
+                        {
+                            Ve = ve,
+                            DiaDiemDen = tour.DiaDiemDen,
+                            DiaDiemDi = tour.DiaDiemDi
+                        }).Join(_context.LoaiVes, c => c.Ve.MaLoaiVe, loaiVe => loaiVe.MaLoaiVe,
+                    (c, loaiVe) => new ThongTinVeExpanded()
+                    {
+                        Ve = c.Ve,
+                        GiaTien = loaiVe.GiaTien,
+                        DiaDiemDen = c.DiaDiemDen,
+                        DiaDiemDi = c.DiaDiemDi
+                    }).ToList();
+                return View("QuanLyBanVe" , quanLyVeViewModel);
             }
             return HttpNotFound("Hãy Đăng Nhập");
         }
@@ -71,11 +108,40 @@ namespace BanVeDiTourDuLich.Controllers
                 {
                     TenNguoiDung = khach.Ten,
                     SoTienMua = tongTien,
-                    SoVeMua = soVe
+                    SoVeMua = soVe,
+                    NgayTaoTaiKhoan = khach.ThoiGianDangKi,
+                    MaNguoiDung = khach.MaKhachHang
                 });
             };
             return View(data);
         }
+
+        public ActionResult QuanLyNguoiDungSingle(string id)
+        {
+            if (CheckUser())
+            {
+                QuanLyNguoiDungViewModel data = new QuanLyNguoiDungViewModel();
+                foreach (KhachHang khach in _context.KhachHangs.Where(khachHang => khachHang.MaKhachHang == id).ToList())
+                {
+                    double tongTien = khach.HoaDons.Sum(hoaDon => hoaDon.Ves.Sum(ve => ve.LoaiVe.GiaTien));
+                    int soVe = khach.HoaDons.Sum(hoaDon => hoaDon.Ves.Count);
+                    data.ThongTinCacNguoiDung.Add(new NguoiDungViewModel
+                    {
+                        TenNguoiDung = khach.Ten,
+                        SoTienMua = tongTien,
+                        SoVeMua = soVe,
+                        NgayTaoTaiKhoan = khach.ThoiGianDangKi,
+                        MaNguoiDung = khach.MaKhachHang
+                    });
+                };
+                return View("QuanLyNguoiDung" ,data);
+            }
+            else
+            {
+                return Content("Bạn không có quyền vào trang này!");
+            }
+        }
+
         public ActionResult QuanLyTour()
         {
             QuanLyTourViewModel quanLyTourViewModel = new QuanLyTourViewModel();
@@ -97,6 +163,38 @@ namespace BanVeDiTourDuLich.Controllers
             return View(quanLyTourViewModel);
 
         }
+
+        public ActionResult QuanLyTourSingle(string id)
+        {
+            if (CheckUser())
+            {
+                QuanLyTourViewModel quanLyTourViewModel = new QuanLyTourViewModel();
+
+                var query1 = from diaDiem in _context.DiaDiems
+                    join tour in _context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                    join loaive in _context.LoaiVes on tour.MaTour equals loaive.MaTour
+                    where tour.MaTour == id
+                    select new ThongTinTourExpanded
+                    {
+                        Tour = tour,
+                        DuongDanAnh = diaDiem.DuongDanAnh,
+                        TenDiaDiem = diaDiem.TenDiaDiem,
+                        GiaTien = loaive.GiaTien,
+                        Ten = loaive.Ten,
+                        DiaDiemDen = tour.DiaDiemDen,
+                        DiaDiemDi = tour.DiaDiemDi
+                    };
+                quanLyTourViewModel.danhsachtour = query1.ToList();
+
+                return View("QuanLyTour" ,quanLyTourViewModel);
+            }
+            else
+            {
+                return Content("Bạn không có quyền vào trang này!");
+            }
+        }
+
+
         public ActionResult ThemMoiTour()
         {
             var model = _context.DiaDiems.Where(x => x.TenDiaDiem != null).ToList();
@@ -195,6 +293,20 @@ namespace BanVeDiTourDuLich.Controllers
             var model = _context.DiaDiems.Where(x => x.MaDiaDiem != null).ToList();
             return View(model);
         }
+
+        public ActionResult QuanLyDiaDiemSingle(string id)
+        {
+            if (CheckUser())
+            {
+                var model = _context.DiaDiems.Where(x => x.MaDiaDiem == id).ToList();
+                return View("QuanLyDiaDiem" ,model);
+            }
+            else
+            {
+                return Content("Bạn không có quyền vào trang này!");
+            }
+        }
+
         public ActionResult ThemMoiDiaDiem()
         {
             return View();
@@ -280,6 +392,69 @@ namespace BanVeDiTourDuLich.Controllers
                 }
             }
             return true;
+        }
+
+        public bool CheckAdmin()
+        {
+            var userId = Session["MaTaiKhoan"];
+            if (userId != null)
+            {
+                NhanVien nhanVien = _context.NhanViens.Find(userId);
+                if (nhanVien == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (nhanVien.MaNhanVien != "ADMIN")
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public ActionResult QuanLyNhanVien()
+        {
+            if (CheckAdmin())
+            {
+                var data = _context.NhanViens.ToList();
+                return View(data);
+            }
+            else
+            {
+                return Content("Bạn không có quyền truy cập trang này");
+            }
+        }
+
+        public ActionResult QuanLyNhanVienSingle(string id)
+        {
+            if (CheckAdmin())
+            {
+                var data = _context.NhanViens.Where(nhanVien => nhanVien.MaNhanVien == id).ToList();
+                return View("QuanLyNhanVien" , data);
+            }
+            else
+            {
+                return Content("Bạn không có quyền truy cập trang này");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> TimKiemTongHop(string tuKhoa)
+        {
+            if (CheckUser())
+            {
+               List<SearchAdminInformation> data = await Utilizer.TimKiemTongHop.Search(tuKhoa);
+               Response.StatusCode = 200;
+               return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Response.StatusCode = 400;
+                return Json("Bạn không có quyền làm việc này", JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

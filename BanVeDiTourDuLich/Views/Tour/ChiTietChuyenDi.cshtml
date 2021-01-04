@@ -7,7 +7,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*<link href="~/Content/ThemeHe/stylechitiet.css" rel="stylesheet" />*@
-
 <div class="modal" id="myModalThemThongTin">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -59,9 +58,9 @@
             <div class="col-md-4 ftco-animate image-box">
                 <div class="project-wrap">
                     <a href="#" class="img" style="background-image: url(@Model.Tour.DiaDiemDen.DuongDanAnh);
-        border-radius: 6px;
-        background-position: center;
-"></a>
+                                                                                                                                                                                                                                                                                                                                                                                border-radius: 6px;
+                                                                                                                                                                                                                                                                                                                                                                                background-position: center;
+                                                                                                                                                                                                                                                                                                                                                                            "></a>
                 </div>
             </div>
             <div class="motachitiet" style="flex: 0.8; font-weight: 600">
@@ -157,9 +156,9 @@
                         <div class="form-group">
                             <label for="DateCheckinField" class="col-xs-8 control-label no-padding">Chọn ngày khởi hành:</label>
                             <div class="col-xs-4 no-padding" style="
-                                                                                                                          float: right;
-                                                                                                                          margin-right: 4rem;
-                                                                                                                      ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          float: right;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          margin-right: 4rem;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ">
                                 <div class="date-input-group">
                                     <label readonly="" type="text" class="form-control date-input dates-date btn-general DateCheckinField">
                                         <span class="DateCheckinText">27-11-2020</span>
@@ -413,6 +412,11 @@
                     <div class="title-lg"><h2>Chương trình tour</h2></div>
                     <div class="sec-content itinerary">
                         <div class="list">
+                            @{
+                                int i1 = 1;
+                                string id = "d" + i1.ToString();
+                                string id1 = "ah" + i1.ToString();
+                            }
                             @foreach (var lichtrinh in Model.LichTrinh)
                             {
                                 <div class="list__item">
@@ -422,7 +426,7 @@
                                     <div class="list__border"></div>
                                     <div class="list__desc">
                                         <h3 class="font500 name"><img src="~/Content/ThemeHe/i-marker.png" alt="marker">&nbsp;&nbsp;&nbsp;@lichtrinh.MoTa</h3>
-                                        <div class="d1 detail" style="max-height: 90px; overflow-y: hidden;">
+                                        <div class="@id detail" style="max-height: 90px; overflow-y: hidden;">
                                             <div style="text-align: justify;">
                                                 <div>
                                                     @lichtrinh.ChiTiet
@@ -430,12 +434,12 @@
                                             </div>
                                             <div style="text-align: justify;">
                                                 <div>
-                                                    <img src="@lichtrinh.DuongDanAnh" style="width:90% " />
+                                                    <img class="destination__image" src="@lichtrinh.DuongDanAnh"/>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="an-hien ah1">
+                                        <div class="an-hien @id1">
                                             <div class="hienra" style="display: block;">
                                                 <a href="#"> Xem thêm &nbsp;<i class="fas fa-arrow-down"></i></a>
                                             </div>
@@ -446,6 +450,9 @@
                                         <div class="border"></div>
                                     </div>
                                 </div>
+                                i1++;
+                                id = "d" + i1.ToString();
+                                id1 = "ah" + i1.ToString();
                             }
                         </div>
                     </div>
@@ -531,13 +538,13 @@
             float: right;
         }
 
-            .floatBox.highlight .date-input-group .date-input {
-                padding-left: 15px;
-                cursor: pointer;
-                height: 34px;
-                background: #fff;
-                border-radius: 2px;
-            }
+        .floatBox.highlight .date-input-group .date-input {
+            padding-left: 15px;
+            cursor: pointer;
+            height: 34px;
+            background: #fff;
+            border-radius: 2px;
+        }
 
         .floatBox .form-group label {
             font-weight: normal;
@@ -564,10 +571,10 @@
             position: absolute;
         }
 
-            .text-detail .width-70 {
-                width: 70px;
-                display: inline-block;
-            }
+        .text-detail .width-70 {
+            width: 70px;
+            display: inline-block;
+        }
 
         .price-color {
             color: #ffbd00;
@@ -876,6 +883,9 @@
             box-shadow: inset 0 0 0 transparent;
             transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
+        .destination__image {
+            width: 20rem;
+        }
     </style>
 }
 
@@ -1173,6 +1183,14 @@
 
 
     $('.ah1 .andi').click(function (event) { event.preventDefault(); $('.n3-tour-detail .chuongtrinhtour .d1.detail').css("max-height", "90px"); $('.n3-tour-detail .chuongtrinhtour .d1.detail').css("overflow-y", "hidden"); $('.ah1 .andi').css("display", "none"); $('.ah1 .hienra').css("display", "block"); })
+    $('.ah2 .hienra').click(function(event){event.preventDefault();$('.n3-tour-detail .chuongtrinhtour .d2.detail').css("max-height","initial");$('.n3-tour-detail .chuongtrinhtour .d2.detail').css("overflow-y","initial");$('.ah2 .andi').css("display","block");$('.ah2 .hienra').css("display","none");})
+
+
+    $('.ah2 .andi').click(function (event) { event.preventDefault(); $('.n3-tour-detail .chuongtrinhtour .d2.detail').css("max-height", "90px"); $('.n3-tour-detail .chuongtrinhtour .d2.detail').css("overflow-y", "hidden"); $('.ah2 .andi').css("display", "none"); $('.ah2 .hienra').css("display", "block"); })
+    $('.ah3 .hienra').click(function(event){event.preventDefault();$('.n3-tour-detail .chuongtrinhtour .d3.detail').css("max-height","initial");$('.n3-tour-detail .chuongtrinhtour .d3.detail').css("overflow-y","initial");$('.ah3 .andi').css("display","block");$('.ah3 .hienra').css("display","none");})
+
+
+    $('.ah3 .andi').click(function (event) { event.preventDefault(); $('.n3-tour-detail .chuongtrinhtour .d3.detail').css("max-height", "90px"); $('.n3-tour-detail .chuongtrinhtour .d3.detail').css("overflow-y", "hidden"); $('.ah3 .andi').css("display", "none"); $('.ah3 .hienra').css("display", "block"); })
 
     </script>
 }

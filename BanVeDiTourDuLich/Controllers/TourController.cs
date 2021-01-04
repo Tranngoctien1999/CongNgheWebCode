@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class TourController : Controller
+    public class TourController : BaseController
     {
         private readonly DataContext context = new DataContext();
 

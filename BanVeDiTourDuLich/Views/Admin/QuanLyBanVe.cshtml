@@ -66,16 +66,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{var _context = new DataContext();}
-                    @{ int i = 1;}
+                    @{
+                        var _context = new DataContext();
+                        int i = 1;
+                    }
                     @foreach (var thongTinVe in @Model.DanhSachThongTinVe)
                     {
                         <tr>
                             <td>@i</td>
                             <td>
                                 <a> @thongTinVe.Ve.MaVe </a>
-                                <br />
-                                <small> Tạo vào 01.01.2019 </small>
                             </td>
                             <td>
                                 <p>@thongTinVe.DiaDiemDi.TenDiaDiem - @thongTinVe.DiaDiemDen.TenDiaDiem</p>
@@ -103,7 +103,7 @@
                                 </form>
                             </td>
                         </tr>
-                        i++;
+                        { i++;}
                     }
 
                 </tbody>
@@ -127,9 +127,10 @@
             width: 100%
         }
 
-        .btn-delete{
+        .btn-delete {
             border: none;
             width: 100%;
+            background: none;
         }
     </style>
 }

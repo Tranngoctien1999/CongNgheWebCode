@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DatVeController.cs" />
     <Compile Include="Controllers\QuanLyBanVeController.cs" />
@@ -294,6 +295,22 @@
     <Compile Include="Migrations\202012290721261_ThemSoDienThoaiChoKhachHang.designer.cs">
       <DependentUpon>202012290721261_ThemSoDienThoaiChoKhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012300830217_ThemThongTinNhanVien.cs" />
+    <Compile Include="Migrations\202012300830217_ThemThongTinNhanVien.designer.cs">
+      <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012311342577_AddDuongDanAnhvaoLichTrinh.cs" />
+    <Compile Include="Migrations\202012311342577_AddDuongDanAnhvaoLichTrinh.Designer.cs">
+      <DependentUpon>202012311342577_AddDuongDanAnhvaoLichTrinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.cs" />
+    <Compile Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.designer.cs">
+      <DependentUpon>202101010217239_AddIdentityOptionalCustomerTrace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101020244087_seeSomethingchange.cs" />
+    <Compile Include="Migrations\202101020244087_seeSomethingchange.designer.cs">
+      <DependentUpon>202101020244087_seeSomethingchange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietPhuongTien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -326,6 +343,8 @@
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Ve.cs" />
     <Compile Include="Utilizer\ConnectionIdUser.cs" />
+    <Compile Include="Utilizer\SearchAdminInformation.cs" />
+    <Compile Include="Utilizer\TimKiemTongHop.cs" />
     <Compile Include="Utilizer\ValidationFunction.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\ChiTietTour2.cs" />
@@ -334,6 +353,7 @@
     <Compile Include="ViewModels\LoaiVeSoLuongCon.cs" />
     <Compile Include="ViewModels\QuanLyTourViewModel.cs" />
     <Compile Include="ViewModels\StripeKey.cs" />
+    <Compile Include="ViewModels\ThongTinChiTietViewModel.cs" />
     <Compile Include="ViewModels\ThongTinTourExpanded.cs" />
     <Compile Include="ViewModels\ThongTinVeTrongGio.cs" />
     <Compile Include="ViewModels\TourGiaTien.cs" />
@@ -349,32 +369,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\BanVeDiTourDuLich.dll" />
     <Content Include="bin\BanVeDiTourDuLich.pdb" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\Microsoft.AspNet.SignalR.Core.dll" />
-    <Content Include="bin\Microsoft.AspNet.SignalR.Core.pdb" />
-    <Content Include="bin\Microsoft.AspNet.SignalR.Core.xml" />
     <Content Include="bin\Microsoft.AspNet.SignalR.SystemWeb.dll" />
-    <Content Include="bin\Microsoft.AspNet.SignalR.SystemWeb.pdb" />
-    <Content Include="bin\Microsoft.AspNet.SignalR.SystemWeb.xml" />
     <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Owin.dll" />
     <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
     <Content Include="bin\Microsoft.Owin.Security.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.xml" />
-    <Content Include="bin\Microsoft.Owin.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\Owin.dll" />
+    <Content Include="bin\PagedList.dll" />
+    <Content Include="bin\PagedList.Mvc.dll" />
+    <Content Include="bin\PagedList.Mvc.xml" />
+    <Content Include="bin\PagedList.xml" />
     <Content Include="bin\roslyn\csc.exe" />
     <Content Include="bin\roslyn\csi.exe" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
@@ -419,19 +431,12 @@
     <Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
     <Content Include="bin\System.Threading.Tasks.Extensions.dll" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\Admin\css\UploadImg.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -530,6 +535,10 @@
     <Content Include="Content\images\Destinations\destination-7.jpg" />
     <Content Include="Content\images\Destinations\destination-8.jpg" />
     <Content Include="Content\images\Destinations\destination-9.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM6.jpg" />
+    <Content Include="Content\images\Destinations\MADIADIEM7.jpg" />
+    <Content Include="Content\images\Destinations\MADIaDIEM8.jpg" />
+    <Content Include="Content\images\Destinations\{1899C9E8-6562-4BF6-9D22-6E018B51BE14}.jpg" />
     <Content Include="Content\images\footer-bg.jpg" />
     <Content Include="Content\images\image_1.jpg" />
     <Content Include="Content\images\image_2.jpg" />
@@ -542,10 +551,15 @@
     <Content Include="Content\images\Destinations\place-2.jpg" />
     <Content Include="Content\images\Destinations\place-3.jpg" />
     <Content Include="Content\images\Destinations\place-4.jpg" />
+    <Content Include="Content\images\Persions\574704-200.png" />
     <Content Include="Content\images\Persions\ADMIN.jpg" />
+    <Content Include="Content\images\Persions\cambridge.books.jpg" />
+    <Content Include="Content\images\Persions\inspirational-quoute-by-bruce-lee-qhd-1920x1080.jpg" />
     <Content Include="Content\images\Persions\KH01.jpg" />
     <Content Include="Content\images\Persions\NHANVIEN0.jpg" />
     <Content Include="Content\images\Persions\NHANVIEN01.jpg" />
+    <Content Include="Content\images\Persions\z2216139190897_5a767a647ff8b5c55547abe03921d461.jpg" />
+    <Content Include="Content\images\ticket.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
@@ -2409,7 +2423,9 @@
     <Content Include="Content\ThemeHe\i-code.png" />
     <Content Include="Content\ThemeHe\i-date.png" />
     <Content Include="Content\ThemeHe\i-dep.png" />
+    <Content Include="Content\ThemeHe\i-marker.png" />
     <Content Include="Content\ThemeHe\i-price.png" />
+    <Content Include="Content\ThemeHe\stylechitiet.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\flaticon\backup.txt" />
     <Content Include="Content\fonts\flaticon\font\flaticon.css" />
@@ -2547,6 +2563,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <None Include="Properties\PublishProfiles\BanVeDiTourDuLich20210101225224 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2594,7 +2611,6 @@
     <Content Include="Views\Home\Destination.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Shared\_MyLayout.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -2620,6 +2636,7 @@
     <Content Include="Views\Admin\EditDiaDiem.cshtml" />
     <Content Include="Views\Admin\ThemMoiDiaDiem.cshtml" />
     <Content Include="Views\User\InforUser.cshtml" />
+    <Content Include="Views\Admin\QuanLyNhanVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2720,6 +2737,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012290721261_ThemSoDienThoaiChoKhachHang.resx">
       <DependentUpon>202012290721261_ThemSoDienThoaiChoKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012300830217_ThemThongTinNhanVien.resx">
+      <DependentUpon>202012300830217_ThemThongTinNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012311342577_AddDuongDanAnhvaoLichTrinh.resx">
+      <DependentUpon>202012311342577_AddDuongDanAnhvaoLichTrinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101010217239_AddIdentityOptionalCustomerTrace.resx">
+      <DependentUpon>202101010217239_AddIdentityOptionalCustomerTrace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101020244087_seeSomethingchange.resx">
+      <DependentUpon>202101020244087_seeSomethingchange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

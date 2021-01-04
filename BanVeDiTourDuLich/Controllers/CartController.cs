@@ -14,7 +14,7 @@ using Stripe;
 
 namespace BanVeDiTourDuLich.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         public static DataContext context = new DataContext();
         // GET: Cart
@@ -80,17 +80,21 @@ namespace BanVeDiTourDuLich.Controllers
                     string idTour = formCollection[1];
                     for (int i = 2; i < formCollection.Count - 3; i += 2)
                     {
-                        for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
+                        int quantity = 0;
+                        if(Int32.TryParse(formCollection[i + 1] , out quantity))
                         {
-                            Ve ve = new Ve()
+                            for (int j = 0; j < int.Parse(formCollection[i + 1]); j++)
                             {
-                                MaVe = "Ve" + (identity + 1).ToString("00"),
-                                MaTour = idTour,
-                                MaLoaiVe = formCollection[i],
-                                MaHoaDon = hoaDon.MaHoaDon
-                            };
-                            context.Ves.Add(ve);
-                            identity++;
+                                Ve ve = new Ve()
+                                {
+                                    MaVe = "Ve" + (identity + 1).ToString("00"),
+                                    MaTour = idTour,
+                                    MaLoaiVe = formCollection[i],
+                                    MaHoaDon = hoaDon.MaHoaDon
+                                };
+                                context.Ves.Add(ve);
+                                identity++;
+                            }
                         }
                     }
                 }
@@ -166,10 +170,50 @@ namespace BanVeDiTourDuLich.Controllers
                     TongTien = g.Sum(hoaDon => hoaDon.Ves.Sum(ve => ve.LoaiVe.GiaTien))
                 }).ToList();
 
-            int soVeDatTrongThang = context.Ves.Where(ve => ve.HoaDon.ThoiGianXuat.Month == DateTime.Now.Month).Count();
+            DateTime pivotTimeClear = DateTime.Now.AddMonths(-5);
+            foreach (var item in data)
+            {
+                DateTime dateTimeItem = new DateTime(item.Nam , item.Thang , DateTime.Now.Day);
+                if (dateTimeItem.Date < pivotTimeClear.Date)
+                {
+                    data.Remove(item);
+                }
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                DateTime pivotTime = DateTime.Now.AddMonths(-i);
+                bool check = false;
+                foreach (var item in data)
+                {
+                    if (check)
+                    {
+                        continue;
+                    }
+                    DateTime dateTimeItem = new DateTime(item.Nam, item.Thang, DateTime.Now.Day);
+                    if (dateTimeItem.Date == pivotTime.Date)
+                    {
+                        check = true;
+                    }
+                }
+
+                if (!check)
+                {
+                    data.Add(new
+                    {
+                        Thang = pivotTime.Month,
+                        Nam = pivotTime.Year,
+                        TongTien = (double)0
+                    });
+                }
+            }
+
+            data = data.OrderBy(item => item.Thang).OrderBy(item => item.Nam).ToList();
+
+            int soVeDatTrongThang = context.Ves.Where(ve => ve.HoaDon.ThoiGianXuat.Month == DateTime.Now.Month && ve.HoaDon.ThoiGianXuat.Year == DateTime.Now.Year).Count();
 
             int soKhachHangDangKiTrongThang =
-                context.KhachHangs.Where(khachHang => khachHang.ThoiGianDangKi.Month == DateTime.Now.Month).Count();
+                context.KhachHangs.Where(khachHang => khachHang.ThoiGianDangKi.Month == DateTime.Now.Month && khachHang.ThoiGianDangKi.Year == DateTime.Now.Year && !khachHang.MaKhachHang.Contains("NONAME")).Count();
 
             await Chat.UpdateChartToManagerBrower(data.Select(c => c.Thang.ToString()).ToArray(),
                 data.Select(c => Int32.Parse(c.TongTien.ToString())).ToArray() , soVeDatTrongThang , soKhachHangDangKiTrongThang);
