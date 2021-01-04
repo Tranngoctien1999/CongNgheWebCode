@@ -735,7 +735,40 @@ namespace BanVeDiTourDuLich.Migrations
                 ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
                 DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
             };
-            context.LichTrinhs.AddOrUpdate(lich1, lich2, lich3, lich4, lich11, lich5, lich6, lich7, lich8, lich10,l11,l12,l13,l14,l15,l17,l18);
+            Models.LichTrinh l19 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR9",
+                Ngay = 1,
+                MoTa = "LÀNG NGHỀ 17",
+                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            Models.LichTrinh l20 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR9",
+                Ngay = 2,
+                MoTa = "LÀNG NGHỀ 17",
+                ChiTiet = "Xe Vietravel đón đoàn tại sân bay Nội Bài, khởi hành đi Sa Pa theo cung đường cao tốc hiện đại và dài nhất Việt Nam.Đến Sapa, nhận phòng nghỉ ngơi. Buổi chiều quý khách thăm  Bản Cát Cát - đẹp như một bức tranh giữa vùng phố cổ Sapa, nơi đây thu hút du khách bởi cầu treo, thác nước, guồng nước và những mảng màu hoa mê hoặc du khách khi lạc bước đến đây. Thăm những nếp nhà của người Mông, Dao, Giáy trong bản, du khách sẽ không khỏi ngỡ ngàng trước vẻ đẹp mộng mị của một trong những ngôi làng cổ đẹp nhất Sapa. Buổi tối Quý khách dạo phố, ngắm nhà thờ Đá Sapa, tự do thưởng thức đặc sản vùng cao như: thịt lợn cắp nách nướng, trứng nướng, rượu táo mèo, giao lưu với người dân tộc vùng cao. Nghỉ đêm tại Sapa.",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM7.jpg"
+            };
+            Models.LichTrinh lich21 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR12",
+                Ngay = 1,
+                MoTa = "NHÀ TRUYỀN THỐNG",
+                ChiTiet = "Học viện Kỹ thuật Quân sự, tên gọi khác: Trường Đại học Lê Quý Đôn, là một viện đại học kỹ thuật tổng hợp, đa ngành, đa lĩnh vực, trường đại học trọng điểm quốc gia Việt Nam, là đại học nghiên cứu- ứng dụng [1] và đào tạo kỹ sư, kỹ sư trưởng, công trình sư, nhà quản trị khoa học và công nghiệp trình độ Đại học, Thạc sĩ, Tiến sĩ trong các ngành khoa học kỹ thuật, công nghệ quân sự, công nghiệp quốc phòng và công nghệ cao phục vụ sự nghiệp hiện đại hoá quân đội và các ngành kinh tế quốc dân.[2]. Mục tiêu đến năm 2030, Học viện sẽ trở thành một trong 5 trường đại học hàng đầu của Việt Nam và nằm trong top 500 trường đại học hàng đầu thế giới [3].",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM1.jpg"
+            };
+            Models.LichTrinh l21 = new Models.LichTrinh()
+            {
+                MaTour = "TOUR12",
+                Ngay = 2,
+                MoTa = "SÂN BÓNG HỌC VIỆN",
+                ChiTiet = "Học viện Kỹ thuật Quân sự, tên gọi khác: Trường Đại học Lê Quý Đôn, là một viện đại học kỹ thuật tổng hợp, đa ngành, đa lĩnh vực, trường đại học trọng điểm quốc gia Việt Nam, là đại học nghiên cứu- ứng dụng [1] và đào tạo kỹ sư, kỹ sư trưởng, công trình sư, nhà quản trị khoa học và công nghiệp trình độ Đại học, Thạc sĩ, Tiến sĩ trong các ngành khoa học kỹ thuật, công nghệ quân sự, công nghiệp quốc phòng và công nghệ cao phục vụ sự nghiệp hiện đại hoá quân đội và các ngành kinh tế quốc dân.[2]. Mục tiêu đến năm 2030, Học viện sẽ trở thành một trong 5 trường đại học hàng đầu của Việt Nam và nằm trong top 500 trường đại học hàng đầu thế giới [3].",
+                DuongDanAnh = "/Content/images/Destinations/MADIADIEM3.jpg"
+            };
+
+            context.LichTrinhs.AddOrUpdate(lich1, lich2, lich3, lich4, lich11, lich5, lich6, lich7, lich8, lich10,l11,l12,l13,l14,l15,l17,l18,l19,l20,l21);
         }
     }
 }

@@ -23,7 +23,7 @@
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        <form action="/Admin/ThemMoiTour" method="POST" id="Recipe_add">
+                        <form action="/Admin/ThemMoiTour" method="POST" id="Recipe_add" enctype="multipart/form-data">
                             <input name="ID_congthuc" style="width:0.1px;height:0.1px;border-width:0" />
                             <div class="form-group">
                                 <label>Mã Tour</label>
@@ -93,25 +93,7 @@
         </div>
     </div>
 </div>
-<!-- /#page-wrapper -->
-<!-- recipe_add Modal-->
-@*<div class="modal fade" id="recipe_addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Công thức đã được thêm. Tiếp tục thêm?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Chọn "Tiếp tục" để tiếp tục thêm công thức mới.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Tiếp tục</button>
-                    <a class="btn btn-primary" href="Recipe">Rời</a>
-                </div>
-            </div>
-        </div>
-    </div>*@
+
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script language="javascript" type="text/javascript">
@@ -173,22 +155,7 @@
         });
 
         // xoá text filed khi click vào nút del ở dòng tương ứng
-        $(document).on("click", "a.del", function () {
-            var n = countItem();
-            if (n == 2) {
-                alert("Number of answers isn't less than 2");
-            } else {
-                var check = $(this).siblings().find("input").val();
-                // cách viết khác
-                // var check = $(this).parent().find("label input").val();
 
-                $(this).parent().remove();
-                for (i = 0; i < n - 1; i++) {
-                    $("#answer .item:eq(" + i + ") label span").html("Nguyên liệu " + (parseInt(i) + 1) + ":");
-
-                }
-            }
-        });
         function countItem1() {
             var items = $("#answer1").children().length;
             return items;
@@ -202,15 +169,15 @@
                 alert("Number of answers isn't greater than 10");
             } else {
                 n++;
-                $("#answer1").append("<div class='item1'><label><span>Bước " + n + ":</span><br/><textarea rows='3' class='NoiDung' name='NoiDung[]' placeholder='Nhập nội dung công thức'></textarea></label><a href='javascript:void(0)' class='del1'>Xóa</a></div>");
+                $("#answer1").append("<div class='item1'><label><span>Ngày " + n + ":</span><br/><textarea rows='3' class='ChiTiet' name='ChiTiet[]' style='width:680px' placeholder='Nhập nội dung'></textarea><textarea rows='1' class='MoTa' name='MoTa[]' style='width:680px' placeholder='Nhập địa điểm '></textarea></label><a href='javascript:void(0)' class='del1'>Xóa</a><input type='file' name='fileUpload" + n + "' id='fileUpload" + n + "' size='23' /></div> ");
             }
         });
 
         // xoá text filed khi click vào nút del ở dòng tương ứng
         $(document).on("click", "a.del1", function () {
             var n = countItem1();
-            if (n == 2) {
-                alert("Number of answers isn't less than 2");
+            if (n == 1) {
+                alert("Number of answers isn't less than 1");
             } else {
                 var check = $(this).siblings().find("input").val();
                 // cách viết khác
@@ -218,7 +185,7 @@
 
                 $(this).parent().remove();
                 for (i = 0; i < n - 1; i++) {
-                    $("#answer1 .item1:eq(" + i + ") label span").html("Bước " + (parseInt(i) + 1) + ":");
+                    $("#answer1 .item1:eq(" + i + ") label span").html("Ngày " + (parseInt(i) + 1) + ":");
 
                 }
             }
@@ -254,4 +221,51 @@
             removeUpload();
         }
     }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.picture__image').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.picture__image1').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.picture__image2').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+    $("#fileUpload").change(function () {
+        readURL(this);
+    });
+
+    function ThemLichTrinh(btn) {
+        var id = $(btn).attr('id');
+        var formId = '#upload' + id;
+        console.log($('#upload1'));
+        var form = $(`${formId}`);
+        console.log(form);
+        console.log(formId);
+        //$.ajax({
+        //    method: 'POST',
+        //    url :
+        //})
+    }
+
 </script>

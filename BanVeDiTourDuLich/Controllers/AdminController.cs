@@ -9,6 +9,7 @@ using System.Web;
 using System.IO;
 using System.Threading.Tasks;
 using BanVeDiTourDuLich.Utilizer;
+using BanVeDiTourDuLich.Models;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -92,7 +93,7 @@ namespace BanVeDiTourDuLich.Controllers
                         DiaDiemDen = c.DiaDiemDen,
                         DiaDiemDi = c.DiaDiemDi
                     }).ToList();
-                return View("QuanLyBanVe" , quanLyVeViewModel);
+                return View("QuanLyBanVe", quanLyVeViewModel);
             }
             return HttpNotFound("Hãy Đăng Nhập");
         }
@@ -134,7 +135,7 @@ namespace BanVeDiTourDuLich.Controllers
                         MaNguoiDung = khach.MaKhachHang
                     });
                 };
-                return View("QuanLyNguoiDung" ,data);
+                return View("QuanLyNguoiDung", data);
             }
             else
             {
@@ -155,8 +156,8 @@ namespace BanVeDiTourDuLich.Controllers
                              DuongDanAnh = diaDiem.DuongDanAnh,
                              GiaTien = loaive.GiaTien,
                              Ten = loaive.Ten,
-                             DiaDiemDi=tour.DiaDiemDi,
-                             DiaDiemDen=tour.DiaDiemDen
+                             DiaDiemDi = tour.DiaDiemDi,
+                             DiaDiemDen = tour.DiaDiemDen
                          };
             quanLyTourViewModel.danhsachtour = query1.ToList();
 
@@ -171,22 +172,22 @@ namespace BanVeDiTourDuLich.Controllers
                 QuanLyTourViewModel quanLyTourViewModel = new QuanLyTourViewModel();
 
                 var query1 = from diaDiem in _context.DiaDiems
-                    join tour in _context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
-                    join loaive in _context.LoaiVes on tour.MaTour equals loaive.MaTour
-                    where tour.MaTour == id
-                    select new ThongTinTourExpanded
-                    {
-                        Tour = tour,
-                        DuongDanAnh = diaDiem.DuongDanAnh,
-                        TenDiaDiem = diaDiem.TenDiaDiem,
-                        GiaTien = loaive.GiaTien,
-                        Ten = loaive.Ten,
-                        DiaDiemDen = tour.DiaDiemDen,
-                        DiaDiemDi = tour.DiaDiemDi
-                    };
+                             join tour in _context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
+                             join loaive in _context.LoaiVes on tour.MaTour equals loaive.MaTour
+                             where tour.MaTour == id
+                             select new ThongTinTourExpanded
+                             {
+                                 Tour = tour,
+                                 DuongDanAnh = diaDiem.DuongDanAnh,
+                                 TenDiaDiem = diaDiem.TenDiaDiem,
+                                 GiaTien = loaive.GiaTien,
+                                 Ten = loaive.Ten,
+                                 DiaDiemDen = tour.DiaDiemDen,
+                                 DiaDiemDi = tour.DiaDiemDi
+                             };
                 quanLyTourViewModel.danhsachtour = query1.ToList();
 
-                return View("QuanLyTour" ,quanLyTourViewModel);
+                return View("QuanLyTour", quanLyTourViewModel);
             }
             else
             {
@@ -209,12 +210,82 @@ namespace BanVeDiTourDuLich.Controllers
                 _context.SaveChanges();
                 _context.LoaiVes.Add(loaiVe);
                 _context.SaveChanges();
-                return RedirectToAction("QuanLyTour");
+                return RedirectToAction("ThemLichTrinh");
+            }
+            catch
+            {
+                var model = _context.DiaDiems.Where(x => x.TenDiaDiem != null).ToList();
+                return View(model);
+            }
+        }
+        public ActionResult ThemLichTrinh()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ThemLichTrinh(LichTrinh lichTrinh,HttpPostedFileBase post)
+        {           
+            if(post!=null)
+            {
+                var paths = Server.MapPath("~/content/images/Destinations/");
+                var path = "/Content/images/Destinations/";
+                post.SaveAs(paths + post.FileName);
+                lichTrinh.DuongDanAnh = path + post.FileName;
+            }
+                _context.LichTrinhs.Add(lichTrinh);
+                _context.SaveChanges();
+                return RedirectToAction("ThemLichTrinh");                       
+        }
+        [HttpGet]
+        public ActionResult QuanLyLichTrinh()
+        {
+            var model = _context.LichTrinhs.Where(x => x.MaTinhNang != null).ToList();
+            return View(model);
+        }
+        public ActionResult EditLichTrinh(int id)
+        { 
+            var model = _context.LichTrinhs.Where(x => x.MaTinhNang == id ).FirstOrDefault();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult EditLichTrinh(LichTrinh lichTrinh, HttpPostedFileBase postfiles)
+        {
+            try
+            {
+                var dd = _context.DiaDiems.Find(lichTrinh.MaTinhNang);
+                if (postfiles != null)
+                {
+                    var paths = Server.MapPath("~/content/images/Destinations/");
+                    var path = "/Content/images/Destinations/";
+                    postfiles.SaveAs(paths + postfiles.FileName);
+                    lichTrinh.DuongDanAnh = path + postfiles.FileName;
+                    dd.DuongDanAnh = lichTrinh.DuongDanAnh;
+                }
+                _context.LichTrinhs.Add(lichTrinh);
+                _context.SaveChanges();
+                return RedirectToAction("QuanLyLichTrinh");
             }
             catch
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public ActionResult XoaLichTrinh(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var lt = _context.LichTrinhs.Find(id);
+
+                if (lt != null)
+                {
+                    _context.LichTrinhs.Remove(lt);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("QuanLyLichTrinh");
+                }
+            }
+            return HttpNotFound();
         }
         [HttpPost]
         public ActionResult XoaTour(string id)
@@ -230,7 +301,7 @@ namespace BanVeDiTourDuLich.Controllers
                     _context.SaveChanges();
                     _context.Tours.Remove(tour);
                     _context.SaveChanges();
-                   
+
                     return RedirectToAction("QuanLyTour");
                 }
             }
@@ -240,6 +311,7 @@ namespace BanVeDiTourDuLich.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult ThemDiaDiemMoi(DiaDiem diaDiem, HttpPostedFileBase postfile)
         {
@@ -273,7 +345,7 @@ namespace BanVeDiTourDuLich.Controllers
             return View(chiTietTourAdmin);
         }
         [HttpPost]
-        public ActionResult EditTour(Tour t,LoaiVe loaive)
+        public ActionResult EditTour(Tour t, LoaiVe loaive)
         {
             var lv = _context.LoaiVes.Find(loaive.MaLoaiVe);
             lv.GiaTien = loaive.GiaTien;
@@ -285,7 +357,7 @@ namespace BanVeDiTourDuLich.Controllers
             tour.SoGio = t.SoGio;
             tour.ThoigianDi = t.ThoigianDi;
             _context.SaveChanges();
-            
+
             return RedirectToAction("QuanLyTour");
         }
         public ActionResult QuanLyDiaDiem()
@@ -299,7 +371,7 @@ namespace BanVeDiTourDuLich.Controllers
             if (CheckUser())
             {
                 var model = _context.DiaDiems.Where(x => x.MaDiaDiem == id).ToList();
-                return View("QuanLyDiaDiem" ,model);
+                return View("QuanLyDiaDiem", model);
             }
             else
             {
@@ -340,7 +412,7 @@ namespace BanVeDiTourDuLich.Controllers
             {
                 var diadiem = _context.DiaDiems.Find(id);
 
-                if (diadiem!= null)
+                if (diadiem != null)
                 {
                     _context.DiaDiems.Remove(diadiem);
                     _context.SaveChanges();
@@ -433,7 +505,7 @@ namespace BanVeDiTourDuLich.Controllers
             if (CheckAdmin())
             {
                 var data = _context.NhanViens.Where(nhanVien => nhanVien.MaNhanVien == id).ToList();
-                return View("QuanLyNhanVien" , data);
+                return View("QuanLyNhanVien", data);
             }
             else
             {
@@ -446,9 +518,9 @@ namespace BanVeDiTourDuLich.Controllers
         {
             if (CheckUser())
             {
-               List<SearchAdminInformation> data = await Utilizer.TimKiemTongHop.Search(tuKhoa);
-               Response.StatusCode = 200;
-               return Json(data, JsonRequestBehavior.AllowGet);
+                List<SearchAdminInformation> data = await Utilizer.TimKiemTongHop.Search(tuKhoa);
+                Response.StatusCode = 200;
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -456,5 +528,6 @@ namespace BanVeDiTourDuLich.Controllers
                 return Json("Bạn không có quyền làm việc này", JsonRequestBehavior.AllowGet);
             }
         }
+       
     }
 }

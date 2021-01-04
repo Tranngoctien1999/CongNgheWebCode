@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "EditLichTrinh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using BanVeDiTourDuLich.Models
+@model LichTrinh
+<link href="~/Content/Admin/css/UploadImg.css" rel="stylesheet" />
+<script src="~/Content/Admin/js/UploadImg.js"></script>
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!-- Page Content -->
+<!-- Page Content -->
+<div class="content-wrapper">
+    <div class="content-header">
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="h3 mb-2 text-gray-800">
+                            Thêm Lịch Trình
+                        </h1>
+                        <br />
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <div class="col-lg-7" style="padding-bottom:120px">
+                        <form action="/Admin/ThemLichTrinh" method="POST" id="Recipe_add" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>Mã lịch trình</label>
+                                <input value="@Model.MaTinhNang" type="text" class="form-control" name="MaTinhNang" placeholder="Mã lịch trình"></>
+                            </div>
+                            <div class="form-group">
+                                <label>Mã Tour</label>
+                                <input value="@Model.MaTour" type="text" class="form-control" name="MaTour" placeholder="Mã Tour"></>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày thứ:</label>
+                                <input value="@Model.Ngay" type="number" class="form-control" name="Ngay" placeholder="Ngày thứ"></>
+                            </div>
+                            <div class="form-group">
+                                <input value="@Model.ChiTiet" class="ChiTiet" name="ChiTiet" style="width:680px ; height :60px" placeholder="Nhập nội dung chi tiết"></>
+                                <input class="MoTa" value="@Model.MoTa" name="MoTa" style="width:680px" placeholder="Nhập địa điểm "></>
+                            </div>
+                            <div class="form-group">
+                                <label>Ảnh minh họa</label>
+                                <div class="file-upload">
+                                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Chọn ảnh</button>
+                                    <div class="image-upload-wrap">
+                                        <input class="file-upload-input" type="file" name="postfiles" onchange="readURL(this);" accept="image/*" />
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <img style="width:552px" class="file-upload-image" src="" alt="your image" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()" class="remove-image">Bỏ chọn</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default" style="background-color:#4e73df; color: rgba(255,255,255,.8)">Lưu</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+
+            function countItem() {
+                var items = $("#answer").children().length;
+                return items;
+            }
+
+
+            $("#add").click(function () {
+                var n = countItem();
+                if (n == 20) {
+                    alert("Number of answers isn't greater than 10");
+                } else {
+                    n++;
+                    $("#answer").append("<div class='item'><label><span>Nguyên liệu " + n + ":</span><br/><input type='text' name='NL[]' placeholder='Tên nguyên liệu' class='NguyenLieu' /><input type='text' name='SL[]' placeholder='Số lượng' class='NguyenLieu' /></label><a href='javascript:void(0)' class='del'>Xóa</a></div>");
+                }
+            });
+
+
+            $(document).on("click", "a.del", function () {
+                var n = countItem();
+                if (n == 2) {
+                    alert("Number of answers isn't less than 2");
+                } else {
+                    var check = $(this).siblings().find("input").val();
+
+
+                    $(this).parent().remove();
+                    for (i = 0; i < n - 1; i++) {
+                        $("#answer .item:eq(" + i + ") label span").html("Nguyên liệu " + (parseInt(i) + 1) + ":");
+
+                    }
+                }
+            });
+            function countItem1() {
+                var items = $("#answer1").children().length;
+                return items;
+            }
+
+            $("#add1").click(function () {
+                var n = countItem1();
+                if (n == 20) {
+                    alert("Number of answers isn't greater than 10");
+                } else {
+                    n++;
+                    $("#answer1").append("<div class='item1'><label><span>Bước " + n + ":</span><br/><textarea rows='3' class='NoiDung' name='NoiDung[]' placeholder='Nhập nội dung công thức'></textarea></label><a href='javascript:void(0)' class='del1'>Xóa</a></div>");
+                }
+            });
+
+            $(document).on("click", "a.del1", function () {
+                var n = countItem1();
+                if (n == 2) {
+                    alert("Number of answers isn't less than 2");
+                } else {
+                    var check = $(this).siblings().find("input").val();
+
+
+                    $(this).parent().remove();
+                    for (i = 0; i < n - 1; i++) {
+                        $("#answer1 .item1:eq(" + i + ") label span").html("Bước " + (parseInt(i) + 1) + ":");
+
+                    }
+                }
+            });
+        });
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+        }
+        $('.image-upload-wrap').bind('dragover', function () {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function () {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.image-upload-wrap').hide();
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+</script>
+
+
