@@ -266,12 +266,12 @@
                         <div class="col-xs-12 no-padding v-margin-bottom-15 relative">
                             <span id="@loaiVe.LoaiVe.MaLoaiVe" class="number-detail">0</span>
                             <span class="text-detail">
-                                <span>@loaiVe.LoaiVe.Ten (còn @loaiVe.SoLuong vé)</span>
+                                <span>@loaiVe.LoaiVe.Ten (còn <span id="@loaiVe.LoaiVe.MaLoaiVe-span">@loaiVe.SoLuong</span> vé)</span>
                             </span>
                             <span class="price-color hide-class"></span>
                             <input id="@loaiVe.LoaiVe.MaLoaiVe-conlai" type="hidden" value="@loaiVe.SoLuong" />
                             <input id="@loaiVe.LoaiVe.MaLoaiVe-entity" class="entity" money="@loaiVe.LoaiVe.GiaTien" type="hidden" value="0" />
-                            <span class="price-color"> x @loaiVe.LoaiVe.GiaTien</span>
+                            <span class="price-color"> x @TourController.AddDotAndCommaToInteger(loaiVe.LoaiVe.GiaTien)</span>
                             <div class="btn-group">
                                 <button type="button" id="@loaiVe.LoaiVe.MaLoaiVe-btnSub" class="btn number-button minus-adult btn-general" onclick="subLoaiVe(this)">
                                     <i class="fas fa-minus"></i>

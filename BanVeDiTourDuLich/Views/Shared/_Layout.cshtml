@@ -506,6 +506,21 @@
         $($('.MaTaiKhoan')[0]).val(customerId);
     }
 
+    chat.client.updateAmountOfTicket = function(maTour, maLoaiVe, soVeDaMua) {
+        var idTour = $('input[name = "idTour"]').val();
+        if (idTour == maTour) {
+            var soLuong = $(`#${maLoaiVe}-conlai`).val();
+            $(`#${maLoaiVe}-conlai`).val(soLuong - soVeDaMua);
+            $(`#${maLoaiVe}-span`)[0].innerText = soLuong - soVeDaMua;
+            var soLuongHienTai = $(`#${maLoaiVe}-entity`).val();
+            if (soLuongHienTai > (soLuong - soVeDaMua)) {
+                $(`#${maLoaiVe}-entity`).val(soLuong - soVeDaMua);
+                $(`#${maLoaiVe}`)[0].innerText = `X${soLuong - soVeDaMua}`;
+            }
+            updateMoney();
+        }
+    }
+
     $($('.send__button')[0]).click(function() {
             var msgDetail = $('.msg-input')[0].value;
             if (msgDetail !== '') {
