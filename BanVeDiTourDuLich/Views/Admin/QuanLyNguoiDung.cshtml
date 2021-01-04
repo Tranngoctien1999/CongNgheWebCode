@@ -1,4 +1,5 @@
-﻿@using BanVeDiTourDuLich.Controllers
+﻿@using PagedList.Mvc
+@using BanVeDiTourDuLich.Controllers
 @model BanVeDiTourDuLich.ViewModels.QuanLyNguoiDungViewModel
 @{
     ViewBag.Title = "QuanLyNhanVien";
@@ -91,6 +92,17 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="container">
+
+            <div class="pagination">
+
+                <a href="/admin/quanlynguoidung?page=1">1</a>
+                <a href="/admin/quanlynguoidung?page=2">2</a>
+                <a href="/admin/quanlynguoidung?page=3">3</a>
+
+
+            </div>
         </div>
         <!-- /.card-body -->
     </div>
