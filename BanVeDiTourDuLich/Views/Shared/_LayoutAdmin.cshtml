@@ -236,9 +236,7 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        <div id="content1">
             @RenderBody()
-        </div>
         <footer class="main-footer">
             <strong>Bản quyền &copy; 2014-2020 <a href="#">Vacation</a>.</strong>
             Đã đăng kí bản quyền
@@ -587,14 +585,6 @@
                 },
                 1000);
     }
-
-    $(document).ready(function(){
-        $(".nav-link").click(function(e){
-            e.preventDefault(); // prevent default link button redirect behaviour     
-            var url=$(this).attr("href");
-            $('#content1').load(url);
-        });
-    });
 
     //$('#btn-message').click(function() {
     //    var check = $("#chatIsShown")[0];

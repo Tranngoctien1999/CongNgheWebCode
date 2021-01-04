@@ -5,10 +5,12 @@ using BanVeDiTourDuLich.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.EnterpriseServices;
 using System.Web;
 using System.IO;
 using System.Threading.Tasks;
 using BanVeDiTourDuLich.Utilizer;
+using Microsoft.Ajax.Utilities;
 
 namespace BanVeDiTourDuLich.Controllers
 {
@@ -64,7 +66,7 @@ namespace BanVeDiTourDuLich.Controllers
             return HttpNotFound("Hãy Đăng Nhập");
         }
 
-        public ActionResult QuanLyBanVeSort(string sortValue, int sortDirection)
+        public ActionResult QuanLyBanVeSort(string sortValue, int? sortDirection)
         {
             if (CheckUser())
             {
@@ -85,6 +87,12 @@ namespace BanVeDiTourDuLich.Controllers
                         DiaDiemDen = c.DiaDiemDen,
                         DiaDiemDi = c.DiaDiemDi
                     }).ToList();
+
+                if (sortValue.IsNullOrWhiteSpace() || (sortDirection != 0 && sortDirection != 1))
+                {
+                    return View("QuanLyBanVe", quanLyVeViewModel);
+                }
+
                 if (string.Compare("MaVe", sortValue) == 0)
                 {
                     if (sortDirection == 0)
@@ -212,7 +220,7 @@ namespace BanVeDiTourDuLich.Controllers
             return HttpNotFound("Hãy Đăng Nhập");
         }
 
-        public ActionResult QuanLyNguoiDungSort(string sortValue, int sortDirection)
+        public ActionResult QuanLyNguoiDungSort(string sortValue, int? sortDirection)
         {
             QuanLyNguoiDungViewModel data = new QuanLyNguoiDungViewModel();
             foreach (KhachHang khach in _context.KhachHangs.ToList())
@@ -228,6 +236,11 @@ namespace BanVeDiTourDuLich.Controllers
                     MaNguoiDung = khach.MaKhachHang
                 });
             };
+
+            if (sortValue.IsNullOrWhiteSpace() || (sortDirection != 0 && sortDirection != 1))
+            {
+                return View("QuanLyNguoiDung", data);
+            }
 
             if (string.Compare("Ten", sortValue) == 0)
             {
@@ -333,7 +346,7 @@ namespace BanVeDiTourDuLich.Controllers
             }
         }
 
-        public ActionResult QuanLyTourSort(string sortValue, int sortDirection)
+        public ActionResult QuanLyTourSort(string sortValue, int? sortDirection)
         {
             QuanLyTourViewModel quanLyTourViewModel = new QuanLyTourViewModel();
 
@@ -350,6 +363,12 @@ namespace BanVeDiTourDuLich.Controllers
                     DiaDiemDen = tour.DiaDiemDen
                 };
             quanLyTourViewModel.danhsachtour = query1.ToList();
+
+            if (sortValue.IsNullOrWhiteSpace() || (sortDirection != 0 && sortDirection != 1))
+            {
+                return View("QuanLyTour", quanLyTourViewModel);
+            }
+
 
             if (string.Compare("MaTour", sortValue) == 0)
             {
@@ -574,9 +593,14 @@ namespace BanVeDiTourDuLich.Controllers
             var model = _context.DiaDiems.Where(x => x.MaDiaDiem != null).ToList();
             return View(model);
         }
-        public ActionResult QuanLyDiaDiemSort(string sortValue, int sortDirection)
+        public ActionResult QuanLyDiaDiemSort(string sortValue, int? sortDirection)
         {
             var model = _context.DiaDiems.Where(x => x.MaDiaDiem != null).ToList();
+
+            if (sortValue.IsNullOrWhiteSpace() || (sortDirection != 0 && sortDirection != 1))
+            {
+                return View("QuanLyDiaDiem", model);
+            }
 
             if (string.Compare("Ma", sortValue) == 0)
             {
@@ -744,6 +768,61 @@ namespace BanVeDiTourDuLich.Controllers
             {
                 var data = _context.NhanViens.ToList();
                 return View(data);
+            }
+            else
+            {
+                return Content("Bạn không có quyền truy cập trang này");
+            }
+        }
+
+        public ActionResult QuanLyNhanVienSort(string sortValue, int? sortDirection)
+        {
+            if (CheckAdmin())
+            {
+                var data = _context.NhanViens.ToList();
+
+                if (sortValue.IsNullOrWhiteSpace() || (sortDirection != 0 && sortDirection != 1))
+                {
+                    return View("QuanLyNhanVien", data);
+                }
+
+                if (string.Compare("Ten", sortValue) == 0)
+                {
+                    if (sortDirection == 0)
+                    {
+                        data = data.OrderBy(nhanVien => nhanVien.Ten).ToList();
+                    }
+                    else
+                    {
+                        data = data.OrderByDescending(nhanVien => nhanVien.Ten).ToList();
+                    }
+                }
+
+                if (string.Compare("Luong", sortValue) == 0)
+                {
+                    if (sortDirection == 0)
+                    {
+                        data = data.OrderBy(nhanVien => nhanVien.Luong).ToList();
+                    }
+                    else
+                    {
+                        data = data.OrderByDescending(nhanVien => nhanVien.Luong).ToList();
+                    }
+                }
+
+                if (string.Compare("NgayVaoLam", sortValue) == 0)
+                {
+                    if (sortDirection == 0)
+                    {
+                        data = data.OrderBy(nhanVien => nhanVien.NgayVaoLam).ToList();
+                    }
+                    else
+                    {
+                        data = data.OrderByDescending(nhanVien => nhanVien.NgayVaoLam).ToList();
+                    }
+                }
+
+                return View("QuanLyNhanVien" ,data);
             }
             else
             {
