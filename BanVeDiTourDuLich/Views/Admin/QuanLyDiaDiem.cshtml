@@ -38,6 +38,22 @@
         <div class="card-header">
             <h3 class="card-title">Địa Điểm</h3>
 
+            <div class="sort-box">
+                <select id="sort-selector">
+                    <option value="">--Chọn cách sắp xếp--</option>
+                    <option value="Ma">Mã Địa Điểm</option>
+                    <option value="Ten">Tên Địa Điểm</option>
+                    <option value="DiaChi">Địa Chỉ</option>
+                </select>
+
+                <select id="sort-direction">
+                    <option value="">Chiều sắp xếp</option>
+                    <option value="1">Từ cao tới thấp</option>
+                    <option value="0">Từ thấp tới cao</option>
+                </select>
+
+                <button id="apply-sort">Áp Dụng</button>
+            </div>
             <div class="card-tools">
                 <button type="button"
                         class="btn btn-tool"
@@ -82,7 +98,7 @@
                             <td>
                                 <p>@diaDiem.DiaChi</p>
                             </td>
-                            
+
                             <td class="project-actions text-center">
 
                                 <button class="btn-delete">
@@ -118,7 +134,15 @@
 </div>
 @section scripts
 {
-
+    <script>
+        $('#apply-sort').click(function() {
+            var value = $('#sort-selector').val();
+            var direction = $('#sort-direction').val();
+            if (value != null && direction != null) {
+                window.location.href = `/admin/QuanLyDiaDiemSort?sortValue=${value}&sortDirection=${direction}`;
+            }
+        })
+    </script>
 }
 
 @section styles
@@ -133,8 +157,33 @@
             width: 100%;
             background: none;
         }
+
+        .sort-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        #sort-selector {
+            margin-right: 2rem;
+            font-family: 'Font Awesome 5 Free';
+        }
+
+        #sort-direction {
+            margin-right: 2rem;
+            font-family: 'Font Awesome 5 Free';
+        }
+
+        #apply-sort, #apply-sort:focus {
+            border: none;
+            background: deepskyblue;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            font-family: 'Font Awesome 5 Free';
+            outline: none;
+        }
+
+            #apply-sort:hover {
+                background: rgba(0, 191, 255, 0.5);
+            }
     </style>
 }
-
-
-
