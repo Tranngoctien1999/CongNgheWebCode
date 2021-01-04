@@ -592,7 +592,14 @@
         $(".nav-link").click(function(e){
             e.preventDefault(); // prevent default link button redirect behaviour     
             var url=$(this).attr("href");
-            $('#content1').load(url);
+            $.ajax({
+                method: "GET",
+                url: url,
+                success: function (data) {
+                    var content = $(data).find('.content-wrapper')[0].innerHTML;
+                    $('.content-wrapper').html(content);
+                }
+            })
         });
     });
 
