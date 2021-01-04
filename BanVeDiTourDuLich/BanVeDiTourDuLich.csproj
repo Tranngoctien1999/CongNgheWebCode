@@ -554,6 +554,7 @@
     <Content Include="Content\images\Persions\574704-200.png" />
     <Content Include="Content\images\Persions\ADMIN.jpg" />
     <Content Include="Content\images\Persions\cambridge.books.jpg" />
+    <Content Include="Content\images\Persions\CongAvatar.jpg" />
     <Content Include="Content\images\Persions\inspirational-quoute-by-bruce-lee-qhd-1920x1080.jpg" />
     <Content Include="Content\images\Persions\KH01.jpg" />
     <Content Include="Content\images\Persions\NHANVIEN0.jpg" />
@@ -2638,6 +2639,9 @@
     <Content Include="Views\User\InforUser.cshtml" />
     <Content Include="Views\Admin\QuanLyNhanVien.cshtml" />
     <Content Include="Views\Admin\ThemNhanVien.cshtml" />
+    <Content Include="Views\Admin\EditLichTrinh.cshtml" />
+    <Content Include="Views\Admin\QuanLyLichTrinh.cshtml" />
+    <Content Include="Views\Admin\ThemLichTrinh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

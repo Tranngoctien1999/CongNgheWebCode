@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using System.Web;
 
 namespace BanVeDiTourDuLich.Models
 {
-    public class LichTrinh
+    public  class LichTrinh
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
