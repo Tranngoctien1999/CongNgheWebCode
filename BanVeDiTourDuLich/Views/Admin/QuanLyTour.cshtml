@@ -1,8 +1,9 @@
-﻿@model BanVeDiTourDuLich.ViewModels.QuanLyTourViewModel
+﻿@using PagedList.Mvc
+@model BanVeDiTourDuLich.ViewModels.QuanLyTourViewModel
 @{
     ViewBag.Title = "QuanLyTour";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    int i = 1;
+    int i = Model.STT;
 }
 
 
@@ -109,18 +110,18 @@
                                 <p>@tour.Tour.ThoigianDi</p>
                             </td>
                             <td class="project-actions text-center">
-                                
-                                    <button class="btn-delete" >
-                                        <a href="/Admin/EditTour/@tour.Tour.MaTour" class="btn btn-danger btn-sm btn-max-width js-xoa">
-                                            <i class="fas fa-trash"> </i>
-                                            chỉnh sửa
-                                        </a>
-                                    </button>
-                               
+
+                                <button class="btn-delete">
+                                    <a href="/Admin/EditTour/@tour.Tour.MaTour" class="btn btn-danger btn-sm btn-max-width js-xoa">
+                                        <i class="fas fa-trash"> </i>
+                                        chỉnh sửa
+                                    </a>
+                                </button>
+
                                 <form action="/Admin/XoaTour" method="post">
                                     <input name='id' type="hidden" value="@tour.Tour.MaTour" />
                                     <button class="btn-delete" type='submit'>
-                                        <a class="btn btn-danger btn-sm btn-max-width js-xoa"> 
+                                        <a class="btn btn-danger btn-sm btn-max-width js-xoa">
                                             <i class="fas fa-trash"> </i>
                                             Xóa
                                         </a>
@@ -134,6 +135,16 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="container">
+           
+            <div class="pagination">
+                @{ int i2 = 0;}
+                @for (i2 = 1; i2 < Model.SoTrang + 1; i2++)
+                {
+                    <a  href="/admin/QuanLyTour?page=@i2.ToString()">@i2.ToString()</a>
+                }
+            </div>
         </div>
         <!-- /.card-body -->
     </div>

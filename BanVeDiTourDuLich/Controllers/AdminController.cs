@@ -11,12 +11,14 @@ using System.IO;
 using System.Threading.Tasks;
 using BanVeDiTourDuLich.Utilizer;
 using Microsoft.Ajax.Utilities;
+using PagedList;
 
 namespace BanVeDiTourDuLich.Controllers
 {
     public class AdminController : BaseController
     {
         private DataContext _context;
+        public static int Count = 0;
         public AdminController()
         {
             _context = new DataContext();
@@ -301,8 +303,13 @@ namespace BanVeDiTourDuLich.Controllers
             return View( "QuanLyNguoiDung" , data);
         }
 
-        public ActionResult QuanLyNguoiDung()
+        public ActionResult QuanLyNguoiDung(int? page)
         {
+            //thực hiện chức năng phân trang
+            //tạo biến số sản phẩm trên trang
+            int PageSize = 10;
+            //tạo biến số trang hiện tại
+            int pagenumber = (page ?? 1);
             QuanLyNguoiDungViewModel data = new QuanLyNguoiDungViewModel();
             foreach (KhachHang khach in _context.KhachHangs.ToList())
             {
@@ -316,7 +323,9 @@ namespace BanVeDiTourDuLich.Controllers
                     NgayTaoTaiKhoan = khach.ThoiGianDangKi,
                     MaNguoiDung = khach.MaKhachHang
                 });
+                data.ThongTinCacNguoiDung.OrderBy(n => n.SoTienMua).ToPagedList(pagenumber, PageSize).ToList();
             };
+         
             return View(data);
         }
 
@@ -442,10 +451,14 @@ namespace BanVeDiTourDuLich.Controllers
             return View("QuanLyTour", quanLyTourViewModel);
         }
 
-        public ActionResult QuanLyTour()
+        public ActionResult QuanLyTour(int? page)
         {
             QuanLyTourViewModel quanLyTourViewModel = new QuanLyTourViewModel();
-
+            //thực hiện chức năng phân trang
+            //tạo biến số sản phẩm trên trang
+            int PageSize = 5;
+            //tạo biến số trang hiện tại
+            int pagenumber = (page ?? 1);
             var query1 = from diaDiem in _context.DiaDiems
                          join tour in _context.Tours on diaDiem.MaDiaDiem equals tour.MaDiemDen
                          join loaive in _context.LoaiVes on tour.MaTour equals loaive.MaTour
@@ -458,10 +471,20 @@ namespace BanVeDiTourDuLich.Controllers
                              DiaDiemDi=tour.DiaDiemDi,
                              DiaDiemDen=tour.DiaDiemDen
                          };
-            quanLyTourViewModel.danhsachtour = query1.ToList();
-
+            double soTrangCheck = query1.ToList().Count() / PageSize;
+            int soTrang = 0;
+            if (soTrangCheck > (int) soTrangCheck)
+            {
+                soTrang = (int) soTrangCheck + 1;
+            }
+            else
+            {
+                soTrang = (int) soTrangCheck;
+            }
+            quanLyTourViewModel.danhsachtour = query1.OrderBy(n => n.Tour.MaTour).ToPagedList(pagenumber, PageSize).ToList();
+            quanLyTourViewModel.SoTrang = soTrang;
+            quanLyTourViewModel.STT = (pagenumber - 1) * PageSize + 1;
             return View(quanLyTourViewModel);
-
         }
 
         public ActionResult QuanLyTourSingle(string id)
