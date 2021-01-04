@@ -9,6 +9,7 @@ using System.EnterpriseServices;
 using System.Web;
 using System.IO;
 using System.Threading.Tasks;
+using BanVeDiTourDuLich.Models;
 using BanVeDiTourDuLich.Utilizer;
 using Microsoft.Ajax.Utilities;
 using PagedList;
@@ -274,6 +275,65 @@ namespace BanVeDiTourDuLich.Controllers
             return Json(new { msg = "Bạn không có quyền xóa khách hàng này!" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> XoaNhanVien(string id)
+        {
+            if (CheckAdmin())
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    NhanVien nhanVien = _context.NhanViens.Find(id);
+
+                    if (nhanVien.MaNhanVien == "ADMIN")
+                    {
+                        Response.StatusCode = 400;
+                        return Json(new { msg = "Không thể xóa tài khoản này!" }, JsonRequestBehavior.AllowGet);
+                    }
+
+                    if (nhanVien != null)
+                    {
+                        try
+                        {
+                            if (nhanVien.TinNhans.Count > 0)
+                            {
+                                _context.TinNhans.RemoveRange(nhanVien.TinNhans);
+                            }
+                            if (nhanVien.TaiKhoan != null)
+                            {
+                                _context.TaiKhoans.Remove(nhanVien.TaiKhoan);
+                            }
+
+                            if (nhanVien.HoaDons != null)
+                            {
+                                foreach (var hoaDon in nhanVien.HoaDons)
+                                {
+                                    _context.Ves.RemoveRange(hoaDon.Ves);
+                                    _context.HoaDons.Remove(hoaDon);
+                                }
+                            }
+                            await _context.SaveChangesAsync();
+                            //_context.KhachHangs.Remove(khachHang);
+                            //_context.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            Response.StatusCode = 400;
+                            return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                        }
+                        Response.StatusCode = 200;
+                        return Json(new { msg = "Xóa thành công!" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        Response.StatusCode = 400;
+                        return Json(new { msg = "Không tìm thấy nhân viên này!" }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            Response.StatusCode = 400;
+            return Json(new { msg = "Bạn không có quyền xóa nhân viên này!" }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult QuanLyNguoiDungSort(string sortValue, int? sortDirection)
         {
             QuanLyNguoiDungViewModel data = new QuanLyNguoiDungViewModel();
@@ -351,7 +411,7 @@ namespace BanVeDiTourDuLich.Controllers
                         .OrderByDescending(nguoiDung => nguoiDung.NgayTaoTaiKhoan).ToList();
                 }
             }
-
+                
             return View( "QuanLyNguoiDung" , data);
         }
 
@@ -933,5 +993,94 @@ namespace BanVeDiTourDuLich.Controllers
                 return Json("Bạn không có quyền làm việc này", JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult ThemNhanVien()
+        {
+            return View();
+        }
+
+        //POST: Register
+        [HttpPost]
+        public ActionResult Register(string TenNhanVien, string Email, string TaiKhoanDangNhap, string MatKhau,
+            string pass,
+            string DiaChi, string SoDienThoai, int Gender, string NgaySinh , double Luong)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (_context.TaiKhoans.Find(TaiKhoanDangNhap) != null)
+                        throw new Exception("Tài khoản này đã được đăng kí ! Vui lòng chọn tên đăng nhập khác");
+
+                    if (string.IsNullOrEmpty(TaiKhoanDangNhap)) throw new Exception("Lỗi Tài khoản đăng nhập");
+
+                    if (string.IsNullOrEmpty(TenNhanVien)) throw new Exception("Lỗi Tên khách hàng");
+
+                    if (!SoDienThoai.ValidatePhoneNumber(true)) throw new Exception("Số điện thoại không hợp lệ");
+
+                    if (!ValidationFunction.IsValidEmail(Email)) throw new Exception("Email không hợp lệ");
+
+                    if (!ValidationFunction.IsValidPassword(MatKhau))
+                        throw new Exception(
+                            "Mật khẩu không hợp lệ ! Hãy nhập ít nhất 1 chữ số , một chữ cái viết hoa , dài ít nhất 8 kí tự");
+
+                    if (string.Compare(MatKhau, pass) != 0) throw new Exception("Hãy nhập mật khẩu khớp nhau");
+
+
+                    if (Gender > 1 || Gender < 0) throw new Exception("Lỗi thông tin giới tính");
+
+                    try
+                    {
+                        DateTime.Parse(NgaySinh);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                }
+
+                var identity = _context.IdentityTraces.Find(1);
+
+                identity.NhanVienIdentity++;
+                var nhanVien = new NhanVien()
+                {
+                    MaNhanVien = "NHANVIEN" + identity.KhachHangIdentity.ToString("00"),
+                    Email = Email,
+                    Ten = TenNhanVien,
+                    DiaChi = DiaChi,
+                    GioiTinh = Gender == 1 ? true : false,
+                    MaLoaiNhanVien = "NHANVIEN0",
+                    NgaySinh = DateTime.Parse(NgaySinh),
+                    NgayVaoLam = DateTime.Now,
+                    SoDienThoai = SoDienThoai,
+                    Luong = Luong,
+                };
+                _context.NhanViens.Add(nhanVien);
+                _context.SaveChanges();
+
+                var taiKhoan = new TaiKhoan
+                {
+                    MaTaiKhoan = nhanVien.MaNhanVien,
+                    TaiKhoanDangNhap = TaiKhoanDangNhap,
+                    MatKhau = MatKhau
+                };
+
+                _context.TaiKhoans.Add(taiKhoan);
+                _context.SaveChanges();
+
+                Response.StatusCode = 200;
+                return Json(new { msg = "Thành Công" }, JsonRequestBehavior.AllowGet);
+            }
+
+            Response.StatusCode = 400;
+            return Json(new { msg = "Lỗi ! Hãy Thử trong vài giây nữa" }, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

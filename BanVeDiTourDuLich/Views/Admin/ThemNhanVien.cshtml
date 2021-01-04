@@ -1,0 +1,173 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AdminLTE 3 | Registration Page</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="/Content/plugins/fontawesome-free/css/all.min.css" />
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet"
+          href="/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/Content/plugins/dist/css/adminlte.min.css" />
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="../../index2.html"><b>Vacation</b></a>
+        </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Đăng kí tài khoản</p>
+
+                <form id="DangKiForm" action="/Admin/Register" method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Tên" name="TenNhanVien" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Email" name="Email" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Tên Tài Khoản" name="TaiKhoanDangNhap" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="password"
+                               class="form-control"
+                               placeholder="Mật khẩu"
+                               name="MatKhau" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password"
+                               class="form-control"
+                               placeholder="Nhập lại mật khẩu" name="pass" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Địa Chỉ" name="DiaChi" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Số điện thoại" name="SoDienThoai" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label>Giới tính <span style="color: red">(*)</span>:</label>
+                    </div>
+
+                    <div>
+                        <select class="form-control" data-val="true" data-val-number="The field Gender must be a number." id="Gender" name="Gender">
+                            <option selected="selected" value="1">Nam</option>
+                            <option value="0">Nữ</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Ngày Sinh <span style="color: red">(*)</span>:</label>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" placeholder="Ngày Sinh" name="NgaySinh" />
+                    </div>
+
+                    <div>
+                        <label>Lương <span style="color: red">(*)</span>:</label>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-8" style="margin-bottom: 1rem;">
+                        <input class="form-control" id="Luong" name="Luong" type="number" value="" style=" width: 15rem !important;">
+                    </div>
+
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Đăng kí
+                        </button>
+                    </div>
+                    <!-- /.col -->
+                </form>
+            </div>
+            <!-- /.form-box -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+    <!-- jQuery -->
+    <script src="/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/Content/plugins/dist/js/adminlte.min.js"></script>
+
+    <script>
+    $('#DangKiForm').submit(function(event) {
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        $.ajax({
+            method : "POST",
+            url: url,
+            data: form.serialize(),
+            success: function (data) {
+                console.log(data);
+                alert(data.msg);
+                window.location.href = "/";
+            }
+            , error: function (data) {
+                console.log(data);
+                alert(data.responseJSON.msg);
+            }
+        })
+    })
+    </script>
+</body>
+</html>
+
+
