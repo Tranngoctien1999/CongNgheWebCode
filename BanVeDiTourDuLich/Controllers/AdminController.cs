@@ -35,6 +35,32 @@ namespace BanVeDiTourDuLich.Controllers
             return HttpNotFound("Hãy Đăng Nhập");
         }
 
+        public ActionResult QuanLyBanVeTheoUser(string userId)
+        {
+            if (CheckUser())
+            {
+                QuanLyVeViewModel quanLyVeViewModel = new QuanLyVeViewModel();
+                quanLyVeViewModel.DanhSachThongTinVe = _context.Ves.Join(_context.Tours, ve => ve.MaTour, tour => tour.MaTour,
+                    (ve, tour) =>
+                        new
+                        {
+                            Ve = ve,
+                            DiaDiemDen = tour.DiaDiemDen,
+                            DiaDiemDi = tour.DiaDiemDi
+                        }).Join(_context.LoaiVes, c => c.Ve.MaLoaiVe, loaiVe => loaiVe.MaLoaiVe,
+                    (c, loaiVe) => new ThongTinVeExpanded()
+                    {
+                        Ve = c.Ve,
+                        GiaTien = loaiVe.GiaTien,
+                        DiaDiemDen = c.DiaDiemDen,
+                        DiaDiemDi = c.DiaDiemDi
+                    }).ToList();
+                quanLyVeViewModel.DanhSachThongTinVe = quanLyVeViewModel.DanhSachThongTinVe
+                    .Where(ve => ve.Ve.HoaDon.KhachHang.MaKhachHang == userId).ToList();
+                return View("QuanLyBanVe", quanLyVeViewModel);
+            }
+            return HttpNotFound("Hãy Đăng Nhập");
+        }
 
         public ActionResult QuanLyBanVe(string id)
         {
