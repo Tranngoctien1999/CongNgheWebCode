@@ -6,35 +6,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AdminLTE 3 | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/Content/plugins/fontawesome-free/css/all.min.css"/>
+    <link rel="stylesheet" href="/Content/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="/Content/css/style2.css" />
     <!-- Ionicons -->
     <link rel="stylesheet"
-          href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+          href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
-          href="/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"/>
+          href="/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
     <!-- iCheck -->
     <link rel="stylesheet"
-          href="/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+          href="/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
     <!-- JQVMap -->
-    <link rel="stylesheet" href="/Content/plugins/jqvmap/jqvmap.min.css"/>
+    <link rel="stylesheet" href="/Content/plugins/jqvmap/jqvmap.min.css" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="/Content/dist/css/adminlte.min.css"/>
+    <link rel="stylesheet" href="/Content/dist/css/adminlte.min.css" />
     <!-- overlayScrollbars -->
     <link rel="stylesheet"
-          href="/Content/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+          href="/Content/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="/Content/plugins/daterangepicker/daterangepicker.css"/>
+    <link rel="stylesheet" href="/Content/plugins/daterangepicker/daterangepicker.css" />
     <!-- summernote -->
-    <link rel="stylesheet" href="/Content/plugins/summernote/summernote-bs4.min.css"/>
+    <link rel="stylesheet" href="/Content/plugins/summernote/summernote-bs4.min.css" />
     <style>
         .inforSignIn {
             top: 10px;
@@ -242,7 +243,7 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-        @RenderBody()
+            @RenderBody()
         <footer class="main-footer">
             <strong>Bản quyền &copy; 2014-2020 <a href="#">Vacation</a>.</strong>
             Đã đăng kí bản quyền
@@ -496,7 +497,6 @@
     })
 
     $('#chiTiet').hover(function () {
-        console.log(123);
         var element = $($('.inforSignIn')[0]);
         if ($(element).css('display') == 'none') {
             $(element).css('display', 'flex');
@@ -583,17 +583,25 @@
         $(notificationItems).append(html);
     }
 
-        //$('#btn-message').click(function() {
-        //    var check = $("#chatIsShown")[0];
-        //    if (check.value == "1") {
-        //        $($(".direct-chat-contacts")[0]).show();
-        //        check.value = "0";
-        //    } else {
-        //        $($(".direct-chat-contacts")[0]).hide();
-        //        check.value = "1";
-        //    }
-        //})
+        function addOutAnimation(button) {
+            var notification_item = $(button).parent();
+            $(notification_item).addClass('notification__item__outanimation');
+            setTimeout(function () {
+                    $(notification_item).remove();
+                },
+                1000);
+    }
 
+    //$('#btn-message').click(function() {
+    //    var check = $("#chatIsShown")[0];
+    //    if (check.value == "1") {
+    //        $($(".direct-chat-contacts")[0]).show();
+    //        check.value = "0";
+    //    } else {
+    //        $($(".direct-chat-contacts")[0]).hide();
+    //        check.value = "1";
+    //    }
+    //})
 </script>
 </body>
 </html>

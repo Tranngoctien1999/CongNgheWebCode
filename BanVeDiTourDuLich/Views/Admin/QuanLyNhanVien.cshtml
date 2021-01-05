@@ -15,10 +15,9 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Quản lý nhân viên</li>
-                    </ol>
+                    <a style="    margin-left: auto;
+                                      align-self: end !important;
+                                      display: table;" href="/Admin/ThemNhanVien">Thêm Nhân Viên</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -31,6 +30,22 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Nhân viên</h3>
+            <div class="sort-box">
+                <select id="sort-selector">
+                    <option value="">--Chọn cách sắp xếp--</option>
+                    <option value="Ten">Tên Nhân Viên</option>
+                    <option value="Luong">Lương</option>
+                    <option value="NgayVaoLam">Ngày Vào Làm</option>
+                </select>
+
+                <select id="sort-direction">
+                    <option value="">Chiều sắp xếp</option>
+                    <option value="1">Từ cao tới thấp</option>
+                    <option value="0">Từ thấp tới cao</option>
+                </select>
+
+                <button id="apply-sort">Áp Dụng</button>
+            </div>
             <div class="card-tools">
                 <button type="button"
                         class="btn btn-tool"
@@ -79,6 +94,16 @@
                                         chỉnh sửa
                                     </a>
                                 </button>
+                                
+                                <form class="deleteForm" action="/Admin/XoaNhanVien/" method="post">
+                                    <input name='id' type="hidden" value="@thongTinNguoiDung.MaNhanVien" />
+                                    <button class="btn-delete" type='submit'>
+                                        <a class="btn btn-danger btn-sm btn-max-width js-xoa">
+                                            <i class="fas fa-trash"> </i>
+                                            Xóa
+                                        </a>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     }
@@ -104,5 +129,66 @@
             width: 100%;
             background: none;
         }
+
+        .sort-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        #sort-selector {
+            margin-right: 2rem;
+            font-family: 'Font Awesome 5 Free';
+        }
+
+        #sort-direction {
+            margin-right: 2rem;
+            font-family: 'Font Awesome 5 Free';
+        }
+
+        #apply-sort, #apply-sort:focus {
+            border: none;
+            background: deepskyblue;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            font-family: 'Font Awesome 5 Free';
+            outline: none;
+        }
+
+            #apply-sort:hover {
+                background: rgba(0, 191, 255, 0.5);
+            }
     </style>
+}
+
+@section scripts
+{
+    <script>
+        $('#apply-sort').click(function() {
+            var value = $('#sort-selector').val();
+            var direction = $('#sort-direction').val();
+            if (value != null && direction != null) {
+                window.location.href = `/admin/QuanLyNhanVienSort?sortValue=${value}&sortDirection=${direction}`;
+            }
+        })
+
+        $('.deleteForm').submit(function (e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            var url = $(this).attr('action');
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: data,
+                success: function ({ msg }) {
+                    alert(msg);
+                    window.location.reload();
+                },
+                error: function (data) {
+                    alert(data.responseJSON.msg);
+                }
+            });
+        });
+
+
+    </script>
 }

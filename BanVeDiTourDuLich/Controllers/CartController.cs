@@ -50,7 +50,7 @@ namespace BanVeDiTourDuLich.Controllers
         }
 
         [HttpPost]
-        public ActionResult Charge(FormCollection formCollection)
+        public async Task<ActionResult> Charge(FormCollection formCollection)
         {
             Stripe.StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["stripePublishableKey"]);
             Stripe.StripeConfiguration.ApiKey = ConfigurationManager.AppSettings["stripeSecretKey"];
@@ -138,6 +138,7 @@ namespace BanVeDiTourDuLich.Controllers
                         context.Ves.Add(ve);
                         identity++;
                     }
+                    await Chat.UpdateToClientBrower(idTour, formCollection[i], soLuongVe);
                 }
             }
             
@@ -149,7 +150,7 @@ namespace BanVeDiTourDuLich.Controllers
             {
                 Charge stripeCharge = chargeService.Create(myCharge);
                 context.SaveChanges();
-                SumerizeRevenue();
+                await SumerizeRevenue();
                 return View("ThanhCong");
             }
             catch (Exception e)

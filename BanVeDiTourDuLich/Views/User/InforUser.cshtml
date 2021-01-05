@@ -156,6 +156,15 @@
             display: flex;
             flex-direction: column;
         }
+
+        .xemve-link {
+            padding: 0.7rem;
+            background: #1b1bff;
+            border-radius: 2rem;
+            margin-right: 1rem;
+            color: white;
+            font-family: 'Font Awesome 5 Pro';
+        }
     </style>
 
 
@@ -467,6 +476,10 @@
                                     </div>
                                     <div class="row mg-bot30">
                                         <div class="col-xs-12 text-right">
+                                            @if (Model.isCustomer)
+                                            {
+                                                <a class="xemve-link" href="/Admin/QuanLyBanVeTheoUser?userId=@Model.KhachHang.MaKhachHang">Xem Vé Đã Đặt</a>
+                                            }
                                             <button id="btCapNhat" type="button" class="btn btn-md btn-default">Cập nhật&nbsp;&nbsp;<i class="fa fa-save"></i></button>
                                         </div>
                                     </div>

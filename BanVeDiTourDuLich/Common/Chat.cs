@@ -320,6 +320,13 @@ namespace BanVeDiTourDuLich.Hubs
                 .updateSoKhachHangMoi(soKhachHangDangKiTrongThang);
         }
 
+        // Update Amount of ticket in client
+        public static async Task UpdateToClientBrower(string maTour , string maLoaiVe , int soVeDaMua)
+        {
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<Chat>();
+            await hubContext.Clients.Clients(user.Select(user => user.ConnectionId).ToList()).updateAmountOfTicket(maTour , maLoaiVe , soVeDaMua);
+        }
+
         public static async Task GetChartData()
         {
             await CartController.SumerizeRevenue();

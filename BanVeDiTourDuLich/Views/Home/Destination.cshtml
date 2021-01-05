@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Destination";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <section class="ftco-section">
@@ -132,13 +133,16 @@
             <div class="col text-center">
                 <div class="block-27">
                     <ul>
-                        <li><a href="/home/destination?page=1">1</a></li>
-                        
-                        <li><a href="/home/destination?page=2">2</a></li>
-                        <li><a href="/home/destination?page=3">3</a></li>
-                        <li><a href="/home/destination?page=4">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
+                       
+
+                        @{ int i2 = 0;}
+                        @for (i2 = 1; i2 < Model.SoTrang + 1; i2++)
+                        {
+                        <li>
+                            <a href="/home/destination?page=@i2.ToString()">@i2.ToString()</a>
+                        </li>
+                           
+                        }
                     </ul>
                 </div>
             </div>
